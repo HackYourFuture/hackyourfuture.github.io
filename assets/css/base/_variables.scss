@@ -1,0 +1,36 @@
+/* Fonts
+--------------------------------------------------------------*/
+$fontArial: Arial, sans-serif;
+$fontHelvetica: "Helvetica Neue", Helvetica, $fontArial;
+$fontHelveticaBold: "Helvetica Neue Bold", $fontHelvetica;
+
+$fontWorkSans: "Work Sans", sans-serif;
+$fontSpaceMono: "Space Mono", monospace;
+
+/* Sizings */
+
+$base-vertical-rithm: 5px;
+$base-margin: 2 * $base-vertical-rithm;
+
+$font-family-base: $fontSpaceMono;
+$font-size-base: 14px !default;
+$font-weight-base: normal;
+$line-height-base: 5 * $base-vertical-rithm !default;
+
+$body-bg: white !default;
+$body-color: black !default;
+
+$dt-font-weight: bold !default;
+
+$color-grey: rgba(230,230,230,1);
+$color-purple: rgba(51,8,100,1);
+
+$link-color: $color-purple !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 30%) !default;
+$link-hover-decoration: none !default;
+
+$table-cell-padding: .75rem !default;
+$text-muted: #A8A8A8 !default;
+
+$button-size: $line-height-base + 1px;

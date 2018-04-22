@@ -1,0 +1,101 @@
+// Font Face
+$pathFont: '~static/fonts/';
+@mixin font-face($fontName, $folderName, $fileName, $fontWeight: normal, $fontStyle: normal){
+	@font-face {
+		font-family: $fontName;
+		src: url('#{$pathFont}#{$folderName}/#{$fileName}.eot');
+		src: url('#{$pathFont}#{$folderName}/#{$fileName}.eot?#iefix') format('embedded-opentype'),
+		url('#{$pathFont}#{$folderName}/#{$fileName}.woff') format('woff'),
+		url('#{$pathFont}#{$folderName}/#{$fileName}.ttf') format('truetype'),
+		url('#{$pathFont}#{$folderName}/#{$fileName}.svg##{$fontName}') format('svg');
+		font-weight: $fontWeight;
+		font-style: $fontStyle;
+	}
+}
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/**
+ * Respond To (Breakpoint)
+ * @param {string} $name - Name of the breakpoint used in $breakpoints
+ */
+@mixin respond-to($name) {
+  @if map-has-key($breakpoints, $name) {
+    @media #{map-get($breakpoints, $name)} {
+      @content;
+    }
+  }
+}
+
+@mixin breakpointY($point) {
+  @media (max-height: $point) {
+    @content;
+  }
+}
+
+@mixin breakpoint($point) {
+  @if $point == 'big_desktop' {
+    @media (max-width: 1824px) {
+      @content;
+    }
+  } @else if $point == 'ipad_landscape' {
+    @media (max-width: 1224px) {
+      @content;
+    }
+  } @else if $point == 'ipad_portrait' {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $point == 'mobile_landscape' {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == 'mobile_portrait' {
+    @media (max-width: 640px) {
+      @content;
+    }
+  } @else if $point == 'custom2' {
+    @media (max-height: 800px) {
+      @content;
+    }
+  } @else if $point == 'custom3' {
+    @media (max-height: 400px) {
+      @content;
+    }
+  } @else if $point == 'custom4' {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }@else if $point == 'small_mobile_portrait' {
+    @media (max-width: 321px) {
+      @content;
+    }
+  } @else if $point == 'custom1' {
+    @media (max-width: 860px) {
+      @content;
+    }
+  } @else if $point == '2000' {
+    @media (min-width: 2000px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $point) {
+      @content;
+    }
+  }
+}

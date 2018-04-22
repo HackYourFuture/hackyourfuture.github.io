@@ -31,6 +31,9 @@
     "axios": "^0.16.2",
     "buefy": "^0.4.6",
     "kibbeling": "^1.0.4",
+    "node-sass": "^4.8.3",
+    "nuxt-sass-resources-loader": "^2.0.0",
+    "sass-loader": "^7.0.1",
     "scrollmonitor": "^1.2.3",
     "verge": "^1.10.2"
   },

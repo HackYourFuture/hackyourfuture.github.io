@@ -23,13 +23,16 @@ module.exports = {
         routes: ['/']
     },
 
+    css: ['@/assets/css/style.scss'],
+
     modules: [
-        ['@nuxtjs/proxy', { pathRewrite: { '^/content' : '/content' } }]
+        ['@nuxtjs/proxy', { pathRewrite: { '^/content' : '/content' } }],
+        ['nuxt-sass-resources-loader', '@/assets/css/variablesandmixins.scss']
     ],
 
-    plugins: [
-        '~/plugins/buefy'
-    ],
+    // plugins: [
+    //     '~/plugins/buefy'
+    // ],
 
     proxy: {
         '/content': 'http://localhost:3051/'
