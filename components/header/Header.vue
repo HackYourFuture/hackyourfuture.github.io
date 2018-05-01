@@ -19,6 +19,8 @@ export default {
 .Header {
   position: fixed;
   width: 100%;
+  background: white;
+  z-index: 10;
   .HeaderNav {
     margin: $base-vertical-rithm * 4;
     text-align: center;

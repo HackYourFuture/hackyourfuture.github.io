@@ -12,7 +12,7 @@ $fontSpaceMono: "Space Mono", monospace;
 $base-vertical-rithm: 5px;
 $base-margin: 2 * $base-vertical-rithm;
 
-$font-family-base: $fontSpaceMono;
+$font-family-base: $fontWorkSans;
 $font-size-base: 14px !default;
 $font-weight-base: normal;
 $line-height-base: 5 * $base-vertical-rithm !default;
@@ -24,6 +24,7 @@ $dt-font-weight: bold !default;
 
 $color-grey: rgba(230,230,230,1);
 $color-purple: rgba(51,8,100,1);
+$color-white: rgba(255,255,255,1);
 
 $link-color: $color-purple !default;
 $link-decoration: none !default;

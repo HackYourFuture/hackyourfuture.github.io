@@ -1,9 +1,3 @@
-# What we do?
-We train refugees to become software-developers
+# we train refugees to become full stack software-developers
 
-In our 6-month program we train talented refugees with and without a coding background in modern JavaScript software development.<br/>
-Our aim is to have our students land their first software development job after finishing our course, and we do everything we can to prepare them as well as possible.<br/>
-With our team of over 35 experienced senior developers we have created a program around the special needs of refugees. Our teachers are all volunteers, and we are all extremely passionate about coding. 
-We believe talented refugees are a great opportunity for the software development world, we are here to give them a helping hand.<br/>
-
-
+In our 6-month program we train talented refugees with and without coding background in modern JavaScript software development. Our aim is to have our students land their first software development job after finishing our course, and we do everything we can to prepare them as well as possible. With our team of over 35 experienced senior developers we have created a program that focusses on problem solving and learing how to learn. Our teachers are all volunteers, and all extremely passionate about coding. All of our vo- lunteers are actively involved in creating our curriculum, which can be seen as an repre- sentation of what they believe are the skills needed in the industry at this moment. We believe talented refugees are a great opportunity for the software development world, we are here to give them a helping hand.
