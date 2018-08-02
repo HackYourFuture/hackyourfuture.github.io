@@ -49,28 +49,32 @@ const sendEmail = (toEmail, Data, Subject) => {
 
 module.exports = (req, res) => {
 
-    authuntication.authenticate().then(auth => appendData(req, auth));
+    authuntication.authenticate().then(auth => appendData(req, auth))
+    .then(()=>{
 
-    sendEmail(
-        fromEmail,
-        applyToOrgTemplate({ params: req.body }),
-        'A new student applied'
-    ).then(() => {
+        sendEmail(
+            fromEmail,
+            applyToOrgTemplate({ params: req.body }),
+            'A new student applied'
+        )
+    })
+    .then(() => {
 
-        return sendEmail(
-            req.body.email,
-            applyToStudentMessage,
-            'Thank you for applying'
-        );
+            return sendEmail(
+                req.body.email,
+                applyToStudentMessage,
+                'Thank you for applying'
+            );
 
-    }).then(() => {
+    })
+    .then(() => {
 
         console.log("=== ALL EMAILS ARE SENT!!!");
         res.status(200).json({ message: 'You got an email :-)' });
 
-    }).catch((err) => {
+    })
+    .catch((err) => {
 
-        console.log("===EMAIL NOT SENT===");
         console.log(err);
         res.status(500).json({ message: 'Something went wrong' });
 

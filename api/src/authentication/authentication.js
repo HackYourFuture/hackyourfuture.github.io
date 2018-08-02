@@ -2,11 +2,11 @@ let readline = require("readline");
 const fs = require("fs");
 let { OAuth2Client } = require("google-auth-library");
 
-let SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]; //you can add more scopes according to your permission need. But in case you chang the scope, make sure you deleted the ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json file
+let SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const TOKEN_DIR =
     (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) +
-    "/.credentials/"; //the directory where we're going to save the token
-const TOKEN_PATH = TOKEN_DIR + "sheets.googleapis.com-nodejs-quickstart.json"; //the file which will contain the token
+    "/.credentials/";
+const TOKEN_PATH = TOKEN_DIR + "sheets.googleapis.com-nodejs-quickstart.json";
 
 class Authentication {
     authenticate() {
@@ -23,7 +23,6 @@ class Authentication {
         var clientSecret = credentials.installed.client_secret;
         var clientId = credentials.installed.client_id;
         var redirectUrl = credentials.installed.redirect_uris[0];
-        //var auth = new googleAuth();
         var oauth2Client = new OAuth2Client(clientId, clientSecret, redirectUrl);
 
         return new Promise((resolve, reject) => {
