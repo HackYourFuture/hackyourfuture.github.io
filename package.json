@@ -9,7 +9,7 @@
     }
   },
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
+    "dev": "set ENVIRONMENT=dev && npm-run-all --parallel dev:*",
     "dev:api": "cd api && npm i && npm run dev",
     "dev:nuxt": "nuxt",
     "dev:server-content": "kib",

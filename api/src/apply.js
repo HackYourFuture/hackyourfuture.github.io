@@ -2,7 +2,8 @@ const AWS = require('aws-sdk');
 const template = require('lodash.template');
 const applyToStudentMessage = require('./../emails_template/apply_to_student.txt');
 const applyToOrgTemplate = template(require('./../emails_template/apply_to_org.tpl'));
-
+const appendData = require("./authentication/appendData");
+const authuntication = require("./authentication/authentication")
 const fromEmail = "info@hackyourfuture.net";
 
 const AWS_CONFIG = {
@@ -47,6 +48,8 @@ const sendEmail = (toEmail, Data, Subject) => {
 }
 
 module.exports = (req, res) => {
+
+    authuntication.authenticate().then(auth => appendData(req, auth));
 
     sendEmail(
         fromEmail,
