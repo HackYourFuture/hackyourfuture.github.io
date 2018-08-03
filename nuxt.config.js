@@ -9,7 +9,7 @@ if (isGenerating){
 }
 
 let lambdaUrl = require('./infra.config.json').api_url.value;
-if (process.env.ENVIRONMENT.trim() === "dev") {
+if (process.env.ENVIRONMENT === "dev") {
     lambdaUrl = 'http://localhost:3005/';
 }
 
