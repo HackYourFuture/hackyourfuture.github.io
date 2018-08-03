@@ -9,11 +9,11 @@
     }
   },
   "scripts": {
-    "dev": "set ENVIRONMENT=dev && npm-run-all --parallel dev:*",
+    "dev": "set ENVIRONMENT=dev&& npm-run-all --parallel dev:*",
     "dev:api": "cd api && npm i && npm run dev",
     "dev:nuxt": "nuxt",
     "dev:server-content": "kib",
-    "generate": "set ENVIRONMENT=prod && npm-run-all --parallel --race generate:*",
+    "generate": "set ENVIRONMENT=prod&& npm-run-all --parallel --race generate:*",
     "generate:server": "kib generate -g ./dist",
     "generate:nuxt": "nuxt generate",
     "lambda": "npm-run-all lambda:prepare lambda:zip",
