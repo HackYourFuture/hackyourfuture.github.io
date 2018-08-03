@@ -42,8 +42,8 @@
   "devDependencies": {
     "npm-run-all": "^4.1.2",
     "nuxt": "^1.4.0",
-    "vue": "^2.5.13",
-    "vue-server-renderer": "^2.5.13",
-    "vue-template-compiler": "^2.5.13"
+    "vue": "^2.5.17",
+    "vue-server-renderer": "^2.5.17",
+    "vue-template-compiler": "^2.5.17"
   }
 }
