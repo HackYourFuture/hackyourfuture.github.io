@@ -101,6 +101,13 @@ import Signup from '~/components/signup/Signup';
 
 <style lang="scss">
 .About {
+  h1 {
+      margin-bottom: $base-vertical-rithm * 2;
+      color: $color-purple;
+      font-weight: normal;
+      font-size: 42px;
+      line-height: 50px;
+    }
   &__header {
     padding: $base-vertical-rithm * 10;
     margin-right: -100px;
@@ -130,13 +137,7 @@ import Signup from '~/components/signup/Signup';
   }
   &__container {
     margin: 0 $base-vertical-rithm * 10;
-    h1 {
-      margin-bottom: $base-vertical-rithm * 2;
-      color: $color-purple;
-      font-weight: normal;
-      font-size: 42px;
-      line-height: 50px;
-    }
+    
     &.how {
       margin-left: -50px;
       .About__container-image {
@@ -150,7 +151,6 @@ import Signup from '~/components/signup/Signup';
         margin-right: 0;
       }
     }
-
 
     .links {
       width: 25%;

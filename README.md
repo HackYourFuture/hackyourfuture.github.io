@@ -80,8 +80,5 @@ to run the project
 - How we connect students to jobs?
 - How we are funded
 
-
-
 ### CONTACT
-- FAQ!!!!!!!!!!
-- Form, with mega super clear message to first check the FAQ!!!!!
+- ok

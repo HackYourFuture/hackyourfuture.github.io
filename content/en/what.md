@@ -1,3 +1,7 @@
-# we train refugees to become full stack software-developers
+# HackYourFuture trains refugees to become full-stack software developers. 
 
-In our 6-month program we train talented refugees with and without coding background in modern JavaScript software development. Our aim is to have our students land their first software development job after finishing our course, and we do everything we can to prepare them as well as possible. With our team of over 35 experienced senior developers we have created a program that focusses on problem solving and learing how to learn. Our teachers are all volunteers, and all extremely passionate about coding. All of our vo- lunteers are actively involved in creating our curriculum, which can be seen as an repre- sentation of what they believe are the skills needed in the industry at this moment. We believe talented refugees are a great opportunity for the software development world, we are here to give them a helping hand.
+Our coding school teaches a 6-month web development program to refugees with or without a background in coding. The curriculum is created and taught by our volunteer network of over forty professional developers. They teach our students how to work on projects in a modern tech team. How to be problem-solvers. At HackYourFuture, students learn to think like developers. 
+
+Training refugees in computer programming significantly boosts their chances of fulfilling, long-term employment. Plus, it fills a gap on the job market. Everyone wins.
+
+Our approach works: 96% of our graduates have gone on to find jobs in the tech industry.

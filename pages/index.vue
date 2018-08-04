@@ -6,7 +6,7 @@
         <div class="content" v-html="what"></div>
 
         <div class="About__video">
-          <nuxt-link :to="'/'" class="About__more">More <br> about <span class="underline">us</span></nuxt-link>
+          <nuxt-link :to="'/'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
           <YoutubePlayer class="About__video-player"/>
         </div>
       </section>
@@ -16,25 +16,38 @@
           <img src="/gallery/00.jpg">
         </div>
         <div class="Apply__container">
-          <h1>Champion technology and frame the future</h1>
+          <h1>Join our 6 month web development course</h1>
           <nuxt-link :to="'/apply'"><span class="underline">Apply</span></nuxt-link>
         </div>
       </section>
 
       <section class="Curiculum">
         <div class="Curiculum__header">
-          <h1>Devising solutions with top-notch trainers</h1>
+          <h1>Expert teachers,<br> up-to-date skills</h1>
           <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curiculum</span></a>
         </div>
+       
+        
         <div class="Curiculum__image">
           <img src="/gallery/02.jpg">
         </div>
+
         <div class="Curiculum__content" v-html="curiculum"></div>
+        <div class="Curiculum__content">
+         <nuxt-link :to="'/teach'"><span class="underline">Time is your most valuable resource. Find out about donating your time and expertise here.</span></nuxt-link>
+       </div>
       </section>
 
       <section class="Hire">
-        <h1>Help a brother out!</h1>
+        <h1>We could always use some help…</h1>
        <div v-html="hire"></div>
+       <div>
+         <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+       </div>
+       <div v-html="laptops"></div>
+       <div>
+         <nuxt-link :to="'/support'"><span class="underline">Find out how to donate laptops. </span></nuxt-link>
+       </div>
         <div class="Hire__image">
           <img src="/gallery/03.jpg">
         </div>
@@ -82,18 +95,21 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
          let apply
          let curiculum
          let hire
+         let laptops
          try {
              let req  = await axios.get('/content/en/index-about.json')
              let wReq  = await axios.get('/content/en/what.json')
              let aReq  = await axios.get('/content/en/apply.json')
              let cReq  = await axios.get('/content/en/curiculum.json')
              let hReq  = await axios.get('/content/en/index-hire.json')
+             let lReq  = await axios.get('/content/en/index-laptops.json')
 
              what = wReq.data.body
              apply = aReq.data.body
              data = req.data.body
              curiculum = cReq.data.body
              hire = hReq.data.body
+             laptops = lReq.data.body
          } catch (e) {
              console.log(e)
              data = false
@@ -102,6 +118,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
              siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
              about: data ? data : null,
              hire: hire ? hire : null,
+             laptops: laptops ? laptops : null,
              what,
              apply,
              curiculum,

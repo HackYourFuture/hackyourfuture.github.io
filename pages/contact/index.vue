@@ -9,7 +9,7 @@
       <div class="Contact__content" v-html="content">
       </div>
       <div class="Contact__form form">
-        <h1>Reach us and facilitate change!</h1>
+        <h1>Reach us for any other questions</h1>
         <p>General Inquiries</p>
         <form action="">
         <fieldset>
@@ -22,34 +22,34 @@
             <label for="lastName">Last Name</label>
             <input type="text" id="lastName" name="lastName" @focus="setActive">
           </div>
-          <div class="half-width inputContainer">
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" @focus="setActive">
-          </div>
-          <div class="half-width inputContainer">
-            
-            <select name="country" id="country" @focus="setActive">
-              <option value="nl">The Netherlands</option>
-            </select>
-          </div>
-          <div class="half-width inputContainer">
-            
-            <label for="email">e-mail</label>
-            <input type="email" id="email" name="email" @focus="setActive">
-          </div>
+         
+          
           <div class="half-width inputContainer">
             
             <label for="phone">phone</label>
             <input type="number" id="phone" name="phone" @focus="setActive">
           </div>
+           <div class="half-width inputContainer">
+            
+            <select name="country" id="country" @focus="setActive">
+              <option value="nl">The Netherlands</option>
+            </select>
+          </div>
+
+<div class="half-width inputContainer">
+            
+            <label for="email">e-mail</label>
+            <input type="email" id="email" name="email" @focus="setActive">
+          </div>
+
           <div class="full-width inputContainer">
             
-            <label for="eductation">Educational Background</label>
-            <input type="eductation" id="eductation" name="eductation" @focus="setActive">
+            <label for="message">What would you like to contact us about?</label>
+            <input type="message" id="message" name="message" @focus="setActive">
           </div>
 
           <div class="apply-btn">
-            <input type="submit" value="Apply">
+            <input type="submit" value="Contact">
           </div>
         </fieldset>
         </form>
@@ -123,9 +123,10 @@ import axios from '~/plugins/axios'
   &__content {
     width: 40%;
     margin-left: 50%;
-    color: $color-purple;
+    
     h4 {
       font-weight: bold;
+      color: $color-purple;
     }
   }
   &__form {

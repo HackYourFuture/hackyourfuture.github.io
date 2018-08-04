@@ -12,65 +12,69 @@
             <div class="Apply__content" v-html="content">
             </div>
 
-            <div class="Apply__form form">
-                <form :action="formUrl" method="POST">
-                    <fieldset>
-                        <div class="half-width inputContainer">
-                            <label for="userName">Name</label>
+<div class="Apply__form form">
 
-                            <input type="text" id="userName" class="input" name="userName" @focus="setActive">
-                        </div>
-                        <div class="half-width inputContainer">
-                            <label for="street">Street</label>
-
-                            <input type="text" id="street" class="input" name="street" @focus="setActive">
-                        </div>
-                        <div class="half-width inputContainer">
-                            <label for="city">City</label>
-
-                            <input type="text" id="city" class="input" name="city" @focus="setActive">
-                        </div>
-                        <div class="half-width inputContainer">
-
-                            <select name="country" class="input" id="country" @focus="setActive">
-                                <option value="nl">The Netherlands</option>
-                            </select>
-                        </div>
-                        <div class="half-width inputContainer">
-
-                            <label for="email">e-mail</label>
-                            <input type="email" id="email" class="input" name="email" @focus="setActive">
-                        </div>
-                        <div class="half-width inputContainer">
-
-                            <label for="phone">phone</label>
-                            <input type="number" id="phone" class="input" name="phone" @focus="setActive">
-                        </div>
-                        <div class="full-width inputContainer">
-
-                            <label for="eductation">Educational Background</label>
-                            <input type="eductation" id="eductation" class="input" name="eductation" @focus="setActive">
-                        </div>
-                        <div class="full-width inputContainer">
-
-                            <label for="how-hear">How did you hear about us?</label>
-                            <input type="how-hear" id="how-hear" class="input" name="how-hear" @focus="setActive" >
-                        </div>
-                        <div class="full-width computer inputContainer">
-
-                            <label for="computer">I have a computer</label>
-                            <select name="computer" id="computer" class="input" @focus="setActive">
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
-                            </select>
-                        </div>
-                        <div class="apply-btn">
-                            <input type="submit" value="Apply">
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </Main>
+    <h1>Apply for our 6 month web development course</h1>
+        <p>General Inquiries</p>
+       <form :action="formUrl" method="POST">
+        <fieldset>
+          <div class="half-width inputContainer">
+            <label for="userName">Name</label>
+            
+            <input type="text" id="userName" name="userName" @focus="setActive">
+          </div>
+          <div class="half-width inputContainer">
+            <label for="street">Street</label>
+            
+            <input type="text" id="street" name="street" @focus="setActive">
+          </div>
+          <div class="half-width inputContainer">
+            <label for="city">City</label>
+            
+            <input type="text" id="city" name="city" @focus="setActive">
+          </div>
+          <div class="half-width inputContainer">
+            
+            <select name="country" id="country" @focus="setActive">
+              <option value="nl">The Netherlands</option>
+            </select>
+          </div>
+          <div class="half-width inputContainer">
+            
+            <label for="email">e-mail</label>
+            <input type="email" id="email" name="email" @focus="setActive">
+          </div>
+          <div class="half-width inputContainer">
+            
+            <label for="phone">phone</label>
+            <input type="number" id="phone" name="phone" @focus="setActive">
+          </div>
+          <div class="half-width inputContainer" >
+            
+            <label for="eductation">Educational Background</label>
+            <input type="eductation" id="eductation" name="eductation" @focus="setActive">
+          </div>
+          <div class="half-width computer inputContainer">
+            <label for="computer">I have a computer</label>
+            <select  name="computer" id="computer" @focus="setActive">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          
+          <div class="full-width inputContainer">
+            
+            <label for="how-hear">How did you hear about us?</label>
+            <input type="how-hear" id="how-hear" name="how-hear" @focus="setActive" >
+          </div>
+           
+          <div class="apply-btn">
+            <input type="submit" value="Apply">
+          </div>
+        </fieldset>
+        </form>
+      </div>
+    </Main>
 
     </div>
 </template>
@@ -113,41 +117,74 @@
 </script>
 
 <style lang="scss">
- .Apply {
-     &__header {
-         padding: $base-vertical-rithm * 10;
-         h1 {
-             margin: $base-vertical-rithm * 10;
-             margin-bottom: $base-vertical-rithm * 2;
-             width: 20%;
-             color: $color-purple;
-             font-weight: bold;
-             font-size: 52px;
-             line-height: 60px;
-             display: inline-block;
-         }
-         &-image {
-             width: 55%;
-             display: inline-block;
-         }
-         &-dates {
-             margin-left: $base-vertical-rithm * 5;
-             width: 10%;
-             display: inline-block;
-             vertical-align: top;
-             h3 {
-                 font-weight: bold;
-             }
-         }
-     }
-     &__content {
-         width: 70%;
-         margin: 0 auto;
-     }
-     &__form {
-         width: 75%;
-         margin-left: 2.5%;
-         padding: $base-vertical-rithm * 10;
-     }
- }
+.Apply {
+  &__header {
+    padding: $base-vertical-rithm * 10;
+    h1 {
+      margin: $base-vertical-rithm * 10;
+      margin-bottom: $base-vertical-rithm * 2;
+      width: 20%;
+      color: $color-purple;
+      font-weight: bold;
+      font-size: 52px;
+      line-height: 60px;
+      display: inline-block;
+    }
+    &-image {
+      width: 55%;
+      display: inline-block;
+    }
+    &-dates {
+      margin-left: $base-vertical-rithm * 5;
+      width: 10%;
+      display: inline-block;
+      vertical-align: top;
+      h3 {
+        font-weight: bold;
+        color: $color-purple;
+      }
+      h4{
+        color: $color-purple;
+      }
+
+    }
+  }
+  &__content {
+    width: 70%;
+    margin: 0 auto;
+    h1{
+      color: $color-purple;
+
+    }
+    ul li{
+      list-style: disc;
+    }
+    ul + p {
+    margin-top: 1rem;
+
+}
+  }
+  &__form {
+    width: 75%;
+    margin-left: 2.5%;
+    padding: $base-vertical-rithm * 10;
+    p, h1 {
+      margin-left: 50px;
+      color: $color-purple;
+    }
+    h1 {
+      font-weight: bold;
+      font-size:36px;
+      width: 60%;
+      line-height: 36px;
+    }
+    p {
+      margin-top: $base-vertical-rithm * 10;
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+
+}
+
 </style>

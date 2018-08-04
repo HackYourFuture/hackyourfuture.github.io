@@ -1,6 +1,6 @@
 <template>
   <div class="Makers">
-    <h1>Meet our makers</h1>
+    <h1>Meet our graduates</h1>
     <div class="Makers__items">
       <div class="Makers__item">
         <div class="Makers__item-image">

@@ -46,7 +46,7 @@ module.exports = {
         '/content': 'http://localhost:3051/'
     },
     head: {
-        title: 'Hack Your Future',
+        title: 'HackYourFuture',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },

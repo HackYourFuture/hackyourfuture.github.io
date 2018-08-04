@@ -5,7 +5,7 @@
     </div>
 
     <div class="Landscape__text">
-      <h1>live up to your potential and create opportunities to a career in the tech industry! </h1>
+      <h1>Use your potential.<br> Build a career in tech.</h1>
     </div>
   </section>
 </template>
