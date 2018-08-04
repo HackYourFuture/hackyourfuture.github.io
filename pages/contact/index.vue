@@ -44,8 +44,8 @@
           </div>
           <div class="full-width inputContainer">
             
-            <label for="eductation">Educational Background</label>
-            <input type="eductation" id="eductation" name="eductation" @focus="setActive">
+            <label for="education">Educational Background</label>
+            <input type="education" id="education" name="education" @focus="setActive">
           </div>
 
           <div class="apply-btn">
