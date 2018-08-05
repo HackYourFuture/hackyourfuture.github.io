@@ -8,14 +8,10 @@ if (isGenerating){
     apiUrl = 'http://localhost:3051/'
 }
 
-console.log("extra line to triggr Travis only")
 let lambdaUrl = require('./infra.config.json').api_url.value;
 if (process.env.ENVIRONMENT === "dev") {
     lambdaUrl = 'http://localhost:3005/';
 }
-
-
-console.log(lambdaUrl);
 
 module.exports = {
 

@@ -79,13 +79,9 @@
 
 <script>
 import axios from "~/plugins/axios";
+let content;
 
 export default {
-  async asyncData() {
-    let dates;
-    let content;
-
- export default {
      async asyncData () {
          let dates
          let content

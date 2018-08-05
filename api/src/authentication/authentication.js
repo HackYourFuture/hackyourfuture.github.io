@@ -1,32 +1,34 @@
-let readline = require("readline");
+const readline = require("readline");
 const fs = require("fs");
-let { OAuth2Client } = require("google-auth-library");
+const path = require('path');
+const { OAuth2Client } = require("google-auth-library");
 
 let SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
-const TOKEN_DIR =
-    (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) +
-    "/.credentials/";
-const TOKEN_PATH = TOKEN_DIR + "sheets.googleapis.com-nodejs-quickstart.json";
+const TOKEN_PATH = path.join(process.cwd(), '.google-credentials.json');
 
 class Authentication {
     authenticate() {
         return new Promise((resolve, reject) => {
-            let credentials = this.getClientSecret();
-            let authorizePromise = this.authorize(credentials);
-            authorizePromise.then(resolve, reject);
+            const credentials = this.getClientSecret();
+            this.authorize(credentials).then(resolve, reject);
         });
     }
     getClientSecret() {
         return require("./credentials.json");
     }
     authorize(credentials) {
-        var clientSecret = credentials.installed.client_secret;
-        var clientId = credentials.installed.client_id;
-        var redirectUrl = credentials.installed.redirect_uris[0];
-        var oauth2Client = new OAuth2Client(clientId, clientSecret, redirectUrl);
+        const clientSecret = credentials.installed.client_secret;
+        const clientId = credentials.installed.client_id;
+        const redirectUrl = credentials.installed.redirect_uris[0];
+        const oauth2Client = new OAuth2Client(clientId, clientSecret, redirectUrl);
 
         return new Promise((resolve, reject) => {
             // Check if we have previously stored a token.
+            if (process.env.GOOGLE_TOKEN) {
+                resolve(process.env.GOOGLE_TOKEN);
+                return;
+            }
+
             fs.readFile(TOKEN_PATH, (err, token) => {
                 if (err) {
                     this.getNewToken(oauth2Client).then(
@@ -37,10 +39,11 @@ class Authentication {
                             reject(err);
                         }
                     );
-                } else {
-                    oauth2Client.credentials = JSON.parse(token);
-                    resolve(oauth2Client);
+                    return;
                 }
+
+                oauth2Client.credentials = JSON.parse(token);
+                resolve(oauth2Client);
             });
         });
     }
