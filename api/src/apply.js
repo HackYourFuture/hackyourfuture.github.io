@@ -48,13 +48,29 @@ const sendEmail = (toEmail, Data, Subject) => {
     });
 }
 
-module.exports = (req, res) => {
+const createApplicant = (body) => {
 
-    sendEmail(
-        fromEmail,
-        applyToOrgTemplate({ params: req.body }),
-        'A new student applied'
-    ).then(() => {
+    return new Promise((resolve, reject) => {
+        for (var i in body) {
+            if (body[i] === "") {
+                return reject("you have to fill all fields");
+            }
+        }
+        console.log("We have a new applicant")
+        return resolve(body)
+
+
+    });
+}
+
+module.exports = (req, res) => {
+    createApplicant(req.body).then(() => {
+        sendEmail(
+            fromEmail,
+            applyToOrgTemplate({ params: req.body }),
+            'A new student applied'
+        )
+    }).then(() => {
 
         return sendEmail(
             req.body.email,
@@ -65,14 +81,15 @@ module.exports = (req, res) => {
     }).then(() => {
 
         console.log("=== ALL EMAILS ARE SENT!!!");
-        res.status(200).json({ message: 'You got an email :-)'});
+
+        res.status(200).json(req.body);
 
     }).catch((err) => {
 
         console.log("===EMAIL NOT SENT===");
         console.log(err);
+
         res.status(500).json({ message: 'Something went wrong' });
 
     });
-
 };
