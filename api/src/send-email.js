@@ -1,18 +1,12 @@
 const AWS = require('aws-sdk');
-// const template = require('');
-// const message = require('');
-// const emailTemplate = template(require(''));
-
 
 const AWS_CONFIG = {
     region: 'eu-west-1'
 };
 
-
 const ses = new AWS.SES(AWS_CONFIG);
 
-
-const sendEmail = (toEmail,fromEmail, Data, Subject) => {
+const sendEmail = (ToAddresses, Source, Data, Subject) => {
 
     return new Promise((resolve, reject) => {
 
@@ -23,7 +17,7 @@ const sendEmail = (toEmail,fromEmail, Data, Subject) => {
 
         ses.sendEmail({
             Destination: {
-                ToAddresses: [toEmail]
+                ToAddresses,
             },
             Message: {
                 Body: {
@@ -35,7 +29,7 @@ const sendEmail = (toEmail,fromEmail, Data, Subject) => {
                     Data: Subject
                 }
             },
-            Source: fromEmail
+            Source,
         }, (err, data) => {
 
             if (err) return reject(err);
@@ -47,6 +41,4 @@ const sendEmail = (toEmail,fromEmail, Data, Subject) => {
     });
 }
 
-module.exports = (req, res) => {
-//    Nothing to send
-};
+module.exports = sendEmail;
