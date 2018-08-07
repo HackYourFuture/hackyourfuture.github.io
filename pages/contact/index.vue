@@ -44,8 +44,8 @@
           </div>
           <div class="full-width inputContainer">
             
-            <label for="eductation">Educational Background</label>
-            <input type="eductation" id="eductation" name="eductation" @focus="setActive">
+            <label for="education">Educational Background</label>
+            <input type="education" id="education" name="education" @focus="setActive">
           </div>
 
           <div class="apply-btn">
@@ -60,35 +60,34 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
+import axios from "~/plugins/axios";
 
- export default {
-     async asyncData () {
-         let dates
-         let content
-         try {
-             let req  = await axios.get('/content/en/contact/contact-questions.json')
-             content = req.data.body
-         } catch (e) {
-             console.log(e)
-             content = false
-         }
-         return {
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             content: content ? content : null
-         }
-     },
-     methods: {
-      setActive(e) {
-        this.$el.querySelectorAll('.inputContainer').forEach(function(i) {
-          i.classList.remove('active');
-        });
-        e.target.parentNode.classList.add('active');
-      }
-    },
-    components: {
+export default {
+  async asyncData() {
+    let dates;
+    let content;
+    try {
+      let req = await axios.get("/content/en/contact/contact-questions.json");
+      content = req.data.body;
+    } catch (e) {
+      console.log(e);
+      content = false;
     }
- }
+    return {
+      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+      content: content ? content : null
+    };
+  },
+  methods: {
+    setActive(e) {
+      this.$el.querySelectorAll(".inputContainer").forEach(function(i) {
+        i.classList.remove("active");
+      });
+      e.target.parentNode.classList.add("active");
+    }
+  },
+  components: {}
+};
 </script>
 
 <style lang="scss">
@@ -133,13 +132,14 @@ import axios from '~/plugins/axios'
     width: 70%;
     margin-left: 15%;
     position: relative;
-    p, h1 {
+    p,
+    h1 {
       margin-left: 50px;
       color: $color-purple;
     }
     h1 {
       font-weight: bold;
-      font-size:36px;
+      font-size: 36px;
       width: 40%;
       line-height: 36px;
     }

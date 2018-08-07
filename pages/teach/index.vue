@@ -49,8 +49,8 @@
             </div>
             <div class="full-width inputContainer">
               
-              <label for="eductation">Educational Background</label>
-              <input type="eductation" id="eductation" name="eductation" @focus="setActive">
+              <label for="education">Educational Background</label>
+              <input type="education" id="education" name="education" @focus="setActive">
             </div>
   
             <div class="apply-btn">
@@ -66,35 +66,34 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
+import axios from "~/plugins/axios";
 
- export default {
-     async asyncData () {
-         let content
-         try {
-             let req  = await axios.get('/content/en/teach/teach-content.json')
-             content = req.data.body
-         } catch (e) {
-             console.log(e)
-             content = false
-             content = false
-         }
-         return {
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             content: content ? content : null
-         }
-     },
-     methods: {
-      setActive(e) {
-        this.$el.querySelectorAll('.inputContainer').forEach(function(i) {
-          i.classList.remove('active');
-        });
-        e.target.parentNode.classList.add('active');
-      }
-    },
-    components: {
+export default {
+  async asyncData() {
+    let content;
+    try {
+      let req = await axios.get("/content/en/teach/teach-content.json");
+      content = req.data.body;
+    } catch (e) {
+      console.log(e);
+      content = false;
+      content = false;
     }
- }
+    return {
+      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+      content: content ? content : null
+    };
+  },
+  methods: {
+    setActive(e) {
+      this.$el.querySelectorAll(".inputContainer").forEach(function(i) {
+        i.classList.remove("active");
+      });
+      e.target.parentNode.classList.add("active");
+    }
+  },
+  components: {}
+};
 </script>
 
 <style lang="scss">
@@ -116,7 +115,6 @@ import axios from '~/plugins/axios'
       display: inline-block;
       vertical-align: top;
     }
-   
   }
   &__container {
     margin: 0 $base-vertical-rithm * 10;
@@ -133,7 +131,7 @@ import axios from '~/plugins/axios'
           bottom: -5px;
         }
         &:nth-child(1) {
-          margin-top:0;
+          margin-top: 0;
         }
       }
     }
@@ -148,7 +146,6 @@ import axios from '~/plugins/axios'
     margin-left: 15%;
     position: relative;
   }
-  
 }
 </style>
 
