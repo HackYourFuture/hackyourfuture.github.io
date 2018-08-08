@@ -90,12 +90,12 @@ label {
   left:5px;
   top:10px;
   transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+  // -moz-transition:0.2s ease all;  //removed per Maartje's request
+  // -webkit-transition:0.2s ease all;
 }
 
 .active label	{
   top:-20px;
-  font-size:14px;
+  // font-size:14px; //removed so that this is back to "standard"
   color: $color-purple;
 }
