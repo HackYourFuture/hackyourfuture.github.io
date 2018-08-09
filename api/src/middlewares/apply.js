@@ -1,19 +1,18 @@
 const email = require('../utils/email');
-const appendData = require("../authentication/appendData");
-const authentication = require("../authentication/authentication")
+const { updateApplicant } = require("../data/update-sheet");
 const sendEmail = require('../sendEmail');
 
 const fromEmail = "info@hackyourfuture.net";
 
 module.exports = (req, res) => {
 
-    authentication.authenticate().then(auth => appendData(req, auth))
+    updateApplicant(req.body.email, req.body)
     .then(()=>{
 
         return sendEmail(
             fromEmail,
             [fromEmail],
-            email('apply_to_org.tpl',{ params: req.body }),
+            email('apply_to_org.tpl', { params: req.body }),
             'A new student applied'
         )
 

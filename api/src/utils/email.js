@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const template = require('lodash.template');
 
-const PATH_EMAILS = path.join(__dirname, '../../emails_template');
+const EMAILS_DIRECTORIES = path.join(__dirname, '../../emails_template');
 
 module.exports = (emailFile, data) => {
 
-    const PATH_EMAIL = path.join(PATH_EMAIL, emailFile);
+    const PATH_EMAIL = path.join(EMAILS_DIRECTORIES, emailFile);
 
-    if (!fs.fileExistSync(PATH_EMAIL)) {
+    if (!fs.existsSync(PATH_EMAIL)) {
         throw new Error(`Not email found ${PATH_EMAIL}`);
     }
     

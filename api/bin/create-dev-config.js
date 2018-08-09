@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require("path")
 const readline = require("readline")
-const googleClient = require("../src/utils/google-auth");
+const { createClient } = require("../src/utils/google-auth");
 
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const PATH_CONFIG = path.join(__dirname, "../google-sheet-config.json");
@@ -22,18 +22,19 @@ console.log(`1) We need to create an App, Go to this URL: ${GOOGLE_CONFIG_URL}`)
 const question = (text) => {
     return new Promise(resolve => {
         rl.question(text, (answer) => {
-            
-            rl.close();
             resolve(answer);
         })
     });
 };
 
 const config = {};
+let client;
 question('Insert the ClientID:')
     .then(clientID => {
+    
         config.clientID = clientID;
         return question('Insert the ClientSecret: ');
+    
     })
     .then(clientSecret => {
         config.clientSecret = clientSecret;
@@ -43,20 +44,38 @@ question('Insert the ClientID:')
         console.log('Get the id from the url');
 
         return question('Insert Spreadsheet ID: ');
+   
     }).then(spreadSheetId => {
+       
         config.spreadSheetId = spreadSheetId;
 
-        const authUrl = googleClient(config.clientID, config.clientSecret).generateAuthUrl({
+        client = createClient(config.clientID, config.clientSecret);
+
+        const authUrl = client.generateAuthUrl({
             access_type: "offline",
             scope: SCOPES
         });
         console.log('Visit this url: ', authUrl)
-        // Here we need to create an oauth2Client with clientId
-        // and clientSecret
+    
         return question('Insert the token: ');
-    }).then(token => {
-        // Here we write the file.
-        config.token = token;
-        fs.writeFileSync(PATH_CONFIG, JSON.stringify(config));
-        console.log("The file is cread :)")
+
+    }).then(code => {
+        
+        // We need to close to prompt
+        rl.close();
+        
+        client.getToken(code, (err, token) => {
+            
+            if (err) {
+                console.error("Error while trying to retrieve access token");
+                throw new Error(err);
+            }
+            
+            config.token = token;
+            
+            fs.writeFileSync(PATH_CONFIG, JSON.stringify(config));
+            console.log("The file is cread :)");
+
+        });
+
     });
