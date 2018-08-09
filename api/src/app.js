@@ -39,7 +39,7 @@ app.post('/apply', (req, res) => {
     let errors = req.validationErrors();
 
     if(errors){
-        console.error("Validation errors: " + errors);
+        console.error("Validation errors: ", errors);
         res.status(500).json({ errors });
     } else{
         Apply(req, res)

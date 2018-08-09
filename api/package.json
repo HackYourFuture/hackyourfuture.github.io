@@ -5,9 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "dev:nodemon": "nodemon ./dist/dev.js --watch",
-    "dev:aws-ses": "aws-ses-local -o ./emails --port 3091",
-    "dev:build": "webpack --watch",
+    "dev:nodemon": "nodemon ./dev.js --watch",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
