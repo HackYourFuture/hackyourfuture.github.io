@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "postinstall": "node bin/create-dev-config.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:nodemon": "nodemon ./dev.js --watch",
     "build": "webpack",
