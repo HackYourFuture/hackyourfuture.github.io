@@ -13,7 +13,10 @@ const {
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const PATH_CONFIG = path.join(__dirname, "../google-sheet-config.json");
 const GOOGLE_CONFIG_URL = 'https://developers.google.com/sheets/api/quickstart/nodejs';
-if (fs.existsSync(PATH_CONFIG)) {
+
+
+// If the file exists or we're in the CI we exit
+if (fs.existsSync(PATH_CONFIG) || process.env.CI) {
     process.exit(0);
     return;
 }
