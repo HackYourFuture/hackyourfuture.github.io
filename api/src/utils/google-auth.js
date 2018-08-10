@@ -1,59 +1,46 @@
-const fs = require('fs');
-const {
-    OAuth2Client
-} = require("google-auth-library");
+const fs = require("fs");
+const { OAuth2Client } = require("google-auth-library");
+const { getConfig } = require("./dev-config");
 
 const redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
 
 function createClient(clientId, clientSecret, token) {
-    const client = new OAuth2Client(clientId, clientSecret, redirectUrl);
+  const client = new OAuth2Client(clientId, clientSecret, redirectUrl);
 
-    if (token) {
-
-        client.credentials = token;
-
-    }
-    return client;
+  if (token) {
+    client.credentials = token;
+  }
+  return client;
 }
 
 function getClient() {
+  let config;
 
-    let config;
+  if (process.env.DEVELOPMENT) {
+    config = getConfig();
+  }
 
-    if (process.env.DEVELOPMENT) {
+  const hasEnviromentConfig =
+    process.env.GOOGLE_CLIENT_ID &&
+    process.env.GOOGLE_CLIENT_SECRET &&
+    process.env.GOOGLE_TOKEN;
 
-        config = JSON.parse(fs.readFileSync('./../../google-sheet-config.json'));
+  if (hasEnviromentConfig) {
+    config = {
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      token: JSON.parse(GOOGLE_TOKEN)
+    };
+  }
 
-    }
+  if (Object.keys(config).length === 0) {
+    throw new Error("No configurations is provided for the auth client");
+  }
 
-    const hasEnviromentConfig = (
-        process.env.GOOGLE_CLIENT_ID &&
-        process.env.GOOGLE_CLIENT_SECRET &&
-        process.env.GOOGLE_TOKEN
-    );
-
-    if (hasEnviromentConfig) {
-
-        config = {
-            clientId: GOOGLE_CLIENT_ID,
-            clientSecret: GOOGLE_CLIENT_SECRET,
-            token: GOOGLE_TOKEN
-        };
-
-    }
-
-    if (Object.keys(config).length === 0) {
-
-        throw new Error('No configurations is provided for the auth client');
-
-    }
-
-    return createClient(config.clientID, config.clientSecret, config.token);
-
+  return createClient(config.clientID, config.clientSecret, config.token);
 }
-
 
 module.exports = {
-    getClient,
-    createClient
-}
+  getClient,
+  createClient
+};

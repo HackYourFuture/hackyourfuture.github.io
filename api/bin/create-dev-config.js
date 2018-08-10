@@ -10,7 +10,6 @@ const {
     saveConfig
 } = require("../src/utils/dev-config");
 
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const PATH_CONFIG = path.join(__dirname, "../google-sheet-config.json");
 const GOOGLE_CONFIG_URL = 'https://developers.google.com/sheets/api/quickstart/nodejs';
 
