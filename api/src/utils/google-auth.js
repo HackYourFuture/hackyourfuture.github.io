@@ -1,14 +1,16 @@
-const { OAuth2Client } = require("google-auth-library");
+const {
+    OAuth2Client
+} = require("google-auth-library");
 
 const redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
 
-function createClient (clientId, clientSecret, token) {
+function createClient(clientId, clientSecret, token) {
     const client = new OAuth2Client(clientId, clientSecret, redirectUrl);
 
-    if(token){
-        
+    if (token) {
+
         client.credentials = token;
-        
+
     }
     return client;
 }
@@ -16,11 +18,11 @@ function createClient (clientId, clientSecret, token) {
 function getClient() {
 
     let config;
-    
+
     if (process.env.DEVELOPMENT) {
 
         config = require('./../../google-sheet-config.json');
-    
+
     }
 
     const hasEnviromentConfig = (
@@ -42,12 +44,13 @@ function getClient() {
     if (Object.keys(config).length === 0) {
 
         throw new Error('No configurations is provided for the auth client');
-    
+
     }
 
-    return createClient(config.clientId, config.clientSecret, config.token);
+    return createClient(config.clientID, config.clientSecret, config.token);
 
 }
+
 
 module.exports = {
     getClient,
