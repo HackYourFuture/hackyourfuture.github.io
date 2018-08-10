@@ -1,11 +1,19 @@
 const {
     google
 } = require("googleapis");
+
 const {
     getClient
 } = require("../utils/google-auth");
-const SHEET_ID = process.env.GOOGLE_SHEET_ID || require('../../google-sheet-config').spreadSheetId;
 
+const {
+    getConfig,
+    updateTokenConfig,
+    saveConfig
+} = require("../utils/dev-config");
+
+
+const SHEET_ID = process.env.GOOGLE_SHEET_ID || require('../../google-sheet-config').spreadSheetId;
 
 const auth = getClient();
 
@@ -19,6 +27,28 @@ const columnPosition = {
     who_hear: 6,
     computer: 7
 };
+
+function handleApiError(error) {
+
+    const {
+        message
+    } = error;
+    const hasTokenError = message.indexOf('invalid') != -1 || message.indexOf('expired') != -1;
+
+    if (!hasTokenError || !process.env.DEVELOPMENT) {
+        console.log("The API returned an error: " + error);
+        return;
+    }
+
+    const config = getConfig();
+    updateTokenConfig(auth).then(token => {
+        config.token = token;
+        saveConfig(config);
+    });
+
+
+}
+
 
 function getRow(rows, email) {
 
@@ -38,7 +68,7 @@ function getRow(rows, email) {
 }
 
 function save(row, {
-    userName,
+    name,
     street,
     city,
     email,
@@ -52,7 +82,7 @@ function save(row, {
 
     const values = [
         [
-            userName,
+            name,
             street,
             city,
             email,
@@ -77,11 +107,11 @@ function save(row, {
         },
         (err, res) => {
             if (err) {
-                console.log("The API returned an error: ", err);
+                handleApiError(err);
                 return;
-            } else {
-                console.log("Spreadsheet is updated");
             }
+
+            console.log("Spreadsheet is updated");
         }
     );
 }
@@ -96,7 +126,7 @@ function getApplicant(email) {
             },
             (err, response) => {
                 if (err) {
-                    console.log("The API returned an error: " + err);
+                    handleApiError(err);
                     return;
                 }
 
