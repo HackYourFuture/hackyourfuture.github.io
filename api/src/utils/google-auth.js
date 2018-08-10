@@ -1,3 +1,4 @@
+const fs = require('fs');
 const {
     OAuth2Client
 } = require("google-auth-library");
@@ -21,7 +22,7 @@ function getClient() {
 
     if (process.env.DEVELOPMENT) {
 
-        config = require('./../../google-sheet-config.json');
+        config = JSON.parse(fs.readFileSync('./../../google-sheet-config.json'));
 
     }
 

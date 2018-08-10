@@ -12,8 +12,9 @@ const {
     saveConfig
 } = require("../utils/dev-config");
 
+const config = getConfig();
 
-const SHEET_ID = process.env.GOOGLE_SHEET_ID || require('../../google-sheet-config').spreadSheetId;
+const SHEET_ID = config.spreadSheetId;
 
 const auth = getClient();
 
@@ -40,7 +41,6 @@ function handleApiError(error) {
         return;
     }
 
-    const config = getConfig();
     updateTokenConfig(auth).then(token => {
         config.token = token;
         saveConfig(config);
