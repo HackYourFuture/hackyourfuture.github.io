@@ -114,6 +114,9 @@ function getApplicant(email) {
             resolve(result + 1);
             return;
           }
+
+          resolve(rows.length + 1);
+          return;
         }
 
         resolve(1);
