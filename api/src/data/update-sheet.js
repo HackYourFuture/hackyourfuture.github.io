@@ -1,5 +1,9 @@
-const { google } = require("googleapis");
-const { getClient } = require("../utils/google-auth");
+const {
+    google
+} = require("googleapis");
+const {
+    getClient
+} = require("../utils/google-auth");
 const SHEET_ID = process.env.GOOGLE_SHEET_ID || require('../../google-sheet-config').spreadSheetId;
 
 
@@ -33,34 +37,39 @@ function getRow(rows, email) {
 
 }
 
-function save(row, { name, street, city, email, phone, education }) {
+function save(row, {
+    userName,
+    street,
+    city,
+    email,
+    phone,
+    education
+}) {
 
     if (!row) throw new Error('We couldnt save the record');
 
     const sheets = google.sheets("v4");
 
-    const values = 
-        [[
-            name,
+    const values = [
+        [
+            userName,
             street,
             city,
             email,
             phone,
             education
-        ]]
-    
-   const resource = {
+        ]
+    ]
+
+    const resource = {
         valueInputOption: "RAW",
-        data: [
-          {
+        data: [{
             range: `Sheet1!A${row}:H`,
             majorDimension: "ROWS",
             values
-          }
-        ]
+        }]
     }
-    sheets.spreadsheets.values.batchUpdate(
-        {
+    sheets.spreadsheets.values.batchUpdate({
             auth,
             spreadsheetId: SHEET_ID,
             valueInputOption: "USER_ENTERED",
@@ -68,7 +77,7 @@ function save(row, { name, street, city, email, phone, education }) {
         },
         (err, res) => {
             if (err) {
-                console.log("The API returned an error: ",  err);
+                console.log("The API returned an error: ", err);
                 return;
             } else {
                 console.log("Spreadsheet is updated");
@@ -80,8 +89,7 @@ function save(row, { name, street, city, email, phone, education }) {
 function getApplicant(email) {
     return new Promise((resolve) => {
         const sheets = google.sheets("v4");
-        sheets.spreadsheets.values.get(
-            {
+        sheets.spreadsheets.values.get({
                 auth,
                 spreadsheetId: SHEET_ID,
                 range: "Sheet1"
@@ -98,21 +106,21 @@ function getApplicant(email) {
 
                     const result = getRow(rows, email);
 
-                    if (result !== -1){
+                    if (result !== -1) {
                         resolve(result + 1);
                         return;
                     }
 
                 }
 
-                resolve( rows.length + 1);
+                resolve(rows.length + 1);
             }
         );
     });
 }
 
 function updateApplicant(email, updates) {
-    
+
     return getApplicant(email)
         .then((row) => {
 
