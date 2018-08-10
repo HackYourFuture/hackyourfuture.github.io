@@ -15,10 +15,10 @@
                         </div>
                       
                          <div id="assiDiv">
-                            <P><img src="/gallery/06.svg" v-on:click="openUploadFileDialogue1()"  class="imageIcon" align="middle" />Upload Assignment screenshot (*)</P>                           
+                            <P v-on:click="openUploadFileDialogue1()">+ Upload Assignment screenshot (*)</P>            
                             <input type="file" class="text" id="file1" ref="file1" v-on:change="handleFileUpload1()" />
                             <div id="assiName"><span id="assiLabel"></span>
-                            <img src="/gallery/07.svg" class="imageIcon" @click="removeAssiFile()"/>                                                         
+                            <button @click="removeAssiFile()">Remove</button>                                                       
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
 
                       
                           <div class="full-width inputContainer">
-                            <label for="message">What would you like to contact us about?</label>
+                            <label for="message">Is there anything you would like to notify us about?</label>
                             <input type="message" id="message" ref="message" name="message" value="" v-on:change="handleMessage()" @focus="setActive">
                           </div>
 

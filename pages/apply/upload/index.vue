@@ -10,14 +10,14 @@
                 <form>
                     <fieldset>   
                         <div id="cvDiv">
-                            <P><img src="/gallery/06.svg" v-on:click="openUploadFileDialogue()" disabled class="imageIcon" align="middle" />Upload Your CV (*)</P>                           
+                            <P v-on:click="openUploadFileDialogue()" disabled >+ Upload Your CV (*)</P>                          
                             <input type="file" class="text" id="file" ref="file" v-on:change="handleFileUpload()" />
-                            <div id="cvName"><span id="cvLabel"></span>
-                            <img src="/gallery/07.svg" class="imageIcon" @click="removeCvFile()" />                          
+                            <div id="cvName"><span class="label" id="cvLabel"></span>
+                            <button @click="removeCvFile()">Remove</button>
                             </div>
                         </div>
 
-                        <div id="cvDiv2">
+                        <div class="section" id="cvDiv2">
                           <div class="insideaDiv">
                           <p class="cv2Lable">If you don't have a CV:</p>
                               <div class="checkboxFour">
@@ -28,11 +28,11 @@
                           <textarea id="cvText" rows="4" cols="50" placeholder="Your information"></textarea>
                         </div>
 
-                         <div id="mlDiv">
-                            <P><img src="/gallery/06.svg" v-on:click="openUploadFileDialogue1()"  class="imageIcon" align="middle" />Upload Your Motivation Letter (*)</P>                           
+                         <div class="section" id="mlDiv">
+                            <P v-on:click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                           
                             <input type="file" class="text" id="file1" ref="file1" v-on:change="handleFileUpload1()" />
-                            <div id="mlName"><span id="mlLabel"></span>
-                            <img src="/gallery/07.svg" class="imageIcon" @click="removeMlFile()"/>                                                         
+                            <div id="mlName"><span class="label ml" id="mlLabel"></span>
+                            <button @click="removeMlFile()">Remove</button>    
                             </div>
                         </div>
                         
@@ -54,7 +54,7 @@
 
                       
                           <div class="full-width inputContainer">
-                            <label for="message">What would you like to contact us about?</label>
+                            <label for="message">Is there anything you would like to notify us about?</label>
                             <input type="message" id="message" ref="message" name="message" value="" v-on:change="handleMessage()" @focus="setActive">
                           </div>
 
@@ -354,34 +354,25 @@ export default {
       display: none;
     }
 
-    #cvLabel {
+    .label{
       margin: $base-vertical-rithm * 10;
       margin-bottom: $base-vertical-rithm * 2;
       margin-left: 80px;
       font-size: 16px;
       line-height: 5px;
       display: inline-block;
+
     }
 
-    #mlLabel {
-      margin: $base-vertical-rithm * 10;
-      margin-bottom: $base-vertical-rithm * 2;
+    .ml{
       margin-left: 60px;
-      font-size: 16px;
-      line-height: 5px;
-      display: inline-block;
     }
 
     .insideaDiv {
       display: flex;
     }
 
-    #cvDiv2 {
-      display: grid;
-      grid-auto-flow: row;
-    }
-
-    #mlDiv2 {
+    .section{
       display: grid;
       grid-auto-flow: row;
     }
