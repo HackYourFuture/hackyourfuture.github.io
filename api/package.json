@@ -4,8 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:nodemon": "nodemon ./dev.js --watch",
+    "dev": "npm-run-all dev:config dev:start",
+    "dev:config": "node bin/create-dev-config.js",
+    "dev:start": "npm-run-all --parallel dev:start:*",
+    "dev:start:nodemon": "nodemon ./dev.js --watch",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

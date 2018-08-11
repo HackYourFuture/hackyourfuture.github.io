@@ -1,44 +1,50 @@
 <template>
         <div>
-        <Main class="Apply container">
-            <div class="Apply__header">
+        <Main class="UploadAssignment container">
+            <div class="UploadAssignment__header">
                 <h1>Upload your Assignment. </h1>
-                <div class="Apply__header-image"></div> 
+               
             </div>
 
-            <div class="Apply__form form">
-                <form>
+            <div class="UploadAssignment__form form">
+                <form id="assignmentUploadForm">
                     <fieldset>   
                         <div class="half-width inputContainer">
                             <label for="url">Assignment URL: (*)</label>
-                            <input type="url" id="url" ref="url" class="input" name="url" value="" v-on:change="handleEmail()" @focus="setActive">
+                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive">
                         </div>
                       
-                         <div id="assiDiv">
-                            <P><img src="/gallery/06.svg" v-on:click="openUploadFileDialogue1()"  class="imageIcon" align="middle" />Upload Assignment screenshot (*)</P>                           
-                            <input type="file" class="text" id="file1" ref="file1" v-on:change="handleFileUpload1()" />
-                            <div id="assiName"><span id="assiLabel"></span>
-                            <img src="/gallery/07.svg" class="imageIcon" @click="removeAssiFile()"/>                                                         
+                         <div id="assignmentDiv">
+                            <P v-on:click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
+                            <input type="file" class="UploadAssignment__form__inputText" id="file1" ref="file1" v-on:change="handleFileUpload1()" />
+                            <div id="assignmentName"><span id="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
+                            <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
                             </div>
                         </div>
 
                         <div class="half-width inputContainer">
                             <label for="email">e-mail (*)</label>
-                            <input type="email" id="email" ref="email" class="input" name="email" value="" v-on:change="handleEmail()" @focus="setActive">
+                            <input type="email" id="email" ref="email" class="input" name="email" value=""                                           
+                             v-on:change="handleEmail()" @focus="setActive">
                         </div>
 
                       
                           <div class="full-width inputContainer">
-                            <label for="message">What would you like to contact us about?</label>
+                            <label for="message">Is there anything you would like to notify us about?</label>
                             <input type="message" id="message" ref="message" name="message" value="" v-on:change="handleMessage()" @focus="setActive">
                           </div>
 
                            
                         <div class="apply-btn">
-                            <input type="submit" value="Apply" v-on:click.prevent="submitFile" true>
+                            <input type="submit" value="Apply" @click.prevent="submitFile()" true>
                         </div>
+                    
                     </fieldset>
+                     <div>
+                  <p id="success-Msg"></p>
+                </div>
                 </form>
+               
             </div>
             </Main>
           </div>
@@ -47,13 +53,12 @@
 <script>
 import axios from "~/plugins/axios";
 import Upload from "~/components/upload/upload";
-
 export default {
   async asyncData() {
     try {
     } catch (e) {}
     return {
-      formUrlApply: process.env.lambdaUrl + "apply/upload",
+      formUrlApply: process.env.lambdaUrl + "apply/upload1",
       siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I"
     };
   },
@@ -62,26 +67,29 @@ export default {
   },
   data() {
     return {
-      file: "",
+      url: "",
       file1: "",
       email: "",
       message: ""
     };
   },
+
   mounted: function() {
-    this.assiNameHide();
+    this.assignmentNameHide();
   },
 
   methods: {
     submitFile() {
       // Initialize the form data
       let formData = new FormData();
-      //  Add the form data we need to submit
-      formData.append("file", this.file);
+
+      // Add the form data we need to submit
+      formData.append("url", this.url.value);
       formData.append("file1", this.file1);
       formData.append("email", this.email.value);
       formData.append("message", this.message.value);
-      //  Make the request to the POST /single-file URL
+
+      // Make the request to the POST /single-file URL
       if (
         document.getElementById("email").value !== "" &&
         document.getElementById("email").value !== null &&
@@ -89,91 +97,81 @@ export default {
         document.getElementById("url").value !== "" &&
         document.getElementById("url").value !== null &&
         document.getElementById("url").value !== "Required field" &&
-        document.getElementById("assiLabel").innerHTML !== ""
+        document.getElementById("assignmentLabel").innerHTML !== ""
       ) {
         axios
-          .post("/apply/upload", formData, {
+          .post("/apply/upload1", formData, {
             headers: {
               "Content-Type": "multipart/form-data"
             }
           })
+
           .then(function() {
             console.log("SUCCESS!!");
+            console.log(...formData); // to see which files have been sent by POST
           })
           .catch(function() {
             console.log("FAILURE!!");
           });
+        this.successMSG();
       } else {
         if (document.getElementById("email").value === "") {
-          if (document.getElementById("email").value === "") {
-            document
-              .getElementById("email")
-              .parentNode.classList.remove("active");
-          }
+          document
+            .getElementById("email")
+            .parentNode.classList.remove("active");
           document.getElementById("email").parentNode.classList.add("active");
           document.getElementById("email").value = "Required field";
         }
-
         if (document.getElementById("url").value === "") {
-          if (document.getElementById("url").value === "") {
-            document
-              .getElementById("url")
-              .parentNode.classList.remove("active");
-          }
+          document.getElementById("url").parentNode.classList.remove("active");
           document.getElementById("url").parentNode.classList.add("active");
           document.getElementById("url").value = "Required field";
         }
-
-        if (document.getElementsByClassName("imageIcon").innerHTML === "") {
-          document.getElementsByClassName("imageIcon").innerHTML =
-            "Required field";
-        }
       }
-      document.getElementById("assignmentUploadForm").reset();
-      this.removeAssiFile();
+      this.removeAssignmentFile();
     },
-    // Handles a change on the file upload
+
+    // Handles a change on the url upload
     handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-      console.log(this.file.name);
-      let xx = this.file;
-      console.log(xx);
+      this.url = this.$refs.url;
+      document.getElementById("url").value = this.url.value;
     },
 
     handleFileUpload1() {
       this.file1 = this.$refs.file1.files[0];
-      console.log(this.file1.name);
-      this.assiNameShow();
-      document.getElementById("assiLabel").innerHTML =
+      this.assignmentNameShow();
+      document.getElementById("assignmentLabel").innerHTML =
         "You Uploaded the file: " + this.file1.name;
     },
 
     handleEmail() {
       this.email = this.$refs.email;
-      console.log(this.email.value);
       document.getElementById("email").value = this.email.value;
     },
 
     handleMessage() {
       this.message = this.$refs.message;
-      console.log(this.message.value);
       document.getElementById("message").value = this.message.value;
     },
 
-    // Handles when the image clicked
-    openUploadFileDialogue() {
-      document.getElementById("file").click();
+    successMSG() {
+      document.getElementById("success-Msg").innerHTML =
+        "You Have Submitted Successfully !";
+      document.getElementById("email").value = "";
+      document.getElementById("url").value = "";
+      document.getElementById("message").value = "";
+      console.log("success uploaded");
     },
 
-    openUploadFileDialogue1() {
+    // Handles when the add file clicked
+    openUploadFileDialogue() {
       document.getElementById("file1").click();
     },
 
     // Removes a select file the user has uploaded
-    removeAssiFile() {
+    removeAssignmentFile() {
       delete this.file1;
-      this.assiNameHide();
-      console.log(this.file1);
+      this.assignmentNameHide();
     },
 
     setActive(e) {
@@ -185,26 +183,29 @@ export default {
       e.target.parentNode.classList.add("active");
     },
 
-    hideAssiDiv() {
-      var x = document.getElementById("assiDiv");
+    hideAssgnmentiDiv() {
+      var x = document.getElementById("assignmentDiv");
       x.style.display = "none";
     },
 
-    assiNameShow() {
-      var x = document.getElementById("assiName");
+    assignmentNameShow() {
+      var x = document.getElementById("assignmentName");
       x.style.display = "block";
     },
-    assiNameHide() {
-      var x = document.getElementById("assiName");
+
+    assignmentNameHide() {
+      var x = document.getElementById("assignmentName");
       x.style.display = "none";
     }
   }
 };
 </script>
+
 <style lang="scss">
-.Apply {
+.UploadAssignment {
   &__header {
     padding: $base-vertical-rithm * 10;
+
     h1 {
       margin: $base-vertical-rithm * 10;
       margin-bottom: $base-vertical-rithm * 2;
@@ -215,40 +216,22 @@ export default {
       line-height: 60px;
       display: inline-block;
     }
-    &-image {
-      width: 55%;
-      display: inline-block;
-    }
   }
 
   &__form {
     width: 75%;
     margin-left: 2.5%;
     padding: $base-vertical-rithm * 10;
-    p,
-    h1 {
-      margin-left: 50px;
-      color: $color-purple;
-    }
-    h1 {
-      font-weight: bold;
-      font-size: 36px;
-      width: 60%;
-      line-height: 36px;
-    }
+
     p {
       margin-top: $base-vertical-rithm * 10;
       font-weight: bold;
       font-size: 24px;
+      margin-left: 50px;
+      color: $color-purple;
     }
 
-    .imageIcon {
-      width: 30px;
-      height: 30px;
-      margin: 10px;
-    }
-
-    #assiLabel {
+    &__assignemntLabel {
       margin: $base-vertical-rithm * 10;
       margin-bottom: $base-vertical-rithm * 2;
       margin-left: 60px;
@@ -257,7 +240,7 @@ export default {
       display: inline-block;
     }
 
-    .text {
+    &__inputText {
       font-size: 18px;
       padding: 10px 10px 10px 5px;
       display: block;
@@ -265,6 +248,15 @@ export default {
       border: none;
       background: transparent;
       display: none;
+    }
+    &__remove-btn {
+      border: 2px solid $color-purple;
+      padding: 0px 10px;
+      text-transform: uppercase;
+      font-weight: 100;
+      top: 2px;
+      right: 0;
+      margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
     }
   }
 }
