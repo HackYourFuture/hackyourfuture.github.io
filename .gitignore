@@ -6,4 +6,4 @@ static/api
 .DS_Store
 *.zip
 api/emails
-.google-credentials.json
+api/google-sheet-config.json

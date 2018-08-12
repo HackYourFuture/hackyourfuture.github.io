@@ -1,21 +1,18 @@
-const template = require('lodash.template');
-const applyToStudentMessage = require('../../emails_template/apply_to_student.txt');
-const applyToOrgTemplate = template(require('../../emails_template/apply_to_org.tpl'));
-const appendData = require("../authentication/appendData");
-const authentication = require("../authentication/authentication")
+const email = require('../utils/email');
+const { updateApplicant } = require("../data/update-sheet");
 const sendEmail = require('../sendEmail');
 
 const fromEmail = "info@hackyourfuture.net";
 
 module.exports = (req, res) => {
 
-    authentication.authenticate().then(auth => appendData(req, auth))
+    updateApplicant(req.body.email, req.body)
     .then(()=>{
 
         return sendEmail(
             fromEmail,
             [fromEmail],
-            applyToOrgTemplate({ params: req.body }),
+            email('apply_to_org.tpl', { params: req.body }),
             'A new student applied'
         )
 
@@ -25,7 +22,7 @@ module.exports = (req, res) => {
         return sendEmail(
             fromEmail,
             [req.body.email],
-            applyToStudentMessage,
+            email('apply_to_student.txt'),
             'Thank you for applying'
         );
 
