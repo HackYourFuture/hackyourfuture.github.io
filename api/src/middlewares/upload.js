@@ -1,7 +1,8 @@
 const {
     updateApplicant,
-    findApplicant // to be made later
 } = require("../data");
+
+const {getApplicant} = require("../data/update-sheet");
 
 const sendEmail = require("../sendEmail");
 
@@ -17,7 +18,7 @@ module.exports = (req, res) => {
     } = req.body;
 
     if(now <= deadline) {
-        findApplicant(email)
+        getApplicant(email)
             .then(()=>
                 updateApplicant(email, assignmentLink, req.files)
                     .then(() => {
@@ -40,9 +41,9 @@ module.exports = (req, res) => {
                     })
             )
             .catch(() => {
-                res.send("Your name does not exist")
+                res.status(404).send("Your name does not exist")
             })
     } else {
-            res.send("the deadline has passed")
+            res.status(400).send("the deadline has passed")
         }
 };
