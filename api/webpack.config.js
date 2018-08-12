@@ -1,8 +1,7 @@
 const path = require('path');
 module.exports = {
     entry: {
-        main: `${__dirname}/main.js`,
-        dev: `${__dirname}/dev.js`
+        main: `${__dirname}/main.js`
     },
     output: {
         filename: '[name].js',
