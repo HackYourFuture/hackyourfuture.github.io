@@ -1,7 +1,5 @@
-const template = require('lodash.template');
-const applyToOrgTemplate = template(require('../../emails_template/contact_us.tpl'));
 const sendEmail = require('../sendEmail');
-
+const email = require('../utils/email')
 const toEmail = "info@hackyourfuture.net";
 
 module.exports = (req, res) => {
@@ -9,7 +7,7 @@ module.exports = (req, res) => {
     sendEmail(
         req.body.email,
         [toEmail],
-        applyToOrgTemplate({ params: req.body }),
+        email('contact_us.tpl', { params: req.body }),
         'New contact request'
     ).then(() => {
         console.log("=== ALL EMAILS ARE SENT!!!");
