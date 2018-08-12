@@ -15,13 +15,13 @@ const SHEET_ID = config.spreadSheetId;
 const auth = getClient();
 
 const columnPosition = {
-  name: 0,
+  userName: 0,
   street: 1,
   city: 2,
   email: 3,
   phone: 4,
   education: 5,
-  who_hear: 6,
+  how_hear: 6,
   computer: 7
 };
 
@@ -41,25 +41,17 @@ function handleApiError(error) {
   });
 }
 
-function getRow(rows, email) {
-  let foundRow = -1;
-
-  rows.forEach((row, rowNumber) => {
-    if (row[columnPosition.email] === email) {
-      foundRow = rowNumber;
-    }
-  });
-
-  console.log(foundRow);
-  return foundRow;
-}
-
-function save(row, { name, street, city, email, phone, education }) {
+function save(
+  row,
+  { userName, street, city, email, phone, education, how_hear, computer }
+) {
   if (!row) throw new Error("We couldnt save the record");
 
   const sheets = google.sheets("v4");
 
-  const values = [[name, street, city, email, phone, education]];
+  const values = [
+    [userName, street, city, email, phone, education, how_hear, computer]
+  ];
 
   const resource = {
     valueInputOption: "RAW",
@@ -105,21 +97,20 @@ function getApplicant(email) {
           return;
         }
 
-        const rows = response.data.values;
+        const rows = response.data.values || [];
 
-        if (rows && rows.length !== 0) {
-          const result = getRow(rows, email);
-
-          if (result !== -1) {
-            resolve(result + 1);
-            return;
+        let i = 0;
+        const foundedAt = rows.reduce((row, state) => {
+          i++;
+          const rowEmail = row[columnPosition.email] || "";
+          if (rowEmail.toLowerCase() === email.toLowerCase()) {
+            state = i;
           }
 
-          resolve(rows.length + 1);
-          return;
-        }
+          return state;
+        }, false);
 
-        resolve(1);
+        resolve({ foundedAt, totalRows: rows.length || 0 });
       }
     );
   });
@@ -127,8 +118,23 @@ function getApplicant(email) {
 
 function updateApplicant(email, updates) {
   return getApplicant(email)
-    .then(row => {
-      console.log(row);
+    .then(({ foundedAt, totalRows }) => {
+      let row;
+
+      // Spreadsheet is empty
+      if (!foundedAt && totalRows === 0) {
+        row = 1;
+      }
+
+      // Record is not founded but we add to the latest row
+      if (!foundedAt && totalRows !== 0) {
+        row = totalRows + 1;
+      }
+
+      if (foundedAt) {
+        row = foundedAt;
+      }
+
       return save(row, updates);
     })
     .catch((msg, totalRows) => {
