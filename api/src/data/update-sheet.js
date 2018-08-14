@@ -41,7 +41,7 @@ function handleApiError(error) {
   });
 }
 
-function save(
+function saveApplicant(
   row,
   { userName, street, city, email, phone, education, how_hear, computer }
 ) {
@@ -70,7 +70,7 @@ function save(
       valueInputOption: "USER_ENTERED",
       resource
     },
-    (err, res) => {
+    err => {
       if (err) {
         handleApiError(err);
         return;
@@ -98,51 +98,37 @@ function getApplicant(email) {
         }
 
         const rows = response.data.values || [];
-
-        let i = 0;
-        const foundedAt = rows.reduce((row, state) => {
-          i++;
+        const totalRows = rows.length;
+        const foundedAt = rows.findIndex((row, index) => {
           const rowEmail = row[columnPosition.email] || "";
           if (rowEmail.toLowerCase() === email.toLowerCase()) {
-            state = i;
+            return index;
           }
+        });
 
-          return state;
-        }, false);
+        let insertRow;
 
-        resolve({ foundedAt, totalRows: rows.length || 0 });
+        // Spreadsheet is empty
+        if (foundedAt === -1 && totalRows === 0) {
+          insertRow = 1;
+        }
+
+        // Record is not founded but we add to the latest row
+        if (foundedAt === -1 && totalRows !== 0) {
+          insertRow = totalRows + 1;
+        }
+
+        // Record is found, update the applicant
+        if (foundedAt !== -1) {
+          insertRow = foundedAt;
+        }
+        resolve({ foundedAt, insertRow });
       }
     );
   });
 }
 
-function updateApplicant(email, updates) {
-  return getApplicant(email)
-    .then(({ foundedAt, totalRows }) => {
-      let row;
-
-      // Spreadsheet is empty
-      if (!foundedAt && totalRows === 0) {
-        row = 1;
-      }
-
-      // Record is not founded but we add to the latest row
-      if (!foundedAt && totalRows !== 0) {
-        row = totalRows + 1;
-      }
-
-      if (foundedAt) {
-        row = foundedAt;
-      }
-
-      return save(row, updates);
-    })
-    .catch((msg, totalRows) => {
-      console.log(totalRows, msg);
-    });
-}
-
 module.exports = {
   getApplicant,
-  updateApplicant
+  saveApplicant
 };
