@@ -27,14 +27,16 @@
         <nuxt-link :to="'/'">become<br> a <span class="underline">trainer</span></nuxt-link>
       </div>
     </Main>
+    <Partners/>
     <Signup :color="'grey'"/>
+    
   </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
 import Signup from '~/components/signup/Signup';
-
+import Partners from '~/components/partners/Partners';
  export default {
      async asyncData () {
          let hire_alumni
@@ -61,7 +63,8 @@ import Signup from '~/components/signup/Signup';
          }
      },
      components: {
-       Signup
+       Signup,
+       Partners
      }
  }
 </script>

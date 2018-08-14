@@ -1,3 +1,5 @@
 # Results until today
 
-In our 6-month program we train talented refugees with and without a coding background in modern JavaScript software development. Our aim is to have our students land their first software development job after finishing our course, and we do everything we can to prepare them as well as possible.
+Our measure of success is simple - do our graduates find a job? Therefore our selection process is rigorous and the program is tough; not everyone who starts our course graduates. After finishing the program, we guide our students towards employment through our network of tech professionals.
+
+Our approach is working: 96% of our graduates have gone on to secure employment, with the rest going into further study. 

@@ -1,27 +1,13 @@
 <template>
   <div>
     <div class="Chapters__map">
-      <vl-map
-      v-if="browser"
-      data-projection="EPSG:4326"
-      :load-tiles-while-animating="true" 
-      :load-tiles-while-interacting="true" style="height: 400px" class="Chapters__map-map">
-        <vl-view :zoom.sync="zoom" :center.sync="center" :rotation.sync="rotation"></vl-view>
 
-        <vl-layer-tile id="osm">
-            <vl-source-osm></vl-source-osm>
-        </vl-layer-tile>
-
-        <vl-feature :id="'point' + chapter.name" v-for="(chapter, key) in chapterPoints" :key="key">
-          <vl-geom-circle :radius="100000" :coordinates="chapter.cords"></vl-geom-circle>
-        </vl-feature>
-     </vl-map>
+      <div class="Chapters__map-map">
+        <img src="/map/map.svg">
+      </div>
 
      <div class="Chapters__map-list">
-       <nuxt-link 
-        v-for="(chapter, key) in chapterPoints"
-        :key="key"
-        :to="strToLower(chapter.name)">{{chapter.name}}</nuxt-link>
+       <p v-for="(chapter, key) in chapterPoints">{{chapter.name}}</p>
      </div>
     </div>
     <Main class="Chapters container">

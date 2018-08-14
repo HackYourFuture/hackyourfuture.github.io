@@ -1,3 +1,5 @@
-You can help us by donating money, knowledge
-and even laptops. Maybe you want to contri- bute to the local Hack Your Future chapter
-or do structural investments to our. Eather way we are very grateful for your generosity!
+ …and there are plenty of ways you can help us. 
+
+Are you looking to hire a developer? We have access to an incredible pool of talent and skill.
+
+

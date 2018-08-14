@@ -8,7 +8,10 @@ if (isGenerating){
     apiUrl = 'http://localhost:3051/'
 }
 
-const lambdaUrl = require('./infra.config.json').api_url.value;
+let lambdaUrl = require('./infra.config.json').api_url.value;
+if (process.env.ENVIRONMENT === "dev") {
+    lambdaUrl = 'http://localhost:3005/';
+}
 
 module.exports = {
 
@@ -38,7 +41,7 @@ module.exports = {
         '/content': 'http://localhost:3051/'
     },
     head: {
-        title: 'Hack Your Future',
+        title: 'HackYourFuture',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },

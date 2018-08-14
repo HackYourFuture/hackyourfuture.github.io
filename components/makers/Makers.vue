@@ -1,29 +1,47 @@
 <template>
   <div class="Makers">
-    <h1>Meet our makers</h1>
+    <h1>Meet our graduates</h1>
     <div class="Makers__items">
-      <div class="Makers__item">
-        <div class="Makers__item-image">
-          <img src="/makers/amena.png">
+      <div class="Makers__items-inner">
+        <div class="Makers__item">
+          <div class="Makers__item-image">
+            <img src="/makers/amena.png">
+          </div>
+          <h3>Amena</h3>
+          <p>Currently working at NOS</p>
         </div>
-        <h3>Amena</h3>
-        <p>Currently working at NOS</p>
-      </div>
 
-      <div class="Makers__item">
-        <div class="Makers__item-image">
-          <img src="/makers/lamma.png">
+        <div class="Makers__item">
+          <div class="Makers__item-image">
+            <img src="/makers/lamma.png">
+          </div>
+          <h3>Lamma</h3>
+          <p>Currently working at NOS</p>
         </div>
-        <h3>Lamma</h3>
-        <p>Currently working at NOS</p>
-      </div>
 
-      <div class="Makers__item">
-        <div class="Makers__item-image">
-          <img src="/makers/nazar.png">
+        <div class="Makers__item">
+          <div class="Makers__item-image">
+            <img src="/makers/nazar.png">
+          </div>
+          <h3>Nazar</h3>
+          <p>Currently working at NOS</p>
         </div>
-        <h3>Nazar</h3>
-        <p>Currently working at NOS</p>
+
+        <div class="Makers__item">
+          <div class="Makers__item-image">
+            <img src="/makers/nazar.png">
+          </div>
+          <h3>Nazar</h3>
+          <p>Currently working at NOS</p>
+        </div>
+
+        <div class="Makers__item">
+          <div class="Makers__item-image">
+            <img src="/makers/nazar.png">
+          </div>
+          <h3>Nazar</h3>
+          <p>Currently working at NOS</p>
+        </div>
       </div>
     </div>
   </div>
@@ -46,13 +64,17 @@
   }
   &__items {
     margin: 25px -25px;
-    
+    overflow-x: scroll;
+    &-inner {
+      width: max-content;
+      height: 450px;
+    }
   }
   &__item {
     background: $color-purple;
     padding: $base-vertical-rithm * 5;
     display: inline-block;
-    width: calc(33% - 50px);
+    width: 350px;
     margin: 25px;
     display: inline-block;
     

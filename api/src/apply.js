@@ -67,7 +67,9 @@ module.exports = (req, res) => {
     createApplicant(req.body).then(() => {
         sendEmail(
             fromEmail,
-            applyToOrgTemplate({ params: req.body }),
+            applyToOrgTemplate({
+                params: req.body
+            }),
             'A new student applied'
         )
     }).then(() => {
@@ -89,7 +91,9 @@ module.exports = (req, res) => {
         console.log("===EMAIL NOT SENT===");
         console.log(err);
 
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({
+            message: 'Something went wrong'
+        });
 
     });
 };

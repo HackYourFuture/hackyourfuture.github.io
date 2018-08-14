@@ -1,6 +1,6 @@
 <template>
   <div class="News">
-    <h1>extra extra read all about it</h1>
+    <h1>what’s happening now</h1>
     <NewsItems/>
   </div>
 </template>

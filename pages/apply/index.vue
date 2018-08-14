@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div>
         <Main class="Apply container">
             <div class="Apply__header">
                 <h1>Join <br> Us!</h1>
@@ -7,13 +7,14 @@
                     <img src="/gallery/05.jpg">
                 </div>
                 <div class="Apply__header-dates" v-html="dates"></div>
+                 
             </div>
 
             <div class="Apply__content" v-html="content">
             </div>
 
             <div class="Apply__form form">
-                <form action="https://jav85876c3.execute-api.eu-central-1.amazonaws.com/prod/apply" method="POST">
+                <form :action="formUrlApply" method="POST">
                     <fieldset>
                         <div class="half-width inputContainer">
                             <label for="userName">Name</label>
@@ -48,13 +49,18 @@
                         </div>
                         <div class="full-width inputContainer">
 
+<<<<<<< HEAD
                             <label for="education">Educational Background</label>
                             <input type="education" id="education" class="input" name="education" @focus="setActive">
+=======
+                            <label for="eductation">Educational Background</label>
+                            <input type="eductation" id="education" class="input" name="education" @focus="setActive">
+>>>>>>> afa64be8c377273ada48bd0035f868b8d2b4a0fb
                         </div>
                         <div class="full-width inputContainer">
 
                             <label for="how-hear">How did you hear about us?</label>
-                            <input type="how-hear" id="how-hear" class="input" name="how-hear" @focus="setActive" >
+                            <input type="how-hear" id="how-hear" class="input" name="how_hear" @focus="setActive" >
                         </div>
                         <div class="full-width computer inputContainer">
 
@@ -72,11 +78,12 @@
             </div>
         </Main>
 
-    </div>
+</div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
+<<<<<<< HEAD
 
 export default {
   async asyncData() {
@@ -109,6 +116,42 @@ export default {
     }
   },
   components: {}
+=======
+let content;
+
+export default {
+  async asyncData () {
+         let dates
+         let content
+         try {
+             let req  = await axios.get('/content/en/apply/apply-dates.json')
+             let req1 = await axios.get('/content/en/apply/apply-content.json')
+             dates = req.data.body
+             content = req1.data.body
+         } catch (e) {
+             console.log(e)
+             dates = false
+             content = false
+         }
+         return {
+             formUrlApply: process.env.lambdaUrl + "apply",
+             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+             dates: dates ? dates : null,
+             content: content ? content : null
+         }
+     },
+     methods: {
+        setActive(e) {
+          this.$el.querySelectorAll(".input").forEach((i) => {
+            if (i.value.length == 0) {
+              i.parentNode.classList.remove("active");
+            }
+          });
+          e.target.parentNode.classList.add("active");
+        }
+    },
+    components: {}
+>>>>>>> afa64be8c377273ada48bd0035f868b8d2b4a0fb
 };
 </script>
 
@@ -131,23 +174,74 @@ export default {
       display: inline-block;
     }
     &-dates {
+<<<<<<< HEAD
       margin-left: $base-vertical-rithm * 5;
       width: 10%;
       display: inline-block;
       vertical-align: top;
       h3 {
         font-weight: bold;
+=======
+      margin-left: $base-vertical-rithm * 15;
+      margin-top: $base-vertical-rithm * 15;
+      width: 100%;
+      display: inline-block;
+      vertical-align: top;
+      div {
+        display: inline-block;
+        width: calc(25% - 20px);
+      }
+      h3 {
+        font-weight: bold;
+        color: $color-purple;
+      }
+      h4 {
+        color: $color-purple;
+        font-weight: bold;
+>>>>>>> afa64be8c377273ada48bd0035f868b8d2b4a0fb
       }
     }
   }
   &__content {
     width: 70%;
     margin: 0 auto;
+<<<<<<< HEAD
+=======
+    h1 {
+      color: $color-purple;
+      line-height: 1;
+    }
+    ul li {
+      list-style: disc;
+    }
+    ul + p {
+      margin-top: 1rem;
+    }
+>>>>>>> afa64be8c377273ada48bd0035f868b8d2b4a0fb
   }
   &__form {
     width: 75%;
     margin-left: 2.5%;
     padding: $base-vertical-rithm * 10;
+<<<<<<< HEAD
+=======
+    p,
+    h1 {
+      margin-left: 50px;
+      color: $color-purple;
+    }
+    h1 {
+      font-weight: bold;
+      font-size: 36px;
+      width: 60%;
+      line-height: 36px;
+    }
+    p {
+      margin-top: $base-vertical-rithm * 10;
+      font-weight: bold;
+      font-size: 24px;
+    }
+>>>>>>> afa64be8c377273ada48bd0035f868b8d2b4a0fb
   }
 }
 </style>
