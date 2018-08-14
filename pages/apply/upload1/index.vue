@@ -6,18 +6,19 @@
                
             </div>
 
-            <div class="UploadAssignment__form form">
+            <div id="UploadAssignment__form" class="UploadAssignment__form form">
                 <form id="assignmentUploadForm">
                     <fieldset>   
                         <div class="half-width inputContainer">
                             <label for="url">Assignment URL: (*)</label>
-                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive">
+                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
                         </div>
                       
                          <div id="assignmentDiv">
                             <P v-on:click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-                            <input type="file" class="UploadAssignment__form__inputText" id="file1" ref="file1" v-on:change="handleFileUpload1()" />
-                            <div id="assignmentName"><span id="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
+                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" ref="input_file_assignment" v-on:change="handleFileUpload1()" />
+                            <h3 ref="requiredMSG"></h3>
+                            <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
                             <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
                             </div>
                         </div>
@@ -25,26 +26,24 @@
                         <div class="half-width inputContainer">
                             <label for="email">e-mail (*)</label>
                             <input type="email" id="email" ref="email" class="input" name="email" value=""                                           
-                             v-on:change="handleEmail()" @focus="setActive">
+                             v-on:change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
                         </div>
 
-                      
-                          <div class="full-width inputContainer">
-                            <label for="message">Is there anything you would like to notify us about?</label>
-                            <input type="message" id="message" ref="message" name="message" value="" v-on:change="handleMessage()" @focus="setActive">
-                          </div>
-
+                        <div id="message_TextArea" class="UploadAssignment__form__section">
+                          <p class="messageLabel">Is there anything you would like to notify us about?</p>
+                          <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="Your Question" v-on:change="handleMessage()"></textarea>
+                        </div>
                            
                         <div class="apply-btn">
                             <input type="submit" value="Apply" @click.prevent="submitFile()" true>
                         </div>
                     
                     </fieldset>
-                     <div>
-                  <p id="success-Msg"></p>
-                </div>
                 </form>
-               
+                
+            </div>
+            <div>
+                  <p id="success-Msg" class="UploadAssignment__success-Msg"></p>
             </div>
             </Main>
           </div>
@@ -67,10 +66,10 @@ export default {
   },
   data() {
     return {
-      url: "",
-      file1: "",
-      email: "",
-      message: ""
+      urlData: "",
+      assignmentData: "",
+      emailData: "",
+      messageData: ""
     };
   },
 
@@ -82,22 +81,29 @@ export default {
     submitFile() {
       // Initialize the form data
       let formData = new FormData();
+      const {
+        url,
+        input_file_assignment,
+        email,
+        message,
+        assignmentLabel
+      } = this.$refs;
 
       // Add the form data we need to submit
-      formData.append("url", this.url.value);
-      formData.append("file1", this.file1);
-      formData.append("email", this.email.value);
-      formData.append("message", this.message.value);
+      formData.append("url", this.urlData.value);
+      formData.append("input_file_assignment", this.assignmentData);
+      formData.append("email", this.emailData.value);
+      formData.append("message", this.messageData.value);
 
       // Make the request to the POST /single-file URL
       if (
-        document.getElementById("email").value !== "" &&
-        document.getElementById("email").value !== null &&
-        document.getElementById("email").value !== "Required field" &&
-        document.getElementById("url").value !== "" &&
-        document.getElementById("url").value !== null &&
-        document.getElementById("url").value !== "Required field" &&
-        document.getElementById("assignmentLabel").innerHTML !== ""
+        email.value !== "" &&
+        email.value !== null &&
+        email.value !== "Required field" &&
+        url.value !== "" &&
+        url.value !== null &&
+        url.value !== "Required field" &&
+        assignmentLabel.innerHTML !== ""
       ) {
         axios
           .post("/apply/upload1", formData, {
@@ -115,17 +121,18 @@ export default {
           });
         this.successMSG();
       } else {
-        if (document.getElementById("email").value === "") {
-          document
-            .getElementById("email")
-            .parentNode.classList.remove("active");
-          document.getElementById("email").parentNode.classList.add("active");
-          document.getElementById("email").value = "Required field";
+        if (email.value === "") {
+          email.parentNode.classList.remove("active");
+          email.parentNode.classList.add("active");
+          email.value = "Required field";
         }
-        if (document.getElementById("url").value === "") {
-          document.getElementById("url").parentNode.classList.remove("active");
-          document.getElementById("url").parentNode.classList.add("active");
-          document.getElementById("url").value = "Required field";
+        if (url.value === "") {
+          url.parentNode.classList.remove("active");
+          url.parentNode.classList.add("active");
+          url.value = "Required field";
+        }
+        if (input_file_assignment.value === "") {
+          this.$refs.requiredMSG.innerHTML = "Required field";
         }
       }
       this.removeAssignmentFile();
@@ -133,44 +140,45 @@ export default {
 
     // Handles a change on the url upload
     handleFileUpload() {
-      this.url = this.$refs.url;
-      document.getElementById("url").value = this.url.value;
+      this.urlData = url;
+      url.value = this.urlData.value;
     },
 
     handleFileUpload1() {
-      this.file1 = this.$refs.file1.files[0];
+      this.assignmentData = input_file_assignment.files[0];
       this.assignmentNameShow();
-      document.getElementById("assignmentLabel").innerHTML =
-        "You Uploaded the file: " + this.file1.name;
+      this.$refs.requiredMSG.innerHTML = "";
+      assignmentLabel.innerHTML =
+        "You Uploaded the file: " + this.assignmentData.name;
     },
 
     handleEmail() {
-      this.email = this.$refs.email;
-      document.getElementById("email").value = this.email.value;
+      this.emailData = email;
+      email.value = this.emailData.value;
     },
 
     handleMessage() {
-      this.message = this.$refs.message;
-      document.getElementById("message").value = this.message.value;
+      this.messageData = message;
+      message.value = this.messageData.value;
     },
 
     successMSG() {
       document.getElementById("success-Msg").innerHTML =
         "You Have Submitted Successfully !";
-      document.getElementById("email").value = "";
-      document.getElementById("url").value = "";
-      document.getElementById("message").value = "";
-      console.log("success uploaded");
+      email.value = "";
+      url.value = "";
+      message.value = "";
+      this.hideForm();
     },
 
     // Handles when the add file clicked
     openUploadFileDialogue() {
-      document.getElementById("file1").click();
+      input_file_assignment.click();
     },
 
     // Removes a select file the user has uploaded
     removeAssignmentFile() {
-      delete this.file1;
+      delete this.assignmentData;
       this.assignmentNameHide();
     },
 
@@ -195,6 +203,24 @@ export default {
 
     assignmentNameHide() {
       var x = document.getElementById("assignmentName");
+      x.style.display = "none";
+    },
+    emptyEmailRequired() {
+      if (email.value) {
+        email.parentNode.classList.remove("active");
+      }
+      email.parentNode.classList.add("active");
+      email.value = "";
+    },
+    emptyUrlRequired() {
+      if (url.value) {
+        url.parentNode.classList.remove("active");
+      }
+      url.parentNode.classList.add("active");
+      url.value = "";
+    },
+    hideForm() {
+      var x = document.getElementById("UploadAssignment__form");
       x.style.display = "none";
     }
   }
@@ -230,6 +256,11 @@ export default {
       margin-left: 50px;
       color: $color-purple;
     }
+    h3 {
+      margin-top: $base-vertical-rithm * 2;
+      font-size: 16px;
+      margin-left: 50px;
+    }
 
     &__assignemntLabel {
       margin: $base-vertical-rithm * 10;
@@ -258,6 +289,29 @@ export default {
       right: 0;
       margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
     }
+    &__section {
+      display: grid;
+      grid-auto-flow: row;
+    }
+    &__textarea {
+      overflow: auto;
+      outline: none;
+      background-color: #e6e6e6;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid $color-purple;
+      border-radius: 5px;
+      margin-left: 50px;
+      font-size: 16px;
+    }
+  }
+
+  &__success-Msg {
+    margin-top: $base-vertical-rithm * 10;
+    font-weight: bold;
+    font-size: 24px;
+    color: $color-purple;
+    text-align: center;
   }
 }
 </style>

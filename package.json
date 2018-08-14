@@ -30,7 +30,6 @@
   "dependencies": {
     "@nuxtjs/proxy": "^1.2.4",
     "appear": "^1.0.1",
-    "aws-sdk": "^2.285.1",
     "axios": "^0.16.2",
     "buefy": "^0.4.6",
     "kibbeling": "^1.0.4",

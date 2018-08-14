@@ -1,6 +1,6 @@
 const email = require('../utils/email');
+const sendEmail = require('../utils/send-emails');
 const { updateApplicant } = require("../data/update-sheet");
-const sendEmail = require('../sendEmail');
 
 const fromEmail = "info@hackyourfuture.net";
 
