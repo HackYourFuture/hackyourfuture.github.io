@@ -1,6 +1,6 @@
-const email = require('../utils/email');
-const sendEmail = require('../utils/send-emails');
-const { updateApplicant } = require("../data/update-sheet");
+const email = require("../utils/email");
+const { getApplicant, saveApplicant } = require("../data/update-sheet");
+const sendEmail = require("../utils/send-emails");
 
 const fromEmail = "info@hackyourfuture.net";
 
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
   res.status(200).json({ message: "Application received" });
 
-  saveApplicant(insertRow, req.body).catch(e =>{
+  saveApplicant(insertRow, req.body).catch(e => {
     console.log("Save Applicant FAILED:", e, req.body);
   });
 

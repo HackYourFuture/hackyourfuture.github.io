@@ -89,7 +89,7 @@ function saveApplicant(
 }
 
 function getApplicant(email) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const sheets = google.sheets("v4");
     sheets.spreadsheets.values.get(
       {
