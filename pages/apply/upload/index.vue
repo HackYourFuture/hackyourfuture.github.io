@@ -2,14 +2,14 @@
        <div>
        <Main class="UploadCv container">
            <div class="UploadCv__header">
-               <h1>Upload CV and Motivation Letter!</h1>
+               <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
            </div>
            <div id="UploadCv__form" class="UploadCv__form form">
                <form id="cvUploadForm">
                    <fieldset>  
                        <div id="cvDiv">
-                           <p id="uploadCvText" v-on:click="openUploadFileDialogue()">+ Upload Your CV (*)</p>                          
-                           <input type="file" value="" name="input_file_cv" class="UploadCv__form__inputText" id="input_file_cv" ref="input_file_cv" v-on:change="handleCvUpload()" />
+                           <p ref="uploadCvText" id="uploadCvText" v-on:click="openUploadFileDialogue()">+ Upload Your CV (*)</p>                          
+                           <input type="file" value="" name="input_file_cv" class="UploadCv__form__inputText" id="input_file_cv" ref="input_file_cv" v-on:change="handleCvUpload()" v-on:click="setCVCheckBoxUnActive()" />
                            <h3 ref="requiredCvMSG"></h3>
                            <div id="cvName"><span class="UploadCv__form__label" id="cvLabel" ref="cvLabel"></span>
                            <button class="UploadCv__form__remove-btn" @click.prevent="removeCvFile()">Remove</button>
@@ -17,7 +17,7 @@
                        </div>
                        <div id="cvDiv_TextArea" class="UploadCv__form__section">
                          <div class="UploadCv__form__insideDiv">
-                           <p class="cv2Lable">If you don't have a CV:</p>
+                           <p class="cv2Lable" ref="cv2Lable">If you don't have a CV:</p>
                              <div class="UploadCv__form__checkboxDiv">
                                <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_cv" ref="input_checkbox_cv" name="check" v-on:click="showCV2()" />
                              </div>
@@ -25,8 +25,8 @@
                          <textarea id="textArea_cv" ref="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Your CV"></textarea>
                        </div>
                         <div id="motivation_letter_Div">
-                           <P v-on:click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                          
-                           <input type="file" class="UploadCv__form__inputText" id="input_file_motivation_letter" ref="input_file_motivation_letter" v-on:change="handleMotivationLetterUpload()" />
+                           <P ref="uploadMlText" v-on:click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                          
+                           <input type="file" class="UploadCv__form__inputText" id="input_file_motivation_letter" ref="input_file_motivation_letter" v-on:change="handleMotivationLetterUpload()" v-on:click="setMlCheckBoxUnActive()" />
                            <h3 ref="requiredMlMSG"></h3>
                            <div id="mlName"><span class="UploadCv__form__label" id="mlLabel" ref="mlLabel"></span>
                            <button class="UploadCv__form__remove-btn" @click.prevent="removeMlFile()">Remove</button>    
@@ -35,7 +35,7 @@
                        
                        <div id="motivation_letterDiv_TextArea" class="UploadCv__form__section">
                          <div class="UploadCv__form__insideDiv">
-                           <p class="ml2Lable">If you don't have a Motivation letter:</p>
+                           <p class="ml2Lable" ref="ml2Lable">If you don't have a Motivation letter:</p>
                              <div class="UploadCv__form__checkboxDiv">
                                <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_motivation_letter" ref="input_checkbox_motivation_letter" name="check" v-on:click="showML2()" />
                              </div>
@@ -47,10 +47,9 @@
                            <input type="email" id="email" ref="email" class="input" name="email" value="" v-on:change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
                        </div>
                      
-                              <div id="message_TextArea" class="UploadCv__form__section">
+                       <div id="message_TextArea" class="UploadCv__form__section">
                          <div class="UploadCv__form__insideDiv">
                            <p class="messageLabel">Is there anything you would like to notify us about?</p>
-                             
                          </div>
                          <textarea id="textArea_message" ref="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Your Question" v-on:change="handleMessage()"></textarea>
                        </div>
@@ -193,7 +192,7 @@ export default {
     },
     successMSG() {
       document.getElementById("success-Msg").innerHTML =
-        "You Have Submitted Successfully !";
+        "You have submitted your CV and motivation letter successfully";
       email.value = "";
       email.parentNode.classList.remove("active");
       textArea_message.value = "";
@@ -210,11 +209,13 @@ export default {
     removeCvFile() {
       delete this.cvData;
       this.cvNameHide();
+      this.setCvCheckBoxActive();
       this.$refs.input_checkbox_cv.disabled = false;
     },
     removeMlFile() {
       delete this.motivationLetterData;
       this.mlNameHide();
+      this.setMlCheckBoxActive();
       this.$refs.input_checkbox_motivation_letter.disabled = false;
     },
     setActive(e) {
@@ -225,6 +226,50 @@ export default {
       });
       e.target.parentNode.classList.add("active");
     },
+    //disable cv checkbox when input upload is active
+    setCVCheckBoxUnActive() {
+      var element = this.$refs.cv2Lable;
+      element.classList.add("UploadCv__form__unAvailable");
+    },
+    //disable ML checkbox when input upload is active
+    setMlCheckBoxUnActive() {
+      var element = this.$refs.ml2Lable;
+      element.classList.add("UploadCv__form__unAvailable");
+    },
+    //Enable CV checkbox when input upload is inactive
+    setCvCheckBoxActive() {
+      var element = this.$refs.cv2Lable;
+      element.classList.remove("UploadCv__form__unAvailable");
+      element.classList.add("UploadCv__form____Available");
+    },
+    //Enable ML checkbox when input upload is inactive
+    setMlCheckBoxActive() {
+      var element = this.$refs.ml2Lable;
+      element.classList.remove("UploadCv__form__unAvailable");
+      element.classList.add("UploadCv__form____Available");
+    },
+    //disable CV input upload when checkbox is active
+    setCvUnActive() {
+      var element = this.$refs.uploadCvText;
+      element.classList.add("UploadCv__form__unAvailable");
+    },
+    //disable ML input upload when checkbox is active
+    setMlUnActive() {
+      var element = this.$refs.uploadMlText;
+      element.classList.add("UploadCv__form__unAvailable");
+    },
+    //Enable CV input upload when checkbox is inactive
+    setCvActive() {
+      var element = this.$refs.uploadCvText;
+      element.classList.remove("UploadCv__form__unAvailable");
+      element.classList.add("UploadCv__form____Available");
+    },
+    //Enable ML input upload when checkbox is inactive
+    setMlActive() {
+      var element = this.$refs.uploadMlText;
+      element.classList.remove("UploadCv__form__unAvailable");
+      element.classList.add("UploadCv__form____Available");
+    },
     // Show & Hide CV CheckBox/Textarea section
     showCV2() {
       var checkBox = this.$refs.input_checkbox_cv;
@@ -233,9 +278,11 @@ export default {
         cvText.style.display = "block";
         delete this.cvData;
         input_file_cv.value = "";
+        this.setCvUnActive();
         input_file_cv.disabled = true;
       } else {
         cvText.style.display = "none";
+        this.setCvActive();
         input_file_cv.disabled = false;
       }
     },
@@ -247,9 +294,11 @@ export default {
         mlText.style.display = "block";
         delete this.motivationLetterData;
         input_file_motivation_letter.value = "";
+        this.setMlUnActive();
         input_file_motivation_letter.disabled = true;
       } else {
         mlText.style.display = "none";
+        this.setMlActive();
         input_file_motivation_letter.disabled = false;
       }
     },
@@ -314,6 +363,8 @@ export default {
     },
     hideForm() {
       var x = document.getElementById("UploadCv__form");
+      var y = this.$refs.pageNameHeader;
+      y.style.display = "none";
       x.style.display = "none";
     }
   }
@@ -344,11 +395,25 @@ export default {
       margin-top: $base-vertical-rithm * 10;
       font-weight: bold;
       font-size: 24px;
+      cursor: pointer;
     }
     h3 {
       margin-top: $base-vertical-rithm * 2;
       font-size: 16px;
       margin-left: 50px;
+    }
+    &__unAvailable {
+      color: $color-white;
+      text-decoration-line: line-through;
+      //border: 2px solid blue;
+    }
+    &__Available {
+      margin-left: 50px;
+      color: $color-purple;
+      margin-top: $base-vertical-rithm * 10;
+      font-weight: bold;
+      font-size: 24px;
+      cursor: pointer;
     }
     &__inputText {
       font-size: 18px;
