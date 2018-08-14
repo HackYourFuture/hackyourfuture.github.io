@@ -6,7 +6,7 @@
         <div class="content" v-html="what"></div>
 
         <div class="About__video">
-          <nuxt-link :to="'/'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
+          <nuxt-link :to="'/about'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
           <YoutubePlayer class="About__video-player"/>
         </div>
       </section>
@@ -24,7 +24,7 @@
       <section class="Curiculum">
         <div class="Curiculum__header">
           <h1>Expert teachers,<br> up-to-date skills</h1>
-          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curiculum</span></a>
+          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curriculum</span></a>
         </div>
        
         
@@ -39,11 +39,11 @@
       </section>
 
       <section class="Teaser">
-        <div class="Teaser__container">
+        
           <h1>Women Coding Teaser</h1>
-          <div class="content" v-html="teaser"></div>
+          <div class="Teaser__content" v-html="teaser"></div>
           <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
-        </div>
+      
         <div class="Teaser__image">
           <img src="/gallery/06.jpg">
         </div>
@@ -57,7 +57,7 @@
        </div>
        <div v-html="laptops"></div>
        <div>
-         <nuxt-link :to="'/support'"><span class="underline">Find out how to donate laptops. </span></nuxt-link>
+         <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
        </div>
         <div class="Hire__image">
           <img src="/gallery/03.jpg">
@@ -299,39 +299,21 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
     }
   }
 }
+
 .Teaser{
-margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
-  @include breakpoint("mobile_landscape") {
+    margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+    @include breakpoint("mobile_landscape") {
     margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
   }
-  & > div {
-    width: 40%;
-    margin: 0 $base-vertical-rithm * 10;
+  &__content {
     display: inline-block;
-    vertical-align: middle;
+    width: 45%;
+    margin: $base-vertical-rithm * 5;
+    font-weight: 400;
     @include breakpoint("mobile_landscape") {
-      width: 100%;
-      margin-left: 0;
+      width: 80%;
     }
   }
-  &__container {
-    h1 {
-      font-size: 36px;
-      color: $color-purple;
-      line-height: 50px;
-    }
-    a {
-      display: block;
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: $base-vertical-rithm * 5;
-      span:after {
-        bottom: -5px;
-      }
-    }
-  }
-
-  
   &__image {
     display: inline-block;
     width: 40%;
@@ -342,8 +324,6 @@ margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
       display: inline;
     }
   }
-
-
 }
 
 .Hire {
