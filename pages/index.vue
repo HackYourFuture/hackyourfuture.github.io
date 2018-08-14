@@ -54,8 +54,6 @@
       </section>
     </Main>
 
-    <Signup/>
-
     <section class="Chapters">
 
     </section>
