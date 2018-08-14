@@ -45,40 +45,47 @@ function saveApplicant(
   row,
   { userName, street, city, email, phone, education, how_hear, computer }
 ) {
-  if (!row) throw new Error("We couldnt save the record");
-
-  const sheets = google.sheets("v4");
-
-  const values = [
-    [userName, street, city, email, phone, education, how_hear, computer]
-  ];
-
-  const resource = {
-    valueInputOption: "RAW",
-    data: [
-      {
-        range: `Sheet1!A${row}:H`,
-        majorDimension: "ROWS",
-        values
-      }
-    ]
-  };
-  sheets.spreadsheets.values.batchUpdate(
-    {
-      auth,
-      spreadsheetId: SHEET_ID,
-      valueInputOption: "USER_ENTERED",
-      resource
-    },
-    err => {
-      if (err) {
-        handleApiError(err);
-        return;
-      }
-
-      console.log("Spreadsheet is updated");
+  return new Promise((resolve, reject) => {
+    if (!row) {
+      reject(new Error("We couldnt save the record"));
+      return;
     }
-  );
+
+    const sheets = google.sheets("v4");
+
+    const values = [
+      [userName, street, city, email, phone, education, how_hear, computer]
+    ];
+
+    const resource = {
+      valueInputOption: "RAW",
+      data: [
+        {
+          range: `Sheet1!A${row}:H`,
+          majorDimension: "ROWS",
+          values
+        }
+      ]
+    };
+    sheets.spreadsheets.values.batchUpdate(
+      {
+        auth,
+        spreadsheetId: SHEET_ID,
+        valueInputOption: "USER_ENTERED",
+        resource
+      },
+      err => {
+        if (err) {
+          handleApiError(err);
+          reject(err);
+          return;
+        }
+
+        resolve();
+        console.log("Spreadsheet is updated");
+      }
+    );
+  });
 }
 
 function getApplicant(email) {
@@ -98,7 +105,7 @@ function getApplicant(email) {
         }
 
         const rows = response.data.values || [];
-        const totalRows = rows.length;
+        const totalRows = rows.length || 0;
         const foundedAt = rows.findIndex((row, index) => {
           const rowEmail = row[columnPosition.email] || "";
           if (rowEmail.toLowerCase() === email.toLowerCase()) {
@@ -122,6 +129,7 @@ function getApplicant(email) {
         if (foundedAt !== -1) {
           insertRow = foundedAt;
         }
+
         resolve({ foundedAt, insertRow });
       }
     );
