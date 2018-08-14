@@ -1,4 +1,4 @@
-const sendEmail = require('../sendEmail');
+const sendEmail = require('../utils/send-emails');
 const email = require('../utils/email')
 const toEmail = "info@hackyourfuture.net";
 
