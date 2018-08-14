@@ -67,7 +67,7 @@
     overflow-x: scroll;
     &-inner {
       width: max-content;
-      height: 450px;
+      height: 460px;
     }
   }
   &__item {

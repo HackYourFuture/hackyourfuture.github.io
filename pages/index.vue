@@ -38,8 +38,19 @@
        </div>
       </section>
 
+      <section class="Teaser">
+        <div class="Teaser__container">
+          <h1>Women Coding Teaser</h1>
+          <div class="content" v-html="teaser"></div>
+          <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
+        </div>
+        <div class="Teaser__image">
+          <img src="/gallery/06.jpg">
+        </div>
+      </section>
+
       <section class="Hire">
-        <h1>We could always use some help…</h1>
+        <h1>Hire our graduates</h1>
        <div v-html="hire"></div>
        <div>
          <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
@@ -89,6 +100,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
          let curiculum
          let hire
          let laptops
+         let teaser
          try {
              let req  = await axios.get('/content/en/index-about.json')
              let wReq  = await axios.get('/content/en/what.json')
@@ -96,6 +108,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
              let cReq  = await axios.get('/content/en/curiculum.json')
              let hReq  = await axios.get('/content/en/index-hire.json')
              let lReq  = await axios.get('/content/en/index-laptops.json')
+             let tReq  = await axios.get('/content/en/index-teaser.json')
 
              what = wReq.data.body
              apply = aReq.data.body
@@ -103,6 +116,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
              curiculum = cReq.data.body
              hire = hReq.data.body
              laptops = lReq.data.body
+             teaser = tReq.data.body
          } catch (e) {
              console.log(e)
              data = false
@@ -112,6 +126,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
              about: data ? data : null,
              hire: hire ? hire : null,
              laptops: laptops ? laptops : null,
+             teaser: teaser ? teaser : null,
              what,
              apply,
              curiculum,
@@ -283,6 +298,52 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
       width: 80%;
     }
   }
+}
+.Teaser{
+margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+  @include breakpoint("mobile_landscape") {
+    margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
+  }
+  & > div {
+    width: 40%;
+    margin: 0 $base-vertical-rithm * 10;
+    display: inline-block;
+    vertical-align: middle;
+    @include breakpoint("mobile_landscape") {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  &__container {
+    h1 {
+      font-size: 36px;
+      color: $color-purple;
+      line-height: 50px;
+    }
+    a {
+      display: block;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: $base-vertical-rithm * 5;
+      span:after {
+        bottom: -5px;
+      }
+    }
+  }
+
+  
+  &__image {
+    display: inline-block;
+    width: 40%;
+    margin: 0 $base-vertical-rithm * 10;
+    @include breakpoint("mobile_landscape") {
+      width: 80%;
+      margin: 0 auto;
+      display: inline;
+    }
+  }
+
+
 }
 
 .Hire {

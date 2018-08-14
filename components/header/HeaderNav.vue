@@ -7,6 +7,7 @@
     <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
     <nuxt-link :to="'/about/'">About</nuxt-link>
     <nuxt-link :to="'/contact/'">Contact</nuxt-link>
+    <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
  
     
   </nav>
