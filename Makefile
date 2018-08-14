@@ -10,7 +10,10 @@ RUN_TRAVIS_AWS_CLI := docker run -it --rm \
 RUN_AWS_CLI := docker run -it --rm \
 		-v $(shell pwd):/workspace \
 		-v ~/.aws:/root/.aws \
-		mesosphere/aws-cli --profile hyf
+		-e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
+		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
+		-e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"\
+		mesosphere/aws-cli
 
 VERSION = $(shell git rev-parse --short=7 HEAD)
 
