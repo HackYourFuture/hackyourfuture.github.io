@@ -15,13 +15,13 @@ const SHEET_ID = config.spreadSheetId;
 const auth = getClient();
 
 const columnPosition = {
-  name: 0,
+  userName: 0,
   street: 1,
   city: 2,
   email: 3,
   phone: 4,
   education: 5,
-  who_hear: 6,
+  how_hear: 6,
   computer: 7
 };
 
@@ -41,56 +41,55 @@ function handleApiError(error) {
   });
 }
 
-function getRow(rows, email) {
-  let foundRow = -1;
-
-  rows.forEach((row, rowNumber) => {
-    if (row[columnPosition.email] === email) {
-      foundRow = rowNumber;
+function saveApplicant(
+  row,
+  { userName, street, city, email, phone, education, how_hear, computer }
+) {
+  return new Promise((resolve, reject) => {
+    if (!row) {
+      reject(new Error("We couldnt save the record"));
+      return;
     }
-  });
 
-  console.log(foundRow);
-  return foundRow;
-}
+    const sheets = google.sheets("v4");
 
-function save(row, { name, street, city, email, phone, education }) {
-  if (!row) throw new Error("We couldnt save the record");
+    const values = [
+      [userName, street, city, email, phone, education, how_hear, computer]
+    ];
 
-  const sheets = google.sheets("v4");
-
-  const values = [[name, street, city, email, phone, education]];
-
-  const resource = {
-    valueInputOption: "RAW",
-    data: [
+    const resource = {
+      valueInputOption: "RAW",
+      data: [
+        {
+          range: `Sheet1!A${row}:H`,
+          majorDimension: "ROWS",
+          values
+        }
+      ]
+    };
+    sheets.spreadsheets.values.batchUpdate(
       {
-        range: `Sheet1!A${row}:H`,
-        majorDimension: "ROWS",
-        values
-      }
-    ]
-  };
-  sheets.spreadsheets.values.batchUpdate(
-    {
-      auth,
-      spreadsheetId: SHEET_ID,
-      valueInputOption: "USER_ENTERED",
-      resource
-    },
-    (err, res) => {
-      if (err) {
-        handleApiError(err);
-        return;
-      }
+        auth,
+        spreadsheetId: SHEET_ID,
+        valueInputOption: "USER_ENTERED",
+        resource
+      },
+      err => {
+        if (err) {
+          handleApiError(err);
+          reject(err);
+          return;
+        }
 
-      console.log("Spreadsheet is updated");
-    }
-  );
+        resolve();
+        console.log("Spreadsheet is updated");
+      }
+    );
+  });
 }
 
 function getApplicant(email) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const sheets = google.sheets("v4");
     sheets.spreadsheets.values.get(
       {
@@ -105,38 +104,39 @@ function getApplicant(email) {
           return;
         }
 
-        const rows = response.data.values;
-
-        if (rows && rows.length !== 0) {
-          const result = getRow(rows, email);
-
-          if (result !== -1) {
-            resolve(result + 1);
-            return;
+        const rows = response.data.values || [];
+        const totalRows = rows.length || 0;
+        const foundedAt = rows.findIndex((row, index) => {
+          const rowEmail = row[columnPosition.email] || "";
+          if (rowEmail.toLowerCase() === email.toLowerCase()) {
+            return index;
           }
+        });
 
-          resolve(rows.length + 1);
-          return;
+        let insertRow;
+
+        // Spreadsheet is empty
+        if (foundedAt === -1 && totalRows === 0) {
+          insertRow = 1;
         }
 
-        resolve(1);
+        // Record is not founded but we add to the latest row
+        if (foundedAt === -1 && totalRows !== 0) {
+          insertRow = totalRows + 1;
+        }
+
+        // Record is found, update the applicant
+        if (foundedAt !== -1) {
+          insertRow = foundedAt;
+        }
+
+        resolve({ foundedAt, insertRow });
       }
     );
   });
 }
 
-function updateApplicant(email, updates) {
-  return getApplicant(email)
-    .then(row => {
-      console.log(row);
-      return save(row, updates);
-    })
-    .catch((msg, totalRows) => {
-      console.log(totalRows, msg);
-    });
-}
-
 module.exports = {
   getApplicant,
-  updateApplicant
+  saveApplicant
 };

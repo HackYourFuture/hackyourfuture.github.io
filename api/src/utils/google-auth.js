@@ -20,12 +20,12 @@ function getClient() {
     config = getConfig();
   }
 
-  const hasEnviromentConfig =
+  const hasEnvironmentConfig =
     process.env.GOOGLE_CLIENT_ID &&
     process.env.GOOGLE_CLIENT_SECRET &&
     process.env.GOOGLE_TOKEN;
 
-  if (hasEnviromentConfig) {
+  if (hasEnvironmentConfig) {
     config = {
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,

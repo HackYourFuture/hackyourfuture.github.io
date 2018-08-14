@@ -81,37 +81,45 @@ import axios from "~/plugins/axios";
 let content;
 
 export default {
-  async asyncData () {
-         let dates
-         let content
-         try {
-             let req  = await axios.get('/content/en/apply/apply-dates.json')
-             let req1 = await axios.get('/content/en/apply/apply-content.json')
-             dates = req.data.body
-             content = req1.data.body
-         } catch (e) {
-             console.log(e)
-             dates = false
-             content = false
-         }
-         return {
-             formUrlApply: process.env.lambdaUrl + "apply",
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             dates: dates ? dates : null,
-             content: content ? content : null
-         }
-     },
-     methods: {
-        setActive(e) {
-          this.$el.querySelectorAll(".input").forEach((i) => {
-            if (i.value.length == 0) {
-              i.parentNode.classList.remove("active");
-            }
-          });
-          e.target.parentNode.classList.add("active");
+  async asyncData() {
+    let dates;
+    let content;
+    try {
+      let req = await axios.get("/content/en/apply/apply-dates.json");
+      let req1 = await axios.get("/content/en/apply/apply-content.json");
+      dates = req.data.body;
+      content = req1.data.body;
+    } catch (e) {
+      console.log(e);
+      dates = false;
+      content = false;
+    }
+    return {
+      formUrlApply: process.env.lambdaUrl + "apply",
+      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+      dates: dates ? dates : null,
+      content: content ? content : null
+    };
+  },
+  methods: {
+    setActive(e) {
+      this.$el.querySelectorAll(".input").forEach(i => {
+        if (i.value.length == 0) {
+          i.parentNode.classList.remove("active");
         }
-    },
-    components: {}
+      });
+      e.target.parentNode.classList.add("active");
+    }
+  },
+  mounted: function() {
+    this.$el.querySelectorAll(".input").forEach(i => {
+      if (i.value.length == 0) {
+        i.parentNode.classList.remove("active");
+      } else {
+        i.parentNode.classList.add("active");
+      }
+    });
+  }
 };
 </script>
 
