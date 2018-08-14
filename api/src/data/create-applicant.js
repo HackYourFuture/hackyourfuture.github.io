@@ -9,8 +9,6 @@
  * @param {string} applicant.phone
  * @param {string} applicant.education
  */
-async function createApplicant(applicant) {
-
-}
+async function createApplicant(applicant) {}
 
 module.exports = createApplicant;

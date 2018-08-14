@@ -111,7 +111,15 @@ export default {
       e.target.parentNode.classList.add("active");
     }
   },
-  components: {}
+  mounted: function() {
+    this.$el.querySelectorAll(".input").forEach(i => {
+      if (i.value.length == 0) {
+        i.parentNode.classList.remove("active");
+      } else {
+        i.parentNode.classList.add("active");
+      }
+    });
+  }
 };
 </script>
 
