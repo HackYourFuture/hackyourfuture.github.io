@@ -91,7 +91,7 @@ app.post('/upload', FileUpload, (req, res) => {
             Upload(req, res)
         }
     });
-    if (file.fieldname === 'myImage') {
+    if (file.fieldname === 'input_ file_assignment') {
         allowedFileTypes.forEach((element) => {
             if (file.mimetype !== element) {
                 return cb(null, false, new Error("Error: File upload only supports the following filetypes :" + allowedFileTypes));
