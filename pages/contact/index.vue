@@ -5,7 +5,7 @@
         <h1>Frequently Asked Questions</h1>
       </div>
 
-      <nuxt-link :to="'/Contact__content'" class="Contact__quicklink">Take me<br> to <span class="underline">contact</span></nuxt-link>
+      <nuxt-link :to="'/'" class="Contact__quicklink">Take me<br> to <span class="underline">contact</span></nuxt-link>
       <div class="Contact__content" v-html="content">
       </div>
       <div class="Contact__form form">
