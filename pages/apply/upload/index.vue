@@ -9,8 +9,8 @@
                <form id="cvUploadForm">
                    <fieldset>  
                        <div id="cvDiv">
-                           <p ref="uploadCvText" id="uploadCvText" v-on:click="openUploadFileDialogue()">+ Upload Your CV (*)</p>                          
-                           <input type="file" value="" name="input_file_cv" class="UploadCv__form__inputText" id="input_file_cv" ref="input_file_cv" v-on:change="handleCvUpload()" @change="setCVCheckBoxUnActive()" />
+                           <p ref="uploadCvText" id="uploadCvText" @click="openUploadFileDialogue()">+ Upload Your CV (*)</p>                          
+                           <input type="file" value="" name="input_file_cv" class="UploadCv__form__inputText" id="input_file_cv" ref="input_file_cv" @change="setCVCheckBoxUnActive(); handleCvUpload();" />
                            <h3 ref="requiredCvMSG"></h3>
                            <div id="cvName"><span class="UploadCv__form__label" id="cvLabel" ref="cvLabel"></span>
                            <button class="UploadCv__form__remove-btn" @click.prevent="removeCvFile()">Remove</button>
@@ -19,17 +19,17 @@
 
                        <div id="cvDiv_TextArea" class="UploadCv__form__section">
                          <div class="UploadCv__form__insideDiv">
-                           <p class="cv2Lable" ref="cv2Lable">If you don't have a CV:</p>
+                           <p class="cv2Lable" ref="cv2Lable">I do not have a CV I can upload:</p>
                              <div class="UploadCv__form__checkboxDiv">
-                               <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_cv" ref="input_checkbox_cv" name="check" v-on:click="showCV2()" />
+                               <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_cv" ref="input_checkbox_cv" name="check" @click="showCV2()" />
                              </div>
                          </div>
-                         <textarea id="textArea_cv" ref="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Your CV"></textarea>
+                         <textarea id="textArea_cv" ref="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"></textarea>
                        </div>
 
                         <div id="motivation_letter_Div">
-                           <P ref="uploadMlText" v-on:click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                          
-                           <input type="file" class="UploadCv__form__inputText" id="input_file_motivation_letter" ref="input_file_motivation_letter" v-on:change="handleMotivationLetterUpload()" @change="setMlCheckBoxUnActive()" />
+                           <P ref="uploadMlText" @click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                          
+                           <input type="file" class="UploadCv__form__inputText" id="input_file_motivation_letter" ref="input_file_motivation_letter" @change="setMlCheckBoxUnActive(); handleMotivationLetterUpload();" />
                            <h3 ref="requiredMlMSG"></h3>
                            <div id="mlName"><span class="UploadCv__form__label" id="mlLabel" ref="mlLabel"></span>
                            <button class="UploadCv__form__remove-btn" @click.prevent="removeMlFile()">Remove</button>    
@@ -38,17 +38,17 @@
                        
                        <div id="motivation_letterDiv_TextArea" class="UploadCv__form__section">
                          <div class="UploadCv__form__insideDiv">
-                           <p class="ml2Lable" ref="ml2Lable">If you don't have a Motivation letter:</p>
+                           <p class="ml2Lable" ref="ml2Lable">I rather write my motivation letter in a text box:</p>
                              <div class="UploadCv__form__checkboxDiv">
-                               <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_motivation_letter" ref="input_checkbox_motivation_letter" name="check" v-on:click="showML2()" />
+                               <input type="checkbox" value="" class="UploadCv__form__checkInput" id="input_checkbox_motivation_letter" ref="input_checkbox_motivation_letter" name="check" @click="showML2()" />
                              </div>
                          </div>
-                         <textarea id="textArea_motivation_letter" ref="textArea_motivation_letter" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Your Motivation Letter"></textarea>
+                         <textarea id="textArea_motivation_letter" ref="textArea_motivation_letter" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."></textarea>
                        </div>
 
                        <div class="half-width inputContainer">
                            <label for="email">e-mail (*)</label>
-                           <input type="email" id="email" ref="email" class="input" name="email" value="" v-on:change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
+                           <input type="email" id="email" ref="email" class="input" name="email" value="" @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
                        </div>
 
                      
@@ -56,11 +56,11 @@
                          <div class="UploadCv__form__insideDiv">
                            <p class="messageLabel">Is there anything you would like to notify us about?</p>
                          </div>
-                         <textarea id="textArea_message" ref="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Your Question" v-on:change="handleMessage()"></textarea>
+                         <textarea id="textArea_message" ref="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"></textarea>
                        </div>
 
                        <div class="apply-btn">
-                           <input type="submit" value="Apply" v-on:click.prevent="submitFile" true>
+                           <input type="submit" value="Apply" @click.prevent="submitFile" true>
                        </div>
                    </fieldset>
                  
