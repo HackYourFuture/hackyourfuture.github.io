@@ -1,556 +1,304 @@
 <template>
-<div>
-  <Main class="About container">
-    <div class="About__header">
-      <div class="About__header-content">
+  <div>
+    <Main class="UploadAssignment container">
+      <div id="UploadAssignment__header" class="UploadAssignment__header">
+        <h1 id="UploadAssignment__headerText">Upload your Assignment. </h1>
+
       </div>
-    </div>
-    <div class="uploadContainer">
-      <div class="text">
-        <h3>Your Assignment Link:</h3></div>
-      <div class="email-input">
-        <input type="text"
-               id="email"
-               ref="email" />
+
+      <div id="UploadAssignment__form" class="UploadAssignment__form form">
+        <form id="assignmentUploadForm">
+          <fieldset>
+            <div class="half-width inputContainer">
+              <label for="url">Assignment URL: (*)</label>
+              <input id="url" ref="url" type="url" class="input" name="url" @focus="setActive" @click="emptyUrlRequired()">
+            </div>
+
+            <div id="assignmentDiv">
+              <P @click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>
+              <input id="input_file_assignment" ref="input_file_assignment" type="file" class="UploadAssignment__form__inputText" @change="handleAssignmentUpload()" >
+              <h3 ref="requiredMSG"/>
+              <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"/>
+                <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>
+              </div>
+            </div>
+
+            <div class="half-width inputContainer">
+              <label for="email">e-mail (*)</label>
+              <input id="email" ref="email" type="email" class="input" name="email" value=""
+                     @focus="setActive" @click="emptyEmailRequired()">
+            </div>
+
+            <div id="message_TextArea" class="UploadAssignment__form__section">
+              <p class="messageLabel">Is there anything you would like to notify us about?</p>
+              <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" />
+            </div>
+
+            <div class="apply-btn">
+              <input type="submit" value="Apply" true @click.prevent="submitFile()">
+            </div>
+
+          </fieldset>
+        </form>
+
       </div>
       <div>
-        <h3 class="text">Choose Photo ( Screenshot ):</h3></div>
-      <div>
-        <input class="text"
-               type="file"
-               id="files"
-               ref="files"
-               multiple
-               v-on:change="handleFilesUpload()" />
+        <p id="success-Msg" class="UploadAssignment__success-Msg"/>
       </div>
-      <div>
-        <div v-for="(file, key) in files"
-             :key="key">{{file.name}}
-          <button v-on:click="removeFile( key )">Remove</button>
-        </div>
-      </div>
-    </div>
-    <div class="wrapper">
-      <button class="button"
-              v-on:click="submitFiles()">Submit</button>
-    </div>
-  </Main>
-  <Upload/>
-</div>
+    </Main>
+  </div>
 </template>
+
 <script>
 import axios from "~/plugins/axios";
 import Upload from "~/components/upload/upload";
-
-export default
-{
-  async asyncData()
-  {
-    let description;
-    let dates;
-    let content;
-
-    try
-    {
-      let req = await axios.get("/content/en/upload/upload1.json");
-      let req1 = await axios.get("/content/en/apply/apply-dates.json");
-      let req2 = await axios.get("/content/en/apply/apply-content.json");
-      description = req.data.body;
-      dates = req1.data.body;
-      content = req2.data.body;
-    }
-    catch (e)
-    {
-      description = false;
-      dates = false;
-      content = false;
-    }
-    return {
-      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-      description: description ? description : null,
-      dates: dates ? dates : null,
-      content: content ? content : null
-    };
-  },
-
-  components:
-  {
-    Upload
-  },
-
-  data()
-  {
-    return {
-      files: []
-    };
-  },
-
-  methods:
-  {
-    /*
-        Adds a file
-    */
-    addFiles()
-    {
-      this.$refs.files.click();
-    },
-
-    /*
-        Submits files to the server
-      */
-    submitFiles()
-    {
-      /*
-          Initialize the form data
-        */
-      let formData = new FormData();
-
-      /*
-          Iteate over any file sent over appending the files
-          to the form data.
-        */
-      for (var i = 0; i < this.files.length; i++)
-      {
-        let file = this.files[i];
-        let emailData = document.getElementById("email").value;
-        let codeData = document.getElementById("code").value;
-        formData.append("files[" + 0 + "]", emailData);
-        formData.append("files[" + 1 + "]", codeData);
-        formData.append("files[" + i + "]", file);
-      }
-      if (
-        this.files.length > 0 &&
-        document.getElementById("email").value !== "" &&
-        document.getElementById("email").value !== null &&
-        document.getElementById("code").value !== "" &&
-        document.getElementById("code").value !== null
-      )
-      {
-        /*
-          Make the request to the POST /select-files URL
-        */
-        axios
-          .post("/upload", formData,
-          {
-            headers:
-            {
-              "Content-Type": "multipart/form-data"
-            }
-          })
-          .then(function()
-          {
-            console.log("SUCCESS!!");
-          })
-          .catch(function()
-          {
-            console.log("FAILURE!!");
-          });
-      }
-      else
-      {
-        alert("You Must Assignemnt link,Photo before You Submit!");
-      }
-
-      /*
-        remove all uploaded files after submitted
-        */
-      for (var i = 0; i < this.files.length; i++)
-      {
-        this.files.splice(0);
-      }
-      console.log(document.getElementById("email").value);
-      console.log(document.getElementById("code").value);
-
-      document.getElementById("files").value = ""; //delete name of file after added
-      document.getElementById("email").value = "";
-      document.getElementById("code").value = "";
-      formData.delete("files"); //delete every thing from formData
-    },
-
-    /*
-        Handles the uploading of files
-      */
-    handleFilesUpload()
-    {
-      let uploadedFiles = this.$refs.files.files;
-      /*
-          Adds the uploaded file to the files array
-        */
-      for (var i = 0; i < uploadedFiles.length; i++)
-      {
-        this.files.push(uploadedFiles[i]);
-      }
-      document.getElementById("files").value = "";
-    },
-
-    /*
-        Removes a select file the user has uploaded
-      */
-    removeFile(key)
-    {
-      this.files.splice(key, 1);
-    }
-  }
-};
-
-</script>
-<stylesheet lang="scss">
-  .uploadContainer { padding: 0; margin: 0; display: flex; flex-direction: column; align-content: center; align-items: center; } .text h2 { margin: auto; display: inline-block; padding: 20px; color: $color-purple; font-weight: bold; } .email-input { border-bottom: 2px solid $color-purple; font-size: 18px; padding: 5px 5px 5px 5px; display: block; background: transparent; margin-bottom: 20px; } .input-dev { margin-left: 5%; } .input-button { -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none; background-color: lightgray; text-align: center; display: inline-block; margin: auto; width: 25%; padding: 0; } .wrapper { text-align: center; } .button { position: relative; background-color: lightgray; color: black; font-size: 18px; cursor: pointer; position: relative; } .wrapper { text-align: center; width: 200px; margin: 0 auto; margin-top: 5 * $base-vertical-rithm; } .submit-button { position: relative; background-color: $color-purple; color: white; font-size: 22px; font-weight: bold; margin: 0; padding: 5%; margin-top: 40px; text-transform: uppercase; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none; width: 100%; text-transform: uppercase; border: 0; cursor: pointer; position: relative; } .About { &__header { padding: $base-vertical-rithm * 5; text-align: center; a { color: $color-purple; font-weight: bold; font-size: 32px; line-height: 40px; span:after { bottom: -5px; } } &-content { display: inline-block; width: 50%; text-align: center; padding: $base-vertical-rithm * 5; & > div { margin-top: $base-vertical-rithm * 2; } } &-image { width: 50%; display: inline-block; vertical-align: top; } &-dates { margin-left: $base-vertical-rithm * 2; margin-top: $base-vertical-rithm * 15; width: 100%; display: inline-block; vertical-align: top; div { display: inline-block; width: calc(25% - 20px); margin-left: 2%; margin-bottom: 3%; } h3 { font-weight: bold; color: $color-purple; } h4 { color: $color-purple; font-weight: bold; } } } &__content { width: 100%; margin: 0 auto; h1 { color: $color-purple; line-height: 1; } ul li { list-style: disc; } ul + p { margin-top: 1rem; } p a { font-size: 18px; } } &__description { width: 100%; margin: 0 auto; h1 { color: $color-purple; line-height: 1; } } &__container { margin: 0 $base-vertical-rithm * 5; h1 { margin-bottom: $base-vertical-rithm * 5; color: $color-purple; font-weight: normal; font-size: 42px; line-height: 50px; } &.how { margin-left: -50px; .About__container-image { margin-left: 0; } } &.who { margin-right: -100px; .About__container-image { margin-right: 0; } } &.footer { .About__container-image { margin-left: 25%; width: 50%; } } & > div { display: inline-block; width: calc(50% - 100px); vertical-align: top; margin: 50px; a { color: $color-purple; font-weight: bold; font-size: 32px; line-height: 40px; margin-bottom: 40px; display: block; span:after { bottom: -5px; } } } } &__footer { margin: 0 $base-vertical-rithm * 10; a { margin: 50px; display: inline-block; font-weight: bold; font-size: 30px; line-height: 40px; &:nth-child(2) { margin-left: 25%; } } } }
-</stylesheet>
-
-</template>
-
-<script>
-import axios from '~/plugins/axios';
-import Upload from '~/components/upload/upload';
-
 export default {
-  async asyncData() {
-    let description
-    let dates
-    let content
-
-    try {
-      let req = await axios.get('/content/en/upload/upload1.json')
-      let req1 = await axios.get('/content/en/apply/apply-dates.json')
-      let req2 = await axios.get('/content/en/apply/apply-content.json')
-      description = req.data.body
-      dates = req1.data.body
-      content = req2.data.body
-    } catch (e) {
-      description = false
-      dates = false
-      content = false
-    }
-    return {
-      siteKey: '6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I',
-      description: description ? description : null,
-      dates: dates ? dates : null,
-      content: content ? content : null
-    }
-  },
-
-  components: {
-    Upload
-  },
-
-  data() {
-    return {
-      files: []
-    }
-  },
-
-  methods: {
-    /*
-        Adds a file
-    */
-    addFiles() {
-      this.$refs.files.click()
+    async asyncData() {
+        return {
+            formUrlApply: process.env.lambdaUrl + "apply/upload1",
+            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I"
+        };
+    },
+    components: {
+        Upload
+    },
+    data() {
+        return {
+            urlData: "",
+            assignmentData: "",
+            emailData: "",
+            messageData: ""
+        };
     },
 
-    /*
-        Submits files to the server
-      */
-    submitFiles() {
-      /*
-          Initialize the form data
-        */
-      let formData = new FormData()
+    mounted: function() {
+        this.assignmentNameHide();
+    },
 
-      /*
-          Iteate over any file sent over appending the files
-          to the form data.
-        */
-      for (var i = 0; i < this.files.length; i++) {
-        let file = this.files[i]
-        let emailData = document.getElementById('email').value
-        let codeData = document.getElementById('code').value
-        formData.append('files[' + 0 + ']', emailData)
-        formData.append('files[' + 1 + ']', codeData)
-        formData.append('files[' + i + ']', file)
-      }
-      if (
-        this.files.length > 0 &&
-        document.getElementById('email').value !== '' &&
-        document.getElementById('email').value !== null &&
-        document.getElementById('code').value !== '' &&
-        document.getElementById('code').value !== null
-      ) {
-        /*
-          Make the request to the POST /select-files URL
-        */
-        axios
-          .post('/upload', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
+    methods: {
+        submitFile() {
+            // Initialize the form data
+            let formData = new FormData();
+            const {
+                url,
+                input_file_assignment,
+                email,
+                assignmentLabel
+            } = this.$refs;
+
+            // Add the form data we need to submit
+            formData.append("url", this.urlData.value);
+            formData.append("input_file_assignment", this.assignmentData);
+            formData.append("email", this.emailData.value);
+            formData.append("message", this.messageData.value);
+
+            // Make the request to the POST /single-file URL
+            if (
+                email.value !== "" &&
+                email.value !== null &&
+                email.value !== "Required field" &&
+                url.value !== "" &&
+                url.value !== null &&
+                url.value !== "Required field" &&
+                assignmentLabel.innerHTML !== ""
+            ) {
+                axios
+                    .post("/apply/upload1", formData, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    })
+
+                    .then(function() {
+                        console.log("SUCCESS!!");
+                        console.log(...formData); // to see which files have been sent by POST
+                    })
+                    .catch(function() {
+                        console.log("FAILURE!!");
+                    });
+                this.successMSG();
+            } else {
+                if (email.value === "") {
+                    email.parentNode.classList.remove("active");
+                    email.parentNode.classList.add("active");
+                    email.value = "Required field";
+                }
+                if (url.value === "") {
+                    url.parentNode.classList.remove("active");
+                    url.parentNode.classList.add("active");
+                    url.value = "Required field";
+                }
+                if (input_file_assignment.value === "") {
+                    this.$refs.requiredMSG.innerHTML = "Required field";
+                }
             }
-          })
-          .then(function() {
-            console.log('SUCCESS!!')
-          })
-          .catch(function() {
-            console.log('FAILURE!!')
-          })
-      } else {
-        alert('You Must Assignemnt link,Photo before You Submit!')
-      }
+            this.removeAssignmentFile();
+        },
 
-      /*
-        remove all uploaded files after submitted
-        */
-      for (var i = 0; i < this.files.length; i++) {
-        this.files.splice(0)
-      }
-      console.log(document.getElementById('email').value)
-      console.log(document.getElementById('code').value)
+        handleAssignmentUpload() {
+            this.assignmentData = this.$refs.input_file_assignment.files[0];
+            this.assignmentNameShow();
+            this.$refs.requiredMSG.innerHTML = "";
+            this.$refs.assignmentLabel.innerHTML =
+                "You Uploaded the file: " + this.assignmentData.name;
+        },
 
-      document.getElementById('files').value = '' // delete name of file after added
-      document.getElementById('email').value = ''
-      document.getElementById('code').value = ''
-      formData.delete('files') // delete every thing from formData
-    },
+        successMSG() {
+            document.getElementById("success-Msg").innerHTML =
+                "You have submitted your Assignment successfully!";
+            this.$refs.email.value = "";
+            this.$refs.url.value = "";
+            this.$refs.message.value = "";
+            this.hideForm();
+        },
 
-    /*
-        Handles the uploading of files
-      */
-    handleFilesUpload() {
-      let uploadedFiles = this.$refs.files.files
-      /*
-          Adds the uploaded file to the files array
-        */
-      for (var i = 0; i < uploadedFiles.length; i++) {
-        this.files.push(uploadedFiles[i])
-      }
-      document.getElementById('files').value = ''
-    },
+        // Handles when the add file clicked
+        openUploadFileDialogue() {
+            this.$refs.input_file_assignment.click();
+        },
 
-    /*
-        Removes a select file the user has uploaded
-      */
-    removeFile(key) {
-      this.files.splice(key, 1)
+        // Removes a select file the user has uploaded
+        removeAssignmentFile() {
+            delete this.assignmentData;
+            this.assignmentNameHide();
+        },
+
+        setActive(e) {
+            this.$el.querySelectorAll(".input").forEach(i => {
+                if (i.value.length == 0) {
+                    i.parentNode.classList.remove("active");
+                }
+            });
+            e.target.parentNode.classList.add("active");
+        },
+
+        hideAssgnmentiDiv() {
+            var x = document.getElementById("assignmentDiv");
+            x.style.display = "none";
+        },
+
+        assignmentNameShow() {
+            var x = document.getElementById("assignmentName");
+            x.style.display = "block";
+        },
+
+        assignmentNameHide() {
+            var x = document.getElementById("assignmentName");
+            x.style.display = "none";
+        },
+        emptyEmailRequired() {
+            const { email } = this.$refs;
+            if (email.value) {
+                email.parentNode.classList.remove("active");
+            }
+            email.parentNode.classList.add("active");
+            email.value = "";
+        },
+        emptyUrlRequired() {
+            const { url } = this.$refs;
+            if (url.value) {
+                url.parentNode.classList.remove("active");
+            }
+            url.parentNode.classList.add("active");
+            url.value = "";
+        },
+        hideForm() {
+            var x = document.getElementById("UploadAssignment__form");
+            var y = document.getElementById("UploadAssignment__headerText");
+            y.style.display = "none";
+            x.style.display = "none";
+        }
     }
-  }
 };
-
 </script>
 
 <style lang="scss">
-.uploadContainer {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
+.UploadAssignment {
+    &__header {
+        padding: $base-vertical-rithm * 10;
 
-.text h2 {
-  margin: auto;
-  display: inline-block;
-  padding: 20px;
-  color: $color-purple;
-  font-weight: bold;
-}
-
-.email-input {
-  border-bottom: 2px solid $color-purple;
-  font-size: 18px;
-  padding: 5px 5px 5px 5px;
-  display: block;
-  background: transparent;
-  margin-bottom: 20px;
-}
-
-.input-dev {
-  margin-left: 5%;
-}
-
-.input-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  background-color: lightgray;
-  text-align: center;
-  display: inline-block;
-  margin: auto;
-  width: 25%;
-  padding: 0;
-}
-
-.wrapper {
-  text-align: center;
-}
-
-.button {
-  position: relative;
-  background-color: lightgray;
-  color: black;
-  font-size: 18px;
-  cursor: pointer;
-  position: relative;
-}
-
-.wrapper {
-  text-align: center;
-  width: 200px;
-  margin: 0 auto;
-  margin-top: 5 * $base-vertical-rithm;
-}
-
-.submit-button {
-  position: relative;
-  background-color: $color-purple;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 0;
-  padding: 5%;
-  margin-top: 40px;
-  text-transform: uppercase;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  width: 100%;
-  text-transform: uppercase;
-  border: 0;
-  cursor: pointer;
-  position: relative;
-}
-
-.About {
-  &__header {
-    padding: $base-vertical-rithm * 5;
-    text-align: center;
-    a {
-      color: $color-purple;
-      font-weight: bold;
-      font-size: 32px;
-      line-height: 40px;
-      span:after {
-        bottom: -5px;
-      }
-    }
-    &-content {
-      display: inline-block;
-      width: 50%;
-      text-align: center;
-      padding: $base-vertical-rithm * 5;
-      &>div {
-        margin-top: $base-vertical-rithm * 2;
-      }
-    }
-    &-image {
-      width: 50%;
-      display: inline-block;
-      vertical-align: top;
-    }
-    &-dates {
-      margin-left: $base-vertical-rithm * 2;
-      margin-top: $base-vertical-rithm * 15;
-      width: 100%;
-      display: inline-block;
-      vertical-align: top;
-      div {
-        display: inline-block;
-        width: calc(25% - 20px);
-        margin-left: 2%;
-        margin-bottom: 3%;
-      }
-      h3 {
-        font-weight: bold;
-        color: $color-purple;
-      }
-      h4 {
-        color: $color-purple;
-        font-weight: bold;
-      }
-    }
-  }
-  &__content {
-    width: 100%;
-    margin: 0 auto;
-    h1 {
-      color: $color-purple;
-      line-height: 1;
-    }
-    ul li {
-      list-style: disc;
-    }
-    ul+p {
-      margin-top: 1rem;
-    }
-    p a {
-      font-size: 18px;
-    }
-  }
-  &__description {
-    width: 100%;
-    margin: 0 auto;
-    h1 {
-      color: $color-purple;
-      line-height: 1;
-    }
-  }
-  &__container {
-    margin: 0 $base-vertical-rithm * 5;
-    h1 {
-      margin-bottom: $base-vertical-rithm * 5;
-      color: $color-purple;
-      font-weight: normal;
-      font-size: 42px;
-      line-height: 50px;
-    }
-    &.how {
-      margin-left: -50px;
-      .About__container-image {
-        margin-left: 0;
-      }
-    }
-    &.who {
-      margin-right: -100px;
-      .About__container-image {
-        margin-right: 0;
-      }
-    }
-    &.footer {
-      .About__container-image {
-        margin-left: 25%;
-        width: 50%;
-      }
-    }
-    &>div {
-      display: inline-block;
-      width: calc(50% - 100px);
-      vertical-align: top;
-      margin: 50px;
-      a {
-        color: $color-purple;
-        font-weight: bold;
-        font-size: 32px;
-        line-height: 40px;
-        margin-bottom: 40px;
-        display: block;
-        span:after {
-          bottom: -5px;
+        h1 {
+            margin: $base-vertical-rithm * 10;
+            margin-bottom: $base-vertical-rithm * 2;
+            width: 100%;
+            color: $color-purple;
+            font-weight: bold;
+            font-size: 52px;
+            line-height: 60px;
+            display: inline-block;
         }
-      }
     }
-  }
-  &__footer {
-    margin: 0 $base-vertical-rithm * 10;
-    a {
-      margin: 50px;
-      display: inline-block;
-      font-weight: bold;
-      font-size: 30px;
-      line-height: 40px;
-      &:nth-child(2) {
-        margin-left: 25%;
-      }
+
+    &__form {
+        width: 75%;
+        margin-left: 2.5%;
+        padding: $base-vertical-rithm * 10;
+
+        p {
+            margin-top: $base-vertical-rithm * 10;
+            font-weight: bold;
+            font-size: 24px;
+            margin-left: 50px;
+            color: $color-purple;
+            cursor: pointer;
+        }
+        h3 {
+            margin-top: $base-vertical-rithm * 2;
+            font-size: 16px;
+            margin-left: 50px;
+        }
+
+        &__assignemntLabel {
+            margin: $base-vertical-rithm * 10;
+            margin-bottom: $base-vertical-rithm * 2;
+            margin-left: 60px;
+            font-size: 14px;
+            line-height: 5px;
+            display: inline-block;
+        }
+
+        &__inputText {
+            font-size: 18px;
+            padding: 10px 10px 10px 5px;
+            display: block;
+            width: 100%;
+            border: none;
+            background: transparent;
+            display: none;
+            cursor: pointer;
+        }
+        &__remove-btn {
+            border: 2px solid $color-purple;
+            padding: 0px 10px;
+            text-transform: uppercase;
+            font-weight: 100;
+            top: 2px;
+            right: 0;
+            margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
+        }
+        &__section {
+            display: grid;
+            grid-auto-flow: row;
+        }
+        &__textarea {
+            overflow: auto;
+            outline: none;
+            background-color: #e6e6e6;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid $color-purple;
+            border-radius: 5px;
+            margin-left: 50px;
+            font-size: 16px;
+        }
     }
-  }
+
+    &__success-Msg {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 24px;
+        color: $color-purple;
+        text-align: center;
+    }
 }
 </style>

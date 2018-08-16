@@ -6,37 +6,35 @@
 </template>
 
 <script>
-import NewsItems from '~/components/news/NewsItems';
+import NewsItems from "~/components/news/NewsItems";
 
 export default {
-  components: {
-    NewsItems
-  }
-}
-
+    components: {
+        NewsItems
+    }
+};
 </script> 
 
 <style lang="scss">
 .News {
-  margin: 5%;
-  background: $color-grey;
-  padding: $base-vertical-rithm;
-  @include breakpoint("mobile_landscape") {
-
-  }
-  h1 {
-    width: 25%;
-    color: $color-purple;
-    font-size: 36px;
-    line-height: 50px;
-    display: inline-block;
-    vertical-align: top;
+    margin: 5%;
+    background: $color-grey;
+    padding: $base-vertical-rithm;
     @include breakpoint("mobile_landscape") {
-      width: 100%;
     }
-  }
-  .News__items {
-    width: 75%;
-  }
+    h1 {
+        width: 25%;
+        color: $color-purple;
+        font-size: 36px;
+        line-height: 50px;
+        display: inline-block;
+        vertical-align: top;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+        }
+    }
+    .News__items {
+        width: 75%;
+    }
 }
 </style>
