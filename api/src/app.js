@@ -22,22 +22,43 @@ const upload = multer({
 
 });
 
+
+const fileTypes = [".jpg", ".jpeg", ".bmp", ".gif", ".png", ".txt", ".doc", ".docs"];
+const allowedMimeTypes = ["text/plain", "application/msword", "application/x-pdf", "application/pdf",
+    "image/gif", "image/jpeg", "image/png", "text/plain"
+];
+const fields = ["input_file_cv", "input_file_motivation_letter", "input_file_assignment"];
+
 function fileType(file, cb) {
-    const fileTypes = ['.jpg', '.jpeg', '.bmp', '.gif', '.png', '.txt', '.doc', '.docs'];
-    const mimeType = fileTypes.test(file.mimeType);
-    if (mimeType) {
-        return cb(null, true);
+
+    const fileTypeAccepted = allowedMimeTypes.includes(file.mimetype);
+    const fieldNameAccepted = fields.includes(file.fieldname);
+    if (fieldNameAccepted) {
+        if (fileTypeAccepted) {
+            return cb([file.mimetype, file.fieldname]);
+        }
+        cb(
+            "Error: File upload only supports the following filetypes :" + fileTypes
+        );
     }
-    cb("Error: File upload only supports the following filetypes :" + fileTypes);
+    return cb("Error: Something went Wrong ");
 }
+
 
 
 const FileUpload = upload.fields(
     [{
-        name: 'files',
-        maxCount: 2
+        name: 'input_file_cv',
+        maxCount: 1
+    }, {
+        name: 'input_file_motivation_letter',
+        maxCount: 1
+    }, {
+        name: 'input_ file_assignment',
+        maxCount: 1
     }]
 );
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -79,27 +100,11 @@ app.post('/apply', (req, res) => {
         Apply(req, res)
     }
 });
-const allowedFileTypes = ['jpeg', 'jpg', 'png', 'gif'];
-const fieldName = ['input_file_cv', 'input_file_motivation_letter '];
+
 app.post('/contact-us', (req, res) => ContactUs(req, res));
 app.post('/apply', (req, res) => Apply(req, res));
 app.post('/upload', FileUpload, (req, res) => {
-
-    fieldName.forEach((element) => {
-        if (file.fieldname === element) {
-            fileType(file, cb)
-            Upload(req, res)
-        }
-    });
-    if (file.fieldname === 'input_ file_assignment') {
-        allowedFileTypes.forEach((element) => {
-            if (file.mimetype !== element) {
-                return cb(null, false, new Error("Error: File upload only supports the following filetypes :" + allowedFileTypes));
-            }
-            cb(null, true);
-            Upload(req, res)
-        });
-    }
+    Upload(req, res);
+    fileType(file, cb);
 });
-
 module.exports = app;
