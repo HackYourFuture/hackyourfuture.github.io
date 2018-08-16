@@ -5,6 +5,7 @@ const cors = require("cors");
 const multer = require("multer");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
+const {decryptEmail} = require("./utils/email-crypto.js");
 
 const app = express();
 
@@ -56,5 +57,12 @@ app.post("/apply", (req, res) => {
 app.post("/contact-us", (req, res) => ContactUs(req, res));
 app.post("/apply", (req, res) => Apply(req, res));
 app.post("/upload", FileUpload, (req, res) => Upload(req, res));
+app.get('/get-applicant/:id',  (req, res) => {
+    const id = req.params.id;
+    const email = decryptEmail(id);
+    getApplicant(email)
+    .then(()=> res.redirect('/upload'))
+    .catch(()=>res.status(404).send("Your name does not exist"));
+});
 
 module.exports = app;
