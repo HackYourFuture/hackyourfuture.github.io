@@ -26,12 +26,12 @@
                         <div class="half-width inputContainer">
                             <label for="email">e-mail (*)</label>
                             <input type="email" id="email" ref="email" class="input" name="email" value=""                                           
-                             v-on:change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
+                             @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
                         </div>
 
                         <div id="message_TextArea" class="UploadAssignment__form__section">
                           <p class="messageLabel">Is there anything you would like to notify us about?</p>
-                          <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="Your Question" v-on:change="handleMessage()"></textarea>
+                          <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"></textarea>
                         </div>
                            
                         <div class="apply-btn">
