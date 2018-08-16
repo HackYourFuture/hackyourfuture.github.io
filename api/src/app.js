@@ -5,7 +5,8 @@ const cors = require("cors");
 const multer = require("multer");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
-const {decryptEmail} = require("./utils/email-crypto.js");
+const { getApplicant } = require("../data/update-sheet");
+const { decryptEmail } = require("./utils/email-crypto.js");
 
 const app = express();
 
@@ -57,12 +58,18 @@ app.post("/apply", (req, res) => {
 app.post("/contact-us", (req, res) => ContactUs(req, res));
 app.post("/apply", (req, res) => Apply(req, res));
 app.post("/upload", FileUpload, (req, res) => Upload(req, res));
-app.get('/get-applicant/:id',  (req, res) => {
-    const id = req.params.id;
+app.get("/get-applicant", (req, res) => {
+    const { id, url } = req.query;
     const email = decryptEmail(id);
     getApplicant(email)
-    .then(()=> res.redirect('/upload'))
-    .catch(()=>res.status(404).send("Your name does not exist"));
+        .then(() => res.redirect(`${url}`))
+        .catch(() =>
+            res
+                .status(404)
+                .send(
+                    "Email address is not associated with any open applications."
+                )
+        );
 });
 
 module.exports = app;
