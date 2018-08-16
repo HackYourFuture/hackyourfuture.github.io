@@ -1,7 +1,7 @@
 <template>
        <div>
        <Main class="UploadCv container">
-           <div id="UploadCv__header" class="UploadCv__header">
+           <div class="UploadCv__header">
                <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
            </div>
 
@@ -151,6 +151,7 @@ export default {
         email.value !== "" &&
         email.value !== null &&
         email.value !== "Required field" &&
+        email.value !== "Invalid Email" &&
         (cvLabel.innerHTML !== "" || textArea_cv.value !== "") &&
         (mlLabel.innerHTML !== "" || textArea_motivation_letter.value !== "")
       ) {
@@ -222,16 +223,33 @@ export default {
       }
     },
     handleEmail() {
-      this.emailData = email;
-      email.value = this.emailData.value;
+      // console.log(this.isValidEmail(email.value));
+      if (this.isValidEmail() === true) {
+        this.emailData = email;
+        email.value = this.emailData.value;
+      }
     },
+
+    isValidEmail() {
+      var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!re.test(email.value)) {
+        email.parentNode.classList.remove("active");
+        email.parentNode.classList.add("active");
+        email.value = "Invalid Email";
+        email.focus;
+        return false;
+      } else {
+        return true;
+      }
+    },
+
     handleMessage() {
       this.messageData = textArea_message;
       textArea_message.value = this.messageData.value;
     },
     successMSG() {
       document.getElementById("success-Msg").innerHTML =
-        "You have submitted your CV and motivation letter successfully";
+        "You have submitted your CV and motivation letter successfully.";
       email.value = "";
       email.parentNode.classList.remove("active");
       textArea_message.value = "";
@@ -517,7 +535,6 @@ export default {
     margin-top: $base-vertical-rithm * 10;
     font-weight: bold;
     font-size: 24px;
-    margin-left: 50px;
     color: $color-purple;
     text-align: center;
   }

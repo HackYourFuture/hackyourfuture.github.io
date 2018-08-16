@@ -2,21 +2,21 @@
         <div>
         <Main class="UploadAssignment container">
             <div id="UploadAssignment__header" class="UploadAssignment__header">
-                <h1 id="UploadAssignment__headerText">Upload your Assignment. </h1>
+                <h1 id="UploadAssignment__title">Upload your Assignment. </h1>
                
             </div>
 
             <div id="UploadAssignment__form" class="UploadAssignment__form form">
                 <form id="assignmentUploadForm">
-                    <fieldset>   
+                    <fieldset>
                         <div class="half-width inputContainer">
                             <label for="url">Assignment URL: (*)</label>
-                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleUrlUpload()" @focus="setActive" @click="emptyUrlRequired()">
+                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
                         </div>
                       
                          <div id="assignmentDiv">
                             <P v-on:click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" ref="input_file_assignment" v-on:change="handleAssignmentUpload()" />
+                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" ref="input_file_assignment" v-on:change="handleFileUpload1()" />
                             <h3 ref="requiredMSG"></h3>
                             <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
                             <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
@@ -100,9 +100,11 @@ export default {
         email.value !== "" &&
         email.value !== null &&
         email.value !== "Required field" &&
+        email.value !== "Invalid Email" &&
         url.value !== "" &&
         url.value !== null &&
         url.value !== "Required field" &&
+        url.value !== "Invalid URL" &&
         assignmentLabel.innerHTML !== ""
       ) {
         axios
@@ -139,12 +141,27 @@ export default {
     },
 
     // Handles a change on the url upload
-    handleUrlUpload() {
-      this.urlData = url;
-      url.value = this.urlData.value;
+    handleFileUpload() {
+      if (this.checkUrl() === true) {
+        this.urlData = url;
+        url.value = this.urlData.value;
+      }
+    },
+    checkUrl() {
+      var inputUrl = url.value;
+      var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+      if (!pattern.test(inputUrl)) {
+        url.parentNode.classList.remove("active");
+        url.parentNode.classList.add("active");
+        url.value = "Invalid URL";
+        url.focus;
+        return false;
+      } else {
+        return true;
+      }
     },
 
-    handleAssignmentUpload() {
+    handleFileUpload1() {
       this.assignmentData = input_file_assignment.files[0];
       this.assignmentNameShow();
       this.$refs.requiredMSG.innerHTML = "";
@@ -153,8 +170,23 @@ export default {
     },
 
     handleEmail() {
-      this.emailData = email;
-      email.value = this.emailData.value;
+      if (this.isValidEmail() === true) {
+        this.emailData = email;
+        email.value = this.emailData.value;
+      }
+    },
+
+    isValidEmail() {
+      var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!re.test(email.value)) {
+        email.parentNode.classList.remove("active");
+        email.parentNode.classList.add("active");
+        email.value = "Invalid Email";
+        email.focus;
+        return false;
+      } else {
+        return true;
+      }
     },
 
     handleMessage() {
@@ -164,7 +196,7 @@ export default {
 
     successMSG() {
       document.getElementById("success-Msg").innerHTML =
-        "You have submitted your Assignment successfully!";
+        "You have submitted your Assignment successfully.";
       email.value = "";
       url.value = "";
       message.value = "";
@@ -221,7 +253,7 @@ export default {
     },
     hideForm() {
       var x = document.getElementById("UploadAssignment__form");
-      var y = document.getElementById("UploadAssignment__headerText");
+      var y = document.getElementById("UploadAssignment__title");
       y.style.display = "none";
       x.style.display = "none";
     }
@@ -257,7 +289,6 @@ export default {
       font-size: 24px;
       margin-left: 50px;
       color: $color-purple;
-      cursor: pointer;
     }
     h3 {
       margin-top: $base-vertical-rithm * 2;
@@ -282,7 +313,6 @@ export default {
       border: none;
       background: transparent;
       display: none;
-      cursor: pointer;
     }
     &__remove-btn {
       border: 2px solid $color-purple;
