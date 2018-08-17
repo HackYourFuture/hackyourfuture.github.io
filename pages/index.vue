@@ -1,5 +1,7 @@
 <template>
+
   <div>
+    <Navigation></Navigation>
     <Landscape />
     <Main class="Main container">
       <section class="About">
@@ -74,64 +76,63 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
-import Colors from '~/constants/colors'
+import axios from "~/plugins/axios";
+import Colors from "~/constants/colors";
 
-import Landscape from '~/components/index/Landscape';
-import Signup from '~/components/signup/Signup';
-import Makers from '~/components/makers/Makers';
-import Partners from '~/components/partners/Partners';
-import YoutubePlayer from '~/components/video/YoutubePlayer';
+import Landscape from "~/components/index/Landscape";
+import Signup from "~/components/signup/Signup";
+import Makers from "~/components/makers/Makers";
+import Partners from "~/components/partners/Partners";
+import YoutubePlayer from "~/components/video/YoutubePlayer";
 
- export default {
-     async asyncData () {
-         let data
-         let what
-         let apply
-         let curiculum
-         let hire
-         let laptops
-         try {
-             let req  = await axios.get('/content/en/index-about.json')
-             let wReq  = await axios.get('/content/en/what.json')
-             let aReq  = await axios.get('/content/en/apply.json')
-             let cReq  = await axios.get('/content/en/curiculum.json')
-             let hReq  = await axios.get('/content/en/index-hire.json')
-             let lReq  = await axios.get('/content/en/index-laptops.json')
+export default {
+  async asyncData() {
+    let data;
+    let what;
+    let apply;
+    let curiculum;
+    let hire;
+    let laptops;
+    try {
+      let req = await axios.get("/content/en/index-about.json");
+      let wReq = await axios.get("/content/en/what.json");
+      let aReq = await axios.get("/content/en/apply.json");
+      let cReq = await axios.get("/content/en/curiculum.json");
+      let hReq = await axios.get("/content/en/index-hire.json");
+      let lReq = await axios.get("/content/en/index-laptops.json");
 
-             what = wReq.data.body
-             apply = aReq.data.body
-             data = req.data.body
-             curiculum = cReq.data.body
-             hire = hReq.data.body
-             laptops = lReq.data.body
-         } catch (e) {
-             console.log(e)
-             data = false
-         }
-         return {
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             about: data ? data : null,
-             hire: hire ? hire : null,
-             laptops: laptops ? laptops : null,
-             what,
-             apply,
-             curiculum,
-             Colors
-         }
-     },
-     components: {
-       Landscape,
-       Signup,
-       Makers,
-       Partners,
-       YoutubePlayer
-     }
- }
+      what = wReq.data.body;
+      apply = aReq.data.body;
+      data = req.data.body;
+      curiculum = cReq.data.body;
+      hire = hReq.data.body;
+      laptops = lReq.data.body;
+    } catch (e) {
+      console.log(e);
+      data = false;
+    }
+    return {
+      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+      about: data ? data : null,
+      hire: hire ? hire : null,
+      laptops: laptops ? laptops : null,
+      what,
+      apply,
+      curiculum,
+      Colors
+    };
+  },
+  components: {
+    Landscape,
+    Signup,
+    Makers,
+    Partners,
+    YoutubePlayer
+  }
+};
 </script>
 
 <style lang="scss">
-
 .About {
   .content {
     width: 80%;
@@ -199,7 +200,7 @@ import YoutubePlayer from '~/components/video/YoutubePlayer';
     text-align: center;
     vertical-align: middle;
     @include breakpoint("mobile_landscape") {
-      margin-top:  $base-vertical-rithm * 10;
+      margin-top: $base-vertical-rithm * 10;
       width: 100%;
     }
     h1 {
