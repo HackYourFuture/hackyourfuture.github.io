@@ -52,7 +52,30 @@
 
 <style lang="scss">
 .Makers {
-    margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
+  margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
+  @include breakpoint("mobile_landscape") {
+    margin: $base-vertical-rithm * 5 $base-vertical-rithm * 2;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: $color-purple;
+  }
+  &__items {
+    margin: 25px -25px;
+    overflow-x: scroll;
+    &-inner {
+      width: max-content;
+      height: 460px;
+    }
+  }
+  &__item {
+    background: $color-purple;
+    padding: $base-vertical-rithm * 5;
+    display: inline-block;
+    width: 350px;
+    margin: 25px;
+    display: inline-block;
     @include breakpoint("mobile_landscape") {
         margin: $base-vertical-rithm * 5 $base-vertical-rithm * 2;
     }
