@@ -1,8 +1,6 @@
-const {
-    updateApplicant,
-} = require("../data");
+const { updateApplicant } = require("../data");
 
-const {getApplicant} = require("../data/update-sheet");
+const { getApplicant } = require("../data/update-sheet");
 
 const sendEmail = require("../utils/send-emails");
 
@@ -12,38 +10,35 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const {
-        email,
-        assignmentLink
-    } = req.body;
+    const { email, assignmentLink } = req.body;
 
-    if(now <= deadline) {
+    if (now <= deadline) {
         getApplicant(email)
-            .then(()=>
+            .then(() =>
                 updateApplicant(email, assignmentLink, req.files)
                     .then(() => {
                         return sendEmail(
-                        fromEmail,
-                        [email],
-                        '** Confirmation email **',
-                        'We\'ve received your files'
+                            fromEmail,
+                            [email],
+                            "** Confirmation email **",
+                            "We've received your files"
                         );
                     })
                     .then(() => {
                         res.send({
-                        message: 'you got an email :-)'
-                    });
+                            message: "you got an email :-)"
+                        });
                     })
                     .catch(() => {
                         res.status(500).send({
-                        message: 'Something went wrong'
+                            message: "Something went wrong"
                         });
                     })
             )
             .catch(() => {
-                res.status(404).send("Your name does not exist")
-            })
+                res.status(404).send("Your name does not exist");
+            });
     } else {
-            res.status(400).send("the deadline has passed")
-        }
+        res.status(400).send("the deadline has passed");
+    }
 };

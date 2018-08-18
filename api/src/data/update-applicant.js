@@ -6,8 +6,6 @@
  * @param {object} updates object containing the applicant's new or updated fields
  * @param {object[]} files files to be stored to S3
  */
-async function updateApplicant(email, updates, files) {
-
-}
+async function updateApplicant() {}
 
 module.exports = updateApplicant;
