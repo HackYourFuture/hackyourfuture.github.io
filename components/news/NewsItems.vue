@@ -13,22 +13,23 @@
 
 <style lang="scss">
 .News {
-  &__items {
-    display: inline-block;
-  }
-  &__item {
-    display: inline-block;
-    width: 25%;
-    color: $color-purple;
-    @include breakpoint("mobile_landscape") {
-      width: 50%;
+    &__items {
+        display: inline-block;
     }
-    a, h3 {
-      font-weight: bold;
+    &__item {
+        display: inline-block;
+        width: 25%;
+        color: $color-purple;
+        @include breakpoint("mobile_landscape") {
+            width: 50%;
+        }
+        a,
+        h3 {
+            font-weight: bold;
+        }
+        &-image {
+            margin-bottom: $base-vertical-rithm * 4;
+        }
     }
-    &-image {
-      margin-bottom: $base-vertical-rithm * 4;
-    }
-  }
 }
 </style>

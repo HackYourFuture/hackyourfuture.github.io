@@ -21,12 +21,13 @@ before_install:
 before_script:
 
 script:
-  - npm install 
+  - npm install
+  - npm run lint
   - npm run generate 
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: make publish-travis
+    script: make publish
     on:
       branch: master
