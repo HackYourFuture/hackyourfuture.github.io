@@ -3,7 +3,6 @@
         <Main class="UploadAssignment container">
             <div id="UploadAssignment__header" class="UploadAssignment__header">
                 <h1 id="UploadAssignment__title">Upload your Assignment. </h1>
-               
             </div>
 
             <div id="UploadAssignment__form" class="UploadAssignment__form form">

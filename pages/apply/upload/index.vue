@@ -63,9 +63,7 @@
                            <input type="submit" name="Apply" value="Apply" @click.prevent="submitFile" true>
                        </div>
                    </fieldset>
-                 
-               </form>
-                 
+               </form> 
            </div>
            <div>
                <p id="success-Msg" class="UploadCv__success-Msg"></p>
