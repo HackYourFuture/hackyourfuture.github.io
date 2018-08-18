@@ -11,12 +11,12 @@
                     <fieldset>
                         <div class="half-width inputContainer">
                             <label for="url">Assignment URL: (*)</label>
-                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
+                            <input type="url" id="url" ref="url" name="url" class="input" v-on:change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
                         </div>
                       
                          <div id="assignmentDiv">
                             <P v-on:click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" ref="input_file_assignment" v-on:change="handleFileUpload1()" />
+                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" name="input_file_assignment" ref="input_file_assignment" v-on:change="handleFileUpload1()" />
                             <h3 ref="requiredMSG"></h3>
                             <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
                             <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
@@ -25,17 +25,17 @@
 
                         <div class="half-width inputContainer">
                             <label for="email">e-mail (*)</label>
-                            <input type="email" id="email" ref="email" class="input" name="email" value=""                                           
+                            <input type="email" id="email" ref="email" name="email" class="input" value=""                                           
                              @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
                         </div>
 
                         <div id="message_TextArea" class="UploadAssignment__form__section">
                           <p class="messageLabel">Is there anything you would like to notify us about?</p>
-                          <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"></textarea>
+                          <textarea id="message" name="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"></textarea>
                         </div>
                            
                         <div class="apply-btn">
-                            <input type="submit" value="Apply" @click.prevent="submitFile()" true>
+                            <input type="submit" name="Apply" value="Apply" @click.prevent="submitFile()" true>
                         </div>
                     
                     </fieldset>
