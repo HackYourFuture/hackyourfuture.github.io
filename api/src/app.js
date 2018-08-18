@@ -7,6 +7,7 @@ const multer = require("multer");
 const { Apply, ContactUs, Upload } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
 const { decryptEmail } = require("./utils/email-crypto.js");
+const { donate, paymentStatus } = require("./donation/donate");
 
 const app = express();
 
@@ -70,6 +71,17 @@ app.get("/get-applicant", (req, res) => {
                     "Email address is not associated with any open applications."
                 )
         );
+});
+
+app.post("/donate", (req, res) => {
+    donate(req.body, res);
+});
+
+app.get("/", (req, res) => {
+    const orderId = req.query.orderId;
+    if (orderId) {
+        paymentStatus(orderId).then(message => res.status(200).json(message));
+    }
 });
 
 module.exports = app;
