@@ -8,12 +8,7 @@ const {
     saveConfig
 } = require("../utils/dev-config");
 
-// prettier-ignore
-const config = process.env.DEVELOPMENT
-    ? getConfig()
-    : {
-        spreadSheetId: "1DOba5whX5dXAM5K380nEyVUj6kb-qywcGxgJZ3aP0eo"
-    };
+const config = getConfig();
 
 const SHEET_ID = config.spreadSheetId;
 

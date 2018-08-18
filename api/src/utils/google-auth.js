@@ -7,10 +7,11 @@ function getEnviromentConfig() {
     if (!process.env.GOOGLE_APP) return false;
 
     try {
-        return JSON.decode(
+        return JSON.parse(
             Buffer.from(process.env.GOOGLE_APP, "base64").toString("utf-8")
         );
     } catch (e) {
+        console.log("An error occurred on the getEnviromentConfig", e);
         return false;
     }
 }
@@ -36,7 +37,7 @@ function getClient() {
     // Here means that we're in the production mode
     // So we can retunr a different client
     if (config) {
-        return getJWTClient();
+        return getJWTClient(config);
     }
 
     if (process.env.DEVELOPMENT) {
