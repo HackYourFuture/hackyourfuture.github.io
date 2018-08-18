@@ -46,6 +46,7 @@
     "popmotion": "^8.3.3",
     "sass-loader": "^7.1.0",
     "scrollmonitor": "^1.2.4",
+    "url-join": "^4.0.0",
     "verge": "^1.10.2",
     "vue-dropdowns": "^1.0.6",
     "vuelayers": "^0.10.13"
