@@ -4,11 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer = require("multer");
 
-const {
-    Apply,
-    ContactUs,
-    Upload
-} = require("./middlewares");
+const { Apply, ContactUs, Upload } = require("./middlewares");
 
 const app = express();
 
@@ -67,16 +63,20 @@ function fileType(file, cb) {
 
 }
 
-const FileUpload = upload.fields([{
-    name: "input_file_cv",
-    maxCount: 1
-}, {
-    name: "input_file_motivation_letter",
-    maxCount: 1
-}, {
-    name: "input_file_assignment",
-    maxCount: 1
-}]);
+const FileUpload = upload.fields([
+    {
+        name: "input_file_cv",
+        maxCount: 1
+    },
+    {
+        name: "input_file_motivation_letter",
+        maxCount: 1
+    },
+    {
+        name: "input_file_assignment",
+        maxCount: 1
+    }
+]);
 
 app.use(cors());
 app.use(bodyParser.json());
