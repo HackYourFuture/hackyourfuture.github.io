@@ -1,4 +1,29 @@
 <template>
+<<<<<<< HEAD
+        <div>
+        <Main class="UploadAssignment container">
+            <div id="UploadAssignment__header" class="UploadAssignment__header">
+                <h1 id="UploadAssignment__title">Upload your Assignment. </h1>
+               
+            </div>
+
+            <div id="UploadAssignment__form" class="UploadAssignment__form form">
+                <form id="assignmentUploadForm">
+                    <fieldset>
+                        <div class="half-width inputContainer">
+                            <label for="url">Assignment URL: (*)</label>
+                            <input type="url" id="url" ref="url" class="input" name="url" v-on:change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
+                        </div>
+                      
+                         <div id="assignmentDiv">
+                            <P v-on:click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
+                            <input type="file" class="UploadAssignment__form__inputText" id="input_file_assignment" ref="input_file_assignment" v-on:change="handleFileUpload1()" />
+                            <h3 ref="requiredMSG"></h3>
+                            <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"></span>
+                            <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
+                            </div>
+                        </div>
+=======
   <div>
     <Main class="UploadAssignment container">
       <div id="UploadAssignment__header" class="UploadAssignment__header">
@@ -22,6 +47,7 @@
                 <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>
               </div>
             </div>
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
@@ -92,6 +118,26 @@ export default {
             formData.append("email", this.emailData.value);
             formData.append("message", this.messageData.value);
 
+<<<<<<< HEAD
+      // Make the request to the POST /single-file URL
+      if (
+        email.value !== "" &&
+        email.value !== null &&
+        email.value !== "Required field" &&
+        email.value !== "Invalid Email" &&
+        url.value !== "" &&
+        url.value !== null &&
+        url.value !== "Required field" &&
+        url.value !== "Invalid URL" &&
+        assignmentLabel.innerHTML !== ""
+      ) {
+        axios
+          .post("/apply/upload1", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+=======
             // Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
@@ -108,6 +154,7 @@ export default {
                             "Content-Type": "multipart/form-data"
                         }
                     })
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
                     .then(function() {
                         console.log("SUCCESS!!");
@@ -135,6 +182,56 @@ export default {
             this.removeAssignmentFile();
         },
 
+<<<<<<< HEAD
+    // Handles a change on the url upload
+    handleFileUpload() {
+      if (this.checkUrl() === true) {
+        this.urlData = url;
+        url.value = this.urlData.value;
+      }
+    },
+    checkUrl() {
+      var inputUrl = url.value;
+      var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+      if (!pattern.test(inputUrl)) {
+        url.parentNode.classList.remove("active");
+        url.parentNode.classList.add("active");
+        url.value = "Invalid URL";
+        url.focus;
+        return false;
+      } else {
+        return true;
+      }
+    },
+
+    handleFileUpload1() {
+      this.assignmentData = input_file_assignment.files[0];
+      this.assignmentNameShow();
+      this.$refs.requiredMSG.innerHTML = "";
+      assignmentLabel.innerHTML =
+        "You Uploaded the file: " + this.assignmentData.name;
+    },
+
+    handleEmail() {
+      if (this.isValidEmail() === true) {
+        this.emailData = email;
+        email.value = this.emailData.value;
+      }
+    },
+
+    isValidEmail() {
+      var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!re.test(email.value)) {
+        email.parentNode.classList.remove("active");
+        email.parentNode.classList.add("active");
+        email.value = "Invalid Email";
+        email.focus;
+        return false;
+      } else {
+        return true;
+      }
+    },
+=======
         handleAssignmentUpload() {
             this.assignmentData = this.$refs.input_file_assignment.files[0];
             this.assignmentNameShow();
@@ -156,6 +253,7 @@ export default {
         openUploadFileDialogue() {
             this.$refs.input_file_assignment.click();
         },
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
         // Removes a select file the user has uploaded
         removeAssignmentFile() {
@@ -163,6 +261,16 @@ export default {
             this.assignmentNameHide();
         },
 
+<<<<<<< HEAD
+    successMSG() {
+      document.getElementById("success-Msg").innerHTML =
+        "You have submitted your Assignment successfully.";
+      email.value = "";
+      url.value = "";
+      message.value = "";
+      this.hideForm();
+    },
+=======
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
@@ -171,6 +279,7 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
         hideAssgnmentiDiv() {
             var x = document.getElementById("assignmentDiv");
@@ -208,6 +317,46 @@ export default {
             y.style.display = "none";
             x.style.display = "none";
         }
+<<<<<<< HEAD
+      });
+      e.target.parentNode.classList.add("active");
+    },
+
+    hideAssgnmentiDiv() {
+      var x = document.getElementById("assignmentDiv");
+      x.style.display = "none";
+    },
+
+    assignmentNameShow() {
+      var x = document.getElementById("assignmentName");
+      x.style.display = "block";
+    },
+
+    assignmentNameHide() {
+      var x = document.getElementById("assignmentName");
+      x.style.display = "none";
+    },
+    emptyEmailRequired() {
+      if (email.value) {
+        email.parentNode.classList.remove("active");
+      }
+      email.parentNode.classList.add("active");
+      email.value = "";
+    },
+    emptyUrlRequired() {
+      if (url.value) {
+        url.parentNode.classList.remove("active");
+      }
+      url.parentNode.classList.add("active");
+      url.value = "";
+    },
+    hideForm() {
+      var x = document.getElementById("UploadAssignment__form");
+      var y = document.getElementById("UploadAssignment__title");
+      y.style.display = "none";
+      x.style.display = "none";
+=======
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
     }
 };
 </script>
@@ -234,6 +383,20 @@ export default {
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 10;
 
+<<<<<<< HEAD
+    p {
+      margin-top: $base-vertical-rithm * 10;
+      font-weight: bold;
+      font-size: 24px;
+      margin-left: 50px;
+      color: $color-purple;
+    }
+    h3 {
+      margin-top: $base-vertical-rithm * 2;
+      font-size: 16px;
+      margin-left: 50px;
+    }
+=======
         p {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
@@ -247,6 +410,7 @@ export default {
             font-size: 16px;
             margin-left: 50px;
         }
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
         &__assignemntLabel {
             margin: $base-vertical-rithm * 10;
@@ -257,6 +421,40 @@ export default {
             display: inline-block;
         }
 
+<<<<<<< HEAD
+    &__inputText {
+      font-size: 18px;
+      padding: 10px 10px 10px 5px;
+      display: block;
+      width: 100%;
+      border: none;
+      background: transparent;
+      display: none;
+    }
+    &__remove-btn {
+      border: 2px solid $color-purple;
+      padding: 0px 10px;
+      text-transform: uppercase;
+      font-weight: 100;
+      top: 2px;
+      right: 0;
+      margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
+    }
+    &__section {
+      display: grid;
+      grid-auto-flow: row;
+    }
+    &__textarea {
+      overflow: auto;
+      outline: none;
+      background-color: #e6e6e6;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid $color-purple;
+      border-radius: 5px;
+      margin-left: 50px;
+      font-size: 16px;
+=======
         &__inputText {
             font-size: 18px;
             padding: 10px 10px 10px 5px;
@@ -291,6 +489,7 @@ export default {
             margin-left: 50px;
             font-size: 16px;
         }
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
     }
 
     &__success-Msg {

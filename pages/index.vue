@@ -1,5 +1,7 @@
 <template>
+
   <div>
+    <Navigation></Navigation>
     <Landscape />
     <Main class="Main container">
       <section class="About">
@@ -82,6 +84,51 @@ import Partners from "~/components/partners/Partners";
 import YoutubePlayer from "~/components/video/YoutubePlayer";
 
 export default {
+<<<<<<< HEAD
+  async asyncData() {
+    let data;
+    let what;
+    let apply;
+    let curiculum;
+    let hire;
+    let laptops;
+    try {
+      let req = await axios.get("/content/en/index-about.json");
+      let wReq = await axios.get("/content/en/what.json");
+      let aReq = await axios.get("/content/en/apply.json");
+      let cReq = await axios.get("/content/en/curiculum.json");
+      let hReq = await axios.get("/content/en/index-hire.json");
+      let lReq = await axios.get("/content/en/index-laptops.json");
+
+      what = wReq.data.body;
+      apply = aReq.data.body;
+      data = req.data.body;
+      curiculum = cReq.data.body;
+      hire = hReq.data.body;
+      laptops = lReq.data.body;
+    } catch (e) {
+      console.log(e);
+      data = false;
+    }
+    return {
+      siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+      about: data ? data : null,
+      hire: hire ? hire : null,
+      laptops: laptops ? laptops : null,
+      what,
+      apply,
+      curiculum,
+      Colors
+    };
+  },
+  components: {
+    Landscape,
+    Signup,
+    Makers,
+    Partners,
+    YoutubePlayer
+  }
+=======
     async asyncData() {
         let data;
         let what;
@@ -125,6 +172,7 @@ export default {
         Partners,
         YoutubePlayer
     }
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 };
 </script>
 
@@ -179,6 +227,32 @@ export default {
 }
 
 .Apply {
+<<<<<<< HEAD
+  margin: $base-vertical-rithm * 30 0;
+  &__image {
+    display: inline-block;
+    width: 45%;
+    margin: 0 $base-vertical-rithm * 10;
+    @include breakpoint("mobile_landscape") {
+      width: 80%;
+      margin: 0 auto;
+      display: inline;
+    }
+  }
+  &__container {
+    width: 45%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    @include breakpoint("mobile_landscape") {
+      margin-top: $base-vertical-rithm * 10;
+      width: 100%;
+    }
+    h1 {
+      font-size: 36px;
+      color: $color-purple;
+      line-height: 50px;
+=======
     margin: $base-vertical-rithm * 30 0;
     &__image {
         display: inline-block;
@@ -189,6 +263,7 @@ export default {
             margin: 0 auto;
             display: inline;
         }
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
     }
     &__container {
         width: 45%;

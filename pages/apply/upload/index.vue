@@ -1,9 +1,17 @@
 <template>
+<<<<<<< HEAD
+       <div>
+       <Main class="UploadCv container">
+           <div class="UploadCv__header">
+               <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
+           </div>
+=======
   <div>
     <Main class="UploadCv container">
       <div id="UploadCv__header" class="UploadCv__header">
         <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
       </div>
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
       <div id="UploadCv__form" class="UploadCv__form form">
         <form id="cvUploadForm">
@@ -143,6 +151,21 @@ export default {
             formData.append("email", this.emailData.value);
             formData.append("textArea_message", this.messageData.value);
 
+<<<<<<< HEAD
+      //  Make the request to the POST /single-file URL
+      if (
+        email.value !== "" &&
+        email.value !== null &&
+        email.value !== "Required field" &&
+        email.value !== "Invalid Email" &&
+        (cvLabel.innerHTML !== "" || textArea_cv.value !== "") &&
+        (mlLabel.innerHTML !== "" || textArea_motivation_letter.value !== "")
+      ) {
+        axios
+          .post("/apply/upload", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+=======
             //  Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
@@ -180,6 +203,7 @@ export default {
                 if (input_file_motivation_letter.value === "") {
                     this.$refs.requiredMlMSG.innerHTML = "Required field";
                 }
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
             }
             this.showCV2();
             this.showML2();
@@ -187,6 +211,106 @@ export default {
             this.removeCvFile();
         },
 
+<<<<<<< HEAD
+    // Handles a change on the file upload
+    handleCvUpload() {
+      if (
+        this.checkCvLength !== "" &&
+        this.checkCvLength !== undefined &&
+        this.checkCvLength !== null
+      ) {
+        this.cvData = input_file_cv.files[0];
+        this.cvNameShow();
+        this.$refs.requiredCvMSG.innerHTML = "";
+        cvLabel.innerHTML = "You Uploaded the file: " + this.cvData.name;
+      } else {
+        delete this.cvData;
+        cvLabel.innerHTML = "";
+      }
+    },
+    handleMotivationLetterUpload() {
+      if (
+        this.checkMlLength !== "" &&
+        this.checkMlLength !== undefined &&
+        this.checkMlLength !== null
+      ) {
+        this.motivationLetterData = input_file_motivation_letter.files[0];
+        this.mlNameShow();
+        this.$refs.requiredMlMSG.innerHTML = "";
+        mlLabel.innerHTML =
+          "You Uploaded the file: " + this.motivationLetterData.name;
+      } else {
+        delete this.motivationLetterData;
+        mlLabel.innerHTML = "";
+      }
+    },
+    handleEmail() {
+      // console.log(this.isValidEmail(email.value));
+      if (this.isValidEmail() === true) {
+        this.emailData = email;
+        email.value = this.emailData.value;
+      }
+    },
+
+    isValidEmail() {
+      var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!re.test(email.value)) {
+        email.parentNode.classList.remove("active");
+        email.parentNode.classList.add("active");
+        email.value = "Invalid Email";
+        email.focus;
+        return false;
+      } else {
+        return true;
+      }
+    },
+
+    handleMessage() {
+      this.messageData = textArea_message;
+      textArea_message.value = this.messageData.value;
+    },
+    successMSG() {
+      document.getElementById("success-Msg").innerHTML =
+        "You have submitted your CV and motivation letter successfully.";
+      email.value = "";
+      email.parentNode.classList.remove("active");
+      textArea_message.value = "";
+      this.hideForm();
+    },
+    // Handles when the image clicked
+    openUploadFileDialogue() {
+      input_file_cv.click();
+    },
+    openUploadFileDialogue1() {
+      input_file_motivation_letter.click();
+    },
+    // Removes a select file the user has uploaded
+    removeCvFile() {
+      input_file_cv.value = "";
+      this.cvNameHide();
+      this.setCvCheckBoxActive();
+      cvLabel.innerHTML = "";
+      this.$refs.input_checkbox_cv.disabled = false;
+    },
+    removeMlFile() {
+      input_file_motivation_letter.value = "";
+      this.mlNameHide();
+      this.setMlCheckBoxActive();
+      mlLabel.innerHTML = "";
+      this.$refs.input_checkbox_motivation_letter.disabled = false;
+    },
+    setActive(e) {
+      this.$el.querySelectorAll(".input").forEach(i => {
+        if (i.value.length == 0) {
+          i.parentNode.classList.remove("active");
+        }
+      });
+      e.target.parentNode.classList.add("active");
+    },
+    //disable cv checkbox when input upload is active
+    setCVCheckBoxUnActive() {
+      var x = this.$refs.cv2Lable;
+=======
         // Handles a change on the file upload
         handleCvUpload() {
             if (
@@ -265,6 +389,7 @@ export default {
         //disable cv checkbox when input upload is active
         setCVCheckBoxUnActive() {
             var x = this.$refs.cv2Lable;
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 
             x.classList.add("UploadCv__form__unAvailable");
         },
@@ -516,5 +641,16 @@ export default {
         color: $color-purple;
         text-align: center;
     }
+<<<<<<< HEAD
+  }
+  &__success-Msg {
+    margin-top: $base-vertical-rithm * 10;
+    font-weight: bold;
+    font-size: 24px;
+    color: $color-purple;
+    text-align: center;
+  }
+=======
+>>>>>>> 5e8b8dd7d4ffcbf13d4484b9133562ff1b9c6775
 }
 </style>
