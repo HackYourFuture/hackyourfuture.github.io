@@ -15,7 +15,7 @@
                       
             <div id="assignmentDiv">
               <P @click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-              <input id="input_file_assignment" ref="input_file_assignment" type="file" class="UploadAssignment__form__inputText" name="input_file_assignment" @change="handleFileUpload1()" >
+              <input id="input_file_assignment" ref="input_file_assignment" type="file" class="UploadAssignment__form__inputText" name="input_file_assignment" @change="handleFileUpload1();imgCheckExtension()" >
               <h3 ref="requiredMSG"/>
               <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"/>
                 <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
@@ -69,11 +69,9 @@ export default {
             messageData: ""
         };
     },
-
     mounted: function() {
         this.assignmentNameHide();
     },
-
     methods: {
         submitFile() {
             // Initialize the form data
@@ -82,16 +80,13 @@ export default {
                 url,
                 input_file_assignment,
                 email,
-                message,
                 assignmentLabel
             } = this.$refs;
-
             // Add the form data we need to submit
             formData.append("url", this.urlData.value);
             formData.append("input_file_assignment", this.assignmentData);
             formData.append("email", this.emailData.value);
             formData.append("message", this.messageData.value);
-
             // Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
@@ -110,7 +105,6 @@ export default {
                             "Content-Type": "multipart/form-data"
                         }
                     })
-
                     .then(function() {
                         console.log("SUCCESS!!");
                         console.log(...formData); // to see which files have been sent by POST
@@ -136,15 +130,16 @@ export default {
             }
             this.removeAssignmentFile();
         },
-
         // Handles a change on the url upload
         handleFileUpload() {
+            const { url } = this.$refs;
             if (this.checkUrl() === true) {
                 this.urlData = url;
                 url.value = this.urlData.value;
             }
         },
         checkUrl() {
+            const { url } = this.$refs;
             var inputUrl = url.value;
             var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
             if (!pattern.test(inputUrl)) {
@@ -157,23 +152,23 @@ export default {
                 return true;
             }
         },
-
         handleFileUpload1() {
+            const { input_file_assignment, assignmentLabel } = this.$refs;
             this.assignmentData = input_file_assignment.files[0];
             this.assignmentNameShow();
             this.$refs.requiredMSG.innerHTML = "";
             assignmentLabel.innerHTML =
                 "You Uploaded the file: " + this.assignmentData.name;
         },
-
         handleEmail() {
+            const { email } = this.$refs;
             if (this.isValidEmail() === true) {
                 this.emailData = email;
                 email.value = this.emailData.value;
             }
         },
-
         isValidEmail() {
+            const { email } = this.$refs;
             var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             if (!re.test(email.value)) {
                 email.parentNode.classList.remove("active");
@@ -185,13 +180,29 @@ export default {
                 return true;
             }
         },
+        //validate screenshot exetinsion
+        imgCheckExtension() {
+            const { assignmentLabel } = this.$refs;
+            var file = document.getElementById("input_file_assignment");
+            if (
+                /\.(jpg|jpeg|png|gif|ico|svg)$/i.test(file.files[0].name) ===
+                false
+            ) {
+                this.$refs.requiredMSG.innerHTML = "Invalid File Type!";
+                this.assignmentNameShow();
+                assignmentLabel.innerHTML = "";
+                this.removeAssignmentFile();
+                return false;
+            }
+        },
 
         handleMessage() {
+            const { message } = this.$refs;
             this.messageData = message;
             message.value = this.messageData.value;
         },
-
         successMSG() {
+            const { url, email, message } = this.$refs;
             document.getElementById("success-Msg").innerHTML =
                 "You have submitted your Assignment successfully.";
             email.value = "";
@@ -199,18 +210,16 @@ export default {
             message.value = "";
             this.hideForm();
         },
-
         // Handles when the add file clicked
         openUploadFileDialogue() {
+            const { input_file_assignment } = this.$refs;
             input_file_assignment.click();
         },
-
         // Removes a select file the user has uploaded
         removeAssignmentFile() {
             delete this.assignmentData;
             this.assignmentNameHide();
         },
-
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
@@ -219,22 +228,20 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
-
         hideAssgnmentiDiv() {
             var x = document.getElementById("assignmentDiv");
             x.style.display = "none";
         },
-
         assignmentNameShow() {
             var x = document.getElementById("assignmentName");
             x.style.display = "block";
         },
-
         assignmentNameHide() {
             var x = document.getElementById("assignmentName");
             x.style.display = "none";
         },
         emptyEmailRequired() {
+            const { email } = this.$refs;
             if (email.value) {
                 email.parentNode.classList.remove("active");
             }
@@ -242,6 +249,7 @@ export default {
             email.value = "";
         },
         emptyUrlRequired() {
+            const { url } = this.$refs;
             if (url.value) {
                 url.parentNode.classList.remove("active");
             }
@@ -262,7 +270,6 @@ export default {
 .UploadAssignment {
     &__header {
         padding: $base-vertical-rithm * 10;
-
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -274,12 +281,10 @@ export default {
             display: inline-block;
         }
     }
-
     &__form {
         width: 75%;
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 10;
-
         p {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
@@ -292,7 +297,6 @@ export default {
             font-size: 16px;
             margin-left: 50px;
         }
-
         &__assignemntLabel {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -301,7 +305,6 @@ export default {
             line-height: 5px;
             display: inline-block;
         }
-
         &__inputText {
             font-size: 18px;
             padding: 10px 10px 10px 5px;
@@ -336,7 +339,6 @@ export default {
             font-size: 16px;
         }
     }
-
     &__success-Msg {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
