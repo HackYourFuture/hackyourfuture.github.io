@@ -5,7 +5,7 @@ const cors = require("cors");
 const multer = require("multer");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
-const { getApplicant } = require("../data/update-sheet");
+const { getApplicant } = require("./data/update-sheet");
 const { decryptEmail } = require("./utils/email-crypto.js");
 
 const app = express();
