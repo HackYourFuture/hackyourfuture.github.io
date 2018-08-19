@@ -41,82 +41,86 @@
 // import eventBus from '~/utils/event-bus';
 
 export default {
-  data() {
-    return {
-      toggled: false
-    };
-  },
-  created() {
-    // eventBus.$on('toggle-mobile-nav', this.toggleNav)
-  },
-  methods: {
-    toggleSearch() {
-      // this.$store.commit('TOGGLE_SEARCH_VIEW', true);
+    data() {
+        return {
+            toggled: false
+        };
     },
-    onClick(e) {
-      if (e.target.nodeName === "A") {
-        if (e.target.classList.contains("nuxt-link-active")) return;
-        // eventBus.$emit('toggle-mobile-nav', false)
-      }
+    created() {
+        // eventBus.$on('toggle-mobile-nav', this.toggleNav)
     },
-    toggleNav(toggle) {
-      this.toggled = toggle;
+    mounted() {
+        this.paymentStatus();
     },
-    paymentStatus: function() {
-      const baseURL = new URL(
-        process.env.GET_DONATION_STATUS_URL ||
-          "http://localhost:3005/donationstatus"
-      );
+    methods: {
+        toggleSearch() {
+            // this.$store.commit('TOGGLE_SEARCH_VIEW', true);
+        },
+        onClick(e) {
+            if (e.target.nodeName === "A") {
+                if (e.target.classList.contains("nuxt-link-active")) return;
+                // eventBus.$emit('toggle-mobile-nav', false)
+            }
+        },
+        toggleNav(toggle) {
+            this.toggled = toggle;
+        },
+        paymentStatus: function() {
+            const orderId = this.$route.query.orderid;
+            if (orderId !== undefined) {
+                console.log("called");
+                let donationStatusURL =
+                    process.env.GET_DONATION_STATUS_URL ||
+                    "http://localhost:3005/donationstatus";
 
-      const param = { orderid: thos.$route.query.orderid };
-
-      baseURL.search = new URLSearchParams(params);
-
-      fetch(baseURL)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+                donationStatusURL = donationStatusURL.concat(
+                    "?orderid=",
+                    orderId
+                );
+                console.log("Called", donationStatusURL);
+                fetch(donationStatusURL)
+                    .then(response => console.log(response))
+                    .catch(err => console.log(err));
+            } else console.log(orderId);
+        }
     }
-  },
-  mounted() {
-    this.paymentStatus();
-  }
 };
 </script>
 
 <style lang="scss">
 .MobileNav {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 220px;
-  z-index: 9999;
-  background: white;
-  border-right: 1px solid rgba(#111, 0.12);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    z-index: 9999;
+    background: white;
+    border-right: 1px solid rgba(#111, 0.12);
 
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
 
-  &.toggled {
-    transform: translateX(0);
-  }
-
-  ul {
-    padding: 0;
-    margin: 0;
-    li {
-      border-bottom: 1px solid rgba(#111, 0.12);
-      &.nuxt-link-active {
-        a {
-          color: $color-purple;
-        }
-      }
-      a {
-        display: block;
-        padding: 1rem 1rem;
-        color: $color-purple;
-      }
+    &.toggled {
+        transform: translateX(0);
     }
-  }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            border-bottom: 1px solid rgba(#111, 0.12);
+            &.nuxt-link-active {
+                a {
+                    color: $color-purple;
+                }
+            }
+            a {
+                display: block;
+                padding: 1rem 1rem;
+                color: $color-purple;
+            }
+        }
+    }
 }
 </style>

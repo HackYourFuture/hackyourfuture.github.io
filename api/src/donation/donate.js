@@ -13,64 +13,63 @@
 
 let apiKey = "";
 if (process.env.ENVIRONMENT === "dev")
-  apiKey = process.env.TEST_API_PAYMENT_KEY;
+    apiKey = process.env.TEST_API_PAYMENT_KEY;
 else apiKey = process.env.PROD_API_PAYMENT_KEY;
 
 const mollieClient = require("@mollie/api-client")({
-  apiKey
+    apiKey
 });
-const urljoin = require("proper-url-join");
 const { encryptData, decryptData } = require("../utils/crypto");
 
 function donate({ method, amount, description }, res) {
-  const orderId = new Date().getTime(); //We may need a better way to generate the unique IDs
-  let baseURL = `http://localhost:3000/`;
-  if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
+    const orderId = new Date().getTime();
+    let baseURL = `http://localhost:3000/`;
+    if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
 
-  const encryptedOrderId = encryptData(orderId.toString());
-  const redirectUrl = urljoin(baseURL, "?orderid=", encryptedOrderId);
+    const encryptedOrderId = encryptData(orderId.toString());
+    const redirectUrl = baseURL.concat("?orderid=", encryptedOrderId);
 
-  mollieClient.payments
-    .create({
-      amount: {
-        value: Number.parseFloat(amount).toFixed(2),
-        currency: "EUR"
-      },
-      description,
-      redirectUrl,
-      webhookUrl: process.env.WEBHOOK_URL,
-      method,
-      metadata: { orderId }
-    })
-    .then(payment => {
-      res.redirect(payment.getPaymentUrl());
-    })
-    .catch(error => {
-      res.json({ error: error });
-    });
+    mollieClient.payments
+        .create({
+            amount: {
+                value: Number.parseFloat(amount).toFixed(2),
+                currency: "EUR"
+            },
+            description,
+            redirectUrl,
+            webhookUrl: process.env.WEBHOOK_URL,
+            method,
+            metadata: { orderId }
+        })
+        .then(payment => {
+            res.redirect(payment.getPaymentUrl());
+        })
+        .catch(error => {
+            res.json({ error: error });
+        });
 }
 
 function paymentStatus(encryptedOrderId) {
-  const orderId = decryptData(encryptedOrderId);
-  return new Promise((resolve, reject) => {
-    mollieClient.payments
-      .all()
-      .then(payments => {
-        payments.map(payment => {
-          if (payment.metadata.orderId === parseInt(orderId)) {
-            if (payment.isPaid()) {
-              resolve("Thanks for the donation");
-              return;
-            }
-            reject("Something went wrong");
-          }
-        });
-      })
-      .catch(err => console.log("Error: ", err.message));
-  });
+    const orderId = decryptData(encryptedOrderId);
+    return new Promise((resolve, reject) => {
+        mollieClient.payments
+            .all()
+            .then(payments => {
+                payments.map(payment => {
+                    if (payment.metadata.orderId === parseInt(orderId)) {
+                        if (payment.isPaid()) {
+                            resolve("Thanks for the donation");
+                            return;
+                        }
+                        reject("Something went wrong");
+                    }
+                });
+            })
+            .catch(err => console.log("Error: ", err.message));
+    });
 }
 
 module.exports = {
-  donate,
-  paymentStatus
+    donate,
+    paymentStatus
 };
