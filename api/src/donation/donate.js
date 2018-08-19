@@ -7,16 +7,6 @@
  */
 
 /**
- * @param {function} encryptOrderId
- * @param {string} orderId
- */
-
-/**
- * @param {function} decryptOrderId
- * @param {string} encryptedOrderId
- */
-
-/**
  * @param {function} paymentStatus
  * @param {string} req.query.orderId
  */
@@ -30,30 +20,14 @@ const mollieClient = require("@mollie/api-client")({
     apiKey
 });
 const urljoin = require("proper-url-join");
-const crypto = require("crypto");
-
-const key = process.env.ENCRYPT_KEY || "class14";
-
-function encryptOrderId(orderId) {
-    const cipher = crypto.createCipher("aes192", key);
-    let encrypted = cipher.update(orderId, "utf8", "hex");
-    encrypted += cipher.final("hex");
-    return encrypted;
-}
-
-function decryptOrderId(orderId) {
-    const decipher = crypto.createDecipher("aes192", key);
-    let decrypted = decipher.update(orderId, "hex", "utf8");
-    decrypted += decipher.final("utf8");
-    return decrypted;
-}
+const { encryptData, decryptData } = require("../utils/crypto");
 
 function donate({ method, amount, description }, res) {
     const orderId = new Date().getTime();
     let baseURL = `http://localhost:3000/`;
     if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
 
-    const encryptedOrderId = encryptOrderId(orderId.toString());
+    const encryptedOrderId = encryptData(orderId.toString());
     const redirectUrlFull = urljoin(baseURL, "?orderid=", encryptedOrderId);
 
     mollieClient.payments
@@ -77,7 +51,7 @@ function donate({ method, amount, description }, res) {
 }
 
 function paymentStatus(encryptedOrderId) {
-    const orderId = decryptOrderId(encryptedOrderId);
+    const orderId = decryptData(encryptedOrderId);
     return new Promise((resolve, reject) => {
         mollieClient.payments
             .all()
@@ -98,7 +72,5 @@ function paymentStatus(encryptedOrderId) {
 
 module.exports = {
     donate,
-    paymentStatus,
-    encryptOrderId,
-    decryptOrderId
+    paymentStatus
 };

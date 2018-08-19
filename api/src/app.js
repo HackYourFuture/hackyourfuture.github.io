@@ -6,7 +6,7 @@ const multer = require("multer");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
-const { decryptEmail } = require("./utils/email-crypto.js");
+const { decryptData } = require("./utils/crypto.js");
 const { donate } = require("./donation/donate");
 
 const app = express();
@@ -61,7 +61,7 @@ app.post("/apply", (req, res) => Apply(req, res));
 app.post("/upload", FileUpload, (req, res) => Upload(req, res));
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
-    const email = decryptEmail(id);
+    const email = decryptData(id);
     getApplicant(email)
         .then(() => res.redirect(`${url}`))
         .catch(() =>
