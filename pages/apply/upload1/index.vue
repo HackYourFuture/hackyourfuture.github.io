@@ -141,7 +141,7 @@ export default {
         checkUrl() {
             const { url } = this.$refs;
             var inputUrl = url.value;
-            var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-[\]/]))?/;
             if (!pattern.test(inputUrl)) {
                 url.parentNode.classList.remove("active");
                 url.parentNode.classList.add("active");
@@ -169,7 +169,7 @@ export default {
         },
         isValidEmail() {
             const { email } = this.$refs;
-            var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!re.test(email.value)) {
                 email.parentNode.classList.remove("active");
                 email.parentNode.classList.add("active");
