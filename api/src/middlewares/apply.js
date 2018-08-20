@@ -4,28 +4,27 @@ const sendEmail = require("../utils/send-emails");
 
 const fromEmail = "info@hackyourfuture.net";
 
+const ERROR_USER_FOUND = "User already exists";
+
 module.exports = async (req, res) => {
     let foundedAt;
-    let insertRow;
-    const ERROR_USER_FOUND = "User already exists";
+    let totalRows;
     try {
-        ({ foundedAt, insertRow } = await getApplicant(req.body.email));
-        if (foundedAt !== -1) {
+        const res = await getApplicant(req.body.email);
+        totalRows = res.totalRows;
+        foundedAt = res.foundedAt;
+        if (foundedAt) {
             throw new Error(ERROR_USER_FOUND);
         }
     } catch (error) {
-        console.log(error);
-
         if (error.message === ERROR_USER_FOUND) {
             res.status(400).json({ error: error.message });
             return;
         }
     }
 
-    res.status(200).json({ message: "Application received" });
-
     // eslint-disable-next-line
-    saveApplicant(insertRow, req.body).catch(error => {
+    saveApplicant(totalRows || 1, req.body).catch(error => {
         console.log("Save Applicant FAILED:", error, req.body);
     });
 
@@ -34,14 +33,26 @@ module.exports = async (req, res) => {
         [fromEmail],
         email("apply_to_org.tpl", { params: req.body }),
         "A new student applied"
-    ).catch(error =>
-        console.log("Send email to organization FAILED", error, req.body)
-    );
+    )
+        .then(() => {
+            console.log("Email to organization send");
+        })
+        .catch(error =>
+            console.log("Send email to organization FAILED", error, req.body)
+        );
 
     sendEmail(
         fromEmail,
         [req.body.email],
         email("apply_to_student.txt"),
         "Thank you for applying"
-    ).catch(error => console.log("Send email to user FAILED", error, req.body));
+    )
+        .then(() => {
+            console.log("Email to organization send");
+        })
+        .catch(error =>
+            console.log("Send email to user FAILED", error, req.body)
+        );
+
+    res.status(200).json({ message: "Application received" });
 };

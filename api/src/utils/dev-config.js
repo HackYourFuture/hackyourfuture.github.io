@@ -51,6 +51,11 @@ function saveConfig(config) {
 }
 
 function getConfig() {
+    if (!process.env.DEVELOPMENT)
+        return {
+            spreadSheetId: "1DOba5whX5dXAM5K380nEyVUj6kb-qywcGxgJZ3aP0eo"
+        };
+
     return JSON.parse(fs.readFileSync(PATH_CONFIG));
 }
 

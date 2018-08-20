@@ -1,18 +1,10 @@
-
-RUN_TRAVIS_AWS_CLI := docker run -it --rm \
-		-v $(shell pwd):/workspace \
-		-v ~/.aws:/root/.aws \
-		-e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
-		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
-		-e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"\
-		mesosphere/aws-cli
-
 RUN_AWS_CLI := docker run -it --rm \
 		-v $(shell pwd):/workspace \
 		-v ~/.aws:/root/.aws \
 		-e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
 		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
 		-e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"\
+		-e "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}"\
 		mesosphere/aws-cli
 
 VERSION = $(shell git rev-parse --short=7 HEAD)
@@ -31,27 +23,32 @@ api/dist: prepare
 api-$(VERSION).zip: api/dist
 	@cd api/dist && zip -r ./../../api-$(VERSION).zip *
 
+.PHONY: publish-lambda
 upload-lambda: api-$(VERSION).zip
 	@$(RUN_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip
 
-publish-api: clean upload-lambda
-	@$(RUN_AWS_CLI) lambda update-function-code --s3-bucket=hyf-api-deploy --s3-key=api-$(VERSION).zip --publish --function-name=gateway_proxy
-
-upload-lambda-travis: api-$(VERSION).zip
-	@$(RUN_TRAVIS_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip
+.PHONY: publish-api
+publish-api: clean-zip upload-lambda
+	@$(RUN_AWS_CLI) lambda update-function-code \
+		--s3-bucket=hyf-api-deploy \
+		--s3-key=api-$(VERSION).zip \
+		--publish \
+		--function-name=gateway_proxy &> /dev/null && \
+		echo "Function updated"
 
 dist: node_modules
 	@npm run generate
 
-upload-web-travis: dist
-	@$(RUN_TRAVIS_AWS_CLI) s3 cp /workspace/dist s3://hyf-website --recursive
+.PHONY: upload-web
+upload-web: dist
+	@$(RUN_AWS_CLI) s3 cp /workspace/dist s3://hyf-website --recursive
 
-publish-api-travis: clean upload-lambda-travis
-	@$(RUN_TRAVIS_AWS_CLI) lambda update-function-code --s3-bucket=hyf-api-deploy --s3-key=api-$(VERSION).zip --publish --function-name=gateway_proxy
+.PHONY: publish
+publish: publish-api upload-web
 
-publish: publish-api
-
-publish-travis: publish-api-travis upload-web-travis
+.PHONY: clean-zip
+clean-zip:
+	@rm -rf api-*.zip
 
 .PHONY: clean
 clean:

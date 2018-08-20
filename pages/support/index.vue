@@ -17,31 +17,31 @@
 </template>
 
 <script>
-
-import axios from '~/plugins/axios'
-import Signup from '~/components/signup/Signup';
-import Partners from '~/components/partners/Partners';
- export default {
-     async asyncData () {
-         let hire_alumni
-         try {
-             let req  = await axios.get('/content/en/support/support-hire_alumni.json')
-             hire_alumni = req.data.body
-         } catch (e) {
-             console.log(e)
-             hire_alumni = false
-         }
-         return {
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             hire_alumni: hire_alumni ? hire_alumni : null
-         }
-     },
-     components: {
-       Signup,
-       Partners
-     }
- }
-
+import axios from "~/plugins/axios";
+import Signup from "~/components/signup/Signup";
+import Partners from "~/components/partners/Partners";
+export default {
+    async asyncData() {
+        let hire_alumni;
+        try {
+            let req = await axios.get(
+                "/content/en/support/support-hire_alumni.json"
+            );
+            hire_alumni = req.data.body;
+        } catch (e) {
+            console.log(e);
+            hire_alumni = false;
+        }
+        return {
+            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+            hire_alumni: hire_alumni ? hire_alumni : null
+        };
+    },
+    components: {
+        Signup,
+        Partners
+    }
+};
 </script>
 
 <style lang="scss">

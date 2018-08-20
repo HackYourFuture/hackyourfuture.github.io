@@ -40,9 +40,9 @@
 
       <section class="Teaser">
         
-          <h1>Women Coding Teaser</h1>
-          <div class="Teaser__content" v-html="teaser"></div>
-          <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
+        <h1>Women Coding Teaser</h1>
+        <div class="Teaser__content" v-html="teaser"/>
+        <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
       
         <div class="Teaser__image">
           <img src="/gallery/06.jpg">
@@ -51,23 +51,21 @@
 
       <section class="Hire">
         <h1>Hire our graduates</h1>
-       <div v-html="hire"></div>
-       <div>
-         <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
-       </div>
-       <div v-html="laptops"></div>
-       <div>
-         <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
-       </div>
+        <div v-html="hire"/>
+        <div>
+          <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+        </div>
+        <div v-html="laptops"/>
+        <div>
+          <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
+        </div>
         <div class="Hire__image">
           <img src="/gallery/03.jpg">
         </div>
       </section>
     </Main>
 
-    <section class="Chapters">
-
-    </section>
+    <section class="Chapters"/>
 
     <section class="Makers">
       <Makers/>
@@ -92,56 +90,55 @@ import Makers from "~/components/makers/Makers";
 import Partners from "~/components/partners/Partners";
 import YoutubePlayer from "~/components/video/YoutubePlayer";
 
- export default {
-     async asyncData () {
-         let data
-         let what
-         let apply
-         let curiculum
-         let hire
-         let laptops
-         let teaser
-         try {
-             let req  = await axios.get('/content/en/index-about.json')
-             let wReq  = await axios.get('/content/en/what.json')
-             let aReq  = await axios.get('/content/en/apply.json')
-             let cReq  = await axios.get('/content/en/curiculum.json')
-             let hReq  = await axios.get('/content/en/index-hire.json')
-             let lReq  = await axios.get('/content/en/index-laptops.json')
-             let tReq  = await axios.get('/content/en/index-teaser.json')
+export default {
+    async asyncData() {
+        let data;
+        let what;
+        let apply;
+        let curiculum;
+        let hire;
+        let laptops;
+        let teaser;
+        try {
+            let req = await axios.get("/content/en/index-about.json");
+            let wReq = await axios.get("/content/en/what.json");
+            let aReq = await axios.get("/content/en/apply.json");
+            let cReq = await axios.get("/content/en/curiculum.json");
+            let hReq = await axios.get("/content/en/index-hire.json");
+            let lReq = await axios.get("/content/en/index-laptops.json");
+            let tReq = await axios.get("/content/en/index-teaser.json");
 
-             what = wReq.data.body
-             apply = aReq.data.body
-             data = req.data.body
-             curiculum = cReq.data.body
-             hire = hReq.data.body
-             laptops = lReq.data.body
-             teaser = tReq.data.body
-         } catch (e) {
-             console.log(e)
-             data = false
-         }
-         return {
-             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-             about: data ? data : null,
-             hire: hire ? hire : null,
-             laptops: laptops ? laptops : null,
-             teaser: teaser ? teaser : null,
-             what,
-             apply,
-             curiculum,
-             Colors
-         }
-     },
-     components: {
-       Landscape,
-       Signup,
-       Makers,
-       Partners,
-       YoutubePlayer
-     }
- }
- 
+            what = wReq.data.body;
+            apply = aReq.data.body;
+            data = req.data.body;
+            curiculum = cReq.data.body;
+            hire = hReq.data.body;
+            laptops = lReq.data.body;
+            teaser = tReq.data.body;
+        } catch (e) {
+            console.log(e);
+            data = false;
+        }
+        return {
+            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
+            about: data ? data : null,
+            hire: hire ? hire : null,
+            laptops: laptops ? laptops : null,
+            teaser: teaser ? teaser : null,
+            what,
+            apply,
+            curiculum,
+            Colors
+        };
+    },
+    components: {
+        Landscape,
+        Signup,
+        Makers,
+        Partners,
+        YoutubePlayer
+    }
+};
 </script>
 
 <style lang="scss">
@@ -300,30 +297,30 @@ import YoutubePlayer from "~/components/video/YoutubePlayer";
     }
 }
 
-.Teaser{
+.Teaser {
     margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
-    margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
-  }
-  &__content {
-    display: inline-block;
-    width: 45%;
-    margin: $base-vertical-rithm * 5;
-    font-weight: 400;
-    @include breakpoint("mobile_landscape") {
-      width: 80%;
+        margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
     }
-  }
-  &__image {
-    display: inline-block;
-    width: 40%;
-    margin: 0 $base-vertical-rithm * 10;
-    @include breakpoint("mobile_landscape") {
-      width: 80%;
-      margin: 0 auto;
-      display: inline;
+    &__content {
+        display: inline-block;
+        width: 45%;
+        margin: $base-vertical-rithm * 5;
+        font-weight: 400;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+        }
     }
-  }
+    &__image {
+        display: inline-block;
+        width: 40%;
+        margin: 0 $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: 0 auto;
+            display: inline;
+        }
+    }
 }
 
 .Hire {
