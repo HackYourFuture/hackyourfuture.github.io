@@ -125,6 +125,10 @@ export default {
 .Apply {
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
+
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -134,10 +138,16 @@ export default {
             font-size: 52px;
             line-height: 60px;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 5;
+            }
         }
         &-image {
             width: 55%;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
         &-dates {
             margin-left: $base-vertical-rithm * 15;
@@ -145,9 +155,16 @@ export default {
             width: 100%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 5;
+            }
             div {
                 display: inline-block;
                 width: calc(25% - 20px);
+                @include breakpoint("mobile_landscape") {
+                    width: calc(50% - 10px);
+                    margin: $base-vertical-rithm * 5 auto;
+                }
             }
             h3 {
                 font-weight: bold;
@@ -177,6 +194,11 @@ export default {
         width: 75%;
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            padding: $base-vertical-rithm * 5;
+        }
+
         p,
         h1 {
             margin-left: 50px;
