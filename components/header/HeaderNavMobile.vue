@@ -49,9 +49,6 @@ export default {
     created() {
         // eventBus.$on('toggle-mobile-nav', this.toggleNav)
     },
-    mounted() {
-        this.paymentStatus();
-    },
     methods: {
         toggleSearch() {
             // this.$store.commit('TOGGLE_SEARCH_VIEW', true);
@@ -64,24 +61,6 @@ export default {
         },
         toggleNav(toggle) {
             this.toggled = toggle;
-        },
-        paymentStatus: function() {
-            const orderId = this.$route.query.orderid;
-            if (orderId !== undefined) {
-                console.log("called");
-                let donationStatusURL =
-                    process.env.GET_DONATION_STATUS_URL ||
-                    "http://localhost:3005/donationstatus";
-
-                donationStatusURL = donationStatusURL.concat(
-                    "?orderid=",
-                    orderId
-                );
-                console.log("Called", donationStatusURL);
-                fetch(donationStatusURL)
-                    .then(response => console.log(response))
-                    .catch(err => console.log(err));
-            } else console.log(orderId);
         }
     }
 };

@@ -22,7 +22,7 @@ const mollieClient = require("@mollie/api-client")({
 const { encryptData, decryptData } = require("../utils/crypto");
 
 function donate({ method, amount, description }, res) {
-    const orderId = new Date().getTime();
+    const orderId = new Date().getTime(); //
     let baseURL = `http://localhost:3000/`;
     if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
 
@@ -50,23 +50,28 @@ function donate({ method, amount, description }, res) {
 }
 
 function paymentStatus(encryptedOrderId) {
-    const orderId = decryptData(encryptedOrderId);
-    return new Promise((resolve, reject) => {
-        mollieClient.payments
-            .all()
-            .then(payments => {
-                payments.map(payment => {
-                    if (payment.metadata.orderId === parseInt(orderId)) {
-                        if (payment.isPaid()) {
-                            resolve("Thanks for the donation");
-                            return;
-                        }
-                        reject("Something went wrong");
-                    }
-                });
-            })
-            .catch(err => console.log("Error: ", err.message));
-    });
+    let orderId;
+
+    return new Promise(resolve => {
+        orderId = decryptData(encryptedOrderId);
+        resolve();
+    })
+        .then(() => mollieClient.payments.all())
+        .then(payments => {
+            const isPaid =
+                payments.filter(
+                    payment =>
+                        payment.isPaid() &&
+                        payment.metadata.orderId !== Number(orderId)
+                ).length > 0;
+
+            if (isPaid) {
+                return "Payment went ok";
+            }
+
+            throw new Error("Payment failed");
+        })
+        .catch(err => console.log(`Error: ${err.message}`));
 }
 
 module.exports = {

@@ -77,14 +77,18 @@ app.post("/donate", (req, res) => {
     donate(req.body, res);
 });
 
-app.get("/donationstatus", (req, res) => {
-    const encryptedOrderId = req.query.orderId;
-    if (encryptedOrderId) {
-        const orderId = decryptData(encryptedOrderId);
-        paymentStatus(orderId)
-            .then(msg => res.status(200).json({ msg }))
-            .catch(err => res.status(500).json({ err }));
+app.get("/donation/status", (req, res) => {
+    const { orderid } = req.query;
+
+    if (orderid) {
+        paymentStatus(orderid)
+            .then(msg => res.json({ message: msg }))
+            .catch(err => res.json({ err }));
+
+        return;
     }
+
+    res.status(400).json({ message: "Not order id provided" });
 });
 
 module.exports = app;
