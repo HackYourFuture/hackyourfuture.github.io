@@ -31,34 +31,41 @@
         <div class="Curiculum__image">
           <img src="/gallery/02.jpg">
         </div>
-
-        <div class="Curiculum__content" v-html="curiculum"/>
-        <div class="Curiculum__content">
-          <nuxt-link :to="'/teach'"><span class="underline">Time is your most valuable resource. Find out about donating your time and expertise here.</span></nuxt-link>
+        <div class="Curiculum__container">
+          <div class="Curiculum__content" v-html="curiculum"/>
+          <div class="Curiculum__content">
+            <nuxt-link :to="'/teach'">Time is your most valuable resource. <span class="underline">Find out about donating your time and expertise here.</span></nuxt-link>
+          </div>
         </div>
       </section>
 
       <section class="Teaser">
         
-        <h1>Women Coding Teaser</h1>
-        <div class="Teaser__content" v-html="teaser"/>
-        <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
-      
+        
+        <div class="Teaser__container">
+          <h1>Women Coding Teaser</h1>
+          <div class="Teaser__content" v-html="teaser"/>
+          <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
+        </div>
         <div class="Teaser__image">
           <img src="/gallery/06.jpg">
         </div>
       </section>
 
       <section class="Hire">
-        <h1>Hire our graduates</h1>
-        <div v-html="hire"/>
-        <div>
-          <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+        <div class="Hire__container">
+          <h1>Hire our graduates</h1>
+          <div v-html="hire"/>
+          <div>
+            <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+          </div>
+          <div v-html="laptops"/>
+          <div>
+            <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
+          </div>
+            
         </div>
-        <div v-html="laptops"/>
-        <div>
-          <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
-        </div>
+        
         <div class="Hire__image">
           <img src="/gallery/03.jpg">
         </div>
@@ -231,6 +238,9 @@ export default {
 
 .Curiculum {
     margin: $base-vertical-rithm * 30 0;
+    @include breakpoint("mobile_landscape") {
+        margin: $base-vertical-rithm * 5 0;
+    }
     &__header {
         margin: 0 $base-vertical-rithm * 10;
         padding: $base-vertical-rithm * 2;
@@ -279,46 +289,83 @@ export default {
         margin-top: -5%;
         display: inline-block;
         vertical-align: top;
-
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;
             margin-top: 0;
         }
     }
-    &__content {
+    &__container {
+        width: 45%;
         display: inline-block;
-        width: 50%;
         margin: $base-vertical-rithm * 5;
-        font-weight: 400;
         @include breakpoint("mobile_landscape") {
             width: 80%;
+            margin: $base-vertical-rithm * 10 auto 0;
+            display: inherit;
+        }
+        &__content {
+            font-weight: 400;
+            a {
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: $base-vertical-rithm * 5;
+                span:after {
+                    bottom: -5px;
+                }
+            }
         }
     }
 }
 
 .Teaser {
-    margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+    margin: $base-vertical-rithm * 30 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
+        margin: 0;
     }
-    &__content {
-        display: inline-block;
+
+    &__container {
         width: 45%;
+        display: inline-block;
         margin: $base-vertical-rithm * 5;
-        font-weight: 400;
         @include breakpoint("mobile_landscape") {
             width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+            display: inherit;
+        }
+        h1 {
+            font-size: 36px;
+            color: $color-purple;
+            width: 45%;
+            line-height: 50px;
+            margin: $base-vertical-rithm * 10 0;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
+        }
+        a {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: $base-vertical-rithm * 5;
+            span:after {
+                bottom: -5px;
+            }
+        }
+        &__content {
+            font-weight: 400;
         }
     }
     &__image {
+        vertical-align: bottom;
         display: inline-block;
         width: 40%;
         margin: 0 $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
-            width: 80%;
-            margin: 0 auto;
-            display: inline;
+            width: 100%;
+            margin-left: 0;
+            margin-top: 0;
         }
     }
 }
@@ -326,29 +373,39 @@ export default {
 .Hire {
     margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
+        margin: $base-vertical-rithm * 5 0;
     }
-    & > div {
-        width: 35%;
-        margin: 0 $base-vertical-rithm * 10;
+    &__container {
+        width: 45%;
         display: inline-block;
+        margin: $base-vertical-rithm * 5;
         @include breakpoint("mobile_landscape") {
-            width: 100%;
-            margin-left: 0;
+            width: 80%;
+
+            margin: 0 auto $base-vertical-rithm * 10;
+            display: inherit;
         }
     }
     h1 {
-        font-size: 55px;
-        font-weight: bold;
+        font-size: 36px;
         color: $color-purple;
-        width: 100%;
+        width: 45%;
         line-height: 50px;
         margin: $base-vertical-rithm * 10 0;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+        }
     }
+
     &__image {
         width: 55%;
         display: inline-block;
         vertical-align: top;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 0;
+        }
     }
 }
 </style>
