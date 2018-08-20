@@ -28,27 +28,6 @@
         <div v-html="how_school_works"/>
       </div>
 
-      <div class="About__container who">
-        <div v-html="for_who"/>
-        <div class="About__container-image">
-          <img src="/gallery/03.jpg">
-        </div>
-      </div>
-
-      <div class="About__container funded">
-        <div v-html="how_funded"/>
-        <div class="links">
-          <nuxt-link :to="'/'">You want<br> to <span class="underline">help?</span></nuxt-link>
-          <nuxt-link :to="'/chapters'">You want <br>to <span class="underline">donate</span></nuxt-link>
-        </div>
-      </div>
-
-      <div class="About__container footer">
-        <div class="About__container-image">
-          <img src="/gallery/03.jpg">
-        </div>
-      </div>
-
     </Main>
     <Signup/>
   </div>
@@ -62,41 +41,29 @@ export default {
     async asyncData() {
         let why_exist;
         let results_today;
-        let for_who;
         let how_school_works;
-        let how_funded;
         try {
             let req = await axios.get("/content/en/about/about-why_exist.json");
             let req1 = await axios.get(
                 "/content/en/about/about-results_today.json"
             );
-            let req2 = await axios.get("/content/en/about/about-for_who.json");
-            let req3 = await axios.get(
+            let req2 = await axios.get(
                 "/content/en/about/about-how_school_works.json"
-            );
-            let req4 = await axios.get(
-                "/content/en/about/about-how_funded.json"
             );
             why_exist = req.data.body;
             results_today = req1.data.body;
-            for_who = req2.data.body;
-            how_school_works = req3.data.body;
-            how_funded = req4.data.body;
+            how_school_works = req2.data.body;
         } catch (e) {
             console.log(e);
             why_exist = false;
             results_today = false;
-            for_who = false;
             how_school_works = false;
-            how_funded = false;
         }
         return {
             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             why_exist: why_exist ? why_exist : null,
             results_today: results_today ? results_today : null,
-            for_who: for_who ? for_who : null,
-            how_school_works: how_school_works ? how_school_works : null,
-            how_funded: how_funded ? how_funded : null
+            how_school_works: how_school_works ? how_school_works : null
         };
     },
     components: {
@@ -117,6 +84,11 @@ export default {
     &__header {
         padding: $base-vertical-rithm * 10;
         margin-right: -100px;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            margin-right: 0;
+            padding: 0;
+        }
         a {
             color: $color-purple;
             font-weight: bold;
@@ -130,6 +102,9 @@ export default {
             display: inline-block;
             width: 50%;
             padding: $base-vertical-rithm * 10;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
             & > div {
                 margin-top: $base-vertical-rithm * 5;
             }
@@ -138,15 +113,28 @@ export default {
             width: 50%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                padding: 0;
+            }
         }
     }
     &__container {
         margin: 0 $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            margin: 0;
+        }
 
         &.how {
             margin-left: -50px;
+            @include breakpoint("mobile_landscape") {
+                margin-left: 0;
+            }
             .About__container-image {
                 margin-left: 0;
+                @include breakpoint("mobile_landscape") {
+                    padding: 0;
+                }
             }
         }
 
@@ -160,6 +148,10 @@ export default {
         .links {
             width: 25%;
             margin-left: 20%;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
+
             a {
                 font-size: 24px;
                 line-height: 30px;
@@ -178,6 +170,11 @@ export default {
             width: calc(50% - 100px);
             vertical-align: top;
             margin: 50px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                margin: 0;
+                padding: $base-vertical-rithm * 10;
+            }
             a {
                 color: $color-purple;
                 font-weight: bold;
