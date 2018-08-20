@@ -51,8 +51,14 @@ export default {
 
 <style lang="scss">
 .Teaser {
+    h2 {
+        color: $color-purple;
+    }
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
         a {
             color: $color-purple;
             font-weight: bold;
@@ -81,6 +87,10 @@ export default {
             div {
                 display: inline-block;
                 width: calc(25% - 20px);
+                @include breakpoint("mobile_landscape") {
+                    width: calc(50% - 10px);
+                    margin: $base-vertical-rithm * 5 auto;
+                }
             }
             h3 {
                 font-weight: bold;
@@ -95,6 +105,9 @@ export default {
             display: inline-block;
             width: 50%;
             padding: $base-vertical-rithm * 10;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
             & > div {
                 margin-top: $base-vertical-rithm * 5;
             }
@@ -103,10 +116,14 @@ export default {
             width: 50%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
     }
     &__container {
         margin: 0 $base-vertical-rithm * 10;
+
         & > div {
             display: inline-block;
             width: calc(50% - 100px);
