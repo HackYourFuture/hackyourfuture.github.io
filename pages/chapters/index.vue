@@ -15,7 +15,7 @@
         <h1>Start your own chapter</h1>
         <div v-html="chapters_info"/>
         <div class="Chapters__information-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/01.jpg">
         </div>
       </div>
     </Main>

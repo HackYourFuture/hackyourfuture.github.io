@@ -13,7 +13,7 @@
 
       <section class="Apply">
         <div class="Apply__image">
-          <img src="/gallery/00.jpg">
+          <img src="/gallery/12.jpg">
         </div>
         <div class="Apply__container">
           <h1>Join our 6 month web development course</h1>
@@ -29,7 +29,7 @@
        
         
         <div class="Curiculum__image">
-          <img src="/gallery/02.jpg">
+          <img src="/gallery/25.jpg">
         </div>
         <div class="Curiculum__container">
           <div class="Curiculum__content" v-html="curiculum"/>
@@ -40,15 +40,13 @@
       </section>
 
       <section class="Teaser">
-        
-        
         <div class="Teaser__container">
           <h1>Women Coding Teaser</h1>
           <div class="Teaser__content" v-html="teaser"/>
           <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
         </div>
         <div class="Teaser__image">
-          <img src="/gallery/06.jpg">
+          <img src="/gallery/22.jpg">
         </div>
       </section>
 
@@ -67,7 +65,7 @@
         </div>
         
         <div class="Hire__image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/20.jpg">
         </div>
       </section>
     </Main>
@@ -380,7 +378,7 @@ export default {
     &__image {
         vertical-align: bottom;
         display: inline-block;
-        width: 40%;
+        width: 45%;
         margin: 0 auto;
         @include breakpoint("mobile_landscape") {
             width: 100%;

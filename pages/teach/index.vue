@@ -3,7 +3,7 @@
     <Main class="Teach container">
       <div class="Teach__header">
         <div class="Teach__header-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/26.jpg">
         </div>
         <h1>What we teach</h1>
       </div>
@@ -19,7 +19,7 @@
       <div class="Teach__container who">
         <div v-html="who_are_our_teachers"/>
         <div class="Teach__container-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/13.jpg">
         </div>
       </div>
 
@@ -27,7 +27,7 @@
         <!-- Not sure if we need another image here -->
           
         <div class="Teach__container-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/10.jpg">
         </div>
         <div v-html="what_it_means_to_teach"/>
          

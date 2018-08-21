@@ -3,7 +3,7 @@
     <Main class="Support container">
       <div class="Support__header">
         <div class="Support__header-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/19.jpg">
         </div>
         <div class="Support__header-content">
           <nuxt-link :to="'/'">Hire<br> <span class="underline">Alumni</span></nuxt-link>

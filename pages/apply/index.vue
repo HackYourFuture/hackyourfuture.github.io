@@ -4,7 +4,7 @@
       <div class="Apply__header">
         <h1>Join <br> Us!</h1>
         <div class="Apply__header-image">
-          <img src="/gallery/05.jpg">
+          <img src="/gallery/11.jpg">
         </div>
         <div class="Apply__header-dates" v-html="dates"/>
 

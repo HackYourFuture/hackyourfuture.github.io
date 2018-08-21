@@ -3,7 +3,7 @@
     <Main class="Teaser container">
       <div class="Teaser__header">
         <div class="Teaser__header-image">
-          <img src="/gallery/07.jpg">
+          <img src="/gallery/21.jpg">
 
         </div>
         <div class="Teaser__header-content">
