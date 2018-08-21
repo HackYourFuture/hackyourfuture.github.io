@@ -80,6 +80,10 @@ export default {
         font-weight: normal;
         font-size: 42px;
         line-height: 50px;
+        @include breakpoint("mobile_landscape") {
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
     &__header {
         padding: $base-vertical-rithm * 10;
@@ -104,6 +108,7 @@ export default {
             padding: $base-vertical-rithm * 10;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                padding: $base-vertical-rithm * 8;
             }
             & > div {
                 margin-top: $base-vertical-rithm * 5;
@@ -151,10 +156,12 @@ export default {
             @include breakpoint("mobile_landscape") {
                 width: 100%;
             }
-
             a {
                 font-size: 24px;
                 line-height: 30px;
+                @include breakpoint("mobile_landscape") {
+                    line-height: 24px;
+                }
             }
         }
 
@@ -173,7 +180,7 @@ export default {
             @include breakpoint("mobile_landscape") {
                 width: 100%;
                 margin: 0;
-                padding: $base-vertical-rithm * 10;
+                padding: $base-vertical-rithm * 8;
             }
             a {
                 color: $color-purple;

@@ -13,6 +13,7 @@
       <div class="Apply__content" v-html="content"/>
 
       <div class="Apply__form form">
+        <h2>Apply for our next class:</h2>
         <form :action="formUrlApply" method="POST">
           <fieldset>
             <div class="half-width inputContainer">
@@ -140,6 +141,8 @@ export default {
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 margin: $base-vertical-rithm * 5;
+                font-size: 32px;
+                line-height: 40px;
             }
         }
         &-image {
@@ -179,9 +182,18 @@ export default {
     &__content {
         width: 70%;
         margin: 0 auto;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: 0 auto;
+        }
+
         h1 {
             color: $color-purple;
             line-height: 1;
+            margin-bottom: $base-vertical-rithm * 5;
+        }
+        h2 {
+            color: $color-purple;
         }
         ul li {
             list-style: disc;
@@ -197,6 +209,7 @@ export default {
         @include breakpoint("mobile_landscape") {
             width: 100%;
             padding: $base-vertical-rithm * 5;
+            margin: 0;
         }
 
         p,
@@ -209,6 +222,18 @@ export default {
             font-size: 36px;
             width: 60%;
             line-height: 36px;
+        }
+        h2 {
+            font-weight: bold;
+            color: $color-purple;
+            font-size: 36px;
+            width: 40%;
+            line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         p {
             margin-top: $base-vertical-rithm * 10;

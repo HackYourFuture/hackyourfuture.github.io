@@ -48,6 +48,9 @@ export default {
 .Support {
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
         a {
             color: $color-purple;
             font-weight: bold;
@@ -61,6 +64,10 @@ export default {
             display: inline-block;
             width: 40%;
             padding: $base-vertical-rithm * 10;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                padding: $base-vertical-rithm * 8;
+            }
             & > div {
                 margin-top: $base-vertical-rithm * 5;
             }
@@ -69,6 +76,9 @@ export default {
             width: 60%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
     }
     &__container {

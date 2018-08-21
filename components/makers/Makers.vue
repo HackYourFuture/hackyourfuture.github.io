@@ -60,6 +60,10 @@
         font-size: 42px;
         font-weight: bold;
         color: $color-purple;
+        @include breakpoint("mobile_landscape") {
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
     &__items {
         margin: 25px -25px;

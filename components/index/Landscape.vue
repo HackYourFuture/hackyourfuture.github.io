@@ -21,6 +21,9 @@ export default {};
     background-size: cover;
     position: relative;
     text-align: center;
+    @include breakpoint("mobile_portrait") {
+        height: 60vh;
+    }
     &__logo {
         width: 30%;
         margin-left: 50%;

@@ -70,10 +70,14 @@ export default {
         }
         h1 {
             margin-bottom: 10px;
-            color: #1d214d;
+            color: $color-purple;
             font-weight: normal;
             font-size: 42px;
             line-height: 50px;
+            @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+            }
         }
         &-links a {
             font-size: 18px;
@@ -107,6 +111,7 @@ export default {
             padding: $base-vertical-rithm * 10;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                padding: $base-vertical-rithm * 8;
             }
             & > div {
                 margin-top: $base-vertical-rithm * 5;

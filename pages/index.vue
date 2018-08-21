@@ -162,6 +162,9 @@ export default {
             margin: $base-vertical-rithm * 10 0;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                font-size: 24px;
+                line-height: 24px;
+                margin: $base-vertical-rithm * 5 0;
             }
         }
         p {
@@ -176,7 +179,7 @@ export default {
         margin: $base-vertical-rithm * 10 0;
         a {
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 10 40px;
+                margin: $base-vertical-rithm * 5 40px;
             }
         }
         &-player {
@@ -195,11 +198,18 @@ export default {
         font-size: 36px;
         line-height: 36px;
         font-weight: 900;
+        @include breakpoint("mobile_landscape") {
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
 }
 
 .Apply {
     margin: $base-vertical-rithm * 30 0;
+    @include breakpoint("mobile_landscape") {
+        margin: $base-vertical-rithm * 20 0;
+    }
     &__image {
         display: inline-block;
         width: 45%;
@@ -211,7 +221,7 @@ export default {
         }
     }
     &__container {
-        width: 45%;
+        width: 44%;
         display: inline-block;
         text-align: center;
         vertical-align: middle;
@@ -223,6 +233,11 @@ export default {
             font-size: 36px;
             color: $color-purple;
             line-height: 50px;
+            @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+                margin: $base-vertical-rithm * 5 0;
+            }
         }
         a {
             display: block;
@@ -258,6 +273,9 @@ export default {
             font-size: 36px;
             line-height: 50px;
             @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+                width: 100%;
                 margin: $base-vertical-rithm * 5;
             }
         }
@@ -342,6 +360,8 @@ export default {
             margin: $base-vertical-rithm * 10 0;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                font-size: 24px;
+                line-height: 24px;
             }
         }
         a {
@@ -361,7 +381,7 @@ export default {
         vertical-align: bottom;
         display: inline-block;
         width: 40%;
-        margin: 0 $base-vertical-rithm * 10;
+        margin: 0 auto;
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;
@@ -381,7 +401,6 @@ export default {
         margin: $base-vertical-rithm * 5;
         @include breakpoint("mobile_landscape") {
             width: 80%;
-
             margin: 0 auto $base-vertical-rithm * 10;
             display: inherit;
         }
@@ -394,6 +413,8 @@ export default {
         margin: $base-vertical-rithm * 10 0;
         @include breakpoint("mobile_landscape") {
             width: 100%;
+            font-size: 24px;
+            line-height: 24px;
         }
     }
 
