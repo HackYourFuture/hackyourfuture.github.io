@@ -60,13 +60,20 @@
         font-size: 42px;
         font-weight: bold;
         color: $color-purple;
+        @include breakpoint("mobile_landscape") {
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
     &__items {
         margin: 25px -25px;
         overflow-x: scroll;
         &-inner {
             width: max-content;
-            height: 450px;
+            height: 460px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
     }
     &__item {
@@ -76,11 +83,8 @@
         width: 350px;
         margin: 25px;
         display: inline-block;
-
         @include breakpoint("mobile_landscape") {
             width: calc(50% - 50px);
-        }
-        &-image {
         }
         h3,
         p {

@@ -2,15 +2,15 @@ const { OAuth2Client, auth } = require("google-auth-library");
 const { getConfig } = require("./dev-config");
 
 const redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
+const { GOOGLE_APP } = process.env;
 
 function getEnviromentConfig() {
-    if (!process.env.GOOGLE_APP) return false;
+    if (!GOOGLE_APP) return false;
 
     try {
-        return JSON.decode(
-            Buffer.from(process.env.GOOGLE_APP, "base64").toString("utf-8")
-        );
+        return JSON.parse(Buffer.from(GOOGLE_APP, "base64").toString("utf-8"));
     } catch (e) {
+        console.log("An error occurred on the getEnviromentConfig", e);
         return false;
     }
 }
@@ -24,9 +24,11 @@ function createClient(clientId, clientSecret, token) {
     return client;
 }
 
-async function getJWTClient(config) {
+function getJWTClient(config) {
     const client = auth.fromJSON(config);
-    await client.authorize();
+
+    client.scopes = ["https://www.googleapis.com/auth/spreadsheets"];
+
     return client;
 }
 
@@ -36,7 +38,8 @@ function getClient() {
     // Here means that we're in the production mode
     // So we can retunr a different client
     if (config) {
-        return getJWTClient();
+        const client = getJWTClient(config);
+        return client;
     }
 
     if (process.env.DEVELOPMENT) {
