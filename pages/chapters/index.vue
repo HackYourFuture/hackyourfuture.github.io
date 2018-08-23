@@ -12,10 +12,10 @@
     </div>
     <Main class="Chapters container">
       <div class="Chapters__information">
-        <h1>get with the program</h1>
+        <h1>Start your own chapter</h1>
         <div v-html="chapters_info"/>
         <div class="Chapters__information-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/01.jpg">
         </div>
       </div>
     </Main>
@@ -57,28 +57,16 @@ export default {
                     cords: [4.844456, 52.348763]
                 },
                 {
+                    name: "Brussels",
+                    cords: [4.3517, 50.8503]
+                },
+                {
                     name: "Copenhagen",
                     cords: [12.569647, 55.677584]
                 },
                 {
-                    name: "Dublin",
-                    cords: [-6.229248, 53.348937]
-                },
-                {
                     name: "Malmö",
                     cords: [13.00925, 55.606281]
-                },
-                {
-                    name: "Paris",
-                    cords: [2.350388, 48.859638]
-                },
-                {
-                    name: "Stockholm",
-                    cords: [18.105469, 59.313396]
-                },
-                {
-                    name: "Reykjavik",
-                    cords: [-21.807861, 64.123866]
                 }
             ]
         };
@@ -102,16 +90,36 @@ export default {
 
     &__map {
         margin-top: 100px;
+
+        @include breakpoint("mobile_landscape") {
+            margin-top: 0;
+        }
         &-map {
             width: 50%;
             margin-left: 25%;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                margin-left: 0;
+                width: 100%;
+            }
+            img {
+                @include breakpoint("mobile_landscape") {
+                    width: 150%;
+                }
+            }
         }
         &-list {
             padding: $base-vertical-rithm * 10;
             width: 20%;
             display: inline-block;
             vertical-align: top;
+            color: $color-purple;
+            @include breakpoint("mobile_landscape") {
+                position: absolute;
+                left: 0;
+                padding: $base-vertical-rithm * 5;
+                margin-top: 270px;
+            }
             a {
                 display: block;
             }
@@ -120,11 +128,18 @@ export default {
 
     &__information {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: $base-vertical-rithm * 8;
+        }
+
         &-image {
             margin-top: $base-vertical-rithm * 10;
             width: 50%;
             margin-left: 25%;
             margin-bottom: -250px;
+            @include breakpoint("mobile_landscape") {
+                margin-left: 0;
+            }
         }
         h1 {
             width: 25%;
@@ -137,11 +152,20 @@ export default {
             line-height: 50px;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 80%;
+                margin: $base-vertical-rithm * 5 0;
+                font-size: 24px;
+                line-height: 24px;
+            }
         }
         & > div {
             width: 50%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
     }
 }

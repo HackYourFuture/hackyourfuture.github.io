@@ -95,8 +95,11 @@ export default {
     position: relative;
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: $base-vertical-rithm * 8;
+        }
         h1 {
-            // margin: $base-vertical-rithm * 10;
+            margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             width: 20%;
             color: $color-purple;
@@ -104,6 +107,11 @@ export default {
             font-size: 52px;
             line-height: 60px;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                margin-left: 0;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         &-image {
             width: 55%;
@@ -118,10 +126,18 @@ export default {
         span:after {
             bottom: -5px;
         }
+        @include breakpoint("mobile_landscape") {
+            position: relative;
+            margin: 0;
+        }
     }
     &__content {
         width: 40%;
         margin-left: 50%;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+        }
 
         h4 {
             font-weight: bold;
@@ -133,16 +149,28 @@ export default {
         width: 70%;
         margin-left: 15%;
         position: relative;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+        }
         p,
         h1 {
             margin-left: 50px;
             color: $color-purple;
+            @include breakpoint("mobile_landscape") {
+                margin: 0;
+            }
         }
         h1 {
             font-weight: bold;
             font-size: 36px;
             width: 40%;
             line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         p {
             margin-top: $base-vertical-rithm * 10;
