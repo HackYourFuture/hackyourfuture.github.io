@@ -13,30 +13,7 @@
 </template>
 
 <script>
-export default {
-    mounted() {
-        this.paymentStatus();
-    },
-    methods: {
-        paymentStatus() {
-            const orderId = this.$route.query.orderid;
-            if (orderId !== undefined) {
-                let donationStatusURL =
-                    process.env.GET_DONATION_STATUS_URL ||
-                    "http://localhost:3005/donation/status";
-
-                donationStatusURL = donationStatusURL.concat(
-                    "/?orderid=",
-                    orderId
-                );
-                fetch(donationStatusURL)
-                    .then(response => response.json())
-                    .then(json => console.log(json))
-                    .catch(err => console.log(err));
-            } else console.log(orderId);
-        }
-    }
-};
+export default {};
 </script>
 
 <style lang="scss">

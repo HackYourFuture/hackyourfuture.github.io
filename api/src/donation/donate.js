@@ -66,10 +66,10 @@ function paymentStatus(encryptedOrderId) {
                 ).length > 0;
 
             if (isPaid) {
-                return "Payment went ok";
+                return "Donation went ok";
             }
 
-            throw new Error("Payment failed");
+            throw new Error("Donation failed");
         })
         .catch(err => console.log(`Error: ${err.message}`));
 }

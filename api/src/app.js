@@ -83,7 +83,7 @@ app.get("/donation/status", (req, res) => {
     if (orderid) {
         paymentStatus(orderid)
             .then(msg => res.json({ message: msg }))
-            .catch(err => res.json({ err }));
+            .catch(err => res.json({ message: err }));
 
         return;
     }
