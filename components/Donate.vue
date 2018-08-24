@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <div v-if="!donated">
+    <div >
       <form class="form-group" @submit.prevent="submitDonation" >
         <label class="donate-label">Donate</label>
         <div class="form-check">
@@ -21,7 +21,10 @@
         <button class="submit-button" type="submit" name="submit" >Donate</button>
       </form>
     </div>
-    <div v-else class="donated-ok">Thanks for your donation</div>
+    <div v-if="donated" class="donated-ok">
+      <p>Thanks For your donation</p>
+      <button @click="donated = false">Close</button>
+    </div>
   </div>
 </template>
 
@@ -94,11 +97,10 @@ export default {
     overflow: hidden;
 }
 .form-container {
-    position: absolute;
-    left: 300px;
-    top: 100px;
+    position: relative;
+    left: 250px;
     width: 590px;
-    height: 500px;
+    height: 300px;
 
     border-radius: 6px;
 
@@ -182,12 +184,53 @@ export default {
         }
     }
 
-    .donated-ok,
-    .something-wrong {
-        margin: 20px;
-        padding: 5px;
+    .donated-ok {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 10px;
+        left: 20px;
         font-size: 35px;
-        height: 40px;
+        height: 250px;
+        width: 550px;
+        border: 2px solid rgb(219, 213, 213);
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        animation: fadeIn 0.5s;
+
+        p {
+            text-align: center;
+            padding: 70px 5px 5px 5px;
+            height: 50%;
+        }
+
+        button {
+            margin: auto;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 5px;
+        }
+    }
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 }
 </style>
