@@ -7,12 +7,12 @@
 
       <div id="UploadCv__form" class="UploadCv__form form">
         <form id="cvUploadForm">
-          <fieldset>
+          <fieldset>  
             <div id="cvDiv">
-              <p id="uploadCvText" ref="uploadCvText" @click="openUploadFileDialogue()">+ Upload Your CV (*)</p>
-              <input ref="input_file_cv" type="file" value="" name="this.$refs.input_file_cv" class="UploadCv__form__inputText" @change="setCVCheckBoxUnActive(); handleCvUpload();" >
+              <p id="uploadCvText" ref="uploadCvText" @click="openUploadFileDialogue()">+ Upload Your CV (*)</p>                          
+              <input id="input_file_cv" ref="input_file_cv" type="file" value="" class="UploadCv__form__inputText" name="input_file_cv" @change="setCVCheckBoxUnActive(); handleCvUpload();cvCheckExtension()" >
               <h3 ref="requiredCvMSG"/>
-              <div id="cvName"><span ref="cvLabel" class="UploadCv__form__label"/>
+              <div id="cvName"><span id="cvLabel" ref="cvLabel" class="UploadCv__form__label"/>
                 <button class="UploadCv__form__remove-btn" @click.prevent="removeCvFile()">Remove</button>
               </div>
             </div>
@@ -24,18 +24,18 @@
                   <input id="input_checkbox_cv" ref="input_checkbox_cv" type="checkbox" value="" class="UploadCv__form__checkInput" name="check" @click="showCV2()" >
                 </div>
               </div>
-              <textarea id="textArea_cv" ref="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"/>
+              <textarea id="textArea_cv" ref="textArea_cv" name="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"/>
             </div>
 
             <div id="motivation_letter_Div">
-              <P ref="uploadMlText" @click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>
-              <input ref="nput_file_motivation_letter" type="file" class="UploadCv__form__inputText" @change="setMlCheckBoxUnActive(); handleMotivationLetterUpload();" >
+              <P ref="uploadMlText" @click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>                          
+              <input id="input_file_motivation_letter" ref="input_file_motivation_letter" type="file" class="UploadCv__form__inputText" name="input_file_motivation_letter" @change="setMlCheckBoxUnActive(); handleMotivationLetterUpload();mlCheckExtension()" >
               <h3 ref="requiredMlMSG"/>
               <div id="mlName"><span id="mlLabel" ref="mlLabel" class="UploadCv__form__label"/>
-                <button class="UploadCv__form__remove-btn" @click.prevent="removeMlFile()">Remove</button>
+                <button class="UploadCv__form__remove-btn" @click.prevent="removeMlFile()">Remove</button>    
               </div>
             </div>
-
+                       
             <div id="motivation_letterDiv_TextArea" class="UploadCv__form__section">
               <div class="UploadCv__form__insideDiv">
                 <p ref="ml2Lable" class="ml2Lable">I rather write my motivation letter in a text box:</p>
@@ -43,29 +43,27 @@
                   <input id="input_checkbox_motivation_letter" ref="input_checkbox_motivation_letter" type="checkbox" value="" class="UploadCv__form__checkInput" name="check" @click="showML2()" >
                 </div>
               </div>
-              <textarea id="textArea_motivation_letter" ref="textArea_motivation_letter" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."/>
+              <textarea id="textArea_motivation_letter" ref="textArea_motivation_letter" name="textArea_motivation_letter" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."/>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input id="email" ref="email" type="email" class="input" name="email" value="" @focus="setActive" @click="emptyEmailRequired()">
+              <input id="email" ref="email" type="email" name="email" class="input" value="" @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
             </div>
 
-
+                     
             <div id="message_TextArea" class="UploadCv__form__section">
               <div class="UploadCv__form__insideDiv">
                 <p class="messageLabel">Is there anything you would like to notify us about?</p>
               </div>
-              <textarea id="textArea_message" ref="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
+              <textarea id="textArea_message" ref="textArea_message" name="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
             </div>
 
             <div class="apply-btn">
-              <input type="submit" value="Apply" true @click.prevent="submitFile">
+              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitFile">
             </div>
           </fieldset>
-
-        </form>
-
+        </form> 
       </div>
       <div>
         <p id="success-Msg" class="UploadCv__success-Msg"/>
@@ -76,7 +74,6 @@
 
 <script>
 import axios from "~/plugins/axios";
-
 export default {
     async asyncData() {
         return {
@@ -95,10 +92,12 @@ export default {
     },
     computed: {
         checkCvLength: function() {
-            return this.$refs.input_file_cv.value;
+            const { input_file_cv } = this.$refs;
+            return input_file_cv.value;
         },
         checkMlLength: function() {
-            return this.$refs.input_file_motivation_letter.value;
+            const { input_file_motivation_letter } = this.$refs;
+            return input_file_motivation_letter.value;
         }
     },
     mounted: function() {
@@ -111,7 +110,6 @@ export default {
         submitFile() {
             // Initialize the form data
             let formData = new FormData();
-
             const {
                 input_file_cv,
                 input_file_motivation_letter,
@@ -121,33 +119,32 @@ export default {
                 cvLabel,
                 mlLabel
             } = this.$refs;
-
             //  Add the form data we need to submit
             if (input_file_cv.files.length !== 0) {
-                formData.append("this.$refs.input_file_cv", this.cvData);
+                formData.append("input_file_cv", this.cvData);
             } else {
-                formData.append("this.$refs.input_file_cv", textArea_cv.value);
+                formData.append("input_file_cv", textArea_cv.value);
             }
-
             if (input_file_motivation_letter.files.length !== 0) {
                 formData.append(
-                    "this.$refs.input_file_motivation_letter",
+                    "input_file_motivation_letter",
                     this.motivationLetterData
                 );
             } else {
                 formData.append(
-                    "this.$refs.input_file_motivation_letter",
+                    "input_file_motivation_letter",
                     textArea_motivation_letter.value
                 );
             }
             formData.append("email", this.emailData.value);
             formData.append("textArea_message", this.messageData.value);
-
             //  Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
                 email.value !== null &&
                 email.value !== "Required field" &&
+                email.value !== "Invalid Email" &&
+                cvLabel.innerHTML !== "Invalid File Type!" &&
                 (cvLabel.innerHTML !== "" || textArea_cv.value !== "") &&
                 (mlLabel.innerHTML !== "" ||
                     textArea_motivation_letter.value !== "")
@@ -186,72 +183,121 @@ export default {
             this.removeMlFile();
             this.removeCvFile();
         },
-
         // Handles a change on the file upload
         handleCvUpload() {
+            const { input_file_cv, cvLabel } = this.$refs;
+            // const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
             if (
                 this.checkCvLength !== "" &&
                 this.checkCvLength !== undefined &&
                 this.checkCvLength !== null
             ) {
-                this.cvData = this.$refs.input_file_cv.files[0];
+                this.cvData = input_file_cv.files[0];
                 this.cvNameShow();
                 this.$refs.requiredCvMSG.innerHTML = "";
-                this.$refs.cvLabel.innerHTML =
+                cvLabel.innerHTML =
                     "You Uploaded the file: " + this.cvData.name;
             } else {
                 delete this.cvData;
-                this.$refs.cvLabel.innerHTML = "";
+                cvLabel.innerHTML = "";
             }
         },
+        // vlidate cv file exetinsion
+        cvCheckExtension() {
+            var file = document.getElementById("input_file_cv");
+            if (/\.(doc|docx|pdf|txt)$/i.test(file.files[0].name) === false) {
+                this.$refs.requiredCvMSG.innerHTML = "Invalid File Type!";
+                this.cvNameShow();
+                this.removeCvFile();
+                return false;
+            }
+        },
+        //validate ML file exetinsion
+        mlCheckExtension() {
+            var file = document.getElementById("input_file_motivation_letter");
+            if (/\.(doc|docx|pdf|txt)$/i.test(file.files[0].name) === false) {
+                this.$refs.requiredMlMSG.innerHTML = "Invalid File Type!";
+                this.mlNameShow();
+                this.removeMlFile();
+            }
+        },
+
         handleMotivationLetterUpload() {
+            const { input_file_motivation_letter, mlLabel } = this.$refs;
             if (
                 this.checkMlLength !== "" &&
                 this.checkMlLength !== undefined &&
                 this.checkMlLength !== null
             ) {
-                this.motivationLetterData = this.$refs.input_file_motivation_letter.files[0];
+                this.motivationLetterData =
+                    input_file_motivation_letter.files[0];
                 this.mlNameShow();
                 this.$refs.requiredMlMSG.innerHTML = "";
-                this.$refs.mlLabel.innerHTML =
+                mlLabel.innerHTML =
                     "You Uploaded the file: " + this.motivationLetterData.name;
             } else {
                 delete this.motivationLetterData;
-                this.$refs.mlLabel.innerHTML = "";
+                mlLabel.innerHTML = "";
+            }
+        },
+        handleEmail() {
+            const { email } = this.$refs;
+            if (this.isValidEmail() === true) {
+                this.emailData = email;
+                email.value = this.emailData.value;
+            }
+        },
+        isValidEmail() {
+            const { email } = this.$refs;
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(email.value)) {
+                email.parentNode.classList.remove("active");
+                email.parentNode.classList.add("active");
+                email.value = "Invalid Email";
+                email.focus;
+                return false;
+            } else {
+                return true;
             }
         },
         handleMessage() {
-            this.messageData = this.$refs.textArea_message;
-            this.$refs.textArea_message.value = this.messageData.value;
+            const { textArea_message } = this.$refs;
+            this.messageData = textArea_message;
+            textArea_message.value = this.messageData.value;
         },
         successMSG() {
+            const { email, textArea_message } = this.$refs;
             document.getElementById("success-Msg").innerHTML =
-                "You have submitted your CV and motivation letter successfully";
-            this.$refs.email.value = "";
-            this.$refs.email.parentNode.classList.remove("active");
-            this.$refs.textArea_message.value = "";
+                "You have submitted your CV and motivation letter successfully.";
+            email.value = "";
+            email.parentNode.classList.remove("active");
+            textArea_message.value = "";
             this.hideForm();
         },
         // Handles when the image clicked
         openUploadFileDialogue() {
-            this.$refs.input_file_cv.click();
+            const { input_file_cv } = this.$refs;
+            input_file_cv.click();
         },
         openUploadFileDialogue1() {
-            this.$refs.input_file_motivation_letter.click();
+            const { input_file_motivation_letter } = this.$refs;
+            input_file_motivation_letter.click();
         },
         // Removes a select file the user has uploaded
         removeCvFile() {
-            this.$refs.input_file_cv.value = "";
+            const { input_file_cv, cvLabel } = this.$refs;
+            input_file_cv.value = "";
             this.cvNameHide();
             this.setCvCheckBoxActive();
-            this.$refs.cvLabel.innerHTML = "";
+            cvLabel.innerHTML = "";
             this.$refs.input_checkbox_cv.disabled = false;
         },
         removeMlFile() {
-            this.$refs.input_file_motivation_letter.value = "";
+            const { input_file_motivation_letter, mlLabel } = this.$refs;
+            input_file_motivation_letter.value = "";
             this.mlNameHide();
             this.setMlCheckBoxActive();
-            this.$refs.mlLabel.innerHTML = "";
+            mlLabel.innerHTML = "";
             this.$refs.input_checkbox_motivation_letter.disabled = false;
         },
         setActive(e) {
@@ -265,7 +311,6 @@ export default {
         //disable cv checkbox when input upload is active
         setCVCheckBoxUnActive() {
             var x = this.$refs.cv2Lable;
-
             x.classList.add("UploadCv__form__unAvailable");
         },
         //disable ML checkbox when input upload is active
@@ -273,7 +318,6 @@ export default {
             var element = this.$refs.ml2Lable;
             element.classList.add("UploadCv__form__unAvailable");
         },
-
         //Enable CV checkbox when input upload is inactive
         setCvCheckBoxActive() {
             var element = this.$refs.cv2Lable;
@@ -286,7 +330,6 @@ export default {
             element.classList.remove("UploadCv__form__unAvailable");
             element.classList.add("UploadCv__form____Available");
         },
-
         //disable CV input upload when checkbox is active
         setCvUnActive() {
             var element = this.$refs.uploadCvText;
@@ -309,38 +352,38 @@ export default {
             element.classList.remove("UploadCv__form__unAvailable");
             element.classList.add("UploadCv__form____Available");
         },
-
         // Show & Hide CV CheckBox/Textarea section
         showCV2() {
+            const { input_file_cv, textArea_cv } = this.$refs;
             var checkBox = this.$refs.input_checkbox_cv;
-            var cvText = this.$refs.textArea_cv;
+            var cvText = textArea_cv;
             if (checkBox.checked === true) {
                 cvText.style.display = "block";
                 delete this.cvData;
-                this.$refs.input_file_cv.value = "";
+                input_file_cv.value = "";
                 this.setCvUnActive();
-                this.$refs.input_file_cv.disabled = true;
+                input_file_cv.disabled = true;
             } else {
                 cvText.style.display = "none";
                 this.setCvActive();
-                this.$refs.input_file_cv.disabled = false;
+                input_file_cv.disabled = false;
             }
         },
-
         // Show & Hide ML CheckBox/Textarea section
         showML2() {
+            const { input_file_motivation_letter } = this.$refs;
             var checkBox = this.$refs.input_checkbox_motivation_letter;
             var mlText = this.$refs.textArea_motivation_letter;
             if (checkBox.checked === true) {
                 mlText.style.display = "block";
                 delete this.motivationLetterData;
-                this.$refs.input_file_motivation_letter.value = "";
+                input_file_motivation_letter.value = "";
                 this.setMlUnActive();
-                this.$refs.input_file_motivation_letter.disabled = true;
+                input_file_motivation_letter.disabled = true;
             } else {
                 mlText.style.display = "none";
                 this.setMlActive();
-                this.$refs.input_file_motivation_letter.disabled = false;
+                input_file_motivation_letter.disabled = false;
             }
         },
         //Show Cv filename
@@ -355,13 +398,14 @@ export default {
             var x = document.getElementById("cvName");
             x.style.display = "none";
         },
-
         cvTextHide() {
-            var x = this.$refs.textArea_cv;
+            const { textArea_cv } = this.$refs;
+            var x = textArea_cv;
             x.style.display = "none";
         },
         mlTextHide() {
-            var x = this.$refs.textArea_motivation_letter;
+            const { textArea_motivation_letter } = this.$refs;
+            var x = textArea_motivation_letter;
             x.style.display = "none";
         },
         //Show ML filename
@@ -377,31 +421,42 @@ export default {
             x.style.display = "none";
         },
         disableCvCheckbox() {
-            if (this.$refs.input_file_cv.files.length !== 0) {
+            const { input_file_cv } = this.$refs;
+            if (input_file_cv.files.length !== 0) {
                 this.$refs.input_checkbox_cv.disabled = true;
             }
         },
         disableMotivationLetterCheckbox() {
-            if (this.$refs.input_file_motivation_letter.files.length !== 0) {
+            const { input_file_motivation_letter } = this.$refs;
+            if (input_file_motivation_letter.files.length !== 0) {
                 this.$refs.input_checkbox_motivation_letter.disabled = true;
             }
         },
         emptyInputs() {
-            this.$refs.input_file_cv.value = "";
-            this.$refs.input_file_motivation_letter.value = "";
-            this.$refs.cvLabel.value = "";
-            this.$refs.textArea_cv.value = "";
-            this.$refs.textArea_motivation_letter.value = "";
-            this.$refs.textArea_message.value = "";
+            const {
+                input_file_cv,
+                input_file_motivation_letter,
+                textArea_cv,
+                textArea_motivation_letter,
+                cvLabel,
+                textArea_message
+            } = this.$refs;
+            input_file_cv.value = "";
+            input_file_motivation_letter.value = "";
+            cvLabel.value = "";
+            textArea_cv.value = "";
+            textArea_motivation_letter.value = "";
+            textArea_message.value = "";
             this.$refs.input_checkbox_cv.checked = false;
             this.$refs.input_checkbox_motivation_letter.checked = false;
         },
         emptyEmailRequired() {
-            if (this.$refs.email.value) {
-                this.$refs.email.parentNode.classList.remove("active");
+            const { email } = this.$refs;
+            if (email.value) {
+                email.parentNode.classList.remove("active");
             }
-            this.$refs.email.parentNode.classList.add("active");
-            this.$refs.email.value = "";
+            email.parentNode.classList.add("active");
+            email.value = "";
         },
         hideForm() {
             var x = document.getElementById("UploadCv__form");
@@ -512,7 +567,6 @@ export default {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 24px;
-        margin-left: 50px;
         color: $color-purple;
         text-align: center;
     }
