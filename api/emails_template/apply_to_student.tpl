@@ -24,7 +24,7 @@ You can now apply for the class that starts in September/October, by sending you
 
 Please also send your CV if you have one.
 
-Click on this link to send the essay and CV;
+Click on this link to send the essay and CV:
 
  <%- params.url %>
 
