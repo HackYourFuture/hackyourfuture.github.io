@@ -48,6 +48,13 @@ module.exports = {
                 content: "width=device-width, initial-scale=1"
             },
             { hid: "description", name: "description", content: "" }
+        ],
+        link: [
+            {
+                rel: "icon",
+                type: "image/png",
+                href: "hyf-icon.png"
+            }
         ]
     }
 };
