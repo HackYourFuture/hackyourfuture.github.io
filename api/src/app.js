@@ -3,6 +3,9 @@ const expressValidator = require("express-validator");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer = require("multer");
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
+const path = require("path");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
@@ -10,14 +13,35 @@ const { decryptEmail } = require("./utils/email-crypto.js");
 
 const app = express();
 
-const storage = multer.memoryStorage();
+const s3 = new aws.S3({
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
+    }
+});
 
 const upload = multer({
-    storage: storage,
+    storage: multerS3({
+        s3: s3,
+        bucket: "hyf-website-uploads",
+        key: function(req, file, cb) {
+            cb(
+                null,
+                "hyf-" +
+                    file.fieldname +
+                    "-" +
+                    encodeURIComponent(req.body.email) +
+                    "-" +
+                    Date.now() +
+                    path.extname(file.originalname)
+            );
+        }
+    }),
     fileFilter: (req, file, cb) => {
         fileType(file, cb);
     }
 });
+
 const fileTypes = [
     ".jpg",
     ".jpeg",
