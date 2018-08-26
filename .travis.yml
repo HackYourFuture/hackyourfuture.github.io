@@ -24,7 +24,7 @@ script:
   - npm install
   - npm run lint
   - npm run generate
-  - cd api && npm run build && cd ..
+  - make api/dist 
 
 deploy:
   - provider: script
