@@ -5,7 +5,7 @@ const { getApplicant } = require("../data/update-sheet");
 const sendEmail = require("../utils/send-emails");
 
 const fromEmail = "info@hackyourfuture.net";
-
+const applicationMail = "application@hackyourfuture.net";
 const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
@@ -24,11 +24,17 @@ module.exports = (req, res) => {
             .then(() =>
                 updateApplicant(email, updatedFilesUrl, req.files)
                     .then(() => {
-                        return sendEmail(
+                        sendEmail(
                             fromEmail,
                             [email],
                             "** Confirmation email **",
                             "We've received your files"
+                        );
+                        sendEmail(
+                            fromEmail,
+                            applicationMail,
+                            "** Confirmation email **",
+                            "Applicant uploaded Cv successfully"
                         );
                     })
                     .then(() => {
@@ -37,6 +43,12 @@ module.exports = (req, res) => {
                         });
                     })
                     .catch(() => {
+                        sendEmail(
+                            fromEmail,
+                            fromEmail,
+                            "** Confirmation email **",
+                            `Uploading CV file is failed:${[email]}`
+                        );
                         res.status(500).send({
                             message: "Something went wrong"
                         });
