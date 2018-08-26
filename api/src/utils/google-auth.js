@@ -1,7 +1,19 @@
-const { OAuth2Client } = require("google-auth-library");
+const { OAuth2Client, auth } = require("google-auth-library");
 const { getConfig } = require("./dev-config");
 
 const redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
+const { GOOGLE_APP } = process.env;
+
+function getEnviromentConfig() {
+    if (!GOOGLE_APP) return false;
+
+    try {
+        return JSON.parse(Buffer.from(GOOGLE_APP, "base64").toString("utf-8"));
+    } catch (e) {
+        console.log("An error occurred on the getEnviromentConfig", e);
+        return false;
+    }
+}
 
 function createClient(clientId, clientSecret, token) {
     const client = new OAuth2Client(clientId, clientSecret, redirectUrl);
@@ -12,24 +24,26 @@ function createClient(clientId, clientSecret, token) {
     return client;
 }
 
+function getJWTClient(config) {
+    const client = auth.fromJSON(config);
+
+    client.scopes = ["https://www.googleapis.com/auth/spreadsheets"];
+
+    return client;
+}
+
 function getClient() {
-    let config;
+    let config = getEnviromentConfig();
+
+    // Here means that we're in the production mode
+    // So we can retunr a different client
+    if (config) {
+        const client = getJWTClient(config);
+        return client;
+    }
 
     if (process.env.DEVELOPMENT) {
         config = getConfig();
-    }
-
-    const hasEnvironmentConfig =
-        process.env.GOOGLE_CLIENT_ID &&
-        process.env.GOOGLE_CLIENT_SECRET &&
-        process.env.GOOGLE_TOKEN;
-
-    if (hasEnvironmentConfig) {
-        config = {
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            token: JSON.parse(process.env.GOOGLE_TOKEN)
-        };
     }
 
     if (Object.keys(config).length === 0) {

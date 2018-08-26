@@ -15,13 +15,10 @@
         <nuxt-link :to="'/teach/'">Teach</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/support/'">Support</nuxt-link>
+        <nuxt-link :to="'/support/'">Hire</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link :to="'/news/'">News</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/about/'">About</nuxt-link>
@@ -30,9 +27,8 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/upload/'">Upload</nuxt-link>
+        <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
       </li>
-        
     </ul>
   </nav>
 

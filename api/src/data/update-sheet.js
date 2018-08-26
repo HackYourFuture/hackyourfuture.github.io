@@ -114,32 +114,23 @@ function getApplicant(email) {
                 }
 
                 const rows = response.data.values || [];
-                const totalRows = rows.length || 0;
-                const foundedAt = rows.findIndex((row, index) => {
+                const totalRows = (rows.length || 0) + 1;
+
+                let rowIndex = 0;
+
+                const foundedAt = rows.reduce((state, row) => {
+                    rowIndex++;
+
                     const rowEmail = row[columnPosition.email] || "";
+
                     if (rowEmail.toLowerCase() === email.toLowerCase()) {
-                        return index;
+                        state = rowIndex;
                     }
-                });
 
-                let insertRow;
+                    return state;
+                }, false);
 
-                // Spreadsheet is empty
-                if (foundedAt === -1 && totalRows === 0) {
-                    insertRow = 1;
-                }
-
-                // Record is not founded but we add to the latest row
-                if (foundedAt === -1 && totalRows !== 0) {
-                    insertRow = totalRows + 1;
-                }
-
-                // Record is found, update the applicant
-                if (foundedAt !== -1) {
-                    insertRow = foundedAt;
-                }
-
-                resolve({ foundedAt, insertRow });
+                resolve({ foundedAt, totalRows });
             }
         );
     });

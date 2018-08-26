@@ -4,7 +4,7 @@
       <div class="Apply__header">
         <h1>Join <br> Us!</h1>
         <div class="Apply__header-image">
-          <img src="/gallery/05.jpg">
+          <img src="/gallery/11.jpg">
         </div>
         <div class="Apply__header-dates" v-html="dates"/>
 
@@ -13,7 +13,8 @@
       <div class="Apply__content" v-html="content"/>
 
       <div class="Apply__form form">
-        <form :action="formUrlApply" method="POST">
+        <h2>Apply for our next class:</h2>
+        <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
@@ -93,7 +94,6 @@ export default {
             content = false;
         }
         return {
-            formUrlApply: process.env.lambdaUrl + "apply",
             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             dates: dates ? dates : null,
             content: content ? content : null
@@ -109,6 +109,15 @@ export default {
         });
     },
     methods: {
+        async formUrlApply(e) {
+            const fields = {};
+            Object.values(e.target.elements).forEach(
+                input =>(fields[input.name] = input.value)); // eslint-disable-line
+            let req = await axios.post(process.env.lambdaUrl + "apply", fields) // eslint-disable-line
+
+            // TODO: redirect to application success route
+            // TODO: try/catch for application POST failure
+        },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
@@ -125,6 +134,10 @@ export default {
 .Apply {
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
+
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -134,10 +147,18 @@ export default {
             font-size: 52px;
             line-height: 60px;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 5;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         &-image {
             width: 55%;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
         &-dates {
             margin-left: $base-vertical-rithm * 15;
@@ -145,9 +166,16 @@ export default {
             width: 100%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 5;
+            }
             div {
                 display: inline-block;
                 width: calc(25% - 20px);
+                @include breakpoint("mobile_landscape") {
+                    width: calc(50% - 10px);
+                    margin: $base-vertical-rithm * 5 auto;
+                }
             }
             h3 {
                 font-weight: bold;
@@ -162,9 +190,18 @@ export default {
     &__content {
         width: 70%;
         margin: 0 auto;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: 0 auto;
+        }
+
         h1 {
             color: $color-purple;
             line-height: 1;
+            margin-bottom: $base-vertical-rithm * 5;
+        }
+        h2 {
+            color: $color-purple;
         }
         ul li {
             list-style: disc;
@@ -177,6 +214,12 @@ export default {
         width: 75%;
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            padding: $base-vertical-rithm * 5;
+            margin: 0;
+        }
+
         p,
         h1 {
             margin-left: 50px;
@@ -187,6 +230,18 @@ export default {
             font-size: 36px;
             width: 60%;
             line-height: 36px;
+        }
+        h2 {
+            font-weight: bold;
+            color: $color-purple;
+            font-size: 36px;
+            width: 40%;
+            line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         p {
             margin-top: $base-vertical-rithm * 10;

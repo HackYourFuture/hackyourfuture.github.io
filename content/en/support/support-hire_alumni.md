@@ -1,1 +1,5 @@
-In our 6-month program we train talented refugees with and without a coding background in modern JavaScript software development. Our aim is to have our students land their first software development job after finishing our course, and we do everything we can to prepare them as well as possible.
+Are you looking for junior web developers while making a positive impact on society? We can help.   
+
+Most of our students are fresh graduates, looking to start their career as a developer. They are talented, as they are selected out of a pool of more than 100 applicants. Our students have residency permits for at least 5 years. This enables them to work in the Netherlands just like any other citizen. 
+ 
+For more information about the process of hiring our students check out our brochure or contact our Partnership Manager Wouter. 

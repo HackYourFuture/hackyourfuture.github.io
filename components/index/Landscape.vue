@@ -17,14 +17,17 @@ export default {};
 <style lang="scss">
 .Landscape {
     height: 100vh;
-    background-image: url("/landscape/main-home.jpg");
+    background-image: url("/gallery/08.jpg");
     background-size: cover;
     position: relative;
     text-align: center;
+    @include breakpoint("mobile_portrait") {
+        height: 60vh;
+    }
     &__logo {
         width: 30%;
         margin-left: 50%;
-        padding-top: 15%;
+        padding-top: 10%;
         transform: translateX(-50%);
         @include breakpoint("mobile_landscape") {
             width: 50%;

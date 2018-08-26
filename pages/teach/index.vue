@@ -3,7 +3,7 @@
     <Main class="Teach container">
       <div class="Teach__header">
         <div class="Teach__header-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/26.jpg">
         </div>
         <h1>What we teach</h1>
       </div>
@@ -19,7 +19,7 @@
       <div class="Teach__container who">
         <div v-html="who_are_our_teachers"/>
         <div class="Teach__container-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/13.jpg">
         </div>
       </div>
 
@@ -27,7 +27,7 @@
         <!-- Not sure if we need another image here -->
           
         <div class="Teach__container-image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/10.jpg">
         </div>
         <div v-html="what_it_means_to_teach"/>
          
@@ -130,6 +130,9 @@ export default {
 .Teach {
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -139,28 +142,48 @@ export default {
             font-size: 60px;
             line-height: 70px;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                margin: $base-vertical-rithm * 8;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
         &-image {
             width: 60%;
             display: inline-block;
             vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
         }
     }
 
     &__container {
         margin: 0 $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            margin: 0;
+        }
         h1 {
             margin-bottom: $base-vertical-rithm * 2;
             color: $color-purple;
             font-weight: normal;
             font-size: 42px;
             line-height: 50px;
+            @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+            }
         }
         & > div {
             display: inline-block;
             width: calc(50% - 100px);
             vertical-align: top;
             margin: 50px;
+            @include breakpoint("mobile_landscape") {
+                width: calc(100% - 80px);
+                margin: 40px;
+            }
             a {
                 color: $color-purple;
                 font-weight: bold;
@@ -186,14 +209,27 @@ export default {
         }
         &.who {
             margin-right: -100px;
+            @include breakpoint("mobile_landscape") {
+                margin-right: 0;
+            }
             .Teach__container-image {
                 margin-right: 0;
+                @include breakpoint("mobile_landscape") {
+                    width: 100%;
+                    margin: 0;
+                }
             }
         }
         &.teach {
             margin-left: -50px;
+            @include breakpoint("mobile_landscape") {
+                margin-left: 0;
+            }
             .Teach__container-image {
                 margin-left: 0;
+                @include breakpoint("mobile_landscape") {
+                    width: 100%;
+                }
             }
         }
 
@@ -201,6 +237,11 @@ export default {
             margin-left: $base-vertical-rithm * 10;
             width: 25%;
             display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
             a {
                 display: block;
                 margin-top: 40px;
@@ -221,6 +262,10 @@ export default {
         width: 70%;
         margin-left: 15%;
         position: relative;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            margin-left: 0;
+        }
         h1 {
             margin-left: 50px;
             color: $color-purple;
@@ -228,6 +273,12 @@ export default {
             font-size: 36px;
             width: 40%;
             line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                width: calc(100% - 80px);
+                margin: 40px;
+                font-size: 32px;
+                line-height: 40px;
+            }
         }
     }
 }
