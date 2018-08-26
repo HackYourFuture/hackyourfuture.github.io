@@ -14,7 +14,7 @@
 
       <div class="Apply__form form">
         <h2>Apply for our next class:</h2>
-        <form :action="formUrlApply" method="POST">
+        <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
@@ -94,7 +94,6 @@ export default {
             content = false;
         }
         return {
-            formUrlApply: process.env.lambdaUrl + "apply",
             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             dates: dates ? dates : null,
             content: content ? content : null
@@ -110,6 +109,15 @@ export default {
         });
     },
     methods: {
+        async formUrlApply(e) {
+            const fields = {};
+            Object.values(e.target.elements).forEach(
+                input =>(fields[input.name] = input.value)); // eslint-disable-line
+            let req = await axios.post(process.env.lambdaUrl + "apply", fields) // eslint-disable-line
+
+            // TODO: redirect to application success route
+            // TODO: try/catch for application POST failure
+        },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
