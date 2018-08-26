@@ -3,11 +3,16 @@ const expressValidator = require("express-validator");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer = require("multer");
-const aws = require("aws-sdk");
 const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
 const path = require("path");
 
-const { Apply, ContactUs, Upload } = require("./middlewares");
+const {
+    Apply,
+    ContactUs,
+    upload_cv_ml,
+    upload_assignment
+} = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
 const { decryptData } = require("./utils/crypto.js");
 const { donate, paymentStatus } = require("./donation/donate");
@@ -28,8 +33,7 @@ const upload = multer({
         key: function(req, file, cb) {
             cb(
                 null,
-                "hyf-" +
-                    file.fieldname +
+                file.fieldname +
                     "-" +
                     encodeURIComponent(req.body.email) +
                     "-" +
@@ -51,7 +55,7 @@ const fileTypes = [
     ".png",
     ".txt",
     ".doc",
-    ".docs"
+    ".docx"
 ];
 const allowedMimeTypes = [
     "text/plain",
@@ -159,7 +163,10 @@ app.post("/apply", (req, res) => {
 });
 app.post("/contact-us", (req, res) => ContactUs(req, res));
 app.post("/apply", (req, res) => Apply(req, res));
-app.post("/upload", FileUpload, (req, res) => Upload(req, res));
+app.post("/apply/upload", FileUpload, (req, res) => upload_cv_ml(req, res));
+app.post("/apply/upload1", FileUpload, (req, res) =>
+    upload_assignment(req, res)
+);
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
     const email = decryptData(id);
