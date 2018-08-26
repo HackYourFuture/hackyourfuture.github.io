@@ -1,40 +1,40 @@
 <template>
   <div>
     <Main class="UploadAssignment container">
-      <div id="UploadAssignment__header" class="UploadAssignment__header">
-        <h1 id="UploadAssignment__title">Upload your Assignment. </h1>
+      <div class="UploadAssignment__header">
+        <h1 ref="pageNameHeader">Upload your Assignment. </h1>
       </div>
 
-      <div id="UploadAssignment__form" class="UploadAssignment__form form">
-        <form id="assignmentUploadForm">
+      <div ref="UploadAssignment__form" class="UploadAssignment__form form">
+        <form>
           <fieldset>
             <div class="half-width inputContainer">
               <label for="url">Assignment URL: (*)</label>
-              <input id="url" ref="url" type="url" name="url" class="input" @change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
+              <input ref="url" type="url" name="url" class="input" @change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
             </div>
                       
-            <div id="assignmentDiv">
+            <div ref="assignmentDiv">
               <P @click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-              <input id="input_file_assignment" ref="input_file_assignment" type="file" class="UploadAssignment__form__inputText" name="input_file_assignment" @change="handleFileUpload1();imgCheckExtension()" >
+              <input ref="input_file_assignment" type="file" class="UploadAssignment__form-inputText" name="input_file_assignment" @change="handleFileUpload1();imgCheckExtension()" >
               <h3 ref="requiredMSG"/>
-              <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"/>
-                <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
+              <div ref="assignmentName"><span ref="assignmentLabel" class="UploadAssignment__form-assignemntLabel"/>
+                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
               </div>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input id="email" ref="email" type="email" name="email" class="input" value=""                                           
+              <input ref="email" type="email" name="email" class="input" value=""                                           
                      @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
             </div>
 
-            <div id="message_TextArea" class="UploadAssignment__form__section">
-              <p class="messageLabel">Is there anything you would like to notify us about?</p>
-              <textarea id="message" ref="message" name="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
+            <div class="UploadAssignment__form-byTextArea">
+              <p>Is there anything you would like to notify us about?</p>
+              <textarea ref="message" name="message" class="UploadAssignment__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
             </div>
                            
             <div class="apply-btn">
-              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitFile()">
+              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm()">
             </div>
                     
           </fieldset>
@@ -42,7 +42,7 @@
                 
       </div>
       <div>
-        <p id="success-Msg" class="UploadAssignment__success-Msg"/>
+        <p ref="successMessage" class="UploadAssignment__successMessage"/>
       </div>
     </Main>
   </div>
@@ -73,7 +73,7 @@ export default {
         this.assignmentNameHide();
     },
     methods: {
-        submitFile() {
+        submitForm() {
             // Initialize the form data
             let formData = new FormData();
             const {
@@ -183,7 +183,7 @@ export default {
         //validate screenshot exetinsion
         imgCheckExtension() {
             const { assignmentLabel } = this.$refs;
-            var file = document.getElementById("input_file_assignment");
+            var file = this.$refs.input_file_assignment;
             if (
                 /\.(jpg|jpeg|png|gif|ico|svg)$/i.test(file.files[0].name) ===
                 false
@@ -202,8 +202,8 @@ export default {
             message.value = this.messageData.value;
         },
         successMSG() {
-            const { url, email, message } = this.$refs;
-            document.getElementById("success-Msg").innerHTML =
+            const { url, email, message, successMessage } = this.$refs;
+            successMessage.innerHTML =
                 "You have submitted your Assignment successfully.";
             email.value = "";
             url.value = "";
@@ -229,15 +229,15 @@ export default {
             e.target.parentNode.classList.add("active");
         },
         hideAssgnmentiDiv() {
-            var x = document.getElementById("assignmentDiv");
+            var x = this.$refs.assignmentDiv;
             x.style.display = "none";
         },
         assignmentNameShow() {
-            var x = document.getElementById("assignmentName");
+            var x = this.$refs.assignmentName;
             x.style.display = "block";
         },
         assignmentNameHide() {
-            var x = document.getElementById("assignmentName");
+            var x = this.$refs.assignmentName;
             x.style.display = "none";
         },
         emptyEmailRequired() {
@@ -257,8 +257,8 @@ export default {
             url.value = "";
         },
         hideForm() {
-            var x = document.getElementById("UploadAssignment__form");
-            var y = document.getElementById("UploadAssignment__title");
+            var x = this.$refs.UploadAssignment__form;
+            var y = this.$refs.pageNameHeader;
             y.style.display = "none";
             x.style.display = "none";
         }
@@ -291,13 +291,14 @@ export default {
             font-size: 24px;
             margin-left: 50px;
             color: $color-purple;
+            cursor: pointer;
         }
         h3 {
             margin-top: $base-vertical-rithm * 2;
             font-size: 16px;
             margin-left: 50px;
         }
-        &__assignemntLabel {
+        &-assignemntLabel {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             margin-left: 60px;
@@ -305,7 +306,7 @@ export default {
             line-height: 5px;
             display: inline-block;
         }
-        &__inputText {
+        &-inputText {
             font-size: 18px;
             padding: 10px 10px 10px 5px;
             display: block;
@@ -313,8 +314,9 @@ export default {
             border: none;
             background: transparent;
             display: none;
+            cursor: pointer;
         }
-        &__remove-btn {
+        &-remove-btn {
             border: 2px solid $color-purple;
             padding: 0px 10px;
             text-transform: uppercase;
@@ -323,11 +325,11 @@ export default {
             right: 0;
             margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
         }
-        &__section {
+        &-byTextArea {
             display: grid;
             grid-auto-flow: row;
         }
-        &__textarea {
+        &-textarea {
             overflow: auto;
             outline: none;
             background-color: #e6e6e6;
@@ -339,7 +341,7 @@ export default {
             font-size: 16px;
         }
     }
-    &__success-Msg {
+    &__successMessage {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 24px;
