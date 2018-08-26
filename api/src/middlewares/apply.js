@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
     }
 
     // eslint-disable-next-line
+
     saveApplicant(totalRows || 1, req.body).catch(error => {
         console.log("Save Applicant FAILED:", error, req.body);
     });
