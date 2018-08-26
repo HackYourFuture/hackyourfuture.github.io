@@ -27,6 +27,8 @@ function decryptData(encryptedData) {
 }
 
 module.exports = {
+    encryptEmail: encryptData,
+    decryptEmail: decryptData,
     encryptData,
     decryptData
 };

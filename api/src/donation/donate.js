@@ -11,10 +11,7 @@
  * @param {string} req.query.orderId
  */
 
-let apiKey = "";
-if (process.env.ENVIRONMENT === "dev")
-    apiKey = process.env.TEST_API_PAYMENT_KEY;
-else apiKey = process.env.PROD_API_PAYMENT_KEY;
+const apiKey = process.env.MOLLIE_API_KEY;
 
 const mollieClient = require("@mollie/api-client")({
     apiKey
@@ -27,7 +24,10 @@ function donate({ method, amount, description }, res) {
     if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
 
     const encryptedOrderId = encryptData(orderId.toString());
-    const redirectUrl = baseURL.concat("?orderid=", encryptedOrderId);
+    const redirectUrl = baseURL.concat(
+        "support/donate?orderid=",
+        encryptedOrderId
+    );
 
     mollieClient.payments
         .create({
@@ -42,7 +42,9 @@ function donate({ method, amount, description }, res) {
             metadata: { orderId }
         })
         .then(payment => {
-            res.redirect(payment.getPaymentUrl());
+            res.json({
+                paymentURL: payment.getPaymentUrl()
+            });
         })
         .catch(error => {
             res.json({ error: error });

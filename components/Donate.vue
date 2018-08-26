@@ -61,7 +61,9 @@ export default {
                 })
             })
                 .then(res => res.json())
-                .then(json => console.log(json));
+                .then(json => {
+                    window.location = json.paymentURL;
+                });
         },
 
         paymentStatus() {

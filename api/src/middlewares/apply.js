@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     res.status(200).json({ message: "Application received" });
 
     // eslint-disable-next-line
-    saveApplicant(insertRow, req.body).catch(error => {
+  saveApplicant(insertRow, req.body).catch(error => {
         console.log("Save Applicant FAILED:", error, req.body);
     });
 
