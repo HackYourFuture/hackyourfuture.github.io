@@ -9,7 +9,8 @@ const path = require("path");
 
 const { Apply, ContactUs, Upload } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
-const { decryptEmail } = require("./utils/email-crypto.js");
+const { decryptData } = require("./utils/crypto.js");
+const { donate, paymentStatus } = require("./donation/donate");
 
 const app = express();
 
@@ -161,7 +162,7 @@ app.post("/apply", (req, res) => Apply(req, res));
 app.post("/upload", FileUpload, (req, res) => Upload(req, res));
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
-    const email = decryptEmail(id);
+    const email = decryptData(id);
     getApplicant(email)
         .then(() => res.redirect(`${url}`))
         .catch(() =>
@@ -171,6 +172,24 @@ app.get("/get-applicant", (req, res) => {
                     "Email address is not associated with any open applications."
                 )
         );
+});
+
+app.post("/donate", (req, res) => {
+    donate(req.body, res);
+});
+
+app.get("/donation/status", (req, res) => {
+    const { orderid } = req.query;
+
+    if (orderid) {
+        paymentStatus(orderid)
+            .then(msg => res.json({ message: msg }))
+            .catch(err => res.json({ message: err }));
+
+        return;
+    }
+
+    res.status(400).json({ message: "Not order id provided" });
 });
 
 module.exports = app;
