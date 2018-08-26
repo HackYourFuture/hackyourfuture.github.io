@@ -20,9 +20,13 @@ Please send a short essay ( max. 300 words) in English in which you describe:
 
 (doesn’t have to be related to web-development, can be anything related to programming)
 
-You can now apply for the class that starts in September/October, by sending your essay to application@hackyourfuture.net The deadline for this round is Augustus 27th 23:59.
+You can now apply for the class that starts in September/October, by sending your essay. The deadline for this round is Augustus 27th 23:59.
 
 Please also send your CV if you have one.
+
+Click on this link to send the essay and CV(if uou have one);
+
+ <%- params.url %>
 
 For more news about the program makes sure to check our website www.hackyourfuture.net
 

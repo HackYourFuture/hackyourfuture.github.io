@@ -1,6 +1,7 @@
 const email = require("../utils/email");
 const { getApplicant, saveApplicant } = require("../data/update-sheet");
 const sendEmail = require("../utils/send-emails");
+const {encryptEmail} = require("../utils/email-crypto")
 
 const fromEmail = "info@hackyourfuture.net";
 
@@ -41,10 +42,14 @@ module.exports = async (req, res) => {
             console.log("Send email to organization FAILED", error, req.body)
         );
 
+    const encryptedEmail = encryptEmail(req.body.email);
+    const redirectURL = `${process.env.lambdaUrl}apply/upload1`;
+    const verififactioURL = `${process.env.lambdaUrl}/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
+
     sendEmail(
         fromEmail,
         [req.body.email],
-        email("apply_to_student.txt"),
+        email("apply_to_student.tpl", { params: {url: verififactioURL}}),
         "Thank you for applying"
     )
         .then(() => {
