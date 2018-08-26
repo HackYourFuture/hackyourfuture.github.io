@@ -34,7 +34,7 @@
 
 </template>
 <script>
-import eventBus from '~/utils/event-bus';
+import eventBus from "~/utils/event-bus";
 
 export default {
     data() {
@@ -42,13 +42,13 @@ export default {
             toggled: false
         };
     },
-    created() {
-        eventBus.$on('toggle-mobile-nav', this.toggleNav)
-    },
     watch: {
-        '$route.name': function () {
+        "$route.name": function() {
             this.toggled = false;
         }
+    },
+    created() {
+        eventBus.$on("toggle-mobile-nav", this.toggleNav);
     },
     methods: {
         toggleSearch() {

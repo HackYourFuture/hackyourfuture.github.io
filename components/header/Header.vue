@@ -1,7 +1,7 @@
 <template>
   <header class="Header">
     <div class="container max-width">
-      <div class="icon menu-button" @click="toggleMenu" :class="{pressed: menuOpen}">
+      <div :class="{pressed: menuOpen}" class="icon menu-button" @click="toggleMenu">
         <span class="icon-menu"/>
         <span class="icon-cross"/>
       </div>
@@ -13,29 +13,29 @@
 </template>
 
 <script>
-import eventBus from '~/utils/event-bus';
+import eventBus from "~/utils/event-bus";
 import HeaderNav from "./HeaderNav";
 import HeaderNavMobile from "./HeaderNavMobile";
 export default {
-    watch: {
-        '$route.name': function () {
-            this.menuOpen = false;
-        }
+    components: {
+        HeaderNav,
+        HeaderNavMobile
     },
-    data () {
+    data() {
         return {
             menuOpen: false
+        };
+    },
+    watch: {
+        "$route.name": function() {
+            this.menuOpen = false;
         }
     },
     methods: {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
-            eventBus.$emit('toggle-mobile-nav', this.menuOpen)
+            eventBus.$emit("toggle-mobile-nav", this.menuOpen);
         }
-    },
-    components: {
-        HeaderNav,
-        HeaderNavMobile
     }
 };
 </script>
@@ -47,8 +47,6 @@ export default {
     background: white;
     z-index: 10;
     top: 0;
-
-
     @include breakpoint("mobile_landscape") {
         height: 60px;
     }
@@ -103,11 +101,11 @@ export default {
             height: 100%;
         }
         .icon-menu {
-            background-image: url('/icons/002-menu-button.svg');
+            background-image: url("/icons/002-menu-button.svg");
         }
         .icon-cross {
-            background-image: url('/icons/001-cancel.svg');
-            transform:  translateX(-50px);
+            background-image: url("/icons/001-cancel.svg");
+            transform: translateX(-50px);
         }
     }
 }

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Main class="Teaser container">
-      <div class="Teaser__header">
-        <div class="Teaser__header-image">
+    <Main class="TeaserPage container">
+      <div class="TeaserPage__header">
+        <div class="TeaserPage__header-image">
           <img src="/gallery/21.jpg">
 
         </div>
-        <div class="Teaser__header-content">
+        <div class="TeaserPage__header-content">
           <h1>Women Coding Teaser</h1>
-          <div class="Teaser__header-dates" v-html="teaser_dates"/>
+          <div class="TeaserPage__header-dates" v-html="teaser_dates"/>
           <div v-html="teaser_about"/>
           
-          <div class="Teaser__header-links">
+          <div class="TeaserPage__header-links">
             <h2>Apply for:</h2>
             <nuxt-link :to="'https://goo.gl/forms/SAYHYc0oqexStVaB3'"><span class="underline">30th of September</span></nuxt-link><br>
             <nuxt-link :to="'https://goo.gl/forms/m1gQTHHSMeUq2KFy2'"><span class="underline">2nd of December</span></nuxt-link>
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-.Teaser {
+.TeaserPage {
     h2 {
         color: $color-purple;
     }
