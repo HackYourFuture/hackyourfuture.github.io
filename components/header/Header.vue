@@ -6,8 +6,7 @@
         <span class="icon-cross"/>
       </div>
       <HeaderNav/>
-      <HeaderNavMobile/>
-      <nuxt-link :to="'/donate'" class="donate-btn">Donate</nuxt-link>
+      <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
     </div>
   </header>
 </template>
