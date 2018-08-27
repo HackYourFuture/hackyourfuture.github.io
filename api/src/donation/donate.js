@@ -16,7 +16,7 @@ const apiKey = process.env.MOLLIE_API_KEY;
 const mollieClient = require("@mollie/api-client")({
     apiKey
 });
-const { encryptData, decryptData } = require("../utils/crypto");
+const { encryptData, decryptData } = require("../utils/email-crypto");
 
 function donate({ method, amount, description }, res) {
     const orderId = new Date().getTime(); //
