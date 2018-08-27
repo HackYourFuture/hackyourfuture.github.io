@@ -12,12 +12,16 @@ async function updateApplicant(email, updates) {
     const APPLICANT_DOESNT_EXIST = "Applicant doesn't exist";
     try {
         const result = await getApplicant(email);
-        if (!result.foundedAt) throw new Error(APPLICANT_DOESNT_EXIST);
+        if (!result.foundedAt) {
+            throw new Error(APPLICANT_DOESNT_EXIST);
+        }
 
         await saveApplicant(result.foundedAt, updates);
         return "Applicant updated successfully";
     } catch (error) {
-        if (error === APPLICANT_DOESNT_EXIST) return APPLICANT_DOESNT_EXIST;
+        if (error === APPLICANT_DOESNT_EXIST) {
+            return APPLICANT_DOESNT_EXIST;
+        }
         return `Update Applicant ${email}  FAILED: ` + error;
     }
 }
