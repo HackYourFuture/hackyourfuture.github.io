@@ -14,7 +14,7 @@ const {
     upload_assignment
 } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
-const { decryptData } = require("./utils/crypto.js");
+const { decryptData } = require("./utils/email-crypto.js");
 const { donate, paymentStatus } = require("./donation/donate");
 
 const app = express();
