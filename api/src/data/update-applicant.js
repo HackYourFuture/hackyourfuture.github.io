@@ -8,22 +8,16 @@
 
 const { getApplicant, saveApplicant } = require("./update-sheet");
 
-async function updateApplicant(email, updates) {
-    let foundedAt;
-    try {
-        const res = await getApplicant(email);
-        foundedAt = res.foundedAt;
-        if (!foundedAt) {
-            throw new Error("Applicant doesn't exist");
-        }
-    } catch (error) {
-        if (error.message === "Applicant doesn't exist") {
-            return error;
-        }
-    }
+function updateApplicant(email, updates) {
+    return new Promise(async (resolve, reject) => {
+        const result = await getApplicant(email);
+        if (!result.foundedAt) reject("Applicant doesn't exist");
 
-    saveApplicant(foundedAt, updates).catch(error => {
-        console.log("Update Applicant FAILED:", error, email);
+        saveApplicant(result.foundedAt, updates)
+            .then(() => resolve("Applicant updated successfully"))
+            .catch(error =>
+                reject(`Update Applicant ${email}  FAILED: `, error)
+            );
     });
 }
 
