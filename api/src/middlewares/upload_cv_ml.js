@@ -34,7 +34,7 @@ module.exports = (req, res) => {
                             fromEmail,
                             applicationMail,
                             "** Confirmation email **",
-                            "Applicant uploaded Cv successfully"
+                            `Applicant uploaded Cv successfully:${[email]}`
                         );
                     })
                     .then(() => {

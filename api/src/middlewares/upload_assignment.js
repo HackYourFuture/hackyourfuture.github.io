@@ -32,7 +32,9 @@ module.exports = (req, res) => {
                             fromEmail,
                             applicationMail,
                             "** Confirmation email **",
-                            "Applicant uploaded Assignment successfully"
+                            `Applicant uploaded Assignment successfully:${[
+                                email
+                            ]}`
                         );
                     })
                     .then(() => {
