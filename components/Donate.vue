@@ -4,10 +4,10 @@
       <form class="form-group" @submit.prevent="submitDonation" >
         <label class="donate-label">Donate</label>
         <div class="form-check">
-          <input id="ideal" v-model="method" class="method-radio" type="radio" value="ideal" checked>
+          <input id="ideal" v-model="method" class="method-radio" type="radio" value="ideal">
           <label class="method-label" for="ideal"><i class="pf pf-ideal">Ideal</i></label>
 
-          <input id="creditcard" v-model="method" class="method-radio" type="radio" value="creditcard" >
+          <input id="creditcard" v-model="method" class="method-radio" type="radio" value="creditcard">
           <label class="method-label" for="creditcard"><i class="pf pf-credit-card">Creditcard</i></label>
 
           <input id="bitcoin" v-model="method" class="method-radio" type="radio" value="bitcoin" >
@@ -15,9 +15,9 @@
         </div>
         <div class="input-container">
           <label for="amount" class="amount-label"> €</label>
-          <input v-validate="'decimal:2'" id="amount" v-model="amount" class="amount-input" type="number" name="amount" placeholder="Amount" > 
-        
+          <input id="amount" v-model="amount" class="amount-input" type="number" name="amount" placeholder="Amount" required> 
         </div>
+        <input id="description" v-model="description" class="description-input" type="text" name="description" placeholder="Message" > 
         <button class="submit-button" type="submit" name="submit" >Donate</button>
       </form>
     </div>
@@ -36,8 +36,8 @@ export default {
         return {
             donated: false,
             method: "",
-            amount: 0,
-            description: "Hello"
+            amount: "",
+            description: ""
         };
     },
     mounted() {
@@ -57,7 +57,7 @@ export default {
                 body: JSON.stringify({
                     method: this.method,
                     amount: this.amount,
-                    description: this.description
+                    description: this.description || "No message"
                 })
             })
                 .then(res => res.json())
@@ -102,12 +102,12 @@ export default {
     position: relative;
     left: 250px;
     width: 590px;
-    height: 300px;
+    height: 320px;
 
     border-radius: 6px;
 
     .form-group {
-        height: 300px;
+        height: 320px;
     }
 
     .donate-label {
@@ -179,6 +179,12 @@ export default {
 
     .form-group {
         text-align: center;
+        .description-input {
+            margin-top: 10px;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+        }
         .submit-button {
             margin-top: 15px;
             border-radius: 6px;
