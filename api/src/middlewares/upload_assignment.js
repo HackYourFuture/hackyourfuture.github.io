@@ -5,23 +5,36 @@ const { getApplicant } = require("../data/update-sheet");
 const sendEmail = require("../utils/send-emails");
 
 const fromEmail = "info@hackyourfuture.net";
-
+const applicationMail = "application@hackyourfuture.net";
 const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { email, assignmentLink } = req.body;
-
+    const { email, url, message } = req.body;
+    const assignmentUrl = req.files.input_file_assignment[0].location;
+    const updatedUrlAssignment = {
+        assignmentUrl,
+        message,
+        url
+    };
     if (now <= deadline) {
         getApplicant(email)
             .then(() =>
-                updateApplicant(email, assignmentLink, req.files)
+                updateApplicant(email, updatedUrlAssignment, req.files)
                     .then(() => {
-                        return sendEmail(
+                        sendEmail(
                             fromEmail,
                             [email],
                             "** Confirmation email **",
                             "We've received your files"
+                        );
+                        sendEmail(
+                            fromEmail,
+                            applicationMail,
+                            "** Confirmation email **",
+                            `Applicant uploaded Assignment successfully:${[
+                                email
+                            ]}`
                         );
                     })
                     .then(() => {
@@ -30,6 +43,12 @@ module.exports = (req, res) => {
                         });
                     })
                     .catch(() => {
+                        sendEmail(
+                            fromEmail,
+                            fromEmail,
+                            "** Confirmation email **",
+                            `Uploading Assignment file is failed:${[email]}`
+                        );
                         res.status(500).send({
                             message: "Something went wrong"
                         });

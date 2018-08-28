@@ -9,11 +9,21 @@
         <form>
           <fieldset>  
             <div>
-              <p ref="uploadCvText" @click="openUploadFileDialogueCV()">+ Upload Your CV (*)</p>                          
-              <input ref="input_file_cv" type="file" value="" class="UploadCv__form-inputText" name="input_file_cv" @change="handleCvUpload();cvCheckExtension()" >
+              <p ref="uploadCvText" @click="openUpload($refs.input_file_cv)">+ Upload Your CV (*)</p>                          
+              <input ref="input_file_cv" type="file" value="" class="UploadCv__form-inputText" name="input_file_cv" @change="handleCvUpload(); fileCheckExtension(
+                $refs.input_file_cv,
+                $refs.input_checkbox_cv,
+                $refs.cvName,
+                $refs.cvLabel,
+                $refs.writeCvText,
+                $refs.requiredCvMSG)
+              " >
               <h3 ref="requiredCvMSG"/>
               <div ref="cvName"><span ref="cvLabel" class="UploadCv__form-label"/>
-                <button class="UploadCv__form-remove-btn" @click.prevent="removeCvFile()">Remove</button>
+                <button class="UploadCv__form-remove-btn" @click.prevent="removeFile($refs.input_file_cv, $refs.cvLabel,
+                                                                                     $refs.cvName,
+                                                                                     $refs.input_checkbox_cv,
+                                                                                     $refs.writeCvText)">Remove</button>
               </div>
             </div>
 
@@ -21,18 +31,26 @@
               <div class="UploadCv__form-labelAndCheckbox">
                 <p ref="writeCvText">I rather write my CV in a text box:</p>
                 <div>
-                  <input ref="input_checkbox_cv" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showCVByTextArea()" >
+                  <input ref="input_checkbox_cv" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showFileByTextArea($refs.input_file_cv,$refs.textArea_cv,$refs.input_checkbox_cv,$refs.uploadCvText)" >
                 </div>
               </div>
               <textarea ref="textArea_cv" name="textArea_cv" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"/>
             </div>
 
             <div>
-              <P ref="uploadMotivationLetterText" @click="openUploadFileDialogueML()">+ Upload Your Motivation Letter (*)</P>                          
-              <input ref="input_file_motivation_letter" type="file" class="UploadCv__form-inputText" name="input_file_motivation_letter" @change="handleMotivationLetterUpload();motivationLetterCheckExtension()" >
+              <P ref="uploadMotivationLetterText" @click="openUpload($refs.input_file_motivation_letter)">+ Upload Your Motivation Letter (*)</P>                          
+              <input ref="input_file_motivation_letter" type="file" class="UploadCv__form-inputText" name="input_file_motivation_letter" @change="handleMotivationLetterUpload(); fileCheckExtension(
+                $refs.input_file_motivation_letter,
+                $refs.input_checkbox_motivation_letter,
+                $refs.motivationLetterName,
+                $refs.motivationLetterLabel,
+                $refs.writeMotivationLetterText,
+                $refs.requiredMotivationLetterMSG)" >
               <h3 ref="requiredMotivationLetterMSG"/>
               <div ref="motivationLetterName"><span ref="motivationLetterLabel" class="UploadCv__form-label"/>
-                <button class="UploadCv__form-remove-btn" @click.prevent="removeMotivationLetterFile()">Remove</button>    
+                <button class="UploadCv__form-remove-btn" @click.prevent="removeFile($refs.input_file_motivation_letter,
+                                                                                     $refs.motivationLetterLabel,$refs.motivationLetterName,$refs.input_checkbox_motivation_letter,
+                                                                                     $refs.writeMotivationLetterText)">Remove</button>    
               </div>
             </div>
                        
@@ -40,7 +58,9 @@
               <div class="UploadCv__form-labelAndCheckbox">
                 <p ref="writeMotivationLetterText">I rather write my motivation letter in a text box:</p>
                 <div>
-                  <input ref="input_checkbox_motivation_letter" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showMotivationLetterByTextArea()" >
+                  <input ref="input_checkbox_motivation_letter" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showFileByTextArea($refs.input_file_motivation_letter,$refs.textArea_motivation_letter,
+                                                                                                                                                                   $refs.input_checkbox_motivation_letter,$refs.uploadMotivationLetterText)
+                  " >
                 </div>
               </div>
               <textarea ref="textArea_motivation_letter" name="textArea_motivation_letter" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."/>
@@ -48,15 +68,14 @@
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input ref="email" type="email" name="email" class="input" value="" @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
+              <input ref="email" type="email" name="email" class="input" value="" @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
             </div>
-
                      
             <div class="UploadCv__form-byTextArea">
               <div>
                 <p>Is there anything you would like to notify us about?</p>
               </div>
-              <textarea ref="textArea_message" name="textArea_message" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
+              <textarea ref="textArea_message" name="textArea_message" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage($refs.textArea_message)"/>
             </div>
 
             <div class="apply-btn">
@@ -98,12 +117,7 @@ export default {
         this.fileTextHide(this.$refs.textArea_motivation_letter);
     },
     methods: {
-        //check if value of upoaded file is not empty
-        checkFileLength: function(file) {
-            return file.value;
-        },
         submitForm() {
-            // Initialize the form data
             let formData = new FormData();
             const {
                 input_file_cv,
@@ -165,7 +179,6 @@ export default {
                     email.value = "Required field";
                 }
                 if (input_file_cv.value === "") {
-                    //this.cvNameShow();
                     this.fileNameShow(
                         this.$refs.input_file_cv,
                         this.$refs.input_checkbox_cv,
@@ -178,12 +191,33 @@ export default {
                         "Required field";
                 }
             }
-            this.showCVByTextArea();
-            this.showMotivationLetterByTextArea();
-            this.removeCvFile();
-            this.removeMotivationLetterFile();
+            this.showFileByTextArea(
+                this.$refs.input_file_cv,
+                this.$refs.textArea_cv,
+                this.$refs.input_checkbox_cv,
+                this.$refs.uploadCvText
+            );
+            this.showFileByTextArea(
+                this.$refs.input_file_motivation_letter,
+                this.$refs.textArea_motivation_letter,
+                this.$refs.input_checkbox_motivation_letter,
+                this.$refs.uploadMotivationLetterText
+            );
+            this.removeFile(
+                this.$refs.input_file_cv,
+                this.$refs.cvLabel,
+                this.$refs.cvName,
+                this.$refs.input_checkbox_cv,
+                this.$refs.writeCvText
+            );
+            this.removeFile(
+                this.$refs.input_file_motivation_letter,
+                this.$refs.motivationLetterLabel,
+                this.$refs.motivationLetterName,
+                this.$refs.input_checkbox_motivation_letter,
+                this.$refs.writeMotivationLetterText
+            );
         },
-
         // Handles a change on the file upload
         handleCvUpload() {
             const { input_file_cv, cvLabel } = this.$refs;
@@ -194,7 +228,6 @@ export default {
             ) {
                 this.setCheckBoxUnActive(this.$refs.writeCvText);
                 this.cvData = input_file_cv.files[0];
-                //this.cvNameShow();
                 this.fileNameShow(
                     this.$refs.input_file_cv,
                     this.$refs.input_checkbox_cv,
@@ -208,7 +241,6 @@ export default {
                 cvLabel.innerHTML = "";
             }
         },
-
         handleMotivationLetterUpload() {
             const {
                 input_file_motivation_letter,
@@ -223,7 +255,6 @@ export default {
                 this.setCheckBoxUnActive(this.$refs.writeMotivationLetterText);
                 this.motivationLetterData =
                     input_file_motivation_letter.files[0];
-                //this.motivationLetterNameShow();
                 this.fileNameShow(
                     this.$refs.input_file_motivation_letter,
                     this.$refs.input_checkbox_motivation_letter,
@@ -237,142 +268,92 @@ export default {
                 motivationLetterLabel.innerHTML = "";
             }
         },
-
-        // vlidate cv file exetinsion
-        cvCheckExtension() {
-            var file = this.$refs.input_file_cv;
-            if (/\.(doc|docx|pdf|txt)$/i.test(file.files[0].name) === false) {
-                this.$refs.requiredCvMSG.innerHTML = "Invalid File Type!";
-                //this.cvNameShow();
-                this.fileNameShow(
-                    this.$refs.input_file_cv,
-                    this.$refs.input_checkbox_cv,
-                    this.$refs.cvName
+        fileCheckExtension(
+            input_file,
+            input_checkBox,
+            file_Name,
+            file_Label,
+            write_file_text,
+            required_msg
+        ) {
+            if (
+                /\.(doc|docx|pdf|txt)$/i.test(input_file.files[0].name) ===
+                false
+            ) {
+                required_msg.innerHTML = "Invalid File Type!";
+                this.fileNameShow(input_file, input_checkBox, file_Name);
+                this.removeFile(
+                    input_file,
+                    file_Label,
+                    file_Name,
+                    input_checkBox,
+                    write_file_text
                 );
-                this.removeCvFile();
                 return false;
             }
         },
-        //validate ML file exetinsion
-        motivationLetterCheckExtension() {
-            var file = this.$refs.input_file_motivation_letter;
-            if (/\.(doc|docx|pdf|txt)$/i.test(file.files[0].name) === false) {
-                this.$refs.requiredMotivationLetterMSG.innerHTML =
-                    "Invalid File Type!";
-                //this.motivationLetterNameShow();
-                this.fileNameShow(
-                    this.$refs.input_file_motivation_letter,
-                    this.$refs.input_checkbox_motivation_letter,
-                    this.$refs.motivationLetterName
-                );
-                this.removeMotivationLetterFile();
-            }
-        },
-
-        handleEmail() {
-            const { email } = this.$refs;
-            if (this.isValidEmail() === true) {
+        handleEmail(email) {
+            if (this.isValidEmail(email) === true) {
                 this.emailData = email;
                 email.value = this.emailData.value;
             }
         },
-
-        handleMessage() {
-            const { textArea_message } = this.$refs;
-            this.messageData = textArea_message;
-            textArea_message.value = this.messageData.value;
+        handleMessage(message) {
+            this.messageData = message;
+            message.value = this.messageData.value;
         },
-
-        // Show & Hide CV CheckBox/Textarea section
-        showCVByTextArea() {
-            const { input_file_cv, textArea_cv } = this.$refs;
-            var checkBox = this.$refs.input_checkbox_cv;
-            var cvText = textArea_cv;
-            if (checkBox.checked === true) {
-                cvText.style.display = "block";
-                delete this.cvData;
-                input_file_cv.value = "";
-                //this.setCvUnActive();
-                this.setFileUnActive(this.$refs.uploadCvText);
-                input_file_cv.disabled = true;
+        showFileByTextArea(
+            input_file,
+            textArea_file,
+            input_checkBox,
+            uploadFile
+        ) {
+            if (input_checkBox.checked === true) {
+                textArea_file.style.display = "block";
+                input_file.value = "";
+                this.setFileUnActive(uploadFile);
+                input_file.disabled = true;
             } else {
-                cvText.style.display = "none";
-                //this.setCvActive();
-                this.setFileActive(this.$refs.uploadCvText);
-                input_file_cv.disabled = false;
+                textArea_file.style.display = "none";
+                this.setFileActive(uploadFile);
+                input_file.disabled = false;
             }
         },
-        // Show & Hide ML CheckBox/Textarea section
-        showMotivationLetterByTextArea() {
-            const { input_file_motivation_letter } = this.$refs;
-            var checkBox = this.$refs.input_checkbox_motivation_letter;
-            var motivationLetterText = this.$refs.textArea_motivation_letter;
-            if (checkBox.checked === true) {
-                motivationLetterText.style.display = "block";
-                delete this.motivationLetterData;
-                input_file_motivation_letter.value = "";
-                //this.setMotivationLetterUnActive();
-                this.setFileUnActive(this.$refs.uploadMotivationLetterText);
-                input_file_motivation_letter.disabled = true;
-            } else {
-                motivationLetterText.style.display = "none";
-                //this.setMotivationLetterActive();
-                this.setFileActive(this.$refs.uploadMotivationLetterText);
-                input_file_motivation_letter.disabled = false;
-            }
+        removeFile(
+            input_file,
+            file_label,
+            file_name,
+            input_checkBox,
+            writeText
+        ) {
+            input_file.value = "";
+            this.setCheckBoxActive(writeText);
+            this.fileNameHide(file_name);
+            file_label.innerHTML = "";
+            input_checkBox.disabled = false;
         },
-        /////////////////////////////////////////////////////
-        // NOT Completed
-        openUploadFileDialogueCV() {
-            const { input_file_cv } = this.$refs;
-            input_file_cv.click();
+        openUpload(e) {
+            e.click();
         },
-        // NOT Completed
-        openUploadFileDialogueML() {
-            const { input_file_motivation_letter } = this.$refs;
-            input_file_motivation_letter.click();
-        },
-
-        // Removes a selected CV file that user has uploaded
-        removeCvFile() {
-            const {
-                input_file_cv,
-                cvLabel,
-                cvName,
-                input_checkbox_cv,
-                writeCvText
-            } = this.$refs;
-            input_file_cv.value = "";
-            this.setCheckBoxActive(writeCvText);
-            this.fileNameHide(cvName);
-            cvLabel.innerHTML = "";
-            input_checkbox_cv.disabled = false;
-        },
-
-        // Removes a selected Motivation Letter file that user has uploaded
-        removeMotivationLetterFile() {
-            const {
-                input_file_motivation_letter,
-                motivationLetterLabel,
-                motivationLetterName,
-                input_checkbox_motivation_letter,
-                writeMotivationLetterText
-            } = this.$refs;
-            input_file_motivation_letter.value = "";
-            this.setCheckBoxActive(writeMotivationLetterText);
-            this.fileNameHide(motivationLetterName);
-            motivationLetterLabel.innerHTML = "";
-            input_checkbox_motivation_letter.disabled = false;
+        //check if value of upoaded file is not empty
+        checkFileLength: function(file) {
+            return file.value;
         },
         // show message when upload seccesses
         successMSG() {
-            const { email, textArea_message, successMessage } = this.$refs;
+            const {
+                email,
+                textArea_message,
+                successMessage,
+                UploadCv__form,
+                pageNameHeader
+            } = this.$refs;
             successMessage.innerHTML =
                 "You have submitted your CV and motivation letter successfully.";
             email.value = "";
             email.parentNode.classList.remove("active");
             textArea_message.value = "";
-            this.hideForm();
+            this.hideForm(UploadCv__form, pageNameHeader);
         },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
@@ -382,16 +363,13 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
-
         setCheckBoxUnActive(e) {
             e.classList.add("UploadCv__form-unAvailable");
         },
-
         setCheckBoxActive(e) {
             e.classList.remove("UploadCv__form-unAvailable");
             e.classList.add("UploadCv__form-Available");
         },
-
         setFileUnActive(e) {
             e.classList.add("UploadCv__form-unAvailable");
         },
@@ -399,27 +377,22 @@ export default {
             e.classList.remove("UploadCv__form-unAvailable");
             e.classList.add("UploadCv__form-Available");
         },
-
         fileTextHide(e) {
             e.style.display = "none";
         },
-
         fileNameShow(e, checkbox, name) {
             this.fileNameHide(e);
             this.disableCheckBox(e, checkbox);
             name.style.display = "block";
         },
-
         fileNameHide(e) {
             e.style.display = "none";
         },
-
         disableCheckBox(e, checkbox) {
             if (e.files.length !== 0) {
                 checkbox.disabled = true;
             }
         },
-
         emptyInputs() {
             const {
                 input_file_cv,
@@ -438,15 +411,11 @@ export default {
             this.$refs.input_checkbox_cv.checked = false;
             this.$refs.input_checkbox_motivation_letter.checked = false;
         },
-
-        emptyEmailRequired() {
-            const { email } = this.$refs;
+        emptyEmailRequired(email) {
             email.parentNode.classList.add("active");
             email.value = "";
         },
-
-        isValidEmail() {
-            const { email } = this.$refs;
+        isValidEmail(email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!re.test(email.value)) {
                 email.parentNode.classList.remove("active");
@@ -458,10 +427,7 @@ export default {
                 return true;
             }
         },
-
-        hideForm() {
-            var x = this.$refs.UploadCv__form;
-            var y = this.$refs.pageNameHeader;
+        hideForm(x, y) {
             y.style.display = "none";
             x.style.display = "none";
         }

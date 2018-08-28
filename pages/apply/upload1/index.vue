@@ -10,36 +10,34 @@
           <fieldset>
             <div class="half-width inputContainer">
               <label for="url">Assignment URL: (*)</label>
-              <input ref="url" type="url" name="url" class="input" @change="handleFileUpload()" @focus="setActive" @click="emptyUrlRequired()">
+              <input ref="url" type="url" name="url" class="input" @change="handleUrlUpload($refs.url)" @focus="setActive" @click="emptyUrlRequired($refs.url)">
             </div>
                       
             <div ref="assignmentDiv">
-              <P @click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>            
-              <input ref="input_file_assignment" type="file" class="UploadAssignment__form-inputText" name="input_file_assignment" @change="handleFileUpload1();imgCheckExtension()" >
+              <P @click="openUploadFileDialogue($refs.input_file_assignment)">+ Upload Assignment screenshot (*)</P>            
+              <input ref="input_file_assignment" type="file" class="UploadAssignment__form-inputText" name="input_file_assignment" @change="handleAssignmentUpload($refs.input_file_assignment,$refs.assignmentLabel);imgCheckExtension($refs.assignmentLabel)" >
               <h3 ref="requiredMSG"/>
               <div ref="assignmentName"><span ref="assignmentLabel" class="UploadAssignment__form-assignemntLabel"/>
-                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>                                                       
+                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeFile($refs.assignmentName)">Remove</button>                                                       
               </div>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
               <input ref="email" type="email" name="email" class="input" value=""                                           
-                     @change="handleEmail()" @focus="setActive" @click="emptyEmailRequired()">
+                     @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
             </div>
 
             <div class="UploadAssignment__form-byTextArea">
               <p>Is there anything you would like to notify us about?</p>
-              <textarea ref="message" name="message" class="UploadAssignment__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
+              <textarea ref="message" name="message" class="UploadAssignment__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage($refs.message)"/>
             </div>
                            
             <div class="apply-btn">
               <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm()">
-            </div>
-                    
+            </div>     
           </fieldset>
-        </form>
-                
+        </form>     
       </div>
       <div>
         <p ref="successMessage" class="UploadAssignment__successMessage"/>
@@ -70,11 +68,10 @@ export default {
         };
     },
     mounted: function() {
-        this.assignmentNameHide();
+        this.fileNameHide(this.$refs.assignmentName);
     },
     methods: {
         submitForm() {
-            // Initialize the form data
             let formData = new FormData();
             const {
                 url,
@@ -115,12 +112,10 @@ export default {
                 this.successMSG();
             } else {
                 if (email.value === "") {
-                    email.parentNode.classList.remove("active");
                     email.parentNode.classList.add("active");
                     email.value = "Required field";
                 }
                 if (url.value === "") {
-                    url.parentNode.classList.remove("active");
                     url.parentNode.classList.add("active");
                     url.value = "Required field";
                 }
@@ -128,18 +123,9 @@ export default {
                     this.$refs.requiredMSG.innerHTML = "Required field";
                 }
             }
-            this.removeAssignmentFile();
+            this.removeFile(this.$refs.assignmentName);
         },
-        // Handles a change on the url upload
-        handleFileUpload() {
-            const { url } = this.$refs;
-            if (this.checkUrl() === true) {
-                this.urlData = url;
-                url.value = this.urlData.value;
-            }
-        },
-        checkUrl() {
-            const { url } = this.$refs;
+        checkUrl(url) {
             var inputUrl = url.value;
             var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-[\]/]))?/;
             if (!pattern.test(inputUrl)) {
@@ -152,23 +138,27 @@ export default {
                 return true;
             }
         },
-        handleFileUpload1() {
-            const { input_file_assignment, assignmentLabel } = this.$refs;
-            this.assignmentData = input_file_assignment.files[0];
-            this.assignmentNameShow();
+        // Handles a change on the url upload
+        handleUrlUpload(url) {
+            if (this.checkUrl(url) === true) {
+                this.urlData = url;
+                url.value = this.urlData.value;
+            }
+        },
+        handleAssignmentUpload(input_file, file_label) {
+            this.assignmentData = input_file.files[0];
+            this.assignmentNameShow(this.$refs.assignmentName);
             this.$refs.requiredMSG.innerHTML = "";
-            assignmentLabel.innerHTML =
+            file_label.innerHTML =
                 "You Uploaded the file: " + this.assignmentData.name;
         },
-        handleEmail() {
-            const { email } = this.$refs;
-            if (this.isValidEmail() === true) {
+        handleEmail(email) {
+            if (this.isValidEmail(email) === true) {
                 this.emailData = email;
                 email.value = this.emailData.value;
             }
         },
-        isValidEmail() {
-            const { email } = this.$refs;
+        isValidEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!re.test(email.value)) {
                 email.parentNode.classList.remove("active");
@@ -181,44 +171,47 @@ export default {
             }
         },
         //validate screenshot exetinsion
-        imgCheckExtension() {
-            const { assignmentLabel } = this.$refs;
+        imgCheckExtension(assignmentLabel) {
             var file = this.$refs.input_file_assignment;
             if (
                 /\.(jpg|jpeg|png|gif|ico|svg)$/i.test(file.files[0].name) ===
                 false
             ) {
                 this.$refs.requiredMSG.innerHTML = "Invalid File Type!";
-                this.assignmentNameShow();
+                this.assignmentNameShow(this.$refs.assignmentName);
                 assignmentLabel.innerHTML = "";
-                this.removeAssignmentFile();
+                this.removeFile(this.$refs.assignmentName);
                 return false;
             }
         },
-
-        handleMessage() {
-            const { message } = this.$refs;
+        handleMessage(message) {
             this.messageData = message;
             message.value = this.messageData.value;
         },
         successMSG() {
-            const { url, email, message, successMessage } = this.$refs;
+            const {
+                url,
+                email,
+                message,
+                successMessage,
+                UploadAssignment__form,
+                pageNameHeader
+            } = this.$refs;
             successMessage.innerHTML =
                 "You have submitted your Assignment successfully.";
             email.value = "";
             url.value = "";
             message.value = "";
-            this.hideForm();
+            this.hideForm(UploadAssignment__form, pageNameHeader);
         },
         // Handles when the add file clicked
-        openUploadFileDialogue() {
-            const { input_file_assignment } = this.$refs;
-            input_file_assignment.click();
+        openUploadFileDialogue(e) {
+            e.click();
         },
         // Removes a select file the user has uploaded
-        removeAssignmentFile() {
+        removeFile(e) {
             delete this.assignmentData;
-            this.assignmentNameHide();
+            this.fileNameHide(e);
         },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
@@ -228,44 +221,33 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
-        hideAssgnmentiDiv() {
-            var x = this.$refs.assignmentDiv;
-            x.style.display = "none";
+        assignmentNameShow(e) {
+            e.style.display = "block";
         },
-        assignmentNameShow() {
-            var x = this.$refs.assignmentName;
-            x.style.display = "block";
+        fileNameHide(e) {
+            e.style.display = "none";
         },
-        assignmentNameHide() {
-            var x = this.$refs.assignmentName;
-            x.style.display = "none";
-        },
-        emptyEmailRequired() {
-            const { email } = this.$refs;
+        emptyEmailRequired(email) {
             if (email.value) {
                 email.parentNode.classList.remove("active");
             }
             email.parentNode.classList.add("active");
             email.value = "";
         },
-        emptyUrlRequired() {
-            const { url } = this.$refs;
+        emptyUrlRequired(url) {
             if (url.value) {
                 url.parentNode.classList.remove("active");
             }
             url.parentNode.classList.add("active");
             url.value = "";
         },
-        hideForm() {
-            var x = this.$refs.UploadAssignment__form;
-            var y = this.$refs.pageNameHeader;
+        hideForm(x, y) {
             y.style.display = "none";
             x.style.display = "none";
         }
     }
 };
 </script>
-
 <style lang="scss">
 .UploadAssignment {
     &__header {
