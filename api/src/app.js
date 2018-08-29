@@ -154,7 +154,7 @@ app.post("/apply", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
-        res.status(500).json({
+        res.status(400).json({
             errors
         });
     } else {
