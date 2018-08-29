@@ -38,7 +38,7 @@ function donate({ method, amount, description }, res) {
             description,
             redirectUrl,
             webhookUrl: process.env.WEBHOOK_URL,
-            method: method || undefined,
+            method: method || null,
             metadata: { orderId }
         })
         .then(payment => {
