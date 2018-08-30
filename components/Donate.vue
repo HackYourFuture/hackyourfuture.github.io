@@ -4,26 +4,28 @@
       <form class="form-group" @submit.prevent="submitDonation" >
         <label class="donate-label">Donate</label>
         <div class="form-check">
-          <input id="ideal" v-model="method" class="method-radio" type="radio" value="ideal" checked>
-          <label class="method-label" for="ideal"><i class="pf pf-ideal">Ideal</i></label>
+          <input id="ideal" v-model="method" class="method-radio" type="radio" value="ideal">
+          <label class="method-label" for="ideal"><i class="pf pf-ideal"/><span class="method-text-span">Ideal</span></label>
 
-          <input id="creditcard" v-model="method" class="method-radio" type="radio" value="creditcard" >
-          <label class="method-label" for="creditcard"><i class="pf pf-credit-card">Creditcard</i></label>
+          <input id="creditcard" v-model="method" class="method-radio" type="radio" value="creditcard">
+          <label class="method-label" for="creditcard"><i class="pf pf-credit-card"/><span class="method-text-span">Creditcard</span></label>
 
           <input id="bitcoin" v-model="method" class="method-radio" type="radio" value="bitcoin" >
-          <label class="method-label last" for="bitcoin"> <i class="pf pf-bitcoin-sign" >Bitcoin</i></label>
+          <label class="method-label last-method-label" for="bitcoin"> <i class="pf pf-bitcoin-sign" /><span class="method-text-span">Bitcoin</span></label>
         </div>
         <div class="input-container">
           <label for="amount" class="amount-label"> €</label>
-          <input v-validate="'decimal:2'" id="amount" v-model="amount" class="amount-input" type="number" name="amount" placeholder="Amount" > 
-        
+          <input id="amount" v-model="amount" class="amount-input" type="number" name="amount" placeholder="Amount" required> 
         </div>
+        <input id="description" v-model="description" class="description-input" type="text" name="description" placeholder="Message" > 
         <button class="submit-button" type="submit" name="submit" >Donate</button>
       </form>
     </div>
-    <div v-if="donated" class="donated-ok">
-      <p>Thanks For your donation</p>
-      <button @click="donated = false">Close</button>
+    <div v-if="donated" class="blur-screen"> 
+      <div v-if="donated" class="donated-ok">
+        <p>Thanks For your donation</p>
+        <button @click="donated = false">Close</button>
+      </div>
     </div>
   </div>
 </template>
@@ -36,8 +38,8 @@ export default {
         return {
             donated: false,
             method: "",
-            amount: 0,
-            description: "Hello"
+            amount: "",
+            description: ""
         };
     },
     mounted() {
@@ -57,7 +59,7 @@ export default {
                 body: JSON.stringify({
                     method: this.method,
                     amount: this.amount,
-                    description: this.description
+                    description: this.description || "No message"
                 })
             })
                 .then(res => res.json())
@@ -99,16 +101,11 @@ export default {
     overflow: hidden;
 }
 .form-container {
+    width: 310px;
     position: relative;
-    left: 250px;
-    width: 590px;
-    height: 300px;
-
+    height: 340px;
+    margin: 0 10px 0 10px;
     border-radius: 6px;
-
-    .form-group {
-        height: 300px;
-    }
 
     .donate-label {
         margin-bottom: 20px;
@@ -132,21 +129,28 @@ export default {
             margin-top: 5px;
             padding-right: 0;
             margin-right: 0;
+            padding: 0;
             vertical-align: middle;
         }
         .method-label {
+            display: flex;
+            font-size: 25px;
             position: relative;
             font-style: normal;
             cursor: pointer;
             margin-right: 40px;
             padding: 0;
         }
-        .last {
+        .last-method-label {
             margin: 0;
         }
 
-        .last i {
-            padding-top: 1px;
+        .last-method-label i {
+            padding: 1px 0 0 0;
+        }
+
+        .method-text-span {
+            display: none;
         }
     }
     .input-container {
@@ -179,22 +183,36 @@ export default {
 
     .form-group {
         text-align: center;
+        .description-input {
+            margin-top: 10px;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+        }
         .submit-button {
             margin-top: 15px;
             border-radius: 6px;
             zoom: 2;
+            background-color: white;
         }
     }
-
+    .blur-screen {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+    }
     .donated-ok {
         display: flex;
         flex-direction: column;
         position: absolute;
         top: 10px;
-        left: 20px;
-        font-size: 35px;
-        height: 250px;
-        width: 550px;
+        left: 10px;
+        font-size: 20px;
+        width: 330px;
+        height: 150px;
         border: 2px solid rgb(219, 213, 213);
         background-color: rgb(255, 255, 255);
         border-radius: 5px;
@@ -205,8 +223,7 @@ export default {
 
         p {
             text-align: center;
-            padding: 70px 5px 5px 5px;
-            height: 50%;
+            padding: 50px 5px 5px 5px;
         }
 
         button {
@@ -232,6 +249,30 @@ export default {
         }
         to {
             opacity: 1;
+        }
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 340px) {
+    .form-container {
+        width: 350px;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 767px) {
+    .form-container {
+        width: 600px;
+        .form-check {
+            .method-text-span {
+                display: inline-block;
+            }
+        }
+
+        .donated-ok {
+            top: 100px;
+            left: 140px;
         }
     }
 }
