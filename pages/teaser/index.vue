@@ -1,67 +1,64 @@
 <template>
   <div>
-    <Main class="Apply container">
-      <div class="Apply__header">
-        <h1>Join <br> Us!</h1>
-        <div class="Apply__header-image">
-          <img src="/gallery/11.jpg">
+    <Main class="TeaserPage container">
+      <div class="TeaserPage__header">
+        <h1>Women Coding Teaser</h1>
+        <div class="TeaserPage__header-image">
+          <img src="/gallery/21.jpg">
         </div>
-        <div class="Apply__header-dates" v-html="dates"/>
+        <div class="TeaserPage__header-dates" v-html="teaser_dates"/>
+        <div class="TeaserPage__header-about" v-html="teaser_about"/>
       </div>
-
-      <div class="Apply__content" v-html="content"/>
-
-      <div ref="Apply__form" class="Apply__form form">
-        <h2>Apply for our next class:</h2>
+      
+      <div ref="TeaserPage__form" class="TeaserPage__form form">
+        <h2>Apply for our next teaser day:</h2>
         <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
+            <div class="half-width inputContainer">
+              <label for="email">e-mail</label>
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" @click="emptyRequiredField($refs.email)">
+            </div>
+            
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
               <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive" @click="emptyRequiredField($refs.userName)">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="street">Street</label>
-              <input id="street" ref="street" type="text" class="input" name="street" @focus="setActive" @click="emptyRequiredField($refs.street)">
+              <label for="userSurname">Surname</label>
+              <input id="userSurname" ref="userSurname" type="text" class="input" name="userSurname" @focus="setActive" @click="emptyRequiredField($refs.userSurname)">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="city">City</label>
-              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive" @click="emptyRequiredField($refs.city)">
-            </div>
-
-            <div class="half-width inputContainer">
-              <select id="country" ref="country" name="country" class="input" @focus="setActive">
-                <option value="nl">The Netherlands</option>
-              </select>
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" @click="emptyRequiredField($refs.email)">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="phone">phone</label>
+              <label for="phone">Phone Number</label>
               <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive" @click="emptyRequiredField($refs.phone)">
             </div>
 
-            <div class="full-width inputContainer">
-              <label for="eductation">Educational Background</label>
-              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive" @click="emptyRequiredField($refs.education)">
-            </div>
-
-            <div class="full-width inputContainer">
-              <label for="how-hear">How did you hear about us?</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive" @click="emptyRequiredField($refs.how-hear)">
-            </div>
-
             <div class="full-width computer inputContainer">
-              <label for="computer">I have a computer</label>
+              <label for="computer">Do you have your own laptop?</label>
               <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
+            </div>
+
+            <div class="full-width inputContainer">
+              <label for="eductation">Education / Work Background</label>
+              <input id="education" ref="education" type="text" class="input" name="education" @focus="setActive" @click="emptyRequiredField($refs.education)">
+            </div>
+
+            <div class="full-width computer inputContainer">
+              <label for="experience">Do you have any prior programming experience?</label>
+              <select id="experience" ref="experience" name="experience" class="input" @focus="setActive">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="full-width inputContainer">
+              <label for="message">Is there something else you would like to notify us about?</label>
+              <input id="message" ref="message" type="text" class="input" name="message" @focus="setActive">
             </div>
 
             <div class="apply-btn">
@@ -70,9 +67,9 @@
           </fieldset>
         </form>
       </div>
-     
+
       <div>
-        <p ref="successMessage" class="Apply__successMessage"/>
+        <p ref="successMessage" class="TeaserPage__successMessage"/>
       </div>
     </Main>
   </div>
@@ -82,22 +79,22 @@
 import axios from "~/plugins/axios";
 export default {
     async asyncData() {
-        let dates;
-        let content;
+        let teaser_dates;
+        let teaser_about;
         try {
-            let req = await axios.get("/content/en/apply/apply-dates.json");
-            let req1 = await axios.get("/content/en/apply/apply-content.json");
-            dates = req.data.body;
-            content = req1.data.body;
+            let req = await axios.get("/content/en/teaser/teaser-dates.json");
+            let req1 = await axios.get("/content/en/teaser/teaser-about.json");
+            teaser_dates = req.data.body;
+            teaser_about = req1.data.body;
         } catch (e) {
             console.log(e);
-            dates = false;
-            content = false;
+            teaser_dates = false;
+            teaser_about = false;
         }
         return {
             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
-            dates: dates ? dates : null,
-            content: content ? content : null
+            teaser_dates: teaser_dates ? teaser_dates : null,
+            teaser_about: teaser_about ? teaser_about : null
         };
     },
     mounted: function() {
@@ -116,7 +113,7 @@ export default {
                 Object.values(e.target.elements).forEach(
                     input => (fields[input.name] = input.value)
         ); // eslint-disable-line
-        let req = await axios.post(process.env.lambdaUrl + "apply", fields); // eslint-disable-line
+        let req = await axios.post(process.env.lambdaUrl + "teaser", fields); // eslint-disable-line
             }
         },
         setActive(e) {
@@ -130,12 +127,10 @@ export default {
         emptyInputs() {
             const inputs = [
                 this.$refs.email,
-                this.$refs.street,
                 this.$refs.userName,
-                this.$refs.city,
+                this.$refs.userSurname,
                 this.$refs.phone,
-                this.$refs.education,
-                this.$refs.how_hear
+                this.$refs.education
             ];
             inputs.forEach(element => {
                 if (element.value === "" || element.value === null) {
@@ -155,7 +150,7 @@ export default {
         },
         successMSG() {
             const { successMessage } = this.$refs;
-            this.$refs.Apply__form.style.display = "none";
+            this.$refs.TeaserPage__form.style.display = "none";
             successMessage.innerHTML = "You have applied successfully.";
         }
     }
@@ -163,13 +158,21 @@ export default {
 </script>
 
 <style lang="scss">
-.Apply {
+.TeaserPage {
+    &__container {
+        margin: 0 $base-vertical-rithm * 10;
+        & > div {
+            display: inline-block;
+            width: calc(50% - 100px);
+            vertical-align: top;
+            margin: 50px;
+        }
+    }
     &__header {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
             padding: 0;
         }
-
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -180,22 +183,25 @@ export default {
             line-height: 60px;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 5;
-                font-size: 32px;
-                line-height: 40px;
+                font-size: 24px;
+                line-height: 24px;
             }
         }
         &-image {
-            width: 55%;
+            width: 50%;
             display: inline-block;
+            vertical-align: top;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
             }
         }
+        &-links a {
+            font-size: 18px;
+        }
         &-dates {
-            margin-left: $base-vertical-rithm * 15;
-            margin-top: $base-vertical-rithm * 15;
-            width: 100%;
+            margin: $base-vertical-rithm * 15;
+            // margin-left: $base-vertical-rithm * 15;
+            width: 90%;
             display: inline-block;
             vertical-align: top;
             @include breakpoint("mobile_landscape") {
@@ -209,42 +215,32 @@ export default {
                     margin: $base-vertical-rithm * 5 auto;
                 }
             }
-            h3 {
-                font-weight: bold;
-                color: $color-purple;
-            }
             h4 {
+                font-size: 18px;
                 color: $color-purple;
                 font-weight: bold;
             }
         }
-    }
-    &__content {
-        width: 70%;
-        margin: 0 auto;
-        @include breakpoint("mobile_landscape") {
-            width: 80%;
+        &-about {
+            width: 90%;
             margin: 0 auto;
-        }
-        h1 {
-            color: $color-purple;
-            line-height: 1;
-            margin-bottom: $base-vertical-rithm * 5;
-        }
-        h2 {
-            color: $color-purple;
-        }
-        ul li {
-            list-style: disc;
-        }
-        ul + p {
-            margin-top: 1rem;
+            @include breakpoint("mobile_landscape") {
+                width: 80%;
+                margin: 0 auto;
+            }
+            h2 {
+                color: $color-purple;
+                font-weight: bold;
+                font-size: 28px;
+                line-height: 1;
+                margin-bottom: $base-vertical-rithm * 5;
+            }
         }
     }
     &__form {
         width: 75%;
         margin-left: 2.5%;
-        padding: $base-vertical-rithm * 10;
+        padding: $base-vertical-rithm * 15;
         @include breakpoint("mobile_landscape") {
             width: 100%;
             padding: $base-vertical-rithm * 5;
@@ -257,7 +253,7 @@ export default {
         }
         h1 {
             font-weight: bold;
-            font-size: 36px;
+            font-size: 30px;
             width: 60%;
             line-height: 36px;
         }

@@ -6,14 +6,14 @@
         <div class="content" v-html="what"/>
 
         <div class="About__video">
-          <nuxt-link :to="'/'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
+          <nuxt-link :to="'/about'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
           <YoutubePlayer class="About__video-player"/>
         </div>
       </section>
 
       <section class="Apply">
         <div class="Apply__image">
-          <img src="/gallery/00.jpg">
+          <img src="/gallery/12.jpg">
         </div>
         <div class="Apply__container">
           <h1>Join our 6 month web development course</h1>
@@ -24,37 +24,51 @@
       <section class="Curiculum">
         <div class="Curiculum__header">
           <h1>Expert teachers,<br> up-to-date skills</h1>
-          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curiculum</span></a>
+          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curriculum</span></a>
         </div>
        
         
         <div class="Curiculum__image">
-          <img src="/gallery/02.jpg">
+          <img src="/gallery/25.jpg">
         </div>
+        <div class="Curiculum__container">
+          <div class="Curiculum__content" v-html="curiculum"/>
+          <div class="Curiculum__content">
+            <nuxt-link :to="'/teach'">Time is your most valuable resource. <span class="underline">Find out about donating your time and expertise here.</span></nuxt-link>
+          </div>
+        </div>
+      </section>
 
-        <div class="Curiculum__content" v-html="curiculum"/>
-        <div class="Curiculum__content">
-          <nuxt-link :to="'/teach'"><span class="underline">Time is your most valuable resource. Find out about donating your time and expertise here.</span></nuxt-link>
+      <section class="Teaser">
+        <div class="Teaser__container">
+          <h1>Women Coding Teaser</h1>
+          <div class="Teaser__content" v-html="teaser"/>
+          <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
+        </div>
+        <div class="Teaser__image">
+          <img src="/gallery/22.jpg">
         </div>
       </section>
 
       <section class="Hire">
-        <h1>We could always use some help…</h1>
-        <div v-html="hire"/>
-        <div>
-          <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+        <div class="Hire__container">
+          <h1>Hire our graduates</h1>
+          <div v-html="hire"/>
+          <div>
+            <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+          </div>
+          <div v-html="laptops"/>
+          <div>
+            <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
+          </div>
+            
         </div>
-        <div v-html="laptops"/>
-        <div>
-          <nuxt-link :to="'/support'"><span class="underline">Find out how to donate laptops. </span></nuxt-link>
-        </div>
+        
         <div class="Hire__image">
-          <img src="/gallery/03.jpg">
+          <img src="/gallery/20.jpg">
         </div>
       </section>
     </Main>
-
-    <Signup/>
 
     <section class="Chapters"/>
 
@@ -89,6 +103,7 @@ export default {
         let curiculum;
         let hire;
         let laptops;
+        let teaser;
         try {
             let req = await axios.get("/content/en/index-about.json");
             let wReq = await axios.get("/content/en/what.json");
@@ -96,6 +111,7 @@ export default {
             let cReq = await axios.get("/content/en/curiculum.json");
             let hReq = await axios.get("/content/en/index-hire.json");
             let lReq = await axios.get("/content/en/index-laptops.json");
+            let tReq = await axios.get("/content/en/index-teaser.json");
 
             what = wReq.data.body;
             apply = aReq.data.body;
@@ -103,6 +119,7 @@ export default {
             curiculum = cReq.data.body;
             hire = hReq.data.body;
             laptops = lReq.data.body;
+            teaser = tReq.data.body;
         } catch (e) {
             console.log(e);
             data = false;
@@ -112,6 +129,7 @@ export default {
             about: data ? data : null,
             hire: hire ? hire : null,
             laptops: laptops ? laptops : null,
+            teaser: teaser ? teaser : null,
             what,
             apply,
             curiculum,
@@ -142,6 +160,9 @@ export default {
             margin: $base-vertical-rithm * 10 0;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                font-size: 24px;
+                line-height: 24px;
+                margin: $base-vertical-rithm * 5 0;
             }
         }
         p {
@@ -156,7 +177,7 @@ export default {
         margin: $base-vertical-rithm * 10 0;
         a {
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 10 40px;
+                margin: $base-vertical-rithm * 5 40px;
             }
         }
         &-player {
@@ -175,11 +196,18 @@ export default {
         font-size: 36px;
         line-height: 36px;
         font-weight: 900;
+        @include breakpoint("mobile_landscape") {
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
 }
 
 .Apply {
     margin: $base-vertical-rithm * 30 0;
+    @include breakpoint("mobile_landscape") {
+        margin: $base-vertical-rithm * 20 0;
+    }
     &__image {
         display: inline-block;
         width: 45%;
@@ -191,7 +219,7 @@ export default {
         }
     }
     &__container {
-        width: 45%;
+        width: 44%;
         display: inline-block;
         text-align: center;
         vertical-align: middle;
@@ -203,6 +231,11 @@ export default {
             font-size: 36px;
             color: $color-purple;
             line-height: 50px;
+            @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+                margin: $base-vertical-rithm * 5 0;
+            }
         }
         a {
             display: block;
@@ -218,6 +251,9 @@ export default {
 
 .Curiculum {
     margin: $base-vertical-rithm * 30 0;
+    @include breakpoint("mobile_landscape") {
+        margin: $base-vertical-rithm * 5 0;
+    }
     &__header {
         margin: 0 $base-vertical-rithm * 10;
         padding: $base-vertical-rithm * 2;
@@ -235,6 +271,9 @@ export default {
             font-size: 36px;
             line-height: 50px;
             @include breakpoint("mobile_landscape") {
+                font-size: 24px;
+                line-height: 24px;
+                width: 100%;
                 margin: $base-vertical-rithm * 5;
             }
         }
@@ -266,20 +305,85 @@ export default {
         margin-top: -5%;
         display: inline-block;
         vertical-align: top;
-
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;
             margin-top: 0;
         }
     }
-    &__content {
+    &__container {
+        width: 45%;
         display: inline-block;
-        width: 50%;
         margin: $base-vertical-rithm * 5;
-        font-weight: 400;
         @include breakpoint("mobile_landscape") {
             width: 80%;
+            margin: $base-vertical-rithm * 10 auto 0;
+            display: inherit;
+        }
+        &__content {
+            font-weight: 400;
+            a {
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: $base-vertical-rithm * 5;
+                span:after {
+                    bottom: -5px;
+                }
+            }
+        }
+    }
+}
+
+.Teaser {
+    margin: $base-vertical-rithm * 30 $base-vertical-rithm * 10;
+    @include breakpoint("mobile_landscape") {
+        margin: 0;
+    }
+
+    &__container {
+        width: 45%;
+        display: inline-block;
+        margin: $base-vertical-rithm * 5;
+        @include breakpoint("mobile_landscape") {
+            width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+            display: inherit;
+        }
+        h1 {
+            font-size: 36px;
+            color: $color-purple;
+            width: 45%;
+            line-height: 50px;
+            margin: $base-vertical-rithm * 10 0;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 24px;
+                line-height: 24px;
+            }
+        }
+        a {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: $base-vertical-rithm * 5;
+            span:after {
+                bottom: -5px;
+            }
+        }
+        &__content {
+            font-weight: 400;
+        }
+    }
+    &__image {
+        vertical-align: bottom;
+        display: inline-block;
+        width: 45%;
+        margin: 0 auto;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 0;
         }
     }
 }
@@ -287,29 +391,40 @@ export default {
 .Hire {
     margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 5 $base-vertical-rithm * 5;
+        margin: $base-vertical-rithm * 5 0;
     }
-    & > div {
-        width: 35%;
-        margin: 0 $base-vertical-rithm * 10;
+    &__container {
+        width: 45%;
         display: inline-block;
+        margin: $base-vertical-rithm * 5;
         @include breakpoint("mobile_landscape") {
-            width: 100%;
-            margin-left: 0;
+            width: 80%;
+            margin: 0 auto $base-vertical-rithm * 10;
+            display: inherit;
         }
     }
     h1 {
-        font-size: 55px;
-        font-weight: bold;
+        font-size: 36px;
         color: $color-purple;
-        width: 100%;
+        width: 45%;
         line-height: 50px;
         margin: $base-vertical-rithm * 10 0;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            font-size: 24px;
+            line-height: 24px;
+        }
     }
+
     &__image {
         width: 55%;
         display: inline-block;
         vertical-align: top;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 0;
+        }
     }
 }
 </style>
