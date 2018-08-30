@@ -7,3 +7,6 @@ static/api
 *.zip
 api/emails
 api/google-sheet-config.json
+.env
+*.log
+

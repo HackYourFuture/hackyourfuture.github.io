@@ -53,7 +53,7 @@
 
             <div class="full-width inputContainer">
               <label for="how-hear">How did you hear about us?</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive" @click="emptyRequiredField($refs.how-hear)">
+              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive" @click="emptyRequiredField($refs.how_hear)">
             </div>
 
             <div class="full-width computer inputContainer">

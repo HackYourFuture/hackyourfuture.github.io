@@ -23,7 +23,8 @@ before_script:
 script:
   - npm install
   - npm run lint
-  - npm run generate 
+  - npm run generate
+  - make api/dist 
 
 deploy:
   - provider: script

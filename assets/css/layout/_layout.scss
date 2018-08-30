@@ -1,3 +1,5 @@
+@import 'base/mixins';
+
 Main.container {
   margin: 5%;
   background: $color-grey;
@@ -24,14 +26,25 @@ span.underline {
     border-bottom:2px solid $color-purple;
     margin: 25px 50px;
     vertical-align: top;
+    @include breakpoint("mobile_landscape") {
+     margin: 20px 20px;
+    }
   }
   .half-width {
-    width: calc(50% - 100px)  
+    width: calc(50% - 100px);
+    @include breakpoint("mobile_landscape") {
+      width: calc(100% - 40px);
+    }
   }
   .full-width {
-    width: calc(100% - 100px)  
+    width: calc(100% - 100px) ;
+    @include breakpoint("mobile_landscape") {
+      width: calc(100% - 40px);
+      height:70px;
+    }
   }
 }
+
 input {
   font-size:18px;
   padding:10px 10px 10px 5px;

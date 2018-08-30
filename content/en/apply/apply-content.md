@@ -1,6 +1,6 @@
 # We teach talented refugees who want to start a career in web development, with or without a tech background. Our six-month coding courses begin every two months. 
 
-## requirements 
+## Requirements 
 
 We’re looking for people who: 
 

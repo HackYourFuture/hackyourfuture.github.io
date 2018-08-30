@@ -15,13 +15,10 @@
         <nuxt-link :to="'/teach/'">Teach</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/support/'">Support</nuxt-link>
+        <nuxt-link :to="'/support/'">Hire</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link :to="'/news/'">News</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/about/'">About</nuxt-link>
@@ -30,15 +27,14 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/upload/'">Upload</nuxt-link>
+        <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
       </li>
-        
     </ul>
   </nav>
 
 </template>
 <script>
-// import eventBus from '~/utils/event-bus';
+import eventBus from "~/utils/event-bus";
 
 export default {
     data() {
@@ -46,8 +42,13 @@ export default {
             toggled: false
         };
     },
+    watch: {
+        "$route.name": function() {
+            this.toggled = false;
+        }
+    },
     created() {
-        // eventBus.$on('toggle-mobile-nav', this.toggleNav)
+        eventBus.$on("toggle-mobile-nav", this.toggleNav);
     },
     methods: {
         toggleSearch() {
@@ -69,7 +70,7 @@ export default {
 <style lang="scss">
 .MobileNav {
     position: fixed;
-    top: 0;
+    top: 60px;
     bottom: 0;
     left: 0;
     width: 220px;

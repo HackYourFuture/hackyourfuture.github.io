@@ -26,15 +26,18 @@
     "webpack-cli": "^2.0.13"
   },
   "dependencies": {
+    "@mollie/api-client": "^2.0.1",
     "aws-sdk": "^2.291.0",
     "aws-serverless-express": "^3.1.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-validator": "^5.3.0",
     "google-auth-library": "^1.6.1",
     "googleapis": "^32.0.0",
     "lodash.template": "^4.4.0",
-    "multer": "^1.3.1"
+    "multer": "^1.3.1",
+    "multer-s3": "^2.7.0"
   }
 }

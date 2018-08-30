@@ -16,7 +16,7 @@
   },
   "scripts": {
     "postinstall": "cd api && npm i",
-    "dev": "export ENVIRONMENT=dev&& npm-run-all dev:config dev:start",
+    "dev": " npm-run-all dev:config dev:start",
     "dev:config": "cd api && npm run dev:config",
     "dev:start": "npm-run-all --parallel dev:start:*",
     "dev:start:api": "cd api && npm run dev",
