@@ -26,7 +26,7 @@
       <div class="Footer__Info container">
         <p>KvK: 64992160</p>
         <p>Copyright © HackYourFuture {{ date }}</p>
-       <!--  <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link> -->
+        <!--  <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link> -->
       </div>
 
       <div class="Footer__Social container">
@@ -84,9 +84,9 @@ export default {
             a {
                 display: block;
             }
-            a img{
-                height:20px;
-                width:20px;
+            a img {
+                height: 20px;
+                width: 20px;
             }
             @media (max-width: 800px) {
                 width: 100%;
