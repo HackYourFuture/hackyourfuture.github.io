@@ -29,13 +29,13 @@
       </div>
 
     </Main>
-    <Signup/>
+   <!--  <Signup/> -->
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Signup from "~/components/signup/Signup";
+// import Signup from "~/components/signup/Signup";
 
 export default {
     async asyncData() {
@@ -67,7 +67,6 @@ export default {
         };
     },
     components: {
-        Signup
     }
 };
 </script>

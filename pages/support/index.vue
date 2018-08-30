@@ -11,6 +11,18 @@
         </div>
       </div>
     </Main>
+    <div class="Support__companies">
+      <h3>Where our students work</h3>
+      <div class="Support__companies-items">
+        <img src="/partners/bijenkorf.svg">
+        <img src="/partners/booking.svg">
+        <img src="/partners/klm.svg">
+        <!-- <img src="/partners/kpmg.svg"> -->
+        <img src="/partners/nuon.svg">
+        <!-- <img src="/partners/owlin.svg"> -->
+        <!-- <img src="/partners/screen6.svg"> -->
+      </div>
+    </div>
     <Partners/>
     <Signup :color="'grey'"/>
   </div>
@@ -54,8 +66,8 @@ export default {
         a {
             color: $color-purple;
             font-weight: bold;
-            font-size: 32px;
-            line-height: 40px;
+            font-size: 52px;
+            line-height: 60px;
             span:after {
                 bottom: -5px;
             }
@@ -98,6 +110,36 @@ export default {
                 span:after {
                     bottom: -5px;
                 }
+            }
+        }
+    }
+    &__companies {
+        margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
+        margin-bottom: $base-vertical-rithm * 5;
+        h3 {
+            font-size: 24px;
+            color: $color-purple;
+            font-weight: bold;
+        }
+        &-items {
+            margin-top: $base-vertical-rithm * 5;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            position: relative;
+            img {
+                display: flex;
+                font-weight: bold;
+                color: $color-purple;
+                width: calc(15% -5px);
+                height: 150px;
+                margin: 15px;
+            }
+            .hoi {
+                height: 10%;
+                width: auto;
             }
         }
     }

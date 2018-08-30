@@ -61,13 +61,18 @@ export default {
         border: 2px solid $color-purple;
         padding: 0px 10px;
         text-transform: uppercase;
-        font-weight: 100;
+        font-weight: bold;
+        color: $color-purple;
         position: absolute;
         top: 2px;
         right: 0;
         margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
         @include breakpoint("mobile_landscape") {
             display: none;
+        }
+        &:hover {
+            color: white;
+            background: $color-purple;
         }
     }
     .menu-button {
