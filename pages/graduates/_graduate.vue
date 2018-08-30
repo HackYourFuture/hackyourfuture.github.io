@@ -3,7 +3,7 @@
     <main class="Graduates container">
       <div class="Graduates__active">
         <div class="Graduates__active-frame">
-            <img :src="'/graduates/' + $route.params.graduate + '.jpg'">
+          <img :src="'/graduates/' + $route.params.graduate + '.jpg'">
         </div>  
         <div class="Graduates__active-content" v-html="content"/>
       </div>
@@ -43,15 +43,15 @@ export default {
     position: relative;
     &__active {
         padding: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
-        &-frame{
+        &-frame {
             width: 35%;
-            background-color:$color-purple;
-            display:inline-block;
+            background-color: $color-purple;
+            display: inline-block;
         }
-        h1{
+        h1 {
             margin-bottom: $base-vertical-rithm * 5;
         }
-        a{
+        a {
             text-decoration: underline;
         }
         img {

@@ -29,7 +29,7 @@
       </div>
 
     </Main>
-   <!--  <Signup/> -->
+    <!--  <Signup/> -->
   </div>
 </template>
 
@@ -66,8 +66,7 @@ export default {
             how_school_works: how_school_works ? how_school_works : null
         };
     },
-    components: {
-    }
+    components: {}
 };
 </script>
 
