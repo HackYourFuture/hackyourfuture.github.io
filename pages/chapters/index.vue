@@ -19,7 +19,7 @@
         </div>
       </div>
     </Main>
-    <Signup :color="'grey'"/>
+   <!--  <Signup :color="'grey'"/> -->
   </div>
 </template>
 

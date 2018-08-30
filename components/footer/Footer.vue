@@ -5,13 +5,13 @@
       <div class="Footer__Links container">
         <nuxt-link :to="'/'">Home</nuxt-link>
         <nuxt-link :to="'/apply/'">Apply</nuxt-link>
-        <nuxt-link :to="'/trainers/'">Trainers</nuxt-link>
-        <nuxt-link :to="'/organisations/'">Organisations</nuxt-link>
+        <nuxt-link :to="'/teach/'">Teach</nuxt-link>
+        <nuxt-link :to="'/support/'">Hire</nuxt-link>
       </div>
 
       <div class="Footer__Links container">
         <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
-        <nuxt-link :to="'/news/'">News</nuxt-link>
+        <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
         <nuxt-link :to="'/about/'">About</nuxt-link>
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
@@ -26,15 +26,15 @@
       <div class="Footer__Info container">
         <p>KvK: 64992160</p>
         <p>Copyright © HackYourFuture {{ date }}</p>
-        <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link>
+       <!--  <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link> -->
       </div>
 
-      <!-- <div class="Footer__Social container">
-        <a href="https://twitter.com/wonderlandams" target="_blank"><img src="~/static/images/icons/twitter.svg"></a>
-        <a href="https://dribbble.com/wonderlandams" target="_blank"><img src="~/static/images/icons/dribbble.svg"></a>
-        <a href="https://uxdesign.wonderlandindustry.com/" target="_blank"><img src="~/static/images/icons/medium.svg"></a>
-        <a href="https://www.instagram.com/wonderlandindustry/" target="_blank"><img src="~/static/images/icons/instagram.svg"></a>
-      </div> -->
+      <div class="Footer__Social container">
+        <a href="https://twitter.com/hackyourfutures" target="_blank"><img src="/icons/tw.svg"></a>
+        <a href="https://www.facebook.com/hackyourfuturenow/" target="_blank"><img src="/icons/fb.svg"></a>
+        <a href="https://www.linkedin.com/company/hackyourfuture/" target="_blank"><img src="/icons/in.svg"></a>
+        <a href="https://github.com/HackYourFuture" target="_blank"><img src="/icons/git.svg"></a>
+      </div>
 
     </div>
   </footer>
@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss">
 .Footer {
-    display: none;
+    //display: none;
     background: $color-purple;
     margin: 0px #{-$base-margin} #{-$base-margin};
     padding-bottom: 6 * $base-vertical-rithm;
@@ -83,6 +83,10 @@ export default {
             }
             a {
                 display: block;
+            }
+            a img{
+                height:20px;
+                width:20px;
             }
             @media (max-width: 800px) {
                 width: 100%;

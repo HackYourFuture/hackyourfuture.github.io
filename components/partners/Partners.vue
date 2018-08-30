@@ -2,10 +2,10 @@
   <div class="Partners">
     <h3>Official partners & supporters</h3>
     <div class="Partners__items">
-      <p>github</p>
-      <p>oranje fonds</p>
-      <p>vsb</p>
-      <p>etc</p>
+      <img src="/partners/ing.svg">
+      <img src="/partners/doen.svg">
+      <img src="/partners/atlasian.svg">
+      <img src="/partners/backbase.svg">
     </div>
   </div>
 </template>
@@ -30,10 +30,12 @@
         -ms-flex-pack: justify;
         justify-content: space-between;
         position: relative;
-        p {
+        img {
             display: flex;
             font-weight: bold;
             color: $color-purple;
+            width: calc(15% -5px);
+            height: 100px;
         }
     }
 }

@@ -2,16 +2,18 @@
   <div>
     <main class="Graduates container">
       <div class="Graduates__active">
-        <img :src="'/makers/' + $route.params.graduate + '.png'">
+        <div class="Graduates__active-frame">
+            <img :src="'/graduates/' + $route.params.graduate + '.jpg'">
+        </div>  
         <div class="Graduates__active-content" v-html="content"/>
       </div>
-      <Makers/>
+      <Graduates/>
     </main>
   </div>
 </template>
 
 <script>
-import Makers from "~/components/makers/Makers";
+import Graduates from "~/components/graduates/Graduates";
 import axios from "~/plugins/axios";
 export default {
     async asyncData({ params }) {
@@ -31,7 +33,7 @@ export default {
         };
     },
     components: {
-        Makers
+        Graduates
     }
 };
 </script>
@@ -41,8 +43,20 @@ export default {
     position: relative;
     &__active {
         padding: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
+        &-frame{
+            width: 35%;
+            background-color:$color-purple;
+            display:inline-block;
+        }
+        h1{
+            margin-bottom: $base-vertical-rithm * 5;
+        }
+        a{
+            text-decoration: underline;
+        }
         img {
-            width: 30%;
+            padding: $base-vertical-rithm * 5;
+            width: 100%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;

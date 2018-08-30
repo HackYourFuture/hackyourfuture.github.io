@@ -123,9 +123,8 @@ export default {
         padding: $base-vertical-rithm * 20;
         img {
             width: 100%;
-            padding-bottom: 100%;
             border-radius: 50%;
-            background: $color-purple;
+            //background: $color-purple;
             display: block;
         }
         h1 {
@@ -137,18 +136,24 @@ export default {
             margin-top: $base-vertical-rithm * 20;
         }
         &-member {
-            width: calc(25% - 50px);
+            width: calc(15% - 50px);
             margin-right: 50px;
             display: inline-block;
             text-align: center;
+            margin-bottom: 25px;
             h3,
             p,
             a {
                 margin: 0;
                 color: $color-purple;
             }
+            a img {
+                width: 20px;
+                margin: auto;
+                border-radius: 0%;
+            }
             h3 {
-                margin-top: $base-vertical-rithm * 8;
+                margin-top: $base-vertical-rithm * 4;
                 font-weight: bold;
             }
             &:last-child {
