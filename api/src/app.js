@@ -25,20 +25,19 @@ const s3 = new aws.S3({
         secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
     }
 });
-
 const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: "hyf-website-uploads",
-        key: function(req, file, cb) {
+        key: function (req, file, cb) {
             cb(
                 null,
                 file.fieldname +
-                    "-" +
-                    encodeURIComponent(req.body.email) +
-                    "-" +
-                    Date.now() +
-                    path.extname(file.originalname)
+                "-" +
+                encodeURIComponent(req.body.email) +
+                "-" +
+                Date.now() +
+                path.extname(file.originalname)
             );
         }
     }),
@@ -83,7 +82,7 @@ function fileType(file, cb) {
             cb(
                 new Error(
                     "File upload only supports the following filetypes :" +
-                        fileTypes
+                    fileTypes
                 )
             );
         }
