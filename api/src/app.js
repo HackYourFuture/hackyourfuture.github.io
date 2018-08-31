@@ -10,8 +10,8 @@ const path = require("path");
 const {
     Apply,
     ContactUs,
-    upload_cv_ml,
-    upload_assignment
+    Upload_cv_ml,
+    Upload_assignment
 } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
 const { decryptData } = require("./utils/email-crypto.js");
@@ -19,10 +19,18 @@ const { donate, paymentStatus } = require("./donation/donate");
 
 const app = express();
 
+// const s3 = new aws.S3({
+//     credentials: {
+//         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//         secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
+//     }
+// });
 const s3 = new aws.S3({
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
+        accessKeyId: "ASIA3OMYWYCHGRGUOCGA",
+        secretAccessKey: "slGQqNAQoUEhFStG2BxhpBZDHnLmsYK5kUbamhS7",
+        SessionToken:
+            "FQoGZXIvYXdzEPD//////////wEaDBh6fBdj9X5sjRHPuSLwAYkusKU0bmQ3FhMmLpZ/7MuUr3GWO6S8OWKPG6Lmipg0ij7VKBq017EoiEG8v5A9RFwUbyaZg3UofS0oGTnt35eKV5xKli3QV7XWN/USRmlZTQmFAiHLC8kFyCuI/lEPqa1dH1iaYBzUXsXBMceUqfYyF+G85/12GYy7iUvYm+XivRkMNvvOd6Joz+IluWlN0C1szaDX9bdyEViMaxhsBtWhNqpnZd6HYdw7Znot8USRZxPkfKvMu92m7Fm/WS3WHWkrCMQL2K0YuvkWmSQwF4nNNKny67gPrKgNB5Wi/K16WmnRHqF+TcVGQ7M0ix+SXijKoqXcBQ=="
     }
 });
 const upload = multer({
@@ -162,9 +170,9 @@ app.post("/apply", (req, res) => {
 });
 app.post("/contact-us", (req, res) => ContactUs(req, res));
 app.post("/apply", (req, res) => Apply(req, res));
-app.post("/apply/upload", FileUpload, (req, res) => upload_cv_ml(req, res));
+app.post("/apply/upload", FileUpload, (req, res) => Upload_cv_ml(req, res));
 app.post("/apply/upload1", FileUpload, (req, res) =>
-    upload_assignment(req, res)
+    Upload_assignment(req, res)
 );
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
