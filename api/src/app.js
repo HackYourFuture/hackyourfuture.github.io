@@ -10,11 +10,11 @@ const path = require("path");
 const {
     Apply,
     ContactUs,
-    upload_cv_ml,
-    upload_assignment
+    UploadCVML,
+    UploadAssignment
 } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
-const { decryptData } = require("./utils/crypto.js");
+const { decryptData } = require("./utils/email-crypto.js");
 const { donate, paymentStatus } = require("./donation/donate");
 
 const app = express();
@@ -154,18 +154,53 @@ app.post("/apply", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
-        res.status(500).json({
+        res.status(400).json({
             errors
         });
     } else {
         Apply(req, res);
     }
 });
-app.post("/contact-us", (req, res) => ContactUs(req, res));
+app.post("/contact-us", (req, res) => {
+    req.check("firstName", "first name is too short")
+        .isLength({
+            min: 3
+        })
+        .isString();
+    req.check("lastName", "last name is too short")
+        .isLength({
+            min: 3
+        })
+        .isString();
+
+    req.check("phone", "Invalid phone number")
+        .isNumeric()
+        .isLength({
+            min: 9
+        });
+    req.check("email", "Invalid Email Address").isEmail();
+
+    req.check("message", "This message is too short")
+        .isLength({
+            min: 3
+        })
+        .isString();
+
+    let errors = req.validationErrors();
+
+    if (errors) {
+        console.error("Validation errors: ", errors);
+        res.status(400).json({
+            errors
+        });
+    } else {
+        ContactUs(req, res);
+    }
+});
 app.post("/apply", (req, res) => Apply(req, res));
-app.post("/apply/upload", FileUpload, (req, res) => upload_cv_ml(req, res));
+app.post("/apply/upload", FileUpload, (req, res) => UploadCVML(req, res));
 app.post("/apply/upload1", FileUpload, (req, res) =>
-    upload_assignment(req, res)
+    UploadAssignment(req, res)
 );
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
@@ -190,13 +225,23 @@ app.get("/donation/status", (req, res) => {
 
     if (orderid) {
         paymentStatus(orderid)
-            .then(msg => res.json({ message: msg }))
-            .catch(err => res.json({ message: err }));
+            .then(msg =>
+                res.json({
+                    message: msg
+                })
+            )
+            .catch(err =>
+                res.json({
+                    message: err
+                })
+            );
 
         return;
     }
 
-    res.status(400).json({ message: "Not order id provided" });
+    res.status(400).json({
+        message: "Not order id provided"
+    });
 });
 
 module.exports = app;
