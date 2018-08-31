@@ -31,7 +31,6 @@ module.exports = async (req, res) => {
     });
 
     sendEmail(
-        fromEmail,
         [fromEmail],
         email("apply_to_org.tpl", { params: req.body }),
         "A new student applied"
@@ -50,7 +49,6 @@ module.exports = async (req, res) => {
     const verififactioURL = `${website}/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
 
     sendEmail(
-        fromEmail,
         [req.body.email],
         email("apply_to_student.tpl", { params: { url: verififactioURL } }),
         "Thank you for applying"

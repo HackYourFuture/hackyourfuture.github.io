@@ -6,7 +6,7 @@ const AWS_CONFIG = {
 
 const ses = new AWS.SES(AWS_CONFIG);
 
-const sendEmail = (Source, ToAddresses, Data, Subject) => {
+const sendEmail = (ToAddresses, Data, Subject, ReplyToAddresses = []) => {
     return new Promise((resolve, reject) => {
         if (process.env.DEVELOPMENT) {
             resolve();
@@ -28,7 +28,8 @@ const sendEmail = (Source, ToAddresses, Data, Subject) => {
                         Data: Subject
                     }
                 },
-                Source
+                Source: "info@hackyourfuture.net",
+                ReplyToAddresses
             },
             (err, data) => {
                 if (err) return reject(err);
