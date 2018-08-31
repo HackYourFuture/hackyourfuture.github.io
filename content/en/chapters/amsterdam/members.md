@@ -1,7 +1,7 @@
 <div class="Chapter__team-member">
   <img src="/team/4.jpeg">
   <h3>Gijs Corstens</h3>
-  <p>Manging Director</p>
+  <p>Managing Director</p>
   <a href="mailto:gijs@hackyourfuture.net"><img src="/icons/mail.svg"></a>
   <a href="https://www.linkedin.com/in/gijs-corstens-3b998414/"><img src="/icons/in.svg"></a>
 </div>
