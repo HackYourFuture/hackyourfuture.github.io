@@ -101,11 +101,11 @@ export default {
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
-            width: 20%;
+            width: 30%;
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 margin-left: 0;
@@ -123,6 +123,7 @@ export default {
         margin: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 18px;
+        color: black;
         span:after {
             bottom: -5px;
         }
@@ -132,8 +133,8 @@ export default {
         }
     }
     &__content {
-        width: 40%;
-        margin-left: 50%;
+        width: 50%;
+        margin-left: 40%;
         @include breakpoint("mobile_landscape") {
             width: 80%;
             margin: $base-vertical-rithm * 10 auto;

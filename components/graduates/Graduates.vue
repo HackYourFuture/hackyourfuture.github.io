@@ -56,11 +56,15 @@ export default {
     &__items {
         margin: 25px -25px;
         overflow-x: scroll;
+        @include breakpoint("mobile_landscape") {
+            overflow-x: none;
+        }
         &-inner {
             width: max-content;
             height: 460px;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
+                height: auto;
             }
         }
     }
@@ -71,9 +75,7 @@ export default {
         width: 350px;
         margin: 25px;
         display: inline-block;
-        @include breakpoint("mobile_landscape") {
-            width: calc(50% - 50px);
-        }
+
         h3,
         p {
             color: white;

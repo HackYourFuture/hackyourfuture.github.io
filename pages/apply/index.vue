@@ -144,8 +144,8 @@ export default {
             width: 20%;
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
 
             @include breakpoint("mobile_landscape") {
@@ -200,9 +200,14 @@ export default {
             color: $color-purple;
             line-height: 1;
             margin: 0 $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+            @media (max-width: 800px) {
+                margin: 0 0 5 * $base-vertical-rithm;
+            }
         }
         h2 {
             color: $color-purple;
+            font-size: 2em;
+            font-weight: bold;
         }
         ul li {
             list-style: disc;

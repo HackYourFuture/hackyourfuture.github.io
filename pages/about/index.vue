@@ -16,7 +16,7 @@
       <div class="About__container results">
         <div v-html="results_today"/>
         <div class="links">
-          <nuxt-link :to="'/'">You want<br> to <span class="underline">help?</span></nuxt-link>
+          <nuxt-link :to="'/teach'">You want<br> to <span class="underline">help?</span></nuxt-link>
           <nuxt-link :to="'/chapters'">You want <br>to <span class="underline">donate</span></nuxt-link>
         </div>
       </div>
@@ -29,13 +29,13 @@
       </div>
 
     </Main>
-    <!--  <Signup/> -->
+    <Signup :color="'grey'"/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-// import Signup from "~/components/signup/Signup";
+import Signup from "~/components/signup/Signup";
 
 export default {
     async asyncData() {
@@ -66,7 +66,9 @@ export default {
             how_school_works: how_school_works ? how_school_works : null
         };
     },
-    components: {}
+    components: {
+        Signup
+    }
 };
 </script>
 
@@ -155,6 +157,7 @@ export default {
                 width: 100%;
             }
             a {
+                color: black;
                 font-size: 24px;
                 line-height: 30px;
                 @include breakpoint("mobile_landscape") {

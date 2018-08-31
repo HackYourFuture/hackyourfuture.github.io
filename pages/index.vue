@@ -76,7 +76,7 @@
       <Graduates/>
     </section>
 
-    <!-- <Signup/> -->
+    <Signup :color="'grey'"/>
 
     <Partners/>
 
@@ -222,7 +222,6 @@ export default {
     &__container {
         width: 44%;
         display: inline-block;
-        //text-align: center;
         vertical-align: middle;
         @include breakpoint("mobile_landscape") {
             margin-top: $base-vertical-rithm * 10;
@@ -322,24 +321,20 @@ export default {
             margin: $base-vertical-rithm * 10 auto 0;
             display: inherit;
         }
-        &__content {
-            background: yellow;
+    }
+    &__content {
+        a {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: $base-vertical-rithm * 5;
+            span:after {
+                bottom: -5px;
+            }
         }
-        // &__content {
-        //     font-weight: 400;
-        //     a {
-        //         display: block;
-        //         font-size: 24px;
-        //         font-weight: bold;
-        //         margin-top: $base-vertical-rithm * 5;
-        //         span:after {
-        //             bottom: -5px;
-        //         }
-        //     }
-        //     &-link a{
-        //         color:black;
-        //     }
-        // }
+        &-link a {
+            color: black;
+        }
     }
 }
 
@@ -405,6 +400,9 @@ export default {
         width: 45%;
         display: inline-block;
         margin: $base-vertical-rithm * 5;
+        a {
+            color: black;
+        }
         @include breakpoint("mobile_landscape") {
             width: 80%;
             margin: 0 auto $base-vertical-rithm * 10;

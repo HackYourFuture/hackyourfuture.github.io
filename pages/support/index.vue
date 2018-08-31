@@ -17,20 +17,15 @@
         <img src="/partners/bijenkorf.svg">
         <img src="/partners/booking.svg">
         <img src="/partners/klm.svg">
-        <!-- <img src="/partners/kpmg.svg"> -->
         <img src="/partners/nuon.svg">
-        <!-- <img src="/partners/owlin.svg"> -->
-        <!-- <img src="/partners/screen6.svg"> -->
       </div>
     </div>
     <Partners/>
-    <Signup :color="'grey'"/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Signup from "~/components/signup/Signup";
 import Partners from "~/components/partners/Partners";
 export default {
     async asyncData() {
@@ -50,7 +45,6 @@ export default {
         };
     },
     components: {
-        Signup,
         Partners
     }
 };
@@ -66,11 +60,16 @@ export default {
         a {
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             span:after {
                 bottom: -5px;
             }
+        }
+        span a {
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 25px;
         }
         &-content {
             display: inline-block;
@@ -140,19 +139,6 @@ export default {
             .hoi {
                 height: 10%;
                 width: auto;
-            }
-        }
-    }
-    &__footer {
-        margin: 0 $base-vertical-rithm * 10;
-        a {
-            margin: 50px;
-            display: inline-block;
-            font-weight: bold;
-            font-size: 30px;
-            line-height: 40px;
-            &:nth-child(2) {
-                margin-left: 25%;
             }
         }
     }
