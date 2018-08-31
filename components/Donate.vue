@@ -33,8 +33,8 @@
 <script>
 import "~/assets/css/css/paymentfont.min.css";
 const { lambdaUrl } = process.env;
-const URL_DONATION_SUBMIT = `${lambdaUrl}/donate`;
-const URL_DONATION_STATUS = `${lambdaUrl}/donation/status`;
+const URL_DONATION_SUBMIT = `${lambdaUrl}donate`;
+const URL_DONATION_STATUS = `${lambdaUrl}donation/status`;
 
 export default {
     data: function() {
