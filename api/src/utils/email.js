@@ -21,7 +21,8 @@ module.exports = (emailFile, data) => {
         "apply_to_org.tpl": require("../../emails_template/apply_to_org.tpl"),
         "apply_to_student.tpl": require("../../emails_template/apply_to_student.tpl"),
         "contact_us.tpl": require("../../emails_template/contact_us.tpl"),
-        "send_to_admin.txt": require("../../emails_template/send_to_admin.txt")
+        "send_to_admin.txt": require("../../emails_template/send_to_admin.txt"),
+        "apply_to_teach_to_org.tpl": require("../../emails_template/apply_to_teach_to_org.tpl")
     };
 
     return template(emails[emailFile])(data);
