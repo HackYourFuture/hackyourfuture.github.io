@@ -50,7 +50,15 @@ export default {
         height: 60px;
     }
 
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
     .HeaderNav {
+        flex: auto;
+        display: flex;
+        flex-direction: row;
         margin: $base-vertical-rithm * 2;
         text-align: center;
         @include breakpoint("mobile_landscape") {
@@ -58,12 +66,13 @@ export default {
         }
     }
     .donate-btn {
+        align-self: center;
         border: 2px solid $color-purple;
         padding: 0px 10px;
         text-transform: uppercase;
         font-weight: bold;
         color: $color-purple;
-        position: absolute;
+        width: 120px;
         top: 2px;
         right: 0;
         margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
