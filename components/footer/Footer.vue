@@ -11,7 +11,7 @@
 
       <div class="Footer__Links container">
         <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
-        <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
+        <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
         <nuxt-link :to="'/about/'">About</nuxt-link>
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
@@ -53,10 +53,8 @@ export default {
 
 <style lang="scss">
 .Footer {
-    //display: none;
     background: $color-purple;
     margin: 0px #{-$base-margin} #{-$base-margin};
-    padding-bottom: 6 * $base-vertical-rithm;
     color: $color-white;
     font-family: $fontWorkSans;
     letter-spacing: 0.5px;
@@ -70,8 +68,8 @@ export default {
         -ms-flex-pack: justify;
         justify-content: space-between;
         position: relative;
-        padding-left: 4 * $base-vertical-rithm;
-        padding-right: 4 * $base-vertical-rithm;
+        padding-left: 10 * $base-vertical-rithm;
+        padding-right: 10 * $base-vertical-rithm;
         @media (max-width: 800px) {
             display: block;
         }
@@ -87,22 +85,39 @@ export default {
             a img {
                 height: 20px;
                 width: 20px;
+                @media (max-width: 800px) {
+                    height: 30px;
+                    width: 30px;
+                    margin: 2%;
+                }
             }
             @media (max-width: 800px) {
-                width: 100%;
+                width: calc(50% -10px);
                 padding: 20px 0px;
+                display: inline-block;
+                margin: 5px;
+                vertical-align: top;
             }
             &:first-child {
                 padding-left: 0px;
             }
             &:last-child {
                 padding-right: 0px;
+                @media (max-width: 800px) {
+                    width: 100%;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+                }
             }
         }
     }
     &__Links {
         width: 10%;
     }
+
     &__Adress {
         width: 20%;
     }

@@ -1,1 +1,1 @@
-Are you interested in starting your own coding school? contact us at info@hackyourfuture.net. You can also check out our open source documentation about how to set up  your own [Coding School](https://github.com/HackYourFuture/startacodeschool)
+Are you interested in starting your own coding school? Contact us at <span class="underline">info@hackyourfuture.net</span>. You can also check out our open source documentation about how to set up  your own <span class="underline">[Coding School](https://github.com/HackYourFuture/startacodeschool)</span>.
