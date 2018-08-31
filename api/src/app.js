@@ -10,8 +10,8 @@ const path = require("path");
 const {
     Apply,
     ContactUs,
-    upload_cv_ml,
-    upload_assignment
+    UploadCVML,
+    UploadAssignment
 } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
 const { decryptData } = require("./utils/email-crypto.js");
@@ -25,7 +25,6 @@ const s3 = new aws.S3({
         secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
     }
 });
-
 const upload = multer({
     storage: multerS3({
         s3: s3,
@@ -163,9 +162,9 @@ app.post("/apply", (req, res) => {
 });
 app.post("/contact-us", (req, res) => ContactUs(req, res));
 app.post("/apply", (req, res) => Apply(req, res));
-app.post("/apply/upload", FileUpload, (req, res) => upload_cv_ml(req, res));
+app.post("/apply/upload", FileUpload, (req, res) => UploadCVML(req, res));
 app.post("/apply/upload1", FileUpload, (req, res) =>
-    upload_assignment(req, res)
+    UploadAssignment(req, res)
 );
 app.get("/get-applicant", (req, res) => {
     const { id, url } = req.query;
