@@ -12,7 +12,7 @@ const {
     ContactUs,
     UploadCVML,
     UploadAssignment,
-    Teach,
+    Teach
 } = require("./middlewares");
 const { getApplicant } = require("./data/update-sheet");
 const { decryptData } = require("./utils/email-crypto.js");
