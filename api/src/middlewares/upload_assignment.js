@@ -23,18 +23,14 @@ module.exports = (req, res) => {
                 updateApplicant(email, updatedUrlAssignment, req.files)
                     .then(() => {
                         sendEmail(
-                            fromEmail,
                             [email],
                             "** Confirmation email **",
                             "We've received your files"
                         );
                         sendEmail(
-                            fromEmail,
-                            applicationMail,
+                            [applicationMail],
                             "** Confirmation email **",
-                            `Applicant uploaded Assignment successfully:${[
-                                email
-                            ]}`
+                            `Applicant uploaded Assignment successfully:${email}`
                         );
                     })
                     .then(() => {
@@ -44,10 +40,9 @@ module.exports = (req, res) => {
                     })
                     .catch(() => {
                         sendEmail(
-                            fromEmail,
-                            fromEmail,
+                            [fromEmail],
                             "** Confirmation email **",
-                            `Uploading Assignment file is failed:${[email]}`
+                            `Uploading Assignment file is failed:${email}`
                         );
                         res.status(500).send({
                             message: "Something went wrong"

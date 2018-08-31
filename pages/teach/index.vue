@@ -24,8 +24,6 @@
       </div>
 
       <div class="Teach__container teach">
-        <!-- Not sure if we need another image here -->
-          
         <div class="Teach__container-image">
           <img src="/gallery/10.jpg">
         </div>
@@ -60,7 +58,7 @@
             </div>
             <div class="full-width inputContainer">
             
-              <label for="message">Please tell us something about your work or educational background</label>
+              <label for="message">Please tell us something about yourself</label>
               <input id="message" type="message" name="message" @focus="setActive">
             </div>
   
@@ -134,13 +132,13 @@ export default {
             padding: 0;
         }
         h1 {
-            margin: $base-vertical-rithm * 10;
-            margin-bottom: $base-vertical-rithm * 2;
+            margin: $base-vertical-rithm * 15 $base-vertical-rithm * 10
+                $base-vertical-rithm * 2;
             width: 30%;
             color: $color-purple;
             font-weight: bold;
             font-size: 60px;
-            line-height: 70px;
+            line-height: 1.25em;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
@@ -243,6 +241,7 @@ export default {
                 margin-top: 0;
             }
             a {
+                color: black;
                 display: block;
                 margin-top: 40px;
                 font-weight: bold;

@@ -26,7 +26,7 @@ Please also send your CV if you have one.
 
 Click on this link to send the essay and CV:
 
- <%- params.url %>
+ <%= params.url %>
 
 For more news about the program makes sure to check our website www.hackyourfuture.net
 

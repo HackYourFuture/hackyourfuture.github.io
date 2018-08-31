@@ -4,10 +4,10 @@ const toEmail = "info@hackyourfuture.net";
 
 module.exports = (req, res) => {
     sendEmail(
-        req.body.email,
         [toEmail],
         email("contact_us.tpl", { params: req.body }),
-        "New contact request"
+        "New contact request",
+        req.body.email
     )
         .then(() => {
             console.log("=== ALL EMAILS ARE SENT!!!");
