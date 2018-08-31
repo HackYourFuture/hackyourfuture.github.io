@@ -1,5 +1,8 @@
 const path = require("path");
+const nodeExternals = require("webpack-node-externals");
+
 module.exports = {
+    mode: "production",
     entry: {
         main: `${__dirname}/main.js`
     },
@@ -9,6 +12,7 @@ module.exports = {
         path: path.join(__dirname, "dist")
     },
     target: "node",
+    externals: [nodeExternals()],
     module: {
         rules: [
             {

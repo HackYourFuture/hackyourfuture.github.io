@@ -1,7 +1,7 @@
 <template>
   <header class="Header">
     <div class="container max-width">
-      <div class="icon menu-button">
+      <div :class="{pressed: menuOpen}" class="icon menu-button" @click="toggleMenu">
         <span class="icon-menu"/>
         <span class="icon-cross"/>
       </div>
@@ -12,10 +12,29 @@
 </template>
 
 <script>
+import eventBus from "~/utils/event-bus";
 import HeaderNav from "./HeaderNav";
+import HeaderNavMobile from "./HeaderNavMobile";
 export default {
     components: {
-        HeaderNav
+        HeaderNav,
+        HeaderNavMobile
+    },
+    data() {
+        return {
+            menuOpen: false
+        };
+    },
+    watch: {
+        "$route.name": function() {
+            this.menuOpen = false;
+        }
+    },
+    methods: {
+        toggleMenu() {
+            this.menuOpen = !this.menuOpen;
+            eventBus.$emit("toggle-mobile-nav", this.menuOpen);
+        }
     }
 };
 </script>
@@ -27,6 +46,9 @@ export default {
     background: white;
     z-index: 10;
     top: 0;
+    @include breakpoint("mobile_landscape") {
+        height: 60px;
+    }
 
     .HeaderNav {
         margin: $base-vertical-rithm * 2;
@@ -49,29 +71,40 @@ export default {
         }
     }
     .menu-button {
-        top: 23px;
+        top: 20px;
         position: absolute;
-        left: 16px;
+        left: 20px;
         width: 22px;
         height: 22px;
         overflow: hidden;
+        display: none;
+        @include breakpoint("mobile_landscape") {
+            display: block;
+        }
         &.pressed {
             .icon-menu {
-                transform: translateY(-18px) rotate(90deg);
+                transform: translateX(50px);
             }
             .icon-cross {
-                transform: translateY(-23px) rotate(0deg);
+                transform: translateX(0px);
             }
         }
         .icon-menu,
         .icon-cross {
             position: absolute;
             transition: transform 0.25s ease-out;
+            background-size: cover;
+            background-repeat: no-repeat;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        .icon-menu {
+            background-image: url("/icons/002-menu-button.svg");
         }
         .icon-cross {
-            top: 20px;
-            font-size: 21px;
-            transform: rotate(90deg);
+            background-image: url("/icons/001-cancel.svg");
+            transform: translateX(-50px);
         }
     }
 }

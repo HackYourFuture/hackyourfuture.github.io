@@ -3,44 +3,14 @@
     <h1>Meet our graduates</h1>
     <div class="Makers__items">
       <div class="Makers__items-inner">
-        <div class="Makers__item">
-          <div class="Makers__item-image">
-            <img src="/makers/amena.png">
-          </div>
-          <h3>Amena</h3>
-          <p>Currently working at NOS</p>
-        </div>
-
-        <div class="Makers__item">
-          <div class="Makers__item-image">
-            <img src="/makers/lamma.png">
-          </div>
-          <h3>Lamma</h3>
-          <p>Currently working at NOS</p>
-        </div>
-
-        <div class="Makers__item">
-          <div class="Makers__item-image">
-            <img src="/makers/nazar.png">
-          </div>
-          <h3>Nazar</h3>
-          <p>Currently working at NOS</p>
-        </div>
-
-        <div class="Makers__item">
-          <div class="Makers__item-image">
-            <img src="/makers/nazar.png">
-          </div>
-          <h3>Nazar</h3>
-          <p>Currently working at NOS</p>
-        </div>
-
-        <div class="Makers__item">
-          <div class="Makers__item-image">
-            <img src="/makers/nazar.png">
-          </div>
-          <h3>Nazar</h3>
-          <p>Currently working at NOS</p>
+        <div v-for="(maker, key) in makers" :key="key" class="Makers__item">
+          <nuxt-link :to="'/graduates/' + maker.route">
+            <div class="Makers__item-image">
+              <img :src="'/makers/' + maker.route + '.png'">
+            </div>
+            <h3>{{ maker.name }}</h3>
+            <p>{{ maker.description }}</p>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -48,6 +18,34 @@
 </template>
 
 <script>
+export default {
+    data() {
+        return {
+            makers: [
+                {
+                    name: "Amena",
+                    route: "amena",
+                    description: "Currently working at NOS"
+                },
+                {
+                    name: "Lamma",
+                    route: "lamma",
+                    description: "Currently working at NOS"
+                },
+                {
+                    name: "Nazar",
+                    route: "nazar",
+                    description: "Currently working at NOS"
+                },
+                {
+                    name: "Nazar",
+                    route: "nazar",
+                    description: "Currently working at NOS"
+                }
+            ]
+        };
+    }
+};
 </script> 
 
 <style lang="scss">
