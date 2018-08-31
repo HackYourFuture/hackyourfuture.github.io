@@ -144,9 +144,10 @@ export default {
             width: 20%;
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
+
             @include breakpoint("mobile_landscape") {
                 margin: $base-vertical-rithm * 5;
                 font-size: 32px;
@@ -154,7 +155,7 @@ export default {
             }
         }
         &-image {
-            width: 55%;
+            width: 60%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
@@ -198,13 +199,19 @@ export default {
         h1 {
             color: $color-purple;
             line-height: 1;
-            margin-bottom: $base-vertical-rithm * 5;
+            margin: 0 $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+            @media (max-width: 800px) {
+                margin: 0 0 5 * $base-vertical-rithm;
+            }
         }
         h2 {
             color: $color-purple;
+            font-size: 2em;
+            font-weight: bold;
         }
         ul li {
             list-style: disc;
+            margin: 5px;
         }
         ul + p {
             margin-top: 1rem;
