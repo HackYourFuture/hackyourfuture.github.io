@@ -32,6 +32,9 @@
 
 <script>
 import "~/assets/css/css/paymentfont.min.css";
+const { lambdaUrl } = process.env;
+const URL_DONATION_SUBMIT = `${lambdaUrl}/donate`;
+const URL_DONATION_STATUS = `${lambdaUrl}/donation/status`;
 
 export default {
     data: function() {
@@ -47,11 +50,7 @@ export default {
     },
     methods: {
         submitDonation() {
-            const submitURL =
-                process.env.SUBMIT_DONATION_URL ||
-                "http://localhost:3005/donate";
-
-            fetch(submitURL, {
+            fetch(URL_DONATION_SUBMIT, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -71,15 +70,8 @@ export default {
         paymentStatus() {
             const orderId = this.$route.query.orderid;
             if (orderId !== undefined) {
-                let donationStatusURL =
-                    process.env.GET_DONATION_STATUS_URL ||
-                    "http://localhost:3005/donation/status";
-
-                donationStatusURL = donationStatusURL.concat(
-                    "/?orderid=",
-                    orderId
-                );
-                fetch(donationStatusURL)
+                const url = URL_DONATION_STATUS.concat("/?orderid=", orderId);
+                fetch(url)
                     .then(response => response.json())
                     .then(json => {
                         if (json.message === "Donation went ok") {
