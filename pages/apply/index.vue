@@ -7,78 +7,79 @@
           <img src="/gallery/11.jpg">
         </div>
         <div class="Apply__header-dates" v-html="dates"/>
-
       </div>
 
       <div class="Apply__content" v-html="content"/>
 
-      <div class="Apply__form form">
+      <div ref="Apply__form" class="Apply__form form">
         <h2>Apply for our next class:</h2>
         <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
-
-              <input id="userName" type="text" class="input" name="userName" @focus="setActive">
+              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive" @click="emptyRequiredField($refs.userName)">
             </div>
+
             <div class="half-width inputContainer">
               <label for="street">Street</label>
-
-              <input id="street" type="text" class="input" name="street" @focus="setActive">
+              <input id="street" ref="street" type="text" class="input" name="street" @focus="setActive" @click="emptyRequiredField($refs.street)">
             </div>
+
             <div class="half-width inputContainer">
               <label for="city">City</label>
-
-              <input id="city" type="text" class="input" name="city" @focus="setActive">
+              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive" @click="emptyRequiredField($refs.city)">
             </div>
-            <div class="half-width inputContainer">
 
-              <select id="country" name="country" class="input" @focus="setActive">
+            <div class="half-width inputContainer">
+              <select id="country" ref="country" name="country" class="input" @focus="setActive">
                 <option value="nl">The Netherlands</option>
               </select>
             </div>
-            <div class="half-width inputContainer">
 
+            <div class="half-width inputContainer">
               <label for="email">e-mail</label>
-              <input id="email" type="email" class="input" name="email" @focus="setActive">
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" @click="emptyRequiredField($refs.email)">
             </div>
+
             <div class="half-width inputContainer">
-
               <label for="phone">phone</label>
-              <input id="phone" type="number" class="input" name="phone" @focus="setActive">
+              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive" @click="emptyRequiredField($refs.phone)">
             </div>
-            <div class="full-width inputContainer">
 
+            <div class="full-width inputContainer">
               <label for="eductation">Educational Background</label>
-              <input id="education" type="eductation" class="input" name="education" @focus="setActive">
+              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive" @click="emptyRequiredField($refs.education)">
             </div>
+
             <div class="full-width inputContainer">
-
               <label for="how-hear">How did you hear about us?</label>
-              <input id="how-hear" type="how-hear" class="input" name="how_hear" @focus="setActive" >
+              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive" @click="emptyRequiredField($refs.how_hear)">
             </div>
-            <div class="full-width computer inputContainer">
 
+            <div class="full-width computer inputContainer">
               <label for="computer">I have a computer</label>
-              <select id="computer" name="computer" class="input" @focus="setActive">
+              <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
+
             <div class="apply-btn">
               <input type="submit" value="Apply">
             </div>
           </fieldset>
         </form>
       </div>
+     
+      <div>
+        <p ref="successMessage" class="Apply__successMessage"/>
+      </div>
     </Main>
-
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-
 export default {
     async asyncData() {
         let dates;
@@ -110,13 +111,13 @@ export default {
     },
     methods: {
         async formUrlApply(e) {
-            const fields = {};
-            Object.values(e.target.elements).forEach(
-                input =>(fields[input.name] = input.value)); // eslint-disable-line
-            let req = await axios.post(process.env.lambdaUrl + "apply", fields) // eslint-disable-line
-
-            // TODO: redirect to application success route
-            // TODO: try/catch for application POST failure
+            if (this.emptyInputs() === true) {
+                const fields = {};
+                Object.values(e.target.elements).forEach(
+                    input => (fields[input.name] = input.value)
+        ); // eslint-disable-line
+        let req = await axios.post(process.env.lambdaUrl + "apply", fields); // eslint-disable-line
+            }
         },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
@@ -125,6 +126,37 @@ export default {
                 }
             });
             e.target.parentNode.classList.add("active");
+        },
+        emptyInputs() {
+            const inputs = [
+                this.$refs.email,
+                this.$refs.street,
+                this.$refs.userName,
+                this.$refs.city,
+                this.$refs.phone,
+                this.$refs.education,
+                this.$refs.how_hear
+            ];
+            inputs.forEach(element => {
+                if (element.value === "" || element.value === null) {
+                    element.parentNode.classList.add("active");
+                    element.value = "Required field";
+                    return false;
+                } else {
+                    this.successMSG();
+                    return true;
+                }
+            });
+            return true;
+        },
+        emptyRequiredField(e) {
+            e.parentNode.classList.add("active");
+            e.value = "";
+        },
+        successMSG() {
+            const { successMessage } = this.$refs;
+            this.$refs.Apply__form.style.display = "none";
+            successMessage.innerHTML = "You have applied successfully.";
         }
     }
 };
@@ -194,7 +226,6 @@ export default {
             width: 80%;
             margin: 0 auto;
         }
-
         h1 {
             color: $color-purple;
             line-height: 1;
@@ -219,7 +250,6 @@ export default {
             padding: $base-vertical-rithm * 5;
             margin: 0;
         }
-
         p,
         h1 {
             margin-left: 50px;
@@ -248,6 +278,13 @@ export default {
             font-weight: bold;
             font-size: 24px;
         }
+    }
+    &__successMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 24px;
+        color: $color-purple;
+        text-align: center;
     }
 }
 </style>
