@@ -21,6 +21,7 @@ before_install:
 before_script:
 
 script:
+  - dig www.npmjs.com @1.1.1.1
   - npm install
   - npm run lint
   - npm run generate
