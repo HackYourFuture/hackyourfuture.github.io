@@ -1,6 +1,6 @@
 <div>
 <h4>Dates:</h4>
-<p>30th of September </4>
+<p>30th of September </p>
 <p>2nd of December</p>
 </div>
 
