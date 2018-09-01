@@ -25,22 +25,22 @@ module.exports = async (req, res) => {
     }
 
     // eslint-disable-next-line
-
-    saveApplicant(totalRows || 1, req.body).catch(error => {
+    try {
+        await saveApplicant(totalRows || 1, req.body);
+    } catch (error) {
         console.log("Save Applicant FAILED:", error, req.body);
-    });
+    }
 
-    sendEmail(
-        [fromEmail],
-        email("apply_to_org.tpl", { params: req.body }),
-        "A new student applied"
-    )
-        .then(() => {
-            console.log("Email to organization send");
-        })
-        .catch(error =>
-            console.log("Send email to organization FAILED", error, req.body)
+    try {
+        await sendEmail(
+            [fromEmail],
+            email("apply_to_org.tpl", { params: req.body }),
+            "A new student applied"
         );
+        console.log("Email to organization send");
+    } catch (error) {
+        console.log("Send email to organization FAILED", error, req.body);
+    }
 
     const website = "http://hyf-website.s3-website.eu-central-1.amazonaws.com";
 
@@ -48,17 +48,16 @@ module.exports = async (req, res) => {
     const redirectURL = `${website}apply/upload1`;
     const verififactioURL = `${website}/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
 
-    sendEmail(
-        [req.body.email],
-        email("apply_to_student.tpl", { params: { url: verififactioURL } }),
-        "Thank you for applying"
-    )
-        .then(() => {
-            console.log("Email to organization send");
-        })
-        .catch(error =>
-            console.log("Send email to user FAILED", error, req.body)
+    try {
+        await sendEmail(
+            [req.body.email],
+            email("apply_to_student.tpl", { params: { url: verififactioURL } }),
+            "Thank you for applying"
         );
+        console.log("Email to organization send");
+    } catch (error) {
+        console.log("Send email to user FAILED", error, req.body);
+    }
 
     res.status(200).json({ message: "Application received" });
 };
