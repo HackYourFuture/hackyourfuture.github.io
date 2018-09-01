@@ -26,7 +26,7 @@
             <div class="half-width inputContainer">
 
               <label for="phone">phone</label>
-              <input id="phone" type="number" name="phone" required @focus="setActive">
+              <input id="phone" type="number" name="phone" @focus="setActive">
             </div>
             <div class="half-width inputContainer">
 
@@ -100,7 +100,7 @@ export default {
                 input => (fields[input.name] = input.value)
             );
             try {
-                await axios.post(process.env.lambdaUrl + "contact-us", fields);
+                await axios.post(`${process.env.lambdaUrl}contact-us`, fields);
                 this.contacted.success = true;
                 this.contacted.tried = true;
                 this.$el
@@ -112,7 +112,9 @@ export default {
                         }
                     });
             } catch (error) {
-                console.log(error.message);
+                if (error.response.data.message) {
+                    this.failedMessage = error.response.data.message;
+                }
                 this.contacted.success = false;
                 this.contacted.tried = true;
             }
