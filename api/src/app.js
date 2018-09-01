@@ -173,11 +173,6 @@ app.post("/contact-us", (req, res) => {
         })
         .isString();
 
-    req.check("phone", "Invalid phone number")
-        .isNumeric()
-        .isLength({
-            min: 9
-        });
     req.check("email", "Invalid Email Address").isEmail();
 
     req.check("message", "This message is too short")
@@ -190,25 +185,29 @@ app.post("/contact-us", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
+
+        const message = errors.reduce(
+            (sum, current) => (sum = `${sum}, ${current.msg}`),
+            ""
+        );
         res.status(400).json({
-            errors
+            message: `Validation failed: ${message}`
         });
     } else {
         ContactUs(req, res);
     }
 });
-app.post("/apply", (req, res) => Apply(req, res));
 app.post("/apply/upload", FileUpload, (req, res) => UploadCVML(req, res));
 app.post("/apply/upload1", FileUpload, (req, res) =>
     UploadAssignment(req, res)
 );
 app.post("/teach", (req, res) => {
-    req.check("firstName", "firstName is too short")
+    req.check("firstName", "First name is too short")
         .isLength({
             min: 2
         })
         .isString();
-    req.check("lastName", "lastName is too short")
+    req.check("lastName", "Last name is too short")
         .isLength({
             min: 2
         })
@@ -216,7 +215,7 @@ app.post("/teach", (req, res) => {
     req.check("email", "Invalid Email Address").isEmail();
     req.check("message", "The message is too short")
         .isLength({
-            min: 3
+            min: 10
         })
         .isString();
 
@@ -224,8 +223,12 @@ app.post("/teach", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
+        const message = errors.reduce(
+            (sum, current) => (sum = `${sum}, ${current.msg}`),
+            ""
+        );
         res.status(400).json({
-            errors
+            message: `Validation failed: ${message}`
         });
     } else {
         Teach(req, res);

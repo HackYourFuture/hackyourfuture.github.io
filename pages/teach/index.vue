@@ -134,7 +134,7 @@ export default {
             );
 
             try {
-                await axios.post(process.env.lambdaUrl + "teach", fields);
+                await axios.post(`${process.env.lambdaUrl}teach`, fields);
                 this.applied.success = true;
                 this.applied.tried = true;
                 this.$el
@@ -146,7 +146,9 @@ export default {
                         }
                     });
             } catch (error) {
-                console.log(error.message);
+                if (error.response.data.message) {
+                    this.failedMessage = error.response.data.message;
+                }
                 this.applied.success = false;
                 this.applied.tried = true;
             }
