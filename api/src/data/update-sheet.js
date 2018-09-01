@@ -43,7 +43,18 @@ function handleApiError(error) {
 
 function saveApplicant(
     row,
-    { userName, street, city, email, phone, education, how_hear, computer }
+    {
+        userName,
+        street,
+        city,
+        email,
+        phone,
+        education,
+        how_hear,
+        computercvUrl,
+        mlUrl,
+        textArea_message
+    }
 ) {
     return new Promise((resolve, reject) => {
         if (!row) {
@@ -62,7 +73,9 @@ function saveApplicant(
                 phone,
                 education,
                 how_hear,
-                computer
+                computercvUrl,
+                mlUrl,
+                textArea_message
             ]
         ];
 
@@ -70,7 +83,7 @@ function saveApplicant(
             valueInputOption: "RAW",
             data: [
                 {
-                    range: `Sheet1!A${row}:H`,
+                    range: `Sheet1!A${row}:K`,
                     majorDimension: "ROWS",
                     values
                 }
