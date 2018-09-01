@@ -10,12 +10,13 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { email, url, message } = req.body;
-    const assignmentUrl = req.files.input_file_assignment[0].location;
+    const { email, message } = req.body;
+    const assignmentUrl = req.body.url;
+    const assignmentFileUrl = req.files.input_file_assignment[0].location;
     const updatedUrlAssignment = {
+        assignmentFileUrl,
         assignmentUrl,
-        message,
-        url
+        message
     };
     if (now <= deadline) {
         getApplicant(email)
