@@ -53,8 +53,7 @@ function saveApplicant(
         how_hear,
         computercvUrl,
         mlUrl,
-        textArea_message,
-        url
+        textArea_message
     }
 ) {
     return new Promise((resolve, reject) => {
@@ -76,8 +75,7 @@ function saveApplicant(
                 how_hear,
                 computercvUrl,
                 mlUrl,
-                textArea_message,
-                url
+                textArea_message
             ]
         ];
 
