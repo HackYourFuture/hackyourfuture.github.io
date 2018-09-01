@@ -146,9 +146,19 @@ export default {
                         }
                     });
             } catch (error) {
-                if (error.response.data.message) {
-                    this.failedMessage = error.response.data.message;
+                if (error.response.data.errors) {
+                    const message = error.response.data.errors.reduce(
+                        (sum, current, index) => {
+                            if (!index) {
+                                return (sum = current.msg);
+                            }
+                            return (sum = `${sum}, ${current.msg}`);
+                        },
+                        ""
+                    );
+                    this.failedMessage = message;
                 }
+
                 this.applied.success = false;
                 this.applied.tried = true;
             }

@@ -154,7 +154,7 @@ app.post("/apply", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
-        res.status(400).json({
+        res.status(422).json({
             errors
         });
     } else {
@@ -186,12 +186,8 @@ app.post("/contact-us", (req, res) => {
     if (errors) {
         console.error("Validation errors: ", errors);
 
-        const message = errors.reduce(
-            (sum, current) => (sum = `${sum}, ${current.msg}`),
-            ""
-        );
-        res.status(400).json({
-            message: `Validation failed: ${message}`
+        res.status(422).json({
+            errors
         });
     } else {
         ContactUs(req, res);
@@ -223,12 +219,9 @@ app.post("/teach", (req, res) => {
 
     if (errors) {
         console.error("Validation errors: ", errors);
-        const message = errors.reduce(
-            (sum, current) => (sum = `${sum}, ${current.msg}`),
-            ""
-        );
-        res.status(400).json({
-            message: `Validation failed: ${message}`
+
+        res.status(422).json({
+            errors
         });
     } else {
         Teach(req, res);
