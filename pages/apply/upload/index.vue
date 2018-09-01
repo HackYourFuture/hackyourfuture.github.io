@@ -1,74 +1,91 @@
 <template>
   <div>
     <Main class="UploadCv container">
-      <div id="UploadCv__header" class="UploadCv__header">
+      <div class="UploadCv__header">
         <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
       </div>
 
-      <div id="UploadCv__form" class="UploadCv__form form">
-        <form id="cvUploadForm">
-          <fieldset>
-            <div id="cvDiv">
-              <p id="uploadCvText" ref="uploadCvText" @click="openUploadFileDialogue()">+ Upload Your CV (*)</p>
-              <input ref="input_file_cv" type="file" value="" name="this.$refs.input_file_cv" class="UploadCv__form__inputText" @change="setCVCheckBoxUnActive(); handleCvUpload();" >
+      <div ref="UploadCv__form" class="UploadCv__form form">
+        <form>
+          <fieldset>  
+            <div>
+              <p ref="uploadCvText" @click="openUpload($refs.input_file_cv)">+ Upload Your CV (*)</p>                          
+              <input ref="input_file_cv" type="file" value="" class="UploadCv__form-inputText" name="input_file_cv" @change="handleCvUpload(); fileCheckExtension(
+                $refs.input_file_cv,
+                $refs.input_checkbox_cv,
+                $refs.cvName,
+                $refs.cvLabel,
+                $refs.writeCvText,
+                $refs.requiredCvMSG)
+              " >
               <h3 ref="requiredCvMSG"/>
-              <div id="cvName"><span ref="cvLabel" class="UploadCv__form__label"/>
-                <button class="UploadCv__form__remove-btn" @click.prevent="removeCvFile()">Remove</button>
+              <div ref="cvName"><span ref="cvLabel" class="UploadCv__form-label"/>
+                <button class="UploadCv__form-remove-btn" @click.prevent="removeFile($refs.input_file_cv, $refs.cvLabel,
+                                                                                     $refs.cvName,
+                                                                                     $refs.input_checkbox_cv,
+                                                                                     $refs.writeCvText)">Remove</button>
               </div>
             </div>
 
-            <div id="cvDiv_TextArea" class="UploadCv__form__section">
-              <div class="UploadCv__form__insideDiv">
-                <p ref="cv2Lable" class="cv2Lable">I do not have a CV I can upload:</p>
-                <div class="UploadCv__form__checkboxDiv">
-                  <input id="input_checkbox_cv" ref="input_checkbox_cv" type="checkbox" value="" class="UploadCv__form__checkInput" name="check" @click="showCV2()" >
+            <div class="UploadCv__form-byTextArea">
+              <div class="UploadCv__form-labelAndCheckbox">
+                <p ref="writeCvText">I rather write my CV in a text box:</p>
+                <div>
+                  <input ref="input_checkbox_cv" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showFileByTextArea($refs.input_file_cv,$refs.textArea_cv,$refs.input_checkbox_cv,$refs.uploadCvText)" >
                 </div>
               </div>
-              <textarea id="textArea_cv" ref="textArea_cv" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"/>
+              <textarea ref="textArea_cv" name="textArea_cv" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="Please tell us something about your work and/or eduational background"/>
             </div>
 
-            <div id="motivation_letter_Div">
-              <P ref="uploadMlText" @click="openUploadFileDialogue1()">+ Upload Your Motivation Letter (*)</P>
-              <input ref="nput_file_motivation_letter" type="file" class="UploadCv__form__inputText" @change="setMlCheckBoxUnActive(); handleMotivationLetterUpload();" >
-              <h3 ref="requiredMlMSG"/>
-              <div id="mlName"><span id="mlLabel" ref="mlLabel" class="UploadCv__form__label"/>
-                <button class="UploadCv__form__remove-btn" @click.prevent="removeMlFile()">Remove</button>
+            <div>
+              <P ref="uploadMotivationLetterText" @click="openUpload($refs.input_file_motivation_letter)">+ Upload Your Motivation Letter (*)</P>                          
+              <input ref="input_file_motivation_letter" type="file" class="UploadCv__form-inputText" name="input_file_motivation_letter" @change="handleMotivationLetterUpload(); fileCheckExtension(
+                $refs.input_file_motivation_letter,
+                $refs.input_checkbox_motivation_letter,
+                $refs.motivationLetterName,
+                $refs.motivationLetterLabel,
+                $refs.writeMotivationLetterText,
+                $refs.requiredMotivationLetterMSG)" >
+              <h3 ref="requiredMotivationLetterMSG"/>
+              <div ref="motivationLetterName"><span ref="motivationLetterLabel" class="UploadCv__form-label"/>
+                <button class="UploadCv__form-remove-btn" @click.prevent="removeFile($refs.input_file_motivation_letter,
+                                                                                     $refs.motivationLetterLabel,$refs.motivationLetterName,$refs.input_checkbox_motivation_letter,
+                                                                                     $refs.writeMotivationLetterText)">Remove</button>    
               </div>
             </div>
-
-            <div id="motivation_letterDiv_TextArea" class="UploadCv__form__section">
-              <div class="UploadCv__form__insideDiv">
-                <p ref="ml2Lable" class="ml2Lable">I rather write my motivation letter in a text box:</p>
-                <div class="UploadCv__form__checkboxDiv">
-                  <input id="input_checkbox_motivation_letter" ref="input_checkbox_motivation_letter" type="checkbox" value="" class="UploadCv__form__checkInput" name="check" @click="showML2()" >
+                       
+            <div class="UploadCv__form-byTextArea">
+              <div class="UploadCv__form-labelAndCheckbox">
+                <p ref="writeMotivationLetterText">I rather write my motivation letter in a text box:</p>
+                <div>
+                  <input ref="input_checkbox_motivation_letter" type="checkbox" value="" class="UploadCv__form-checkInput" name="check" @click="showFileByTextArea($refs.input_file_motivation_letter,$refs.textArea_motivation_letter,
+                                                                                                                                                                   $refs.input_checkbox_motivation_letter,$refs.uploadMotivationLetterText)
+                  " >
                 </div>
               </div>
-              <textarea id="textArea_motivation_letter" ref="textArea_motivation_letter" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."/>
+              <textarea ref="textArea_motivation_letter" name="textArea_motivation_letter" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="Please tell us why it is that you would like to apply to our program and also what it is specifically about coding that interests you."/>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input id="email" ref="email" type="email" class="input" name="email" value="" @focus="setActive" @click="emptyEmailRequired()">
+              <input ref="email" type="email" name="email" class="input" value="" @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
             </div>
-
-
-            <div id="message_TextArea" class="UploadCv__form__section">
-              <div class="UploadCv__form__insideDiv">
-                <p class="messageLabel">Is there anything you would like to notify us about?</p>
+                     
+            <div class="UploadCv__form-byTextArea">
+              <div>
+                <p>Is there anything you would like to notify us about?</p>
               </div>
-              <textarea id="textArea_message" ref="textArea_message" class="UploadCv__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage()"/>
+              <textarea ref="textArea_message" name="textArea_message" class="UploadCv__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage($refs.textArea_message)"/>
             </div>
 
             <div class="apply-btn">
-              <input type="submit" value="Apply" true @click.prevent="submitFile">
+              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm">
             </div>
           </fieldset>
-
-        </form>
-
+        </form> 
       </div>
       <div>
-        <p id="success-Msg" class="UploadCv__success-Msg"/>
+        <p ref="successMessage" class="UploadCv__successMessage"/>
       </div>
     </Main>
   </div>
@@ -76,7 +93,6 @@
 
 <script>
 import axios from "~/plugins/axios";
-
 export default {
     async asyncData() {
         return {
@@ -93,25 +109,16 @@ export default {
             messageData: ""
         };
     },
-    computed: {
-        checkCvLength: function() {
-            return this.$refs.input_file_cv.value;
-        },
-        checkMlLength: function() {
-            return this.$refs.input_file_motivation_letter.value;
-        }
-    },
+    computed: {},
     mounted: function() {
-        this.cvNameHide();
-        this.mlNameHide();
-        this.cvTextHide();
-        this.mlTextHide();
+        this.fileNameHide(this.$refs.cvName);
+        this.fileNameHide(this.$refs.motivationLetterName);
+        this.fileTextHide(this.$refs.textArea_cv);
+        this.fileTextHide(this.$refs.textArea_motivation_letter);
     },
     methods: {
-        submitFile() {
-            // Initialize the form data
+        submitForm() {
             let formData = new FormData();
-
             const {
                 input_file_cv,
                 input_file_motivation_letter,
@@ -119,37 +126,36 @@ export default {
                 textArea_motivation_letter,
                 email,
                 cvLabel,
-                mlLabel
+                motivationLetterLabel
             } = this.$refs;
-
             //  Add the form data we need to submit
             if (input_file_cv.files.length !== 0) {
-                formData.append("this.$refs.input_file_cv", this.cvData);
+                formData.append("input_file_cv", this.cvData);
             } else {
-                formData.append("this.$refs.input_file_cv", textArea_cv.value);
+                formData.append("input_file_cv", textArea_cv.value);
             }
-
             if (input_file_motivation_letter.files.length !== 0) {
                 formData.append(
-                    "this.$refs.input_file_motivation_letter",
+                    "input_file_motivation_letter",
                     this.motivationLetterData
                 );
             } else {
                 formData.append(
-                    "this.$refs.input_file_motivation_letter",
+                    "input_file_motivation_letter",
                     textArea_motivation_letter.value
                 );
             }
             formData.append("email", this.emailData.value);
             formData.append("textArea_message", this.messageData.value);
-
             //  Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
                 email.value !== null &&
                 email.value !== "Required field" &&
+                email.value !== "Invalid Email" &&
+                cvLabel.innerHTML !== "Invalid File Type!" &&
                 (cvLabel.innerHTML !== "" || textArea_cv.value !== "") &&
-                (mlLabel.innerHTML !== "" ||
+                (motivationLetterLabel.innerHTML !== "" ||
                     textArea_motivation_letter.value !== "")
             ) {
                 axios
@@ -169,90 +175,185 @@ export default {
                 this.emptyInputs(); // reset all inputs and textarea
             } else {
                 if (email.value === "") {
-                    email.parentNode.classList.remove("active");
                     email.parentNode.classList.add("active");
                     email.value = "Required field";
                 }
                 if (input_file_cv.value === "") {
-                    this.cvNameShow();
+                    this.fileNameShow(
+                        this.$refs.input_file_cv,
+                        this.$refs.input_checkbox_cv,
+                        this.$refs.cvName
+                    );
                     this.$refs.requiredCvMSG.innerHTML = "Required field";
                 }
                 if (input_file_motivation_letter.value === "") {
-                    this.$refs.requiredMlMSG.innerHTML = "Required field";
+                    this.$refs.requiredMotivationLetterMSG.innerHTML =
+                        "Required field";
                 }
             }
-            this.showCV2();
-            this.showML2();
-            this.removeMlFile();
-            this.removeCvFile();
+            this.showFileByTextArea(
+                this.$refs.input_file_cv,
+                this.$refs.textArea_cv,
+                this.$refs.input_checkbox_cv,
+                this.$refs.uploadCvText
+            );
+            this.showFileByTextArea(
+                this.$refs.input_file_motivation_letter,
+                this.$refs.textArea_motivation_letter,
+                this.$refs.input_checkbox_motivation_letter,
+                this.$refs.uploadMotivationLetterText
+            );
+            this.removeFile(
+                this.$refs.input_file_cv,
+                this.$refs.cvLabel,
+                this.$refs.cvName,
+                this.$refs.input_checkbox_cv,
+                this.$refs.writeCvText
+            );
+            this.removeFile(
+                this.$refs.input_file_motivation_letter,
+                this.$refs.motivationLetterLabel,
+                this.$refs.motivationLetterName,
+                this.$refs.input_checkbox_motivation_letter,
+                this.$refs.writeMotivationLetterText
+            );
         },
-
         // Handles a change on the file upload
         handleCvUpload() {
+            const { input_file_cv, cvLabel } = this.$refs;
             if (
-                this.checkCvLength !== "" &&
-                this.checkCvLength !== undefined &&
-                this.checkCvLength !== null
+                this.checkFileLength(input_file_cv) !== "" &&
+                this.checkFileLength(input_file_cv) !== undefined &&
+                this.checkFileLength(input_file_cv) !== null
             ) {
-                this.cvData = this.$refs.input_file_cv.files[0];
-                this.cvNameShow();
+                this.setCheckBoxUnActive(this.$refs.writeCvText);
+                this.cvData = input_file_cv.files[0];
+                this.fileNameShow(
+                    this.$refs.input_file_cv,
+                    this.$refs.input_checkbox_cv,
+                    this.$refs.cvName
+                );
                 this.$refs.requiredCvMSG.innerHTML = "";
-                this.$refs.cvLabel.innerHTML =
+                cvLabel.innerHTML =
                     "You Uploaded the file: " + this.cvData.name;
             } else {
                 delete this.cvData;
-                this.$refs.cvLabel.innerHTML = "";
+                cvLabel.innerHTML = "";
             }
         },
         handleMotivationLetterUpload() {
+            const {
+                input_file_motivation_letter,
+                motivationLetterLabel
+            } = this.$refs;
             if (
-                this.checkMlLength !== "" &&
-                this.checkMlLength !== undefined &&
-                this.checkMlLength !== null
+                this.checkFileLength(input_file_motivation_letter) !== "" &&
+                this.checkFileLength(input_file_motivation_letter) !==
+                    undefined &&
+                this.checkFileLength(input_file_motivation_letter) !== null
             ) {
-                this.motivationLetterData = this.$refs.input_file_motivation_letter.files[0];
-                this.mlNameShow();
-                this.$refs.requiredMlMSG.innerHTML = "";
-                this.$refs.mlLabel.innerHTML =
+                this.setCheckBoxUnActive(this.$refs.writeMotivationLetterText);
+                this.motivationLetterData =
+                    input_file_motivation_letter.files[0];
+                this.fileNameShow(
+                    this.$refs.input_file_motivation_letter,
+                    this.$refs.input_checkbox_motivation_letter,
+                    this.$refs.motivationLetterName
+                );
+                this.$refs.requiredMotivationLetterMSG.innerHTML = "";
+                motivationLetterLabel.innerHTML =
                     "You Uploaded the file: " + this.motivationLetterData.name;
             } else {
                 delete this.motivationLetterData;
-                this.$refs.mlLabel.innerHTML = "";
+                motivationLetterLabel.innerHTML = "";
             }
         },
-        handleMessage() {
-            this.messageData = this.$refs.textArea_message;
-            this.$refs.textArea_message.value = this.messageData.value;
+        fileCheckExtension(
+            input_file,
+            input_checkBox,
+            file_Name,
+            file_Label,
+            write_file_text,
+            required_msg
+        ) {
+            if (
+                /\.(doc|docx|pdf|txt)$/i.test(input_file.files[0].name) ===
+                false
+            ) {
+                required_msg.innerHTML = "Invalid File Type!";
+                this.fileNameShow(input_file, input_checkBox, file_Name);
+                this.removeFile(
+                    input_file,
+                    file_Label,
+                    file_Name,
+                    input_checkBox,
+                    write_file_text
+                );
+                return false;
+            }
         },
+        handleEmail(email) {
+            if (this.isValidEmail(email) === true) {
+                this.emailData = email;
+                email.value = this.emailData.value;
+            }
+        },
+        handleMessage(message) {
+            this.messageData = message;
+            message.value = this.messageData.value;
+        },
+        showFileByTextArea(
+            input_file,
+            textArea_file,
+            input_checkBox,
+            uploadFile
+        ) {
+            if (input_checkBox.checked === true) {
+                textArea_file.style.display = "block";
+                input_file.value = "";
+                this.setFileUnActive(uploadFile);
+                input_file.disabled = true;
+            } else {
+                textArea_file.style.display = "none";
+                this.setFileActive(uploadFile);
+                input_file.disabled = false;
+            }
+        },
+        removeFile(
+            input_file,
+            file_label,
+            file_name,
+            input_checkBox,
+            writeText
+        ) {
+            input_file.value = "";
+            this.setCheckBoxActive(writeText);
+            this.fileNameHide(file_name);
+            file_label.innerHTML = "";
+            input_checkBox.disabled = false;
+        },
+        openUpload(e) {
+            e.click();
+        },
+        //check if value of upoaded file is not empty
+        checkFileLength: function(file) {
+            return file.value;
+        },
+        // show message when upload seccesses
         successMSG() {
-            document.getElementById("success-Msg").innerHTML =
-                "You have submitted your CV and motivation letter successfully";
-            this.$refs.email.value = "";
-            this.$refs.email.parentNode.classList.remove("active");
-            this.$refs.textArea_message.value = "";
-            this.hideForm();
-        },
-        // Handles when the image clicked
-        openUploadFileDialogue() {
-            this.$refs.input_file_cv.click();
-        },
-        openUploadFileDialogue1() {
-            this.$refs.input_file_motivation_letter.click();
-        },
-        // Removes a select file the user has uploaded
-        removeCvFile() {
-            this.$refs.input_file_cv.value = "";
-            this.cvNameHide();
-            this.setCvCheckBoxActive();
-            this.$refs.cvLabel.innerHTML = "";
-            this.$refs.input_checkbox_cv.disabled = false;
-        },
-        removeMlFile() {
-            this.$refs.input_file_motivation_letter.value = "";
-            this.mlNameHide();
-            this.setMlCheckBoxActive();
-            this.$refs.mlLabel.innerHTML = "";
-            this.$refs.input_checkbox_motivation_letter.disabled = false;
+            const {
+                email,
+                textArea_message,
+                successMessage,
+                UploadCv__form,
+                pageNameHeader
+            } = this.$refs;
+            successMessage.innerHTML =
+                "You have submitted your CV and motivation letter successfully.";
+            email.value = "";
+            email.parentNode.classList.remove("active");
+            textArea_message.value = "";
+            this.hideForm(UploadCv__form, pageNameHeader);
         },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
@@ -262,150 +363,71 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
-        //disable cv checkbox when input upload is active
-        setCVCheckBoxUnActive() {
-            var x = this.$refs.cv2Lable;
-
-            x.classList.add("UploadCv__form__unAvailable");
+        setCheckBoxUnActive(e) {
+            e.classList.add("UploadCv__form-unAvailable");
         },
-        //disable ML checkbox when input upload is active
-        setMlCheckBoxUnActive() {
-            var element = this.$refs.ml2Lable;
-            element.classList.add("UploadCv__form__unAvailable");
+        setCheckBoxActive(e) {
+            e.classList.remove("UploadCv__form-unAvailable");
+            e.classList.add("UploadCv__form-Available");
         },
-
-        //Enable CV checkbox when input upload is inactive
-        setCvCheckBoxActive() {
-            var element = this.$refs.cv2Lable;
-            element.classList.remove("UploadCv__form__unAvailable");
-            element.classList.add("UploadCv__form____Available");
+        setFileUnActive(e) {
+            e.classList.add("UploadCv__form-unAvailable");
         },
-        //Enable ML checkbox when input upload is inactive
-        setMlCheckBoxActive() {
-            var element = this.$refs.ml2Lable;
-            element.classList.remove("UploadCv__form__unAvailable");
-            element.classList.add("UploadCv__form____Available");
+        setFileActive(e) {
+            e.classList.remove("UploadCv__form-unAvailable");
+            e.classList.add("UploadCv__form-Available");
         },
-
-        //disable CV input upload when checkbox is active
-        setCvUnActive() {
-            var element = this.$refs.uploadCvText;
-            element.classList.add("UploadCv__form__unAvailable");
+        fileTextHide(e) {
+            e.style.display = "none";
         },
-        //disable ML input upload when checkbox is active
-        setMlUnActive() {
-            var element = this.$refs.uploadMlText;
-            element.classList.add("UploadCv__form__unAvailable");
+        fileNameShow(e, checkbox, name) {
+            this.fileNameHide(e);
+            this.disableCheckBox(e, checkbox);
+            name.style.display = "block";
         },
-        //Enable CV input upload when checkbox is inactive
-        setCvActive() {
-            var element = this.$refs.uploadCvText;
-            element.classList.remove("UploadCv__form__unAvailable");
-            element.classList.add("UploadCv__form____Available");
+        fileNameHide(e) {
+            e.style.display = "none";
         },
-        //Enable ML input upload when checkbox is inactive
-        setMlActive() {
-            var element = this.$refs.uploadMlText;
-            element.classList.remove("UploadCv__form__unAvailable");
-            element.classList.add("UploadCv__form____Available");
-        },
-
-        // Show & Hide CV CheckBox/Textarea section
-        showCV2() {
-            var checkBox = this.$refs.input_checkbox_cv;
-            var cvText = this.$refs.textArea_cv;
-            if (checkBox.checked === true) {
-                cvText.style.display = "block";
-                delete this.cvData;
-                this.$refs.input_file_cv.value = "";
-                this.setCvUnActive();
-                this.$refs.input_file_cv.disabled = true;
-            } else {
-                cvText.style.display = "none";
-                this.setCvActive();
-                this.$refs.input_file_cv.disabled = false;
-            }
-        },
-
-        // Show & Hide ML CheckBox/Textarea section
-        showML2() {
-            var checkBox = this.$refs.input_checkbox_motivation_letter;
-            var mlText = this.$refs.textArea_motivation_letter;
-            if (checkBox.checked === true) {
-                mlText.style.display = "block";
-                delete this.motivationLetterData;
-                this.$refs.input_file_motivation_letter.value = "";
-                this.setMlUnActive();
-                this.$refs.input_file_motivation_letter.disabled = true;
-            } else {
-                mlText.style.display = "none";
-                this.setMlActive();
-                this.$refs.input_file_motivation_letter.disabled = false;
-            }
-        },
-        //Show Cv filename
-        cvNameShow() {
-            this.cvNameHide();
-            this.disableCvCheckbox();
-            var x = document.getElementById("cvName");
-            x.style.display = "block";
-        },
-        //Hide CV filename
-        cvNameHide() {
-            var x = document.getElementById("cvName");
-            x.style.display = "none";
-        },
-
-        cvTextHide() {
-            var x = this.$refs.textArea_cv;
-            x.style.display = "none";
-        },
-        mlTextHide() {
-            var x = this.$refs.textArea_motivation_letter;
-            x.style.display = "none";
-        },
-        //Show ML filename
-        mlNameShow() {
-            this.mlNameHide();
-            this.disableMotivationLetterCheckbox();
-            var x = document.getElementById("mlName");
-            x.style.display = "block";
-        },
-        //Hide ML filename
-        mlNameHide() {
-            var x = document.getElementById("mlName");
-            x.style.display = "none";
-        },
-        disableCvCheckbox() {
-            if (this.$refs.input_file_cv.files.length !== 0) {
-                this.$refs.input_checkbox_cv.disabled = true;
-            }
-        },
-        disableMotivationLetterCheckbox() {
-            if (this.$refs.input_file_motivation_letter.files.length !== 0) {
-                this.$refs.input_checkbox_motivation_letter.disabled = true;
+        disableCheckBox(e, checkbox) {
+            if (e.files.length !== 0) {
+                checkbox.disabled = true;
             }
         },
         emptyInputs() {
-            this.$refs.input_file_cv.value = "";
-            this.$refs.input_file_motivation_letter.value = "";
-            this.$refs.cvLabel.value = "";
-            this.$refs.textArea_cv.value = "";
-            this.$refs.textArea_motivation_letter.value = "";
-            this.$refs.textArea_message.value = "";
+            const {
+                input_file_cv,
+                input_file_motivation_letter,
+                textArea_cv,
+                textArea_motivation_letter,
+                cvLabel,
+                textArea_message
+            } = this.$refs;
+            input_file_cv.value = "";
+            input_file_motivation_letter.value = "";
+            cvLabel.value = "";
+            textArea_cv.value = "";
+            textArea_motivation_letter.value = "";
+            textArea_message.value = "";
             this.$refs.input_checkbox_cv.checked = false;
             this.$refs.input_checkbox_motivation_letter.checked = false;
         },
-        emptyEmailRequired() {
-            if (this.$refs.email.value) {
-                this.$refs.email.parentNode.classList.remove("active");
-            }
-            this.$refs.email.parentNode.classList.add("active");
-            this.$refs.email.value = "";
+        emptyEmailRequired(email) {
+            email.parentNode.classList.add("active");
+            email.value = "";
         },
-        hideForm() {
-            var x = document.getElementById("UploadCv__form");
-            var y = this.$refs.pageNameHeader;
+        isValidEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(email.value)) {
+                email.parentNode.classList.remove("active");
+                email.parentNode.classList.add("active");
+                email.value = "Invalid Email";
+                email.focus;
+                return false;
+            } else {
+                return true;
+            }
+        },
+        hideForm(x, y) {
             y.style.display = "none";
             x.style.display = "none";
         }
@@ -444,12 +466,11 @@ export default {
             font-size: 16px;
             margin-left: 50px;
         }
-        &__unAvailable {
+        &-unAvailable {
             color: $color-white;
             text-decoration-line: line-through;
-            //border: 2px solid blue;
         }
-        &__Available {
+        &-Available {
             margin-left: 50px;
             color: $color-purple;
             margin-top: $base-vertical-rithm * 10;
@@ -457,7 +478,7 @@ export default {
             font-size: 24px;
             cursor: pointer;
         }
-        &__inputText {
+        &-inputText {
             font-size: 18px;
             padding: 10px 10px 10px 5px;
             display: block;
@@ -467,7 +488,7 @@ export default {
             display: none;
             cursor: pointer;
         }
-        &__remove-btn {
+        &-remove-btn {
             border: 2px solid $color-purple;
             padding: 0px 10px;
             text-transform: uppercase;
@@ -476,19 +497,19 @@ export default {
             right: 0;
             margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
         }
-        &__section {
+        &-byTextArea {
             display: grid;
             grid-auto-flow: row;
         }
-        &__insideDiv {
+        &-labelAndCheckbox {
             display: flex;
         }
-        &__checkInput {
+        &-checkInput {
             margin-top: 18px;
             margin-left: 10px;
             zoom: 2.7;
         }
-        &__textarea {
+        &-textarea {
             overflow: auto;
             outline: none;
             background-color: #e6e6e6;
@@ -499,7 +520,7 @@ export default {
             margin-left: 60px;
             font-size: 16px;
         }
-        &__label {
+        &-label {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             margin-left: 60px;
@@ -508,11 +529,10 @@ export default {
             display: inline-block;
         }
     }
-    &__success-Msg {
+    &__successMessage {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 24px;
-        margin-left: 50px;
         color: $color-purple;
         text-align: center;
     }
