@@ -338,10 +338,11 @@ export default {
         display: flex;
         flex-direction: column;
         position: absolute;
-        left: 30%;
-        top: 120px;
+        left: 50%;
+        top: 50%;
+        margin: -100px 0 0 -170px;
         font-size: 20px;
-        width: 330px;
+        width: 350px;
         height: 220px;
         border: 2px solid rgb(219, 213, 213);
         background-color: rgb(255, 255, 255);
@@ -351,13 +352,7 @@ export default {
         box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
         animation: fadeIn 0.5s;
         @include breakpoint("mobile_portrait") {
-            left: 13%;
-            top: 200px;
-            width: 260px;
-            height: 200px;
-        }
-        @include breakpoint("ipad_portrait") {
-            top: 200px;
+            width: 330px;
         }
 
         p {
