@@ -34,16 +34,15 @@
       <div class="Teach__form form">
         <h1>Join our teacher team</h1>
           
-        <form action="">
+        <form @submit.prevent="submitForm">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="firstName">Fist Name</label>
-              
-              <input id="firstName" type="text" name="firstName" @focus="setActive">
+              <input id="firstName" type="text" name="firstName" required @focus="setActive">
             </div>
             <div class="half-width inputContainer">
               <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" name="lastName" @focus="setActive">
+              <input id="lastName" type="text" name="lastName" required @focus="setActive">
             </div>
             <div class="half-width inputContainer">
               
@@ -54,12 +53,12 @@
             <div class="half-width inputContainer">
               
               <label for="email">e-mail</label>
-              <input id="email" type="email" name="email" @focus="setActive">
+              <input id="email" type="email" name="email" required @focus="setActive">
             </div>
             <div class="full-width inputContainer">
             
               <label for="message">Please tell us something about yourself</label>
-              <input id="message" type="message" name="message" @focus="setActive">
+              <input id="message" type="message" name="message" pattern=".{10,}" title="At least 10 characters" required @focus="setActive">
             </div>
   
             <div class="apply-btn">
@@ -67,7 +66,14 @@
             </div>
           </fieldset>
         </form>
+        <div v-if="applied.tried" class="blur-screen"> 
+          <div class="applied-popup">
+            <p>{{ applied.success ? successMessage : failedMessage }}</p>
+            <button @click="applied.tried = false; applied.success = false">Close</button>
+          </div>
+        </div>
       </div>
+     
     
     </Main>
 
@@ -78,6 +84,14 @@
 import axios from "~/plugins/axios";
 
 export default {
+    data: () => {
+        return {
+            successMessage:
+                "Thank you for applying, we will contact you as soon as possible",
+            failedMessage: "Sorry something went wrong, please try again.",
+            applied: { tried: false, success: false }
+        };
+    },
     async asyncData() {
         let what_we_teach;
         let who_are_our_teachers;
@@ -112,11 +126,37 @@ export default {
                 : null
         };
     },
-    components: {},
     methods: {
+        async submitForm(e) {
+            const fields = {};
+            Object.values(e.target.elements).forEach(
+                input => (fields[input.name] = input.value)
+            );
+
+            try {
+                await axios.post(process.env.lambdaUrl + "teach", fields);
+                this.applied.success = true;
+                this.applied.tried = true;
+                this.$el
+                    .querySelectorAll(".inputContainer")
+                    .forEach((i, index) => {
+                        if (index !== 2) {
+                            i.childNodes[1].value = "";
+                            i.classList.remove("active");
+                        }
+                    });
+            } catch (error) {
+                console.log(error.message);
+                this.applied.success = false;
+                this.applied.tried = true;
+            }
+        },
+
         setActive(e) {
-            this.$el.querySelectorAll(".inputContainer").forEach(function(i) {
-                i.classList.remove("active");
+            this.$el.querySelectorAll(".inputContainer").forEach((i, index) => {
+                if (index !== 2 && i.childNodes[1].value.length === 0) {
+                    i.classList.remove("active");
+                }
             });
             e.target.parentNode.classList.add("active");
         }
@@ -278,6 +318,78 @@ export default {
                 font-size: 32px;
                 line-height: 40px;
             }
+        }
+    }
+    .Teach__form {
+        position: relative;
+    }
+    .blur-screen {
+        position: absolute;
+        z-index: 98;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .applied-popup {
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 30%;
+        top: 120px;
+        font-size: 20px;
+        width: 330px;
+        height: 220px;
+        border: 2px solid rgb(219, 213, 213);
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        animation: fadeIn 0.5s;
+        @include breakpoint("mobile_portrait") {
+            left: 13%;
+            top: 200px;
+            width: 260px;
+            height: 200px;
+        }
+        @include breakpoint("ipad_portrait") {
+            top: 200px;
+        }
+
+        p {
+            text-align: center;
+            padding: 50px 5px 5px 5px;
+            color: #293a7d;
+        }
+
+        button {
+            margin: auto;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 5px;
+        }
+    }
+
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
 }
