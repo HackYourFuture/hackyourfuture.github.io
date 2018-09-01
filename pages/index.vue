@@ -33,8 +33,8 @@
         </div>
         <div class="Curiculum__container">
           <div class="Curiculum__content" v-html="curiculum"/>
-          <div class="Curiculum__content">
-            <nuxt-link :to="'/teach'">Time is your most valuable resource. <span class="underline">Find out about donating your time and expertise here.</span></nuxt-link>
+          <div class="Curiculum__content-link">
+            <nuxt-link :to="'/teach'">Time is your most valuable resource. <br> Find out about donating your <span class="underline">time and expertise</span> here.</nuxt-link>
           </div>
         </div>
       </section>
@@ -51,36 +51,34 @@
       </section>
 
       <section class="Hire">
+        <div class="Hire__image">
+          <img src="/gallery/20.jpg">
+        </div>
         <div class="Hire__container">
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
           <div>
-            <nuxt-link :to="'/support'"><span class="underline">Get in touch to talk about hiring our graduates.</span></nuxt-link>
+            <nuxt-link :to="'/support'">Get in touch to talk about <span class="underline">hiring our graduates.</span></nuxt-link>
           </div>
           <div v-html="laptops"/>
           <div>
-            <nuxt-link :to="'/contact'"><span class="underline">Contact us about donating laptops. </span></nuxt-link>
+            <nuxt-link :to="'/contact'">Contact us about <span class="underline">donating laptops. </span></nuxt-link>
           </div>
-            
         </div>
         
-        <div class="Hire__image">
-          <img src="/gallery/20.jpg">
-        </div>
+        
       </section>
     </Main>
 
     <section class="Chapters"/>
 
     <section class="Makers">
-      <Makers/>
+      <Graduates/>
     </section>
 
-    <Signup/>
+    <Signup :color="'grey'"/>
 
     <Partners/>
-
-    
 
   </div>
 </template>
@@ -91,9 +89,10 @@ import Colors from "~/constants/colors";
 
 import Landscape from "~/components/index/Landscape";
 import Signup from "~/components/signup/Signup";
-import Makers from "~/components/makers/Makers";
+import Graduates from "~/components/graduates/Graduates";
 import Partners from "~/components/partners/Partners";
 import YoutubePlayer from "~/components/video/YoutubePlayer";
+import Footer from "~/components/footer/Footer";
 
 export default {
     async asyncData() {
@@ -139,9 +138,10 @@ export default {
     components: {
         Landscape,
         Signup,
-        Makers,
+        Graduates,
         Partners,
-        YoutubePlayer
+        YoutubePlayer,
+        Footer
     }
 };
 </script>
@@ -192,10 +192,11 @@ export default {
         vertical-align: top;
         display: inline-block;
         margin: 0px $base-vertical-rithm * 5;
+        color: black;
         margin-left: 10%;
         font-size: 36px;
         line-height: 36px;
-        font-weight: 900;
+        font-weight: bold;
         @include breakpoint("mobile_landscape") {
             font-size: 24px;
             line-height: 24px;
@@ -221,7 +222,6 @@ export default {
     &__container {
         width: 44%;
         display: inline-block;
-        text-align: center;
         vertical-align: middle;
         @include breakpoint("mobile_landscape") {
             margin-top: $base-vertical-rithm * 10;
@@ -241,6 +241,7 @@ export default {
             display: block;
             font-size: 24px;
             font-weight: bold;
+            color: black;
             margin-top: $base-vertical-rithm * 5;
             span:after {
                 bottom: -5px;
@@ -320,17 +321,19 @@ export default {
             margin: $base-vertical-rithm * 10 auto 0;
             display: inherit;
         }
-        &__content {
-            font-weight: 400;
-            a {
-                display: block;
-                font-size: 24px;
-                font-weight: bold;
-                margin-top: $base-vertical-rithm * 5;
-                span:after {
-                    bottom: -5px;
-                }
+    }
+    &__content {
+        a {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: $base-vertical-rithm * 5;
+            span:after {
+                bottom: -5px;
             }
+        }
+        &-link a {
+            color: black;
         }
     }
 }
@@ -353,7 +356,6 @@ export default {
         h1 {
             font-size: 36px;
             color: $color-purple;
-            width: 45%;
             line-height: 50px;
             margin: $base-vertical-rithm * 10 0;
             @include breakpoint("mobile_landscape") {
@@ -365,6 +367,7 @@ export default {
         a {
             display: block;
             font-size: 24px;
+            color: black;
             font-weight: bold;
             margin-top: $base-vertical-rithm * 5;
             span:after {
@@ -397,6 +400,9 @@ export default {
         width: 45%;
         display: inline-block;
         margin: $base-vertical-rithm * 5;
+        a {
+            color: black;
+        }
         @include breakpoint("mobile_landscape") {
             width: 80%;
             margin: 0 auto $base-vertical-rithm * 10;
@@ -417,9 +423,9 @@ export default {
     }
 
     &__image {
-        width: 55%;
+        width: 50%;
         display: inline-block;
-        vertical-align: top;
+        vertical-align: bottom;
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;

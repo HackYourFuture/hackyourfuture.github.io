@@ -31,7 +31,6 @@ module.exports = async (req, res) => {
     });
 
     sendEmail(
-        fromEmail,
         [fromEmail],
         email("apply_to_org.tpl", { params: req.body }),
         "A new student applied"
@@ -43,14 +42,13 @@ module.exports = async (req, res) => {
             console.log("Send email to organization FAILED", error, req.body)
         );
 
+    const website = "http://hyf-website.s3-website.eu-central-1.amazonaws.com";
+
     const encryptedEmail = encryptEmail(req.body.email);
-    const redirectURL = `${process.env.lambdaUrl}apply/upload1`;
-    const verififactioURL = `${
-        process.env.lambdaUrl
-    }/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
+    const redirectURL = `${website}apply/upload1`;
+    const verififactioURL = `${website}/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
 
     sendEmail(
-        fromEmail,
         [req.body.email],
         email("apply_to_student.tpl", { params: { url: verififactioURL } }),
         "Thank you for applying"

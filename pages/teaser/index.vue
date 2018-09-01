@@ -155,8 +155,10 @@ export default {
             line-height: 60px;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
+                width: 100%;
                 font-size: 24px;
                 line-height: 24px;
+                margin: $base-vertical-rithm * 5;
             }
         }
         &-image {
@@ -182,6 +184,7 @@ export default {
             div {
                 display: inline-block;
                 width: calc(25% - 20px);
+                vertical-align: top;
                 @include breakpoint("mobile_landscape") {
                     width: calc(50% - 10px);
                     margin: $base-vertical-rithm * 5 auto;

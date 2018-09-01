@@ -25,14 +25,12 @@ module.exports = (req, res) => {
                 updateApplicant(email, updatedFilesUrl, req.files)
                     .then(() => {
                         sendEmail(
-                            fromEmail,
                             [email],
                             "** Confirmation email **",
                             "We've received your files"
                         );
                         sendEmail(
-                            fromEmail,
-                            applicationMail,
+                            [applicationMail],
                             "** Confirmation email **",
                             `Applicant uploaded Cv successfully:${[email]}`
                         );
@@ -44,8 +42,7 @@ module.exports = (req, res) => {
                     })
                     .catch(() => {
                         sendEmail(
-                            fromEmail,
-                            fromEmail,
+                            [fromEmail],
                             "** Confirmation email **",
                             `Uploading CV file is failed:${[email]}`
                         );
