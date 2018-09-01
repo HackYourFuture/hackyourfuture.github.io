@@ -64,7 +64,7 @@ function paymentStatus(encryptedOrderId) {
                 payments.filter(
                     payment =>
                         payment.isPaid() &&
-                        payment.metadata.orderId !== Number(orderId)
+                        payment.metadata.orderId === Number(orderId)
                 ).length > 0;
 
             if (isPaid) {

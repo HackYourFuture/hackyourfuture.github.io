@@ -7,11 +7,9 @@
           <img src="/gallery/11.jpg">
         </div>
         <div class="Apply__header-dates" v-html="dates"/>
-
       </div>
 
       <div class="Apply__content" v-html="content"/>
-
       <div class="Apply__form form">
         <h2>Apply for our next class:</h2>
         <form method="POST" @submit.prevent="formUrlApply">
@@ -34,7 +32,9 @@
             <div class="half-width inputContainer">
 
               <select id="country" name="country" class="input" @focus="setActive">
-                <option value="nl">The Netherlands</option>
+                <option value="nl">Netherlands</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
               </select>
             </div>
             <div class="half-width inputContainer">
@@ -72,7 +72,6 @@
         </form>
       </div>
     </Main>
-
   </div>
 </template>
 
@@ -112,8 +111,9 @@ export default {
         async formUrlApply(e) {
             const fields = {};
             Object.values(e.target.elements).forEach(
-                input =>(fields[input.name] = input.value)); // eslint-disable-line
-            let req = await axios.post(process.env.lambdaUrl + "apply", fields) // eslint-disable-line
+                input => (fields[input.name] = input.value)
+      ); // eslint-disable-line
+      let req = await axios.post(process.env.lambdaUrl + "apply", fields); // eslint-disable-line
 
             // TODO: redirect to application success route
             // TODO: try/catch for application POST failure
@@ -137,7 +137,6 @@ export default {
         @include breakpoint("mobile_landscape") {
             padding: 0;
         }
-
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
