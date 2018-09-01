@@ -83,7 +83,7 @@ function saveApplicant(
             valueInputOption: "RAW",
             data: [
                 {
-                    range: `Sheet1!A${row}:H`,
+                    range: `Sheet1!A${row}:K`,
                     majorDimension: "ROWS",
                     values
                 }
