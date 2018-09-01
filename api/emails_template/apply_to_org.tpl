@@ -1,9 +1,7 @@
-Hey there a new stundent <%- params.name %> did apply!
+Hey <b><%- params.name %></b> wants to become a student!
 
-Here his details:
+Here are his details:
+
 <% for(let k in params) {%>
-<%- k %>:
---
-<%- params[k] %>
-
+<%- k %>: <%- params[k] %>
 <% } %>

@@ -17,11 +17,11 @@ before_install:
   - sudo add-apt-repository -y ppa:ansible/ansible
   - sudo apt-get update
   - sudo apt-get -y install docker-ce ansible
+  - sudo echo "\n104.16.109.30 npmjs.com" >> /etc/hosts
 
 before_script:
 
 script:
-  - dig www.npmjs.com @1.1.1.1
   - npm install
   - npm run lint
   - npm run generate

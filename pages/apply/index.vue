@@ -32,7 +32,9 @@
             <div class="half-width inputContainer">
 
               <select id="country" name="country" class="input" @focus="setActive">
-                <option value="nl">The Netherlands</option>
+                <option value="nl">Netherlands</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
               </select>
             </div>
             <div class="half-width inputContainer">
