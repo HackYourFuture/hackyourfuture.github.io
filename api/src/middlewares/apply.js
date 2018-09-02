@@ -60,8 +60,8 @@ module.exports = async (req, res) => {
 
     const website = "http://hyf-website.s3-website.eu-central-1.amazonaws.com";
     const encryptedEmail = encryptEmail(req.body.email);
-    const redirectURL = `${website}apply/upload1`;
-    const verififactioURL = `${website}/get-applicant?id=${encryptedEmail}&redirectLocation=${redirectURL}`;
+    const verififactioURL = `${website}/apply/first-phase?token=${encryptedEmail}`;
+    console.log(verififactioURL);
 
     try {
         const res = await getApplicant(req.body.email);
