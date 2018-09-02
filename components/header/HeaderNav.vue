@@ -20,11 +20,8 @@ export default {};
 <style lang="scss">
 .HeaderNav {
     a {
+        flex: 1;
         position: relative;
-        margin-right: $base-vertical-rithm * 8;
-        &:last-child {
-            margin-right: 0;
-        }
         text-transform: uppercase;
         font-family: $fontWorkSans;
         font-weight: bold;
