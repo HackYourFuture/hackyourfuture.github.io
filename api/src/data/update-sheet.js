@@ -61,6 +61,8 @@ function saveApplicant(
         cvUrl,
         mlUrl,
         textArea_message_cv,
+        acceptedFirstRound,
+        emailSent,
         assignmentFileUrl,
         assignmentUrl,
         assignmentMessage
@@ -87,6 +89,8 @@ function saveApplicant(
                 cvUrl,
                 mlUrl,
                 textArea_message_cv,
+                acceptedFirstRound,
+                emailSent,
                 assignmentFileUrl,
                 assignmentUrl,
                 assignmentMessage
