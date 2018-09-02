@@ -16,7 +16,7 @@
           <fieldset>
             <div class="half-width inputContainer">
               <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" >
             </div>
             
             <div class="half-width inputContainer">
@@ -72,8 +72,9 @@
         <p ref="successMessage" class="TeaserPage__successMessage"/>
       </div>
       <div ref="errMsg"> 
-        <p ref="errorMessage" class="Apply__errorMessage"/>
+        <p ref="errorMessage" class="TeaserPage__errorMessage"/>
       </div>
+	  
     </Main>
   </div>
 </template>
@@ -110,28 +111,32 @@ export default {
     },
     methods: {
         async formUrlApply(e) {
+            //let obj = {};
             const fields = {};
             Object.values(e.target.elements).forEach(
                 input => (fields[input.name] = input.value)
       ); // eslint-disable-line
             try {
-                let req = await axios.post(// eslint-disable-line
+                await axios.post(// eslint-disable-line
                     process.env.lambdaUrl + "teaser",
                     fields
                 ); // eslint-disable-line
             } catch (error) {
                 if (error.response) {
-                    let obj = error.response.data;
-                    for (let key in obj) {
-                        console.log(key);
-                        for (let i = 0; i < 7; i++) {
-                            this.$refs.errorMessage.innerHTML +=
-                                `<br/>` +
-                                obj.requestErrors[i].param +
-                                " : " +
-                                obj.requestErrors[i].msg;
-                        }
-                    }
+                    this.$refs.errorMessage.innerHTML =
+                        "You have to Fill all required Fields!";
+                    //      obj = error.response.data;
+                    //    console.log(error.response.data);
+                    // for (let key in obj) {
+                    //     console.log(key);
+                    //     for (let i = 0; i < 7; i++) {
+                    //         this.$refs.errorMessage.innerHTML +=
+                    //             `<br/>` +
+                    //             obj[i].param +
+                    //             " : " +
+                    //             obj[i].msg;
+                    //     }
+                    // }
                 }
             }
         },
@@ -148,4 +153,147 @@ export default {
 </script>
 
 <style lang="scss">
-
+.TeaserPage {
+    &__container {
+        margin: 0 $base-vertical-rithm * 10;
+        & > div {
+            display: inline-block;
+            width: calc(50% - 100px);
+            vertical-align: top;
+            margin: 50px;
+        }
+    }
+    &__header {
+        padding: $base-vertical-rithm * 10;
+        @include breakpoint("mobile_landscape") {
+            padding: 0;
+        }
+        h1 {
+            margin: $base-vertical-rithm * 10;
+            margin-bottom: $base-vertical-rithm * 2;
+            width: 20%;
+            color: $color-purple;
+            font-weight: bold;
+            font-size: 52px;
+            line-height: 60px;
+            display: inline-block;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 24px;
+                line-height: 24px;
+                margin: $base-vertical-rithm * 5;
+            }
+        }
+        &-image {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
+        }
+        &-image {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+            }
+        }
+        &-links a {
+            font-size: 18px;
+        }
+        &-dates {
+            margin: $base-vertical-rithm * 15;
+            // margin-left: $base-vertical-rithm * 15;
+            width: 90%;
+            display: inline-block;
+            vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 5;
+            }
+            div {
+                display: inline-block;
+                width: calc(25% - 20px);
+                vertical-align: top;
+                @include breakpoint("mobile_landscape") {
+                    width: calc(50% - 10px);
+                    margin: $base-vertical-rithm * 5 auto;
+                }
+            }
+            h4 {
+                font-size: 18px;
+                color: $color-purple;
+                font-weight: bold;
+            }
+        }
+        &-about {
+            width: 90%;
+            margin: 0 auto;
+            @include breakpoint("mobile_landscape") {
+                width: 80%;
+                margin: 0 auto;
+            }
+            h2 {
+                color: $color-purple;
+                font-weight: bold;
+                font-size: 28px;
+                line-height: 1;
+                margin-bottom: $base-vertical-rithm * 5;
+            }
+        }
+    }
+    &__form {
+        width: 75%;
+        margin-left: 2.5%;
+        padding: $base-vertical-rithm * 15;
+        @include breakpoint("mobile_landscape") {
+            width: 100%;
+            padding: $base-vertical-rithm * 5;
+            margin: 0;
+        }
+        p,
+        h1 {
+            margin-left: 50px;
+            color: $color-purple;
+        }
+        h1 {
+            font-weight: bold;
+            font-size: 30px;
+            width: 60%;
+            line-height: 36px;
+        }
+        h2 {
+            font-weight: bold;
+            color: $color-purple;
+            font-size: 36px;
+            width: 40%;
+            line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                font-size: 32px;
+                line-height: 40px;
+            }
+        }
+        p {
+            margin-top: $base-vertical-rithm * 10;
+            font-weight: bold;
+            font-size: 24px;
+        }
+    }
+    &__successMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 24px;
+        color: $color-purple;
+        text-align: center;
+    }
+    &__errorMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 18px;
+        color: $color-purple;
+        text-align: center;
+    }
+}
+</style>
