@@ -20,12 +20,19 @@ const { donate } = require("./donation/donate");
 
 const app = express();
 
-const s3 = new aws.S3({
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
-    }
-});
+let s3;
+
+if (process.env.DEVELOPMENT) {
+    s3 = new aws.S3({
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
+        }
+    });
+} else {
+    s3 = new aws.S3();
+}
+
 const upload = multer({
     storage: multerS3({
         s3: s3,

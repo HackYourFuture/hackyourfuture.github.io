@@ -53,7 +53,8 @@ function saveConfig(config) {
 function getConfig() {
     if (!process.env.DEVELOPMENT)
         return {
-            spreadSheetId: "1DOba5whX5dXAM5K380nEyVUj6kb-qywcGxgJZ3aP0eo"
+            // This needs to be converted to an environment variable
+            spreadSheetId: "1CRF9TbwSayVq9yhrUCCv038DG0jPGBN7ehOyZa4mvE0"
         };
 
     return JSON.parse(fs.readFileSync(PATH_CONFIG));

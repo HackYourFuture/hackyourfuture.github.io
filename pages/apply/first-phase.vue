@@ -107,6 +107,8 @@ export default {
         };
     },
     async mounted() {
+        const token = window.location.search.replace("?token=", "");
+        this.token = token;
         try {
             const { data } = await axios.get(
                 `${process.env.lambdaUrl}get-applicant?token=${this.token}`
