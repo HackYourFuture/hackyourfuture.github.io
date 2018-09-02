@@ -43,7 +43,3 @@ npm run dev
                                       - Copenhagen
                                       - Malmö
 ```
-
-```
-
-```
