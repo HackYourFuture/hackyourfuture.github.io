@@ -10,13 +10,14 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { email, textArea_message } = req.body;
+    const { email } = req.body;
+    const textArea_message_cv = req.body.textArea_message;
     const cvUrl = req.files.input_file_cv[0].location;
     const mlUrl = req.files.input_file_motivation_letter[0].location;
     const updatedFilesUrl = {
         cvUrl,
         mlUrl,
-        textArea_message
+        textArea_message_cv
     };
     if (now <= deadline) {
         getApplicant(email)
