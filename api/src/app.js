@@ -30,6 +30,7 @@ if (process.env.DEVELOPMENT) {
         }
     });
 } else {
+    console.log("Should not neeed credentials");
     s3 = new aws.S3();
 }
 
@@ -37,7 +38,6 @@ const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: "hyf-website-uploads",
-        acl: "public-read",
         key: function(req, file, cb) {
             cb(
                 null,
