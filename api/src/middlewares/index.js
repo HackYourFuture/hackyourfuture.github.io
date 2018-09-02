@@ -3,5 +3,7 @@ module.exports = {
     ContactUs: require("./contact-us"),
     UploadCVML: require("./upload_cv_ml"),
     UploadAssignment: require("./upload_assignment"),
-    Teach: require("./teach")
+    Teach: require("./teach"),
+    GetApplicantFromToken: require("./get-applicant"),
+    DonationStatus: require("./donation-status")
 };
