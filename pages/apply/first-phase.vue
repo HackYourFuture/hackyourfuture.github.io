@@ -95,7 +95,7 @@ import axios from "~/plugins/axios";
 export default {
     async asyncData({ query }) {
         return {
-            token: query.token,
+            token: query.token || window.location.search.replace("?token=", ""),
             verified: false,
             cvData: "",
             motivationLetterData: "",
