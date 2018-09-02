@@ -5,11 +5,11 @@
         <h1 ref="pageNameHeader">Upload CV and Motivation Letter!</h1>
       </div>
 
-      <div ref="UploadCv__form" class="UploadCv__form form">
+      <div ref="UploadCv__form" :style="{ display: verified ? 'block' : 'none'}" class="UploadCv__form form">
         <form>
-          <fieldset>  
+          <fieldset>
             <div>
-              <p ref="uploadCvText" @click="openUpload($refs.input_file_cv)">+ Upload Your CV (*)</p>                          
+              <p ref="uploadCvText" @click="openUpload($refs.input_file_cv)">+ Upload Your CV (*)</p>
               <input ref="input_file_cv" type="file" value="" class="UploadCv__form-inputText" name="input_file_cv" @change="handleCvUpload(); fileCheckExtension(
                 $refs.input_file_cv,
                 $refs.input_checkbox_cv,
@@ -38,7 +38,7 @@
             </div>
 
             <div>
-              <P ref="uploadMotivationLetterText" @click="openUpload($refs.input_file_motivation_letter)">+ Upload Your Motivation Letter (*)</P>                          
+              <P ref="uploadMotivationLetterText" @click="openUpload($refs.input_file_motivation_letter)">+ Upload Your Motivation Letter (*)</P>
               <input ref="input_file_motivation_letter" type="file" class="UploadCv__form-inputText" name="input_file_motivation_letter" @change="handleMotivationLetterUpload(); fileCheckExtension(
                 $refs.input_file_motivation_letter,
                 $refs.input_checkbox_motivation_letter,
@@ -50,10 +50,10 @@
               <div ref="motivationLetterName"><span ref="motivationLetterLabel" class="UploadCv__form-label"/>
                 <button class="UploadCv__form-remove-btn" @click.prevent="removeFile($refs.input_file_motivation_letter,
                                                                                      $refs.motivationLetterLabel,$refs.motivationLetterName,$refs.input_checkbox_motivation_letter,
-                                                                                     $refs.writeMotivationLetterText)">Remove</button>    
+                                                                                     $refs.writeMotivationLetterText)">Remove</button>
               </div>
             </div>
-                       
+
             <div class="UploadCv__form-byTextArea">
               <div class="UploadCv__form-labelAndCheckbox">
                 <p ref="writeMotivationLetterText">I rather write my motivation letter in a text box:</p>
@@ -67,10 +67,9 @@
             </div>
 
             <div class="half-width inputContainer">
-              <label for="email">e-mail (*)</label>
-              <input ref="email" type="email" name="email" class="input" value="" @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
+              <input ref="email" :value="email" type="email" name="email" class="input" disabled>
             </div>
-                     
+
             <div class="UploadCv__form-byTextArea">
               <div>
                 <p>Is there anything you would like to notify us about?</p>
@@ -79,10 +78,10 @@
             </div>
 
             <div class="apply-btn">
-              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm">
+              <input type="submit" name="Apply" value="Apply" @click.prevent="submitForm">
             </div>
           </fieldset>
-        </form> 
+        </form>
       </div>
       <div>
         <p ref="successMessage" class="UploadCv__successMessage"/>
@@ -94,23 +93,32 @@
 <script>
 import axios from "~/plugins/axios";
 export default {
-    async asyncData() {
+    async asyncData({ query }) {
         return {
+            token: query.token,
+            verified: false,
+            cvData: "",
+            motivationLetterData: "",
+            emailData: "",
+            messageData: "",
+            email: "",
             formUrlApply: process.env.lambdaUrl + "apply/upload",
             siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I"
         };
     },
-    components: {},
-    data() {
-        return {
-            cvData: "",
-            motivationLetterData: "",
-            emailData: "",
-            messageData: ""
-        };
-    },
-    computed: {},
-    mounted: function() {
+    async mounted() {
+        try {
+            const { data } = await axios.get(
+                `${process.env.lambdaUrl}get-applicant?token=${this.token}`
+            );
+            if (data.email) {
+                this.verified = true;
+                this.email = data.email;
+            }
+        } catch (e) {
+            console.log("Couldn't get user");
+        }
+
         this.fileNameHide(this.$refs.cvName);
         this.fileNameHide(this.$refs.motivationLetterName);
         this.fileTextHide(this.$refs.textArea_cv);
@@ -159,11 +167,17 @@ export default {
                     textArea_motivation_letter.value !== "")
             ) {
                 axios
-                    .post("/apply/upload", formData, {
-                        headers: {
-                            "Content-Type": "multipart/form-data"
+                    .post(
+                        `${process.env.lambdaUrl}apply/upload?token=${
+                            this.token
+                        }`,
+                        formData,
+                        {
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            }
                         }
-                    })
+                    )
                     .then(function() {
                         console.log("SUCCESS!!");
                         console.log(...formData); // to see which files have been sent by POST
