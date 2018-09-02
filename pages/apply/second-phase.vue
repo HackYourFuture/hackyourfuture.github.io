@@ -97,7 +97,7 @@ export default {
                 assignmentLabel.innerHTML !== ""
             ) {
                 axios
-                    .post("/apply/upload1", formData, {
+                    .post(process.env.lambdaUrl + "/apply/upload1", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data"
                         }
