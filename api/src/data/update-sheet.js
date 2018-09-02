@@ -43,7 +43,18 @@ function handleApiError(error) {
 
 function saveApplicant(
     row,
-    { userName, street, city, email, phone, education, how_hear, computer }
+    {
+        userName,
+        street,
+        city,
+        email,
+        phone,
+        education,
+        how_hear,
+        computer,
+        file_cv,
+        file_motivation_letter
+    }
 ) {
     return new Promise((resolve, reject) => {
         if (!row) {
@@ -62,7 +73,9 @@ function saveApplicant(
                 phone,
                 education,
                 how_hear,
-                computer
+                computer,
+                file_cv,
+                file_motivation_letter
             ]
         ];
 
