@@ -1,5 +1,6 @@
  
 Dear applicant of HackYourFuture,
+
 First of all thank you for applying to our program. We’re very glad to see so many of you who want to educate themselves in web-development. We are very excited to get the program started.
 
 Second of all, we’d like to explain you a bit about the selection process regarding the program.
@@ -16,7 +17,7 @@ It’s important to be determined about wanting to learn to code, in order to su
 
 The following step in your application looks as follows:
 
-Please send a short essay ( max. 300 words) in English in which you describe:
+Please send a short essay (max. 300 words) in English in which you describe:
 
 1. Why do you want to learn programming and particularly web-development?
 
@@ -24,10 +25,10 @@ Please send a short essay ( max. 300 words) in English in which you describe:
 
 (doesn’t have to be related to web-development, can be anything related to programming)
 
-You can apply to our class in Malmö by sending your essay to hyf.malmoe@foocafe.org (mailto:hyf.malmoe@foocafe.org)  as soon as possible. We will keep you updated when we know more about when the course will start. Please also send your CV if you have one.. 
+You can apply to our class in Malmö by sending your essay to hyf.malmoe@foocafe.org (mailto:hyf.malmoe@foocafe.org)  as soon as possible. We will keep you updated when we know more about when the course will start. Please also send your CV if you have one..
 
 For more news about the program makes sure to check our websites www.hackyourfuture.net and foocafe.org
 
 Kind regards,
 
-The HackYourFutureTeam
+The HackYourFuture Team

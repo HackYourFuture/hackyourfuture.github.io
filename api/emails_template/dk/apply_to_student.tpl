@@ -35,4 +35,4 @@ Don't know where to find them? Ask us about useful resources in your email and w
 For more news about the program makes sure to check our website www.hackyourfuture.netand follow our updates on Facebook https://www.facebook.com/hackyourfuturecopenhagen/
 
 Kind regards, 
-The HackYourFutureTeam
+The HackYourFuture Team
