@@ -94,9 +94,8 @@
 import axios from "~/plugins/axios";
 export default {
     async asyncData({ query }) {
-        const token = !window ? query.token : window.location.search.replace("?token=", "");
         return {
-            token,
+            token: query.token,
             verified: false,
             cvData: "",
             motivationLetterData: "",
@@ -108,6 +107,8 @@ export default {
         };
     },
     async mounted() {
+        const token = window.location.search.replace("?token=", "");
+        this.token = token;
         try {
             const { data } = await axios.get(
                 `${process.env.lambdaUrl}get-applicant?token=${this.token}`
@@ -137,6 +138,8 @@ export default {
                 cvLabel,
                 motivationLetterLabel
             } = this.$refs;
+            formData.append("email", this.email);
+            formData.append("textArea_message", this.messageData.value);
             //  Add the form data we need to submit
             if (input_file_cv.files.length !== 0) {
                 formData.append("input_file_cv", this.cvData);
@@ -154,8 +157,6 @@ export default {
                     textArea_motivation_letter.value
                 );
             }
-            formData.append("email", this.emailData.value);
-            formData.append("textArea_message", this.messageData.value);
             //  Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
