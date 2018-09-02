@@ -138,6 +138,8 @@ export default {
                 cvLabel,
                 motivationLetterLabel
             } = this.$refs;
+            formData.append("email", this.email);
+            formData.append("textArea_message", this.messageData.value);
             //  Add the form data we need to submit
             if (input_file_cv.files.length !== 0) {
                 formData.append("input_file_cv", this.cvData);
@@ -155,8 +157,6 @@ export default {
                     textArea_motivation_letter.value
                 );
             }
-            formData.append("email", this.emailData.value);
-            formData.append("textArea_message", this.messageData.value);
             //  Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
