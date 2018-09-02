@@ -1,4 +1,5 @@
 const { updateApplicant } = require("../data");
+const { decryptEmail } = require("./../utils/email-crypto");
 
 const { getApplicant } = require("../data/update-sheet");
 
@@ -10,7 +11,9 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { email } = req.body;
+    const { token } = req.query;
+
+    const email = decryptEmail(token);
     const textArea_message_cv = req.body.textArea_message;
     const cvUrl = req.files.input_file_cv[0].location;
     const mlUrl = req.files.input_file_motivation_letter[0].location;
