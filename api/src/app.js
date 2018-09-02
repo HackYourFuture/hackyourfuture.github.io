@@ -115,6 +115,7 @@ app.use(
     })
 );
 app.use(expressValidator());
+
 app.post("/apply", Apply);
 app.post("/contact-us", ContactUs);
 app.post("/apply", Apply);
