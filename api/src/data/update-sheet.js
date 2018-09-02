@@ -25,10 +25,10 @@ const columnPosition = {
     computer: 7,
     cvUrl: 8,
     mlUrl: 9,
-    textArea_message: 10,
-    assignmentFileUrl: 11,
-    assignmentUrl: 12,
-    message: 13
+    textArea_message_cv: 10,
+    assignmentUrl: 13,
+    assignmentFileUrl: 14,
+    assignmentMessage: 15
 };
 
 function handleApiError(error) {
@@ -60,10 +60,12 @@ function saveApplicant(
         computer,
         cvUrl,
         mlUrl,
-        textArea_message,
+        textArea_message_cv,
+        acceptedFirstRound,
+        emailSent,
         assignmentFileUrl,
         assignmentUrl,
-        message
+        assignmentMessage
     }
 ) {
     return new Promise((resolve, reject) => {
@@ -86,10 +88,12 @@ function saveApplicant(
                 computer,
                 cvUrl,
                 mlUrl,
-                textArea_message,
+                textArea_message_cv,
+                acceptedFirstRound,
+                emailSent,
                 assignmentFileUrl,
                 assignmentUrl,
-                message
+                assignmentMessage
             ]
         ];
 
@@ -97,7 +101,7 @@ function saveApplicant(
             valueInputOption: "RAW",
             data: [
                 {
-                    range: `Sheet1!A${row}:N`,
+                    range: `Sheet1!A${row}:R`,
                     majorDimension: "ROWS",
                     values
                 }
