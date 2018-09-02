@@ -10,12 +10,13 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { email, url, message } = req.body;
-    const assignmentUrl = req.files.input_file_assignment[0].location;
+    const { email, message } = req.body;
+    const assignmentUrl = req.body.url;
+    const assignmentFileUrl = req.files.input_file_assignment[0].location;
     const updatedUrlAssignment = {
+        assignmentFileUrl,
         assignmentUrl,
-        message,
-        url
+        message
     };
     if (now <= deadline) {
         getApplicant(email)
@@ -23,18 +24,14 @@ module.exports = (req, res) => {
                 updateApplicant(email, updatedUrlAssignment, req.files)
                     .then(() => {
                         sendEmail(
-                            fromEmail,
                             [email],
                             "** Confirmation email **",
                             "We've received your files"
                         );
                         sendEmail(
-                            fromEmail,
-                            applicationMail,
+                            [applicationMail],
                             "** Confirmation email **",
-                            `Applicant uploaded Assignment successfully:${[
-                                email
-                            ]}`
+                            `Applicant uploaded Assignment successfully:${email}`
                         );
                     })
                     .then(() => {
@@ -44,10 +41,9 @@ module.exports = (req, res) => {
                     })
                     .catch(() => {
                         sendEmail(
-                            fromEmail,
-                            fromEmail,
+                            [fromEmail],
                             "** Confirmation email **",
-                            `Uploading Assignment file is failed:${[email]}`
+                            `Uploading Assignment file is failed:${email}`
                         );
                         res.status(500).send({
                             message: "Something went wrong"

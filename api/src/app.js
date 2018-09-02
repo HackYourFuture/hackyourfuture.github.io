@@ -9,13 +9,14 @@ const path = require("path");
 
 const {
     Apply,
+    GetApplicantFromToken,
     ContactUs,
-    upload_cv_ml,
-    upload_assignment
+    UploadCVML,
+    UploadAssignment,
+    Teach,
+    DonationStatus
 } = require("./middlewares");
-const { getApplicant } = require("./data/update-sheet");
-const { decryptData } = require("./utils/email-crypto.js");
-const { donate, paymentStatus } = require("./donation/donate");
+const { donate } = require("./donation/donate");
 
 const app = express();
 
@@ -25,11 +26,11 @@ const s3 = new aws.S3({
         secretAccessKey: process.env.SECRET_ACCESS_KEY_ID
     }
 });
-
 const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: "hyf-website-uploads",
+        acl: "public-read",
         key: function(req, file, cb) {
             cb(
                 null,
@@ -116,87 +117,14 @@ app.use(
 );
 app.use(expressValidator());
 
-app.post("/apply", (req, res) => {
-    req.check("userName", "Username is too short")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("street", "Street name is too short")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("city", "City name is too short or too long")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("email", "Invalid Email Address").isEmail();
-    req.check("phone", "Invalid phone number")
-        .isNumeric()
-        .isLength({
-            min: 9
-        });
-    req.check("education", "The string must be between 2-15 letters")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("how_hear", "Either not a String or the String is too long")
-        .isString()
-        .isLength({
-            max: 20
-        });
-    req.check("computer", "Invalid boolean").isBoolean();
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        console.error("Validation errors: ", errors);
-        res.status(400).json({
-            errors
-        });
-    } else {
-        Apply(req, res);
-    }
-});
-app.post("/contact-us", (req, res) => ContactUs(req, res));
-app.post("/apply", (req, res) => Apply(req, res));
-app.post("/apply/upload", FileUpload, (req, res) => upload_cv_ml(req, res));
-app.post("/apply/upload1", FileUpload, (req, res) =>
-    upload_assignment(req, res)
-);
-app.get("/get-applicant", (req, res) => {
-    const { id, url } = req.query;
-    const email = decryptData(id);
-    getApplicant(email)
-        .then(() => res.redirect(`${url}`))
-        .catch(() =>
-            res
-                .status(404)
-                .send(
-                    "Email address is not associated with any open applications."
-                )
-        );
-});
-
-app.post("/donate", (req, res) => {
-    donate(req.body, res);
-});
-
-app.get("/donation/status", (req, res) => {
-    const { orderid } = req.query;
-
-    if (orderid) {
-        paymentStatus(orderid)
-            .then(msg => res.json({ message: msg }))
-            .catch(err => res.json({ message: err }));
-
-        return;
-    }
-
-    res.status(400).json({ message: "Not order id provided" });
-});
+app.post("/apply", Apply);
+app.post("/contact-us", ContactUs);
+app.post("/apply", Apply);
+app.post("/apply/upload", FileUpload, UploadCVML);
+app.post("/apply/upload1", FileUpload, UploadAssignment);
+app.post("/teach", Teach);
+app.get("/get-applicant", GetApplicantFromToken);
+app.post("/donate", (req, res) => donate(req.body, res));
+app.get("/donation/status", DonationStatus);
 
 module.exports = app;

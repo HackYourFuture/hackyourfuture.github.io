@@ -21,7 +21,11 @@ api/dist: prepare
 	@cd api && npm run build
 
 api-$(VERSION).zip: api/dist
-	@cd api/dist && zip -r ./../../api-$(VERSION).zip *
+	@cd api && \
+		zip -q -r -j ./../api-$(VERSION).zip ./dist/main.js && \
+		zip -q -r ./../api-$(VERSION).zip ./node_modules
+
+api-zip:  api-$(VERSION).zip
 
 .PHONY: publish-lambda
 upload-lambda: api-$(VERSION).zip
@@ -30,8 +34,7 @@ upload-lambda: api-$(VERSION).zip
 .PHONY: publish-api
 publish-api: clean-zip upload-lambda
 	@$(RUN_AWS_CLI) lambda update-function-code \
-		--s3-bucket=hyf-api-deploy \
-		--s3-key=api-$(VERSION).zip \
+		--file-zip=fileb://./api-$(VERSION).zip \
 		--publish \
 		--function-name=gateway_proxy &> /dev/null && \
 		echo "Function updated"

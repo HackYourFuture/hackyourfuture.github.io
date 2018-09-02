@@ -10,16 +10,16 @@
       <div class="Contact__form form">
         <h1>Reach us for any other questions</h1>
         <p>General Inquiries</p>
-        <form action="">
+        <form @submit.prevent="submitForm">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="firstName">Fist Name</label>
 
-              <input id="firstName" type="text" name="firstName" @focus="setActive">
+              <input id="firstName" type="text" name="firstName" required @focus="setActive">
             </div>
             <div class="half-width inputContainer">
               <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" name="lastName" @focus="setActive">
+              <input id="lastName" type="text" name="lastName" required @focus="setActive">
             </div>
 
 
@@ -38,13 +38,13 @@
             <div class="half-width inputContainer">
 
               <label for="email">e-mail</label>
-              <input id="email" type="email" name="email" @focus="setActive">
+              <input id="email" type="email" name="email" required @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
 
               <label for="message">What would you like to contact us about?</label>
-              <input id="message" type="message" name="message" @focus="setActive">
+              <input id="message" type="message" name="message" pattern=".{10,}" title="The message must be at least 10 characters" required @focus="setActive">
             </div>
 
             <div class="apply-btn">
@@ -52,6 +52,12 @@
             </div>
           </fieldset>
         </form>
+        <div v-if="contacted.tried" class="blur-screen"> 
+          <div class="contacted-popup">
+            <p>{{ contacted.success ? successMessage : failedMessage }}</p>
+            <button @click="contacted.tried = false; contacted.success = false">Close</button>
+          </div>
+        </div>
       </div>
     </Main>
 
@@ -62,6 +68,15 @@
 import axios from "~/plugins/axios";
 
 export default {
+    components: {},
+    data: () => {
+        return {
+            successMessage:
+                "Thank you for contacting us, we will get back to you as soon as possible",
+            failedMessage: "Sorry something went wrong, please try again.",
+            contacted: { tried: false, success: false }
+        };
+    },
     async asyncData() {
         let content;
         try {
@@ -78,11 +93,46 @@ export default {
             content: content ? content : null
         };
     },
-    components: {},
     methods: {
+        async submitForm(e) {
+            const fields = {};
+            Object.values(e.target.elements).forEach(
+                input => (fields[input.name] = input.value)
+            );
+            try {
+                await axios.post(`${process.env.lambdaUrl}contact-us`, fields);
+                this.contacted.success = true;
+                this.contacted.tried = true;
+                this.$el
+                    .querySelectorAll(".inputContainer")
+                    .forEach((i, index) => {
+                        if (index !== 3) {
+                            i.childNodes[1].value = "";
+                            i.classList.remove("active");
+                        }
+                    });
+            } catch (error) {
+                if (error.response.data.errors) {
+                    const message = error.response.data.errors.reduce(
+                        (sum, current, index) => {
+                            if (!index) {
+                                return (sum = current.msg);
+                            }
+                            return (sum = `${sum}, ${current.msg}`);
+                        },
+                        ""
+                    );
+                    this.failedMessage = message;
+                }
+                this.contacted.success = false;
+                this.contacted.tried = true;
+            }
+        },
         setActive(e) {
-            this.$el.querySelectorAll(".inputContainer").forEach(function(i) {
-                i.classList.remove("active");
+            this.$el.querySelectorAll(".inputContainer").forEach((i, index) => {
+                if (index !== 3 && i.childNodes[1].value.length === 0) {
+                    i.classList.remove("active");
+                }
             });
             e.target.parentNode.classList.add("active");
         }
@@ -101,11 +151,11 @@ export default {
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
-            width: 20%;
+            width: 30%;
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 margin-left: 0;
@@ -123,6 +173,7 @@ export default {
         margin: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 18px;
+        color: black;
         span:after {
             bottom: -5px;
         }
@@ -132,8 +183,8 @@ export default {
         }
     }
     &__content {
-        width: 40%;
-        margin-left: 50%;
+        width: 50%;
+        margin-left: 40%;
         @include breakpoint("mobile_landscape") {
             width: 80%;
             margin: $base-vertical-rithm * 10 auto;
@@ -176,6 +227,81 @@ export default {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
             font-size: 24px;
+        }
+    }
+
+    .Contact__form {
+        position: relative;
+    }
+    .blur-screen {
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        @include breakpoint("mobile_portrait") {
+            background: rgba(0, 0, 0, 0);
+        }
+    }
+    .contacted-popup {
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        font-size: 20px;
+        width: 450px;
+        height: 220px;
+        margin-top: -150px;
+        margin-left: -210px;
+        border: 2px solid rgb(219, 213, 213);
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+        animation: fadeIn 0.5s;
+        @include breakpoint("mobile_portrait") {
+            width: 260px;
+            height: 200px;
+            margin-top: 0;
+            margin-left: -130px;
+        }
+
+        p {
+            margin: 0;
+            text-align: center;
+            padding: 50px 10px 10px 10px;
+            color: #293a7d;
+            @include breakpoint("ipad_portrait") {
+                padding-top: 25px;
+            }
+        }
+        button {
+            margin: auto;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            padding: 5px;
+        }
+    }
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
 }

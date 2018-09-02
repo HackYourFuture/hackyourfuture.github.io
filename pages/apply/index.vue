@@ -17,43 +17,43 @@
           <fieldset>
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
-              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive" @click="emptyRequiredField($refs.userName)">
+              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="street">Street</label>
-              <input id="street" ref="street" type="text" class="input" name="street" @focus="setActive" @click="emptyRequiredField($refs.street)">
+              <input id="street" ref="street" type="text" class="input" name="street" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="city">City</label>
-              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive" @click="emptyRequiredField($refs.city)">
+              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive">
             </div>
 
-            <div class="half-width inputContainer">
-              <select id="country" ref="country" name="country" class="input" @focus="setActive">
-                <option value="nl">The Netherlands</option>
-              </select>
-            </div>
+            <select id="country" name="country" class="input" @focus="setActive">
+              <option value="nl">Netherlands</option>
+              <option value="dk">Denmark</option>
+              <option value="se">Sweden</option>
+            </select>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" @click="emptyRequiredField($refs.email)">
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="phone">phone</label>
-              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive" @click="emptyRequiredField($refs.phone)">
+              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
               <label for="eductation">Educational Background</label>
-              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive" @click="emptyRequiredField($refs.education)">
+              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
               <label for="how-hear">How did you hear about us?</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive" @click="emptyRequiredField($refs.how_hear)">
+              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
@@ -70,9 +70,11 @@
           </fieldset>
         </form>
       </div>
-     
       <div>
         <p ref="successMessage" class="Apply__successMessage"/>
+      </div>
+      <div ref="errMsg"> 
+        <p ref="errorMessage" class="Apply__errorMessage"/>
       </div>
     </Main>
   </div>
@@ -111,14 +113,33 @@ export default {
     },
     methods: {
         async formUrlApply(e) {
-            if (this.emptyInputs() === true) {
-                const fields = {};
-                Object.values(e.target.elements).forEach(
-                    input => (fields[input.name] = input.value)
-        ); // eslint-disable-line
-        let req = await axios.post(process.env.lambdaUrl + "apply", fields); // eslint-disable-line
+            let obj = {};
+            const fields = {};
+            Object.values(e.target.elements).forEach(
+                input => (fields[input.name] = input.value)
+      ); // eslint-disable-line
+            try {
+                let req = await axios.post(// eslint-disable-line
+                    process.env.lambdaUrl + "apply",
+                    fields
+                ); // eslint-disable-line
+            } catch (error) {
+                if (error.response) {
+                    obj = error.response.data;
+                    for (let key in obj) {
+                        console.log(key);
+                        for (let i = 0; i < 7; i++) {
+                            this.$refs.errorMessage.innerHTML +=
+                                `<br/>` +
+                                obj.requestErrors[i].param +
+                                " : " +
+                                obj.requestErrors[i].msg;
+                        }
+                    }
+                }
             }
         },
+
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
@@ -126,37 +147,6 @@ export default {
                 }
             });
             e.target.parentNode.classList.add("active");
-        },
-        emptyInputs() {
-            const inputs = [
-                this.$refs.email,
-                this.$refs.street,
-                this.$refs.userName,
-                this.$refs.city,
-                this.$refs.phone,
-                this.$refs.education,
-                this.$refs.how_hear
-            ];
-            inputs.forEach(element => {
-                if (element.value === "" || element.value === null) {
-                    element.parentNode.classList.add("active");
-                    element.value = "Required field";
-                    return false;
-                } else {
-                    this.successMSG();
-                    return true;
-                }
-            });
-            return true;
-        },
-        emptyRequiredField(e) {
-            e.parentNode.classList.add("active");
-            e.value = "";
-        },
-        successMSG() {
-            const { successMessage } = this.$refs;
-            this.$refs.Apply__form.style.display = "none";
-            successMessage.innerHTML = "You have applied successfully.";
         }
     }
 };
@@ -169,16 +159,16 @@ export default {
         @include breakpoint("mobile_landscape") {
             padding: 0;
         }
-
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             width: 20%;
             color: $color-purple;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
+
             @include breakpoint("mobile_landscape") {
                 margin: $base-vertical-rithm * 5;
                 font-size: 32px;
@@ -186,7 +176,7 @@ export default {
             }
         }
         &-image {
-            width: 55%;
+            width: 60%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
@@ -229,13 +219,19 @@ export default {
         h1 {
             color: $color-purple;
             line-height: 1;
-            margin-bottom: $base-vertical-rithm * 5;
+            margin: 0 $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+            @media (max-width: 800px) {
+                margin: 0 0 5 * $base-vertical-rithm;
+            }
         }
         h2 {
             color: $color-purple;
+            font-size: 2em;
+            font-weight: bold;
         }
         ul li {
             list-style: disc;
+            margin: 5px;
         }
         ul + p {
             margin-top: 1rem;
@@ -283,6 +279,13 @@ export default {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 24px;
+        color: $color-purple;
+        text-align: center;
+    }
+    &__errorMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 18px;
         color: $color-purple;
         text-align: center;
     }

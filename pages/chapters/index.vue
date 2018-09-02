@@ -128,6 +128,9 @@ export default {
 
     &__information {
         padding: $base-vertical-rithm * 10;
+        a {
+            color: black;
+        }
         @include breakpoint("mobile_landscape") {
             padding: $base-vertical-rithm * 8;
         }
