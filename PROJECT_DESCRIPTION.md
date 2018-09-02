@@ -110,7 +110,7 @@ All the changes, after initialisation, should be handled on the Google sheets th
 
 This README was written by Jason Tan and is correct as of 2 September 2018.
 
-This website was created by Maartje Kruijt and Mauro Mandracchia and was last worked on 2 September 2018 by Class 14:
+This website was created by Maarten Vleugels, Mauro Mandracchia and Maartje Kruijt, and was last worked on 2 September 2018 by Class 14:
 
 - **A Team** (Fadi, Emad, Wael & Hadeel)
 - **Big Voice Big Team** (Sarbast, Sobhi, Rashad & Murat)
