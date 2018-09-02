@@ -1,49 +1,46 @@
 <template>
   <div>
     <Main class="UploadAssignment container">
-      <div id="UploadAssignment__header" class="UploadAssignment__header">
-        <h1 id="UploadAssignment__headerText">Upload your Assignment. </h1>
-
+      <div class="UploadAssignment__header">
+        <h1 ref="pageNameHeader">Upload your Assignment. </h1>
       </div>
 
-      <div id="UploadAssignment__form" class="UploadAssignment__form form">
-        <form id="assignmentUploadForm">
+      <div ref="UploadAssignment__form" class="UploadAssignment__form form">
+        <form>
           <fieldset>
             <div class="half-width inputContainer">
               <label for="url">Assignment URL: (*)</label>
-              <input id="url" ref="url" type="url" class="input" name="url" @focus="setActive" @click="emptyUrlRequired()">
+              <input ref="url" type="url" name="url" class="input" @change="handleUrlUpload($refs.url)" @focus="setActive" @click="emptyUrlRequired($refs.url)">
             </div>
 
-            <div id="assignmentDiv">
-              <P @click="openUploadFileDialogue()">+ Upload Assignment screenshot (*)</P>
-              <input id="input_file_assignment" ref="input_file_assignment" type="file" class="UploadAssignment__form__inputText" @change="handleAssignmentUpload()" >
+            <div ref="assignmentDiv">
+              <p @click="openUploadFileDialogue($refs.input_file_assignment)">+ Upload Assignment screenshot (*)</p>
+              <input ref="input_file_assignment" type="file" class="UploadAssignment__form-inputText" name="input_file_assignment" @change="handleAssignmentUpload($refs.input_file_assignment,$refs.assignmentLabel);imgCheckExtension($refs.assignmentLabel)" >
               <h3 ref="requiredMSG"/>
-              <div id="assignmentName"><span id="assignmentLabel" ref="assignmentLabel" class="UploadAssignment__form__assignemntLabel"/>
-                <button class="UploadAssignment__form__remove-btn" @click.prevent="removeAssignmentFile()">Remove</button>
+              <div ref="assignmentName"><span ref="assignmentLabel" class="UploadAssignment__form-assignemntLabel"/>
+                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeFile($refs.assignmentName)">Remove</button>
               </div>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input id="email" ref="email" type="email" class="input" name="email" value=""
-                     @focus="setActive" @click="emptyEmailRequired()">
+              <input ref="email" type="email" name="email" class="input" value=""
+                     @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
             </div>
 
-            <div id="message_TextArea" class="UploadAssignment__form__section">
-              <p class="messageLabel">Is there anything you would like to notify us about?</p>
-              <textarea id="message" ref="message" class="UploadAssignment__form__textarea" rows="4" cols="50" placeholder="This can be anything :)" />
+            <div class="UploadAssignment__form-byTextArea">
+              <p>Is there anything you would like to notify us about?</p>
+              <textarea ref="message" name="message" class="UploadAssignment__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage($refs.message)"/>
             </div>
 
             <div class="apply-btn">
-              <input type="submit" value="Apply" true @click.prevent="submitFile()">
+              <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm()">
             </div>
-
           </fieldset>
         </form>
-
       </div>
       <div>
-        <p id="success-Msg" class="UploadAssignment__success-Msg"/>
+        <p ref="successMessage" class="UploadAssignment__successMessage"/>
       </div>
     </Main>
   </div>
@@ -70,14 +67,11 @@ export default {
             messageData: ""
         };
     },
-
     mounted: function() {
-        this.assignmentNameHide();
+        this.fileNameHide(this.$refs.assignmentName);
     },
-
     methods: {
-        submitFile() {
-            // Initialize the form data
+        submitForm() {
             let formData = new FormData();
             const {
                 url,
@@ -85,21 +79,21 @@ export default {
                 email,
                 assignmentLabel
             } = this.$refs;
-
             // Add the form data we need to submit
             formData.append("url", this.urlData.value);
             formData.append("input_file_assignment", this.assignmentData);
             formData.append("email", this.emailData.value);
             formData.append("message", this.messageData.value);
-
             // Make the request to the POST /single-file URL
             if (
                 email.value !== "" &&
                 email.value !== null &&
                 email.value !== "Required field" &&
+                email.value !== "Invalid Email" &&
                 url.value !== "" &&
                 url.value !== null &&
                 url.value !== "Required field" &&
+                url.value !== "Invalid URL" &&
                 assignmentLabel.innerHTML !== ""
             ) {
                 axios
@@ -108,7 +102,6 @@ export default {
                             "Content-Type": "multipart/form-data"
                         }
                     })
-
                     .then(function() {
                         console.log("SUCCESS!!");
                         console.log(...formData); // to see which files have been sent by POST
@@ -119,12 +112,10 @@ export default {
                 this.successMSG();
             } else {
                 if (email.value === "") {
-                    email.parentNode.classList.remove("active");
                     email.parentNode.classList.add("active");
                     email.value = "Required field";
                 }
                 if (url.value === "") {
-                    url.parentNode.classList.remove("active");
                     url.parentNode.classList.add("active");
                     url.value = "Required field";
                 }
@@ -132,37 +123,96 @@ export default {
                     this.$refs.requiredMSG.innerHTML = "Required field";
                 }
             }
-            this.removeAssignmentFile();
+            this.removeFile(this.$refs.assignmentName);
         },
-
-        handleAssignmentUpload() {
-            this.assignmentData = this.$refs.input_file_assignment.files[0];
-            this.assignmentNameShow();
+        checkUrl(url) {
+            var inputUrl = url.value;
+            var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-[\]/]))?/;
+            if (!pattern.test(inputUrl)) {
+                url.parentNode.classList.remove("active");
+                url.parentNode.classList.add("active");
+                url.value = "Invalid URL";
+                url.focus;
+                return false;
+            } else {
+                return true;
+            }
+        },
+        // Handles a change on the url upload
+        handleUrlUpload(url) {
+            if (this.checkUrl(url) === true) {
+                this.urlData = url;
+                url.value = this.urlData.value;
+            }
+        },
+        handleAssignmentUpload(input_file, file_label) {
+            this.assignmentData = input_file.files[0];
+            this.assignmentNameShow(this.$refs.assignmentName);
             this.$refs.requiredMSG.innerHTML = "";
-            this.$refs.assignmentLabel.innerHTML =
+            file_label.innerHTML =
                 "You Uploaded the file: " + this.assignmentData.name;
         },
-
+        handleEmail(email) {
+            if (this.isValidEmail(email) === true) {
+                this.emailData = email;
+                email.value = this.emailData.value;
+            }
+        },
+        isValidEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(email.value)) {
+                email.parentNode.classList.remove("active");
+                email.parentNode.classList.add("active");
+                email.value = "Invalid Email";
+                email.focus;
+                return false;
+            } else {
+                return true;
+            }
+        },
+        //validate screenshot exetinsion
+        imgCheckExtension(assignmentLabel) {
+            var file = this.$refs.input_file_assignment;
+            if (
+                /\.(jpg|jpeg|png|gif|ico|svg)$/i.test(file.files[0].name) ===
+                false
+            ) {
+                this.$refs.requiredMSG.innerHTML = "Invalid File Type!";
+                this.assignmentNameShow(this.$refs.assignmentName);
+                assignmentLabel.innerHTML = "";
+                this.removeFile(this.$refs.assignmentName);
+                return false;
+            }
+        },
+        handleMessage(message) {
+            this.messageData = message;
+            message.value = this.messageData.value;
+        },
         successMSG() {
-            document.getElementById("success-Msg").innerHTML =
-                "You have submitted your Assignment successfully!";
-            this.$refs.email.value = "";
-            this.$refs.url.value = "";
-            this.$refs.message.value = "";
-            this.hideForm();
+            const {
+                url,
+                email,
+                message,
+                successMessage,
+                UploadAssignment__form,
+                pageNameHeader
+            } = this.$refs;
+            successMessage.innerHTML =
+                "You have submitted your Assignment successfully.";
+            email.value = "";
+            url.value = "";
+            message.value = "";
+            this.hideForm(UploadAssignment__form, pageNameHeader);
         },
-
         // Handles when the add file clicked
-        openUploadFileDialogue() {
-            this.$refs.input_file_assignment.click();
+        openUploadFileDialogue(e) {
+            e.click();
         },
-
         // Removes a select file the user has uploaded
-        removeAssignmentFile() {
+        removeFile(e) {
             delete this.assignmentData;
-            this.assignmentNameHide();
+            this.fileNameHide(e);
         },
-
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
                 if (i.value.length == 0) {
@@ -171,52 +221,37 @@ export default {
             });
             e.target.parentNode.classList.add("active");
         },
-
-        hideAssgnmentiDiv() {
-            var x = document.getElementById("assignmentDiv");
-            x.style.display = "none";
+        assignmentNameShow(e) {
+            e.style.display = "block";
         },
-
-        assignmentNameShow() {
-            var x = document.getElementById("assignmentName");
-            x.style.display = "block";
+        fileNameHide(e) {
+            e.style.display = "none";
         },
-
-        assignmentNameHide() {
-            var x = document.getElementById("assignmentName");
-            x.style.display = "none";
-        },
-        emptyEmailRequired() {
-            const { email } = this.$refs;
+        emptyEmailRequired(email) {
             if (email.value) {
                 email.parentNode.classList.remove("active");
             }
             email.parentNode.classList.add("active");
             email.value = "";
         },
-        emptyUrlRequired() {
-            const { url } = this.$refs;
+        emptyUrlRequired(url) {
             if (url.value) {
                 url.parentNode.classList.remove("active");
             }
             url.parentNode.classList.add("active");
             url.value = "";
         },
-        hideForm() {
-            var x = document.getElementById("UploadAssignment__form");
-            var y = document.getElementById("UploadAssignment__headerText");
+        hideForm(x, y) {
             y.style.display = "none";
             x.style.display = "none";
         }
     }
 };
 </script>
-
 <style lang="scss">
 .UploadAssignment {
     &__header {
         padding: $base-vertical-rithm * 10;
-
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
@@ -228,12 +263,10 @@ export default {
             display: inline-block;
         }
     }
-
     &__form {
         width: 75%;
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 10;
-
         p {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
@@ -247,8 +280,7 @@ export default {
             font-size: 16px;
             margin-left: 50px;
         }
-
-        &__assignemntLabel {
+        &-assignemntLabel {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             margin-left: 60px;
@@ -256,8 +288,7 @@ export default {
             line-height: 5px;
             display: inline-block;
         }
-
-        &__inputText {
+        &-inputText {
             font-size: 18px;
             padding: 10px 10px 10px 5px;
             display: block;
@@ -267,7 +298,7 @@ export default {
             display: none;
             cursor: pointer;
         }
-        &__remove-btn {
+        &-remove-btn {
             border: 2px solid $color-purple;
             padding: 0px 10px;
             text-transform: uppercase;
@@ -276,11 +307,11 @@ export default {
             right: 0;
             margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
         }
-        &__section {
+        &-byTextArea {
             display: grid;
             grid-auto-flow: row;
         }
-        &__textarea {
+        &-textarea {
             overflow: auto;
             outline: none;
             background-color: #e6e6e6;
@@ -292,8 +323,7 @@ export default {
             font-size: 16px;
         }
     }
-
-    &__success-Msg {
+    &__successMessage {
         margin-top: $base-vertical-rithm * 10;
         font-weight: bold;
         font-size: 24px;
