@@ -22,7 +22,13 @@ const columnPosition = {
     phone: 4,
     education: 5,
     how_hear: 6,
-    computer: 7
+    computer: 7,
+    cvUrl: 8,
+    mlUrl: 9,
+    textArea_message: 10,
+    assignmentFileUrl: 11,
+    assignmentUrl: 12,
+    message: 13
 };
 
 function handleApiError(error) {
@@ -52,8 +58,12 @@ function saveApplicant(
         education,
         how_hear,
         computer,
-        file_cv,
-        file_motivation_letter
+        cvUrl,
+        mlUrl,
+        textArea_message,
+        assignmentFileUrl,
+        assignmentUrl,
+        message
     }
 ) {
     return new Promise((resolve, reject) => {
@@ -74,8 +84,12 @@ function saveApplicant(
                 education,
                 how_hear,
                 computer,
-                file_cv,
-                file_motivation_letter
+                cvUrl,
+                mlUrl,
+                textArea_message,
+                assignmentFileUrl,
+                assignmentUrl,
+                message
             ]
         ];
 
@@ -83,7 +97,7 @@ function saveApplicant(
             valueInputOption: "RAW",
             data: [
                 {
-                    range: `Sheet1!A${row}:H`,
+                    range: `Sheet1!A${row}:N`,
                     majorDimension: "ROWS",
                     values
                 }
