@@ -38,9 +38,9 @@ module.exports = (req, res) => {
 
     sendEmail(
         fromEmail,
-        [fromEmail],
         email("apply_to_org.tpl", { params: req.body }),
-        "A new teacher applied"
+        "A new teacher applied",
+        req.body.email
     )
         .then(() => {
             res.send({
