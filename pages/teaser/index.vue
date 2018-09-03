@@ -16,27 +16,27 @@
           <fieldset>
             <div class="half-width inputContainer">
               <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" >
+              <input id="email" ref="email" type="email" class="input" name="email" required @focus="setActive">
             </div>
             
             <div class="half-width inputContainer">
-              <label for="userName">Name</label>
-              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive">
+              <label for="firstName">First Name</label>
+              <input id="firstName" type="text" class="input" name="firstName" required @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="userSurname">Surname</label>
-              <input id="userSurname" ref="userSurname" type="text" class="input" name="userSurname" @focus="setActive">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" type="text" class="input" name="lastName" required @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="phone">Phone Number</label>
-              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
+              <input id="phone" type="number" class="input" name="phone" @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
               <label for="computer">Do you have your own laptop?</label>
-              <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
+              <select id="computer" name="computer" class="input" required @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -44,12 +44,12 @@
 
             <div class="full-width inputContainer">
               <label for="eductation">Education / Work Background</label>
-              <input id="education" ref="education" type="text" class="input" name="education" @focus="setActive">
+              <input id="education" type="text" class="input" name="education" required @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
               <label for="experience">Do you have any prior programming experience?</label>
-              <select id="experience" ref="experience" name="experience" class="input" @focus="setActive">
+              <select id="experience" name="experience" class="input" required @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
                 <option value="other">Other</option>
@@ -58,7 +58,7 @@
 
             <div class="full-width inputContainer">
               <label for="message">Is there something else you would like to notify us about?</label>
-              <input id="message" ref="message" type="text" class="input" name="message" @focus="setActive">
+              <input id="message" type="text" class="input" name="message" @focus="setActive">
             </div>
 
             <div class="apply-btn">
@@ -66,13 +66,12 @@
             </div>
           </fieldset>
         </form>
-      </div>
-
-      <div>
-        <p ref="successMessage" class="TeaserPage__successMessage"/>
-      </div>
-      <div ref="errMsg"> 
-        <p ref="errorMessage" class="TeaserPage__errorMessage"/>
+        <div v-if="applied.tried" class="blur-screen"> 
+          <div class="applied-popup">
+            <p>{{ applied.success ? successMessage : failedMessage }}</p>
+            <button @click="applied.tried = false; applied.success = false">Close</button>
+          </div>
+        </div>
       </div>
 	  
     </Main>
@@ -81,6 +80,14 @@
 <script>
 import axios from "~/plugins/axios";
 export default {
+    data: () => {
+        return {
+            successMessage:
+                "Thank you for applying, we will contact you as soon as possible",
+            failedMessage: "Sorry something went wrong, please try again.",
+            applied: { tried: false, success: false }
+        };
+    },
     async asyncData() {
         let teaser_dates;
         let teaser_about;
@@ -111,33 +118,34 @@ export default {
     },
     methods: {
         async formUrlApply(e) {
-            //let obj = {};
             const fields = {};
             Object.values(e.target.elements).forEach(
                 input => (fields[input.name] = input.value)
       ); // eslint-disable-line
             try {
-                await axios.post(// eslint-disable-line
-                    process.env.lambdaUrl + "teaser",
-                    fields
-                ); // eslint-disable-line
+                await axios.post(`${process.env.lambdaUrl}teaser`, fields);
+                this.applied.success = true;
+                this.applied.tried = true;
+                this.$el.querySelectorAll(".input").forEach(i => {
+                    i.value = "";
+                    i.parentNode.classList.remove("active");
+                });
             } catch (error) {
-                if (error.response) {
-                    this.$refs.errorMessage.innerHTML =
-                        "You have to Fill all required Fields!";
-                    //      obj = error.response.data;
-                    //    console.log(error.response.data);
-                    // for (let key in obj) {
-                    //     console.log(key);
-                    //     for (let i = 0; i < 7; i++) {
-                    //         this.$refs.errorMessage.innerHTML +=
-                    //             `<br/>` +
-                    //             obj[i].param +
-                    //             " : " +
-                    //             obj[i].msg;
-                    //     }
-                    // }
+                if (error.response.data.errors) {
+                    const message = error.response.data.errors.reduce(
+                        (sum, current, index) => {
+                            if (!index) {
+                                return (sum = current.msg);
+                            }
+                            return (sum = `${sum}, ${current.msg}`);
+                        },
+                        ""
+                    );
+                    this.failedMessage = message;
                 }
+
+                this.applied.success = false;
+                this.applied.tried = true;
             }
         },
         setActive(e) {
@@ -244,6 +252,7 @@ export default {
         }
     }
     &__form {
+        position: relative;
         width: 75%;
         margin-left: 2.5%;
         padding: $base-vertical-rithm * 15;
@@ -279,6 +288,53 @@ export default {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
             font-size: 24px;
+        }
+        .blur-screen {
+            position: absolute;
+            z-index: 98;
+            left: 0;
+            top: 0;
+            width: 100%;
+            min-height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .applied-popup {
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -170px;
+            font-size: 20px;
+            width: 350px;
+            height: 220px;
+            border: 2px solid rgb(219, 213, 213);
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+            -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+            box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
+            animation: fadeIn 0.5s;
+            @include breakpoint("mobile_portrait") {
+                width: 330px;
+            }
+
+            p {
+                margin: 0;
+                text-align: center;
+                padding: 50px 5px 5px 5px;
+                color: #293a7d;
+            }
+
+            button {
+                margin: auto;
+                border: 2px solid rgb(219, 213, 213);
+                background-color: rgb(255, 255, 255);
+                border-radius: 5px;
+                padding: 5px;
+            }
         }
     }
     &__successMessage {
