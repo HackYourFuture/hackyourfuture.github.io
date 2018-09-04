@@ -16,6 +16,7 @@ const {
     Teach,
     DonationStatus
 } = require("./middlewares");
+const Teaser = require("./middlewares/teaser");
 const { donate } = require("./donation/donate");
 
 const app = express();
@@ -130,6 +131,7 @@ app.post("/apply", Apply);
 app.post("/apply/upload", FileUpload, UploadCVML);
 app.post("/apply/upload1", FileUpload, UploadAssignment);
 app.post("/teach", Teach);
+app.post("/teaser", Teaser);
 app.get("/get-applicant", GetApplicantFromToken);
 app.post("/donate", (req, res) => donate(req.body, res));
 app.get("/donation/status", DonationStatus);
