@@ -1,25 +1,25 @@
 <div>
 <h3>Amsterdam</h3>
-<h4> Deadline class 18</h4>
-<p>16th of February</p>
+<h4> Deadline class 19</h4>
+<p>4th of October</p>
 <h4>Starts</h4>
-<p>16th of February</p>
+<p>4th of November</p>
 </div>
 
 <div>
 <h3> Brussels</h3>
-<h4> Deadline class 02</h4>
-<p>5th of August</p>
+<h4> Deadline class 03</h4>
+<p><a href="http://hackyourfuture.be/">Apply here</a></p>
 <h4> Starts </h4>
-<p>2nd of September</p>
+<p>January 2019</p>
 </div>
 
 <div>
 <h3> Copenhagen</h3>
 <h4> Deadline class 07</h4>
-<p>22nd of July</p>
+<p>24th of September</p>
 <h4> Starts </h4> 
-<p>1st of July</p>
+<p>November</p>
 </div>
 
 <div>
