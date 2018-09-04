@@ -40,7 +40,7 @@ module.exports = (req, res) => {
         fromEmail,
         email("apply_to_org.tpl", { params: req.body }),
         "A new teacher applied",
-        req.body.email
+        [req.body.email]
     )
         .then(() => {
             res.send({
