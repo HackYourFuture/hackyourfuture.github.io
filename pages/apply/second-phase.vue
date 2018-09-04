@@ -12,19 +12,19 @@
               <label for="url">Assignment URL: (*)</label>
               <input ref="url" type="url" name="url" class="input" @change="handleUrlUpload($refs.url)" @focus="setActive" @click="emptyUrlRequired($refs.url)">
             </div>
-
+                      
             <div ref="assignmentDiv">
-              <p @click="openUploadFileDialogue($refs.input_file_assignment)">+ Upload Assignment screenshot (*)</p>
+              <P @click="openUploadFileDialogue($refs.input_file_assignment)">+ Upload Assignment screenshot (*)</P>            
               <input ref="input_file_assignment" type="file" class="UploadAssignment__form-inputText" name="input_file_assignment" @change="handleAssignmentUpload($refs.input_file_assignment,$refs.assignmentLabel);imgCheckExtension($refs.assignmentLabel)" >
               <h3 ref="requiredMSG"/>
               <div ref="assignmentName"><span ref="assignmentLabel" class="UploadAssignment__form-assignemntLabel"/>
-                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeFile($refs.assignmentName)">Remove</button>
+                <button class="UploadAssignment__form-remove-btn" @click.prevent="removeFile($refs.assignmentName)">Remove</button>                                                       
               </div>
             </div>
 
             <div class="half-width inputContainer">
               <label for="email">e-mail (*)</label>
-              <input ref="email" type="email" name="email" class="input" value=""
+              <input ref="email" type="email" name="email" class="input" value=""                                           
                      @change="handleEmail($refs.email)" @focus="setActive" @click="emptyEmailRequired($refs.email)">
             </div>
 
@@ -32,12 +32,12 @@
               <p>Is there anything you would like to notify us about?</p>
               <textarea ref="message" name="message" class="UploadAssignment__form-textarea" rows="4" cols="50" placeholder="This can be anything :)" @change="handleMessage($refs.message)"/>
             </div>
-
+                           
             <div class="apply-btn">
               <input type="submit" name="Apply" value="Apply" true @click.prevent="submitForm()">
-            </div>
+            </div>     
           </fieldset>
-        </form>
+        </form>     
       </div>
       <div>
         <p ref="successMessage" class="UploadAssignment__successMessage"/>
@@ -97,7 +97,7 @@ export default {
                 assignmentLabel.innerHTML !== ""
             ) {
                 axios
-                    .post("/apply/upload1", formData, {
+                    .post(process.env.lambdaUrl + "/apply/upload1", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data"
                         }
@@ -127,7 +127,7 @@ export default {
         },
         checkUrl(url) {
             var inputUrl = url.value;
-            var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-[\]/]))?/;
+            var pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-[/]))?/;
             if (!pattern.test(inputUrl)) {
                 url.parentNode.classList.remove("active");
                 url.parentNode.classList.add("active");

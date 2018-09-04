@@ -10,33 +10,33 @@
         <div class="TeaserPage__header-about" v-html="teaser_about"/>
       </div>
       
-      <div class="TeaserPage__form form">
+      <div ref="TeaserPage__form" class="TeaserPage__form form">
         <h2>Apply for our next teaser day:</h2>
         <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
             <div class="half-width inputContainer">
               <label for="email">e-mail</label>
-              <input id="email" type="email" class="input" name="email" @focus="setActive">
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive" >
             </div>
             
             <div class="half-width inputContainer">
               <label for="userName">Name</label>
-              <input id="userName" type="text" class="input" name="userName" @focus="setActive">
+              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="userSurname">Surname</label>
-              <input id="userSurname" type="text" class="input" name="userSurname" @focus="setActive">
+              <input id="userSurname" ref="userSurname" type="text" class="input" name="userSurname" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="phone">Phone Number</label>
-              <input id="phone" type="number" class="input" name="phone" @focus="setActive">
+              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
               <label for="computer">Do you have your own laptop?</label>
-              <select id="computer" name="computer" class="input" @focus="setActive">
+              <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -44,12 +44,12 @@
 
             <div class="full-width inputContainer">
               <label for="eductation">Education / Work Background</label>
-              <input id="education" type="text" class="input" name="education" @focus="setActive">
+              <input id="education" ref="education" type="text" class="input" name="education" @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
               <label for="experience">Do you have any prior programming experience?</label>
-              <select id="experience" name="experience" class="input" @focus="setActive">
+              <select id="experience" ref="experience" name="experience" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
                 <option value="other">Other</option>
@@ -58,7 +58,7 @@
 
             <div class="full-width inputContainer">
               <label for="message">Is there something else you would like to notify us about?</label>
-              <input id="message" type="text" class="input" name="message" @focus="setActive">
+              <input id="message" ref="message" type="text" class="input" name="message" @focus="setActive">
             </div>
 
             <div class="apply-btn">
@@ -66,12 +66,15 @@
             </div>
           </fieldset>
         </form>
-        <!-- <div class="TeaserPage__header-links">
-            <h2>Apply for:</h2>
-            <nuxt-link :to="'https://goo.gl/forms/SAYHYc0oqexStVaB3'"><span class="underline">30th of September</span></nuxt-link><br>
-            <nuxt-link :to="'https://goo.gl/forms/m1gQTHHSMeUq2KFy2'"><span class="underline">2nd of December</span></nuxt-link>
-          </div> -->
       </div>
+
+      <div>
+        <p ref="successMessage" class="TeaserPage__successMessage"/>
+      </div>
+      <div ref="errMsg"> 
+        <p ref="errorMessage" class="TeaserPage__errorMessage"/>
+      </div>
+	  
     </Main>
   </div>
 </template>
@@ -97,7 +100,6 @@ export default {
             teaser_about: teaser_about ? teaser_about : null
         };
     },
-    components: {},
     mounted: function() {
         this.$el.querySelectorAll(".input").forEach(i => {
             if (i.value.length == 0) {
@@ -109,13 +111,34 @@ export default {
     },
     methods: {
         async formUrlApply(e) {
+            //let obj = {};
             const fields = {};
             Object.values(e.target.elements).forEach(
                 input => (fields[input.name] = input.value)
-            );
-            //let req = await axios.post(process.env.lambdaUrl + "apply", fields);
-            // TODO: redirect to application success route
-            // TODO: try/catch for application POST failure
+      ); // eslint-disable-line
+            try {
+                await axios.post(// eslint-disable-line
+                    process.env.lambdaUrl + "teaser",
+                    fields
+                ); // eslint-disable-line
+            } catch (error) {
+                if (error.response) {
+                    this.$refs.errorMessage.innerHTML =
+                        "You have to Fill all required Fields!";
+                    //      obj = error.response.data;
+                    //    console.log(error.response.data);
+                    // for (let key in obj) {
+                    //     console.log(key);
+                    //     for (let i = 0; i < 7; i++) {
+                    //         this.$refs.errorMessage.innerHTML +=
+                    //             `<br/>` +
+                    //             obj[i].param +
+                    //             " : " +
+                    //             obj[i].msg;
+                    //     }
+                    // }
+                }
+            }
         },
         setActive(e) {
             this.$el.querySelectorAll(".input").forEach(i => {
@@ -159,6 +182,14 @@ export default {
                 font-size: 24px;
                 line-height: 24px;
                 margin: $base-vertical-rithm * 5;
+            }
+        }
+        &-image {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
             }
         }
         &-image {
@@ -249,6 +280,20 @@ export default {
             font-weight: bold;
             font-size: 24px;
         }
+    }
+    &__successMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 24px;
+        color: $color-purple;
+        text-align: center;
+    }
+    &__errorMessage {
+        margin-top: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 18px;
+        color: $color-purple;
+        text-align: center;
     }
 }
 </style>
