@@ -12,7 +12,7 @@ Secondly, in order to learn programming, its really important that you have the 
 
 The following step in your application looks as follows:
 
-Please send a short essay ( max. 300 words) in English in which you describe:
+Please provide us a short essay (max. 300 words) in English in which you describe:
 
 1. Why do you want to learn programming and particularly web-development?
 
@@ -20,9 +20,9 @@ Please send a short essay ( max. 300 words) in English in which you describe:
 
 (doesn’t have to be related to web-development, can be anything related to programming)
 
-You can now apply for the class that starts in September/October, by sending your essay. The deadline for this round is Augustus 27th 23:59.
+You can now apply for the class that starts in November, by sending your essay. The deadline for this round is 4th of October.
 
-Please also send your CV if you have one.
+Please also send provide us with your CV.
 
 Click on this link to send the essay and CV:
 
@@ -34,4 +34,4 @@ and follow our updates on Facebook https://www.facebook.com/hackyourfuturenow/
 
 Kind regards,
 
-The HackYourFutureTeam
+The HackYourFuture Team
