@@ -3,7 +3,7 @@
     <Main class="Teach container">
       <div class="Teach__header">
         <div class="Teach__header-image">
-          <img src="/gallery/26.jpg">
+          <img src="/gallery/26.jpg" alt="Teacher in front on class of students.">
         </div>
         <h1>What we teach</h1>
       </div>
@@ -19,53 +19,53 @@
       <div class="Teach__container who">
         <div v-html="who_are_our_teachers"/>
         <div class="Teach__container-image">
-          <img src="/gallery/13.jpg">
+          <img src="/gallery/13.jpg" alt="Student and teacher solving a problem behind computer.">
         </div>
       </div>
 
       <div class="Teach__container teach">
         <div class="Teach__container-image">
-          <img src="/gallery/10.jpg">
+          <img src="/gallery/10.jpg" alt="Teacher with project group.">
         </div>
         <div v-html="what_it_means_to_teach"/>
-         
       </div>
         
       <div class="Teach__form form">
         <h1>Join our teacher team</h1>
-          
+    
         <form @submit.prevent="submitForm">
           <fieldset>
             <div class="half-width inputContainer">
-              <label for="firstName">Fist Name</label>
-              <input id="firstName" type="text" name="firstName" required @focus="setActive">
+              <label for="firstName">Fist Name *</label>
+              <input id="firstName" type="text" name="firstName" @focus="setActive">
             </div>
             <div class="half-width inputContainer">
-              <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" name="lastName" required @focus="setActive">
+              <label for="lastName">Last Name *</label>
+              <input id="lastName" type="text" name="lastName" @focus="setActive">
             </div>
+
             <div class="half-width inputContainer">
-              
-              <select id="country" name="country" @focus="setActive">
+              <label class="active label" for="country">Country *</label>
+              <select id="country" name="country" class="input" @focus="setActive">
                 <option value="nl">The Netherlands</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
               </select>
             </div>
             <div class="half-width inputContainer">
-              
-              <label for="email">e-mail</label>
-              <input id="email" type="email" name="email" required @focus="setActive">
+              <label for="email">E-mail *</label>
+              <input id="email" type="email" name="email" @focus="setActive">
             </div>
             <div class="full-width inputContainer">
-            
-              <label for="message">Please tell us something about yourself</label>
-              <input id="message" type="message" name="message" pattern=".{10,}" title="At least 10 characters" required @focus="setActive">
+              <label for="message">Please tell us something about yourself *</label>
+              <input id="message" type="message" name="message" @focus="setActive">
             </div>
-  
             <div class="apply-btn">
               <input type="submit" value="Apply">
             </div>
           </fieldset>
         </form>
+        
         <div v-if="applied.tried" class="blur-screen"> 
           <div class="applied-popup">
             <p>{{ applied.success ? successMessage : failedMessage }}</p>
@@ -73,10 +73,8 @@
           </div>
         </div>
       </div>
-     
-    
-    </Main>
 
+    </Main>
   </div>
 </template>
 
@@ -350,7 +348,7 @@ export default {
         display: flex;
         flex-direction: column;
         position: absolute;
-        left: 50%;
+        left: 100%;
         top: 50%;
         margin: -100px 0 0 -170px;
         font-size: 20px;

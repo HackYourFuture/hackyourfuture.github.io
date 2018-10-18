@@ -30,10 +30,10 @@
       </div>
 
       <div class="Footer__Social container">
-        <a href="https://twitter.com/hackyourfutures" target="_blank"><img src="/icons/tw.svg"></a>
-        <a href="https://www.facebook.com/hackyourfuturenow/" target="_blank"><img src="/icons/fb.svg"></a>
-        <a href="https://www.linkedin.com/company/hackyourfuture/" target="_blank"><img src="/icons/in.svg"></a>
-        <a href="https://github.com/HackYourFuture" target="_blank"><img src="/icons/git.svg"></a>
+        <a href="https://twitter.com/hackyourfutures"><img src="/icons/tw.svg" alt="Twitter."></a>
+        <a href="https://www.facebook.com/hackyourfuturenow/"><img src="/icons/fb.svg" alt="Facebook."></a>
+        <a href="https://www.linkedin.com/company/hackyourfuture/"><img src="/icons/in.svg" alt="LinkedIn."></a>
+        <a href="https://github.com/HackYourFuture"><img src="/icons/git.svg" alt="Github."></a>
       </div>
 
     </div>

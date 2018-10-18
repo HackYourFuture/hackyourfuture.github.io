@@ -4,7 +4,7 @@
       <div class="TeaserPage__header">
         <h1>Women Coding Teaser</h1>
         <div class="TeaserPage__header-image">
-          <img src="/gallery/21.jpg">
+          <img src="/gallery/21.jpg" alt="Group of women who get their first coding class.">
         </div>
         <div class="TeaserPage__header-dates" v-html="teaser_dates"/>
         <div class="TeaserPage__header-about" v-html="teaser_about"/>
@@ -14,46 +14,47 @@
         <h2>Apply for our next teaser day:</h2>
         <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
+
             <div class="half-width inputContainer">
-              <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" required @focus="setActive">
+              <label for="firstName">First Name *</label>
+              <input id="firstName" type="text" class="input" name="firstName" @focus="setActive">
+            </div>
+
+            <div class="half-width inputContainer">
+              <label for="lastName">Last Name *</label>
+              <input id="lastName" type="text" class="input" name="lastName" @focus="setActive">
+            </div>
+  
+            <div class="half-width inputContainer">
+              <label for="email">E-mail *</label>
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
             </div>
             
             <div class="half-width inputContainer">
-              <label for="firstName">First Name</label>
-              <input id="firstName" type="text" class="input" name="firstName" required @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" class="input" name="lastName" required @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="phone">Phone Number</label>
+              <label for="phone">Phone</label>
               <input id="phone" type="number" class="input" name="phone" @focus="setActive">
             </div>
 
-            <div class="full-width computer inputContainer">
-              <label for="computer">Do you have your own laptop?</label>
-              <select id="computer" name="computer" class="input" required @focus="setActive">
+            <div class="half-width computer inputContainer">
+              <label for="computer">I have my own laptop *</label>
+              <select id="computer" name="computer" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
 
-            <div class="full-width inputContainer">
-              <label for="eductation">Education / Work Background</label>
-              <input id="education" type="text" class="input" name="education" required @focus="setActive">
-            </div>
-
-            <div class="full-width computer inputContainer">
-              <label for="experience">Do you have any prior programming experience?</label>
-              <select id="experience" name="experience" class="input" required @focus="setActive">
+            <div class="half-width computer inputContainer">
+              <label for="experience">I have programmed before *</label>
+              <select id="experience" name="experience" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
                 <option value="other">Other</option>
               </select>
+            </div>
+
+            <div class="full-width inputContainer">
+              <label for="eductation">Education / Work Background *</label>
+              <input id="education" type="text" class="input" name="education" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">

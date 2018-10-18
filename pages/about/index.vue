@@ -8,7 +8,7 @@
         </div>
 
         <div class="About__header-image">
-          <img src="/gallery/15.jpg">
+          <img src="/gallery/15.jpg" alt="HackYourFuture students during their class on Sunday.">
         </div>
         
       </div>
@@ -23,7 +23,7 @@
 
       <div class="About__container how">
         <div class="About__container-image">
-          <img src="/gallery/07.jpg">
+          <img src="/gallery/07.jpg" alt="Overview, the opening and gathering of everyone in HackYourFuture before the classes start.">
         </div>
         <div v-html="how_school_works"/>
       </div>

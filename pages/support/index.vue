@@ -3,7 +3,7 @@
     <Main class="Support container">
       <div class="Support__header">
         <div class="Support__header-image">
-          <img src="/gallery/19.jpg">
+          <img src="/gallery/19.jpg" alt="Student presenting his final project.">
         </div>
         <div class="Support__header-content">
           <nuxt-link :to="'/'">Hire<br> <span class="underline">Alumni</span></nuxt-link>
@@ -14,10 +14,10 @@
     <div class="Support__companies">
       <h3>Where our students work</h3>
       <div class="Support__companies-items">
-        <img src="/partners/bijenkorf.svg">
-        <img src="/partners/booking.svg">
-        <img src="/partners/klm.svg">
-        <img src="/partners/nuon.svg">
+        <img src="/partners/bijenkorf.svg" alt="Bijenkorf.">
+        <img src="/partners/booking.svg" alt="Booking.com.">
+        <img src="/partners/klm.svg" alt="KLM.">
+        <img src="/partners/nuon.svg" alt="Nuon.">
       </div>
     </div>
     <Partners/>

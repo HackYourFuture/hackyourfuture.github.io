@@ -4,7 +4,7 @@
       <div class="Apply__header">
         <h1>Join <br> Us!</h1>
         <div class="Apply__header-image">
-          <img src="/gallery/11.jpg">
+          <img src="/gallery/11.jpg" alt="Group of students working in class.">
         </div>
         <div class="Apply__header-dates" v-html="dates"/>
       </div>
@@ -16,52 +16,60 @@
         <form method="POST" @submit.prevent="formUrlApply">
           <fieldset>
             <div class="half-width inputContainer">
-              <label for="userName">Name</label>
-              <input id="userName" ref="userName" type="text" class="input" name="userName" @focus="setActive">
+              <label for="firstName">First Name *</label>
+              <input id="firstName" ref="firstName" type="text" class="input" name="firstName" required @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="street">Street</label>
-              <input id="street" ref="street" type="text" class="input" name="street" @focus="setActive">
+              <label for="lastName">Last Name *</label>
+              <input id="lastName" ref="lastName" type="text" class="input" name="lastName" required @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="city">City</label>
-              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive">
-            </div>
-
-            <select id="country" name="country" class="input" @focus="setActive">
-              <option value="nl">Netherlands</option>
-              <option value="dk">Denmark</option>
-              <option value="se">Sweden</option>
-            </select>
-
-            <div class="half-width inputContainer">
-              <label for="email">e-mail</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
+              <label for="city">City *</label>
+              <input id="city" ref="city" type="text" class="input" name="city" required @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
-              <label for="phone">phone</label>
-              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
+              <label class="active label" for="country">Country *</label>
+              <select id="country" name="country" class="input" required>
+                <option value="nl">The Netherlands</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
+              </select>
+            </div>
+
+            <div class="half-width inputContainer">
+              <label for="email">E-mail *</label>
+              <input id="email" ref="email" type="email" class="input" name="email" required @focus="setActive">
+            </div>
+
+            <div class="half-width inputContainer">
+              <label for="phone">Phone *</label>
+              <input id="phone" ref="phone" type="number" class="input" name="phone" required @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
-              <label for="eductation">Educational Background</label>
-              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive">
+              <label for="eductation">Educational Background *</label>
+              <input id="education" ref="education" type="eductation" class="input" required name="education" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
-              <label for="how-hear">How did you hear about us?</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive">
+              <label for="how-hear">How did you hear about us? *</label>
+              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" required @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
-              <label for="computer">I have a computer</label>
+              <label for="computer">I have a computer *</label>
               <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
+            </div>
+
+            <div class="full-width inputContainer">
+              <label for="message">Is there something else you would like to notify us about?</label>
+              <input id="message" ref="message" type="text" class="input" name="message" @focus="setActive">
             </div>
 
             <div class="apply-btn">

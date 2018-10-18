@@ -13,7 +13,6 @@ const validate = req => {
             min: 3
         })
         .isString();
-
     req.check("phone", "Invalid phone number")
         .isNumeric()
         .isLength({

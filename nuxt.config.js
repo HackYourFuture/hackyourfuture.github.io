@@ -43,6 +43,12 @@ module.exports = {
         title: "HackYourFuture",
         meta: [
             { charset: "utf-8" },
+            { name: "theme-color", content: "white" },
+            {
+                name: "Description",
+                content:
+                    "HackYourFuture is a non profit programming school teaching web development to refugees. After graduation we guide our students towards employment."
+            },
             {
                 name: "viewport",
                 content: "width=device-width, initial-scale=1"

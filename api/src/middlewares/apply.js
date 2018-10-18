@@ -8,17 +8,17 @@ const fromEmail = "info@hackyourfuture.net";
 const ERROR_USER_FOUND = "User already exists";
 
 const validate = req => {
-    req.check("userName", "Username is too short")
+    req.check("firstName", "first name is too short")
         .isLength({
-            min: 3
+            min: 2
         })
         .isString();
-    req.check("street", "Street name is too short")
+    req.check("lastName", "last name is too short")
         .isLength({
-            min: 3
+            min: 2
         })
         .isString();
-    req.check("city", "City name is too short or too long")
+    req.check("city", "City name is too short")
         .isLength({
             min: 3
         })
@@ -38,6 +38,11 @@ const validate = req => {
         .isString()
         .isLength({
             max: 20
+        });
+    req.check("message", "Either not a String or the String is too long")
+        .isString()
+        .isLength({
+            max: 120
         });
     req.check("computer", "Invalid boolean").isBoolean();
 
