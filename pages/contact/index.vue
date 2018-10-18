@@ -242,7 +242,7 @@ export default {
         display: flex;
         flex-direction: column;
         position: absolute;
-        left: 100%;
+        left: 50%;
         top: 50%;
         font-size: 20px;
         width: 450px;
