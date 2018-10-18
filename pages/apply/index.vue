@@ -17,22 +17,22 @@
           <fieldset>
             <div class="half-width inputContainer">
               <label for="firstName">First Name *</label>
-              <input id="firstName" ref="firstName" type="text" class="input" name="firstName" required @focus="setActive">
+              <input id="firstName" ref="firstName" type="text" class="input" name="firstName" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="lastName">Last Name *</label>
-              <input id="lastName" ref="lastName" type="text" class="input" name="lastName" required @focus="setActive">
+              <input id="lastName" ref="lastName" type="text" class="input" name="lastName" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="city">City *</label>
-              <input id="city" ref="city" type="text" class="input" name="city" required @focus="setActive">
+              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label class="active label" for="country">Country *</label>
-              <select id="country" name="country" class="input" required>
+              <select id="country" name="country" class="input">
                 <option value="nl">The Netherlands</option>
                 <option value="dk">Denmark</option>
                 <option value="se">Sweden</option>
@@ -41,22 +41,22 @@
 
             <div class="half-width inputContainer">
               <label for="email">E-mail *</label>
-              <input id="email" ref="email" type="email" class="input" name="email" required @focus="setActive">
+              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
             </div>
 
             <div class="half-width inputContainer">
               <label for="phone">Phone *</label>
-              <input id="phone" ref="phone" type="number" class="input" name="phone" required @focus="setActive">
+              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
               <label for="eductation">Educational Background *</label>
-              <input id="education" ref="education" type="eductation" class="input" required name="education" @focus="setActive">
+              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive">
             </div>
 
             <div class="full-width inputContainer">
               <label for="how-hear">How did you hear about us? *</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" required @focus="setActive">
+              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive">
             </div>
 
             <div class="full-width computer inputContainer">
