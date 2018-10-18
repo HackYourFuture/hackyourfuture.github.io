@@ -13,7 +13,7 @@
 
       <section class="Apply">
         <div class="Apply__image">
-          <img src="/gallery/12.jpg">
+          <img src="/gallery/12.jpg" alt="Group of students working in class.">
         </div>
         <div class="Apply__container">
           <h1>Join our 6 month web development course</h1>
@@ -24,12 +24,12 @@
       <section class="Curiculum">
         <div class="Curiculum__header">
           <h1>Expert teachers,<br> up-to-date skills</h1>
-          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">Check out our <span class="underline">curriculum</span></a>
+          <a href="https://github.com/HackYourFuture/curriculum">Check out our <span class="underline">curriculum</span></a>
         </div>
        
         
         <div class="Curiculum__image">
-          <img src="/gallery/25.jpg">
+          <img src="/gallery/25.jpg" alt="Teacher in front of class.">
         </div>
         <div class="Curiculum__container">
           <div class="Curiculum__content" v-html="curiculum"/>
@@ -46,13 +46,13 @@
           <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
         </div>
         <div class="Teaser__image">
-          <img src="/gallery/22.jpg">
+          <img src="/gallery/22.jpg" alt="Close up, two women asking a question in the coding teaser.">
         </div>
       </section>
 
       <section class="Hire">
         <div class="Hire__image">
-          <img src="/gallery/20.jpg">
+          <img src="/gallery/20.jpg" alt="Student receiving diploma after graduation.">
         </div>
         <div class="Hire__container">
           <h1>Hire our graduates</h1>

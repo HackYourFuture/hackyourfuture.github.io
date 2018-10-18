@@ -2,7 +2,7 @@
   <div>
     <main class="Graduates container">
       <div class="Graduates__active">
-        <img :src="'/graduates/' + $route.params.graduate + '.jpg'">
+        <img :src="'/graduates/' + $route.params.graduate + '.jpg'" alt="Graduate of HackYourFuture">
         <div class="Graduates__active-content" v-html="content"/>
       </div>
       <Graduates/>

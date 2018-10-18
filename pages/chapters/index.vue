@@ -3,7 +3,7 @@
     <div class="Chapters__map">
 
       <div class="Chapters__map-map">
-        <img src="/map/map.svg">
+        <img src="/map/map.svg" alt="Map indicating the HackYourFuture Chapters.">
       </div>
 
       <div class="Chapters__map-list">
@@ -15,7 +15,7 @@
         <h1>Start your own chapter</h1>
         <div v-html="chapters_info"/>
         <div class="Chapters__information-image">
-          <img src="/gallery/01.jpg">
+          <img src="/gallery/01.jpg" alt="Group picture of team and students.">
         </div>
       </div>
     </Main>

@@ -20,6 +20,11 @@ const validate = req => {
             min: 3
         })
         .isString();
+    req.check("message", "Either not a String or the String is too long")
+        .isString()
+        .isLength({
+            max: 120
+        });
 
     return req.validationErrors();
 };

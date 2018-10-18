@@ -4,7 +4,6 @@
       <div class="Contact__header">
         <h1>Frequently Asked Questions</h1>
       </div>
-
       <nuxt-link :to="'/'" class="Contact__quicklink">Take me<br> to <span class="underline">contact</span></nuxt-link>
       <div class="Contact__content" v-html="content"/>
       <div class="Contact__form form">
@@ -13,40 +12,34 @@
         <form @submit.prevent="submitForm">
           <fieldset>
             <div class="half-width inputContainer">
-              <label for="firstName">Fist Name</label>
-
-              <input id="firstName" type="text" name="firstName" required @focus="setActive">
+              <label for="firstName">Fist Name *</label>
+              <input id="firstName" type="text" name="firstName" @focus="setActive">
+              <div class="invalid-feedback">This field is required.</div>
             </div>
             <div class="half-width inputContainer">
-              <label for="lastName">Last Name</label>
-              <input id="lastName" type="text" name="lastName" required @focus="setActive">
+              <label for="lastName">Last Name *</label>
+              <input id="lastName" type="text" name="lastName" @focus="setActive">
             </div>
-
-
             <div class="half-width inputContainer">
-
-              <label for="phone">phone</label>
+              <label for="phone">Phone</label>
               <input id="phone" type="number" name="phone" @focus="setActive">
             </div>
             <div class="half-width inputContainer">
-
-              <select id="country" name="country" @focus="setActive">
+              <label class="active label" for="country">Chapter *</label>
+              <select id="country" name="country" class="input" @focus="setActive">
                 <option value="nl">The Netherlands</option>
+                <option value="dk">Denmark</option>
+                <option value="se">Sweden</option>
               </select>
             </div>
-
             <div class="half-width inputContainer">
-
-              <label for="email">e-mail</label>
-              <input id="email" type="email" name="email" required @focus="setActive">
+              <label for="email">E-mail *</label>
+              <input id="email" type="email" name="email" @focus="setActive">
             </div>
-
             <div class="full-width inputContainer">
-
-              <label for="message">What would you like to contact us about?</label>
-              <input id="message" type="message" name="message" pattern=".{10,}" title="The message must be at least 10 characters" required @focus="setActive">
+              <label for="message">What would you like to contact us about? *</label>
+              <input id="message" type="message" name="message" @focus="setActive">
             </div>
-
             <div class="apply-btn">
               <input type="submit" value="Contact">
             </div>
@@ -60,7 +53,6 @@
         </div>
       </div>
     </Main>
-
   </div>
 </template>
 
@@ -250,7 +242,7 @@ export default {
         display: flex;
         flex-direction: column;
         position: absolute;
-        left: 50%;
+        left: 100%;
         top: 50%;
         font-size: 20px;
         width: 450px;

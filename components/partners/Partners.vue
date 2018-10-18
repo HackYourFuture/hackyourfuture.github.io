@@ -2,10 +2,10 @@
   <div class="Partners">
     <h3>Official partners & supporters</h3>
     <div class="Partners__items">
-      <img src="/partners/ing.svg">
-      <img src="/partners/doen.svg">
-      <img src="/partners/atlasian.svg">
-      <img src="/partners/backbase.svg">
+      <img src="/partners/ing.svg" alt="ING.">
+      <img src="/partners/doen.svg" alt="Stichting doen.">
+      <img src="/partners/atlasian.svg" alt="Atlassian.">
+      <img src="/partners/backbase.svg" alt="Backbase.">
     </div>
   </div>
 </template>
