@@ -81,7 +81,6 @@ export default {
             content = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             content: content ? content : null
         };
     },

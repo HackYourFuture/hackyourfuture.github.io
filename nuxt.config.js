@@ -23,6 +23,14 @@ module.exports = {
         isGenerating
     },
 
+    build: {
+        postcss: {
+            "postcss-cssnext": {
+                browsers: ["last 2 versions", "ie >= 9"]
+            }
+        }
+    },
+
     generated: {
         routes: ["/"]
     },
@@ -39,6 +47,7 @@ module.exports = {
     proxy: {
         "/content": "http://localhost:3051/"
     },
+
     head: {
         title: "HackYourFuture",
         meta: [

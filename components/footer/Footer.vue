@@ -62,10 +62,7 @@ export default {
         color: $color-white;
     }
     &__Main {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
+        display: flex;
         justify-content: space-between;
         position: relative;
         padding-left: 10 * $base-vertical-rithm;
@@ -105,10 +102,7 @@ export default {
                 padding-right: 0px;
                 @media (max-width: 800px) {
                     width: 100%;
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    -webkit-box-pack: justify;
-                    -ms-flex-pack: justify;
+                    display: flex;
                     justify-content: space-between;
                 }
             }

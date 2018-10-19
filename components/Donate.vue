@@ -208,8 +208,6 @@ export default {
         border: 2px solid rgb(219, 213, 213);
         background-color: rgb(255, 255, 255);
         border-radius: 5px;
-        -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
-        -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
         box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
         animation: fadeIn 0.5s;
 
@@ -224,14 +222,6 @@ export default {
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
             padding: 5px;
-        }
-    }
-    @-webkit-keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
         }
     }
 

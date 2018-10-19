@@ -102,8 +102,7 @@ export default {
             emailData: "",
             messageData: "",
             email: "",
-            formUrlApply: process.env.lambdaUrl + "apply/upload",
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I"
+            formUrlApply: process.env.lambdaUrl + "apply/upload"
         };
     },
     async mounted() {
