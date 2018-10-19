@@ -124,7 +124,6 @@ export default {
             data = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             about: data ? data : null,
             hire: hire ? hire : null,
             laptops: laptops ? laptops : null,

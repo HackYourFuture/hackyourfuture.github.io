@@ -52,8 +52,7 @@ import Upload from "~/components/upload/upload";
 export default {
     async asyncData() {
         return {
-            formUrlApply: process.env.lambdaUrl + "apply/upload1",
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I"
+            formUrlApply: process.env.lambdaUrl + "apply/upload1"
         };
     },
     components: {

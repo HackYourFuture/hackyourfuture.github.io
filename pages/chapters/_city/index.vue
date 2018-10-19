@@ -59,7 +59,6 @@ export default {
             members = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             welcome: welcome ? welcome : null,
             city: city,
             description: description ? description : null,

@@ -60,7 +60,6 @@ export default {
             how_school_works = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             why_exist: why_exist ? why_exist : null,
             results_today: results_today ? results_today : null,
             how_school_works: how_school_works ? how_school_works : null

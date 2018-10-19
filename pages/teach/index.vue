@@ -114,7 +114,6 @@ export default {
             what_it_means_to_teach = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             what_we_teach: what_we_teach ? what_we_teach : null,
             who_are_our_teachers: who_are_our_teachers
                 ? who_are_our_teachers
@@ -377,15 +376,6 @@ export default {
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
             padding: 5px;
-        }
-    }
-
-    @-webkit-keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
         }
     }
 

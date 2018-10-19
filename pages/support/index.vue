@@ -40,7 +40,6 @@ export default {
             hire_alumni = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             hire_alumni: hire_alumni ? hire_alumni : null
         };
     },
@@ -122,10 +121,7 @@ export default {
         }
         &-items {
             margin-top: $base-vertical-rithm * 5;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
+            display: flex;
             justify-content: space-between;
             position: relative;
             img {

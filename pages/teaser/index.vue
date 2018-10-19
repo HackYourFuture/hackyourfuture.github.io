@@ -103,7 +103,6 @@ export default {
             teaser_about = false;
         }
         return {
-            siteKey: "6LfsWVAUAAAAAE5mdeB0ICRoDDkWJd00vr9NEZ3I",
             teaser_dates: teaser_dates ? teaser_dates : null,
             teaser_about: teaser_about ? teaser_about : null
         };
@@ -314,8 +313,6 @@ export default {
             border: 2px solid rgb(219, 213, 213);
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
-            -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
-            -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
             box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.21);
             animation: fadeIn 0.5s;
             @include breakpoint("mobile_portrait") {

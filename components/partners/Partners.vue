@@ -24,17 +24,14 @@
     }
     &__items {
         margin-top: $base-vertical-rithm * 5;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
+        display: flex;
         justify-content: space-between;
         position: relative;
         img {
             display: flex;
             font-weight: bold;
             color: $color-purple;
-            width: calc(15% -5px);
+            width: calc(15% - 5px);
             height: 100px;
         }
     }
