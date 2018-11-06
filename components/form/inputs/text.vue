@@ -8,7 +8,11 @@
 
 <script>
 export default {
-    props: ["label", "name", "validate"],
+    props: {
+        label: String,
+        name: String,
+        validate: String
+    },
 
     data() {
         return {

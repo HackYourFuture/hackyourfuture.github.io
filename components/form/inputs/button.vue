@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-    props: ["buttonLabel"],
+    props: { buttonLabel: String },
     methods: {
         check() {
             return true;
