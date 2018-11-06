@@ -11,7 +11,12 @@
 
 <script>
 export default {
-    props: ["label", "name", "cols", "rows"]
+    props: {
+        label: String,
+        name: String,
+        cols: String,
+        rows: String
+    }
 };
 </script>
 <style lang="scss">

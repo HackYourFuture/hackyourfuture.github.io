@@ -37,7 +37,7 @@ const components = {
 };
 export default {
     components,
-    props: ["inputs", "action"],
+    props: { inputs: String, action: String },
     mounted() {
         Object.keys(components).forEach(componentName => {
             const component = components[componentName];
@@ -78,7 +78,6 @@ export default {
 
             return classList;
         },
-
         formData() {
             const formElements = Array.from(
                 this.$refs.form.querySelectorAll(allInputTypes)

@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-    props: ["label", "name"],
+    props: { label: String, name: String },
     data() {
         return {
             errorMessage: "",
@@ -33,7 +33,6 @@ export default {
             for (let i = 0; i < uploadedFiles.length; i++) {
                 this.files.push(uploadedFiles[i]);
             }
-            console.log(uploadedFiles);
         },
         removeFile(key) {
             this.files.splice(key, 1);

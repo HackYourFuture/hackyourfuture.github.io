@@ -1,27 +1,55 @@
 <template>
   <div class="form-container">
-    <div >
-      <form class="form-group" @submit.prevent="submitDonation" >
+    <div>
+      <form class="form-group" @submit.prevent="submitDonation">
         <label class="donate-label">Donate</label>
         <div class="form-check">
           <input id="ideal" v-model="method" class="method-radio" type="radio" value="ideal">
-          <label class="method-label" for="ideal"><i class="pf pf-ideal"/><span class="method-text-span">Ideal</span></label>
-
-          <input id="creditcard" v-model="method" class="method-radio" type="radio" value="creditcard">
-          <label class="method-label" for="creditcard"><i class="pf pf-credit-card"/><span class="method-text-span">Creditcard</span></label>
-
-          <input id="bitcoin" v-model="method" class="method-radio" type="radio" value="bitcoin" >
-          <label class="method-label last-method-label" for="bitcoin"> <i class="pf pf-bitcoin-sign" /><span class="method-text-span">Bitcoin</span></label>
+          <label class="method-label" for="ideal">
+            <i class="pf pf-ideal"/>
+            <span class="method-text-span">Ideal</span>
+          </label>
+          <input
+            id="creditcard"
+            v-model="method"
+            class="method-radio"
+            type="radio"
+            value="creditcard"
+          >
+          <label class="method-label" for="creditcard">
+            <i class="pf pf-credit-card"/>
+            <span class="method-text-span">Creditcard</span>
+          </label>
+          <input id="bitcoin" v-model="method" class="method-radio" type="radio" value="bitcoin">
+          <label class="method-label last-method-label" for="bitcoin">
+            <i class="pf pf-bitcoin-sign"/>
+            <span class="method-text-span">Bitcoin</span>
+          </label>
         </div>
         <div class="input-container">
-          <label for="amount" class="amount-label"> €</label>
-          <input id="amount" v-model="amount" class="amount-input" type="number" name="amount" placeholder="Amount" required> 
+          <label for="amount" class="amount-label">€</label>
+          <input
+            id="amount"
+            v-model="amount"
+            class="amount-input"
+            type="number"
+            name="amount"
+            placeholder="Amount"
+            required
+          >
         </div>
-        <input id="description" v-model="description" class="description-input" type="text" name="description" placeholder="Message" > 
-        <button class="submit-button" type="submit" name="submit" >Donate</button>
+        <input
+          id="description"
+          v-model="description"
+          class="description-input"
+          type="text"
+          name="description"
+          placeholder="Message"
+        >
+        <button class="submit-button" type="submit" name="submit">Donate</button>
       </form>
     </div>
-    <div v-if="donated" class="blur-screen"> 
+    <div v-if="donated" class="blur-screen">
       <div v-if="donated" class="donated-ok">
         <p>Thanks For your donation</p>
         <button @click="donated = false">Close</button>
@@ -80,7 +108,7 @@ export default {
                         }
                     })
                     .catch(err => console.log(err));
-            } else console.log(orderId);
+            }
         }
     }
 };

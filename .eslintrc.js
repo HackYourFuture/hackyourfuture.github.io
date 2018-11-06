@@ -20,8 +20,10 @@ module.exports = {
   rules: {
     "indent": ["error", 4, { "SwitchCase": 1 }],
     "semi": [2, "always"],
-    "no-console": 1,
+    "no-console": 0,
     "vue/max-attributes-per-line": "off",
+    "vue/require-default-prop": "off",
+    "no-unused-vars": "off",
     "prettier/prettier": ["error", { "semi": true, "tabWidth": 4 }]
   }
 }

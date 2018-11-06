@@ -13,7 +13,12 @@
 
 <script>
 export default {
-    props: ["label", "name", "options", "validate"],
+    props: {
+        label: String,
+        name: String,
+        options: String,
+        validate: String
+    },
     data() {
         return {
             errorMessage: "",
