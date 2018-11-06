@@ -1,98 +1,107 @@
 <template>
   <div>
-    <Landscape />
-    <Main class="Main container">
-      <section class="About">
+    <landscape/>
+    <main class="main container">
+      <section class="about">
         <div class="content" v-html="what"/>
-
-        <div class="About__video">
-          <nuxt-link :to="'/about'" class="About__more">Read more <br> about <span class="underline">us</span></nuxt-link>
-          <YoutubePlayer class="About__video-player"/>
+        <div class="about__video">
+          <nuxt-link :to="'/about'" class="about__more">
+            Read more
+            <br>about
+            <span class="underline">us</span>
+          </nuxt-link>
+          <youtubePlayer class="about__video-player"/>
         </div>
       </section>
-
-      <section class="Apply">
-        <div class="Apply__image">
+      <section class="apply">
+        <div class="apply__image">
           <img src="/gallery/12.jpg" alt="Group of students working in class.">
         </div>
-        <div class="Apply__container">
+        <div class="apply__container">
           <h1>Join our 6 month web development course</h1>
-          <nuxt-link :to="'/apply'"><span class="underline">Apply</span></nuxt-link>
+          <nuxt-link :to="'/apply'">
+            <span class="underline">apply</span>
+          </nuxt-link>
         </div>
       </section>
-
-      <section class="Curiculum">
-        <div class="Curiculum__header">
-          <h1>Expert teachers,<br> up-to-date skills</h1>
-          <a href="https://github.com/HackYourFuture/curriculum">Check out our <span class="underline">curriculum</span></a>
+      <section class="curiculum">
+        <div class="curiculum__header">
+          <h1>Expert teachers,
+            <br>up-to-date skills
+          </h1>
+          <a href="https://github.com/HackYourFuture/curriculum">
+            Check out our
+            <span class="underline">curriculum</span>
+          </a>
         </div>
-       
-        
-        <div class="Curiculum__image">
+        <div class="curiculum__image">
           <img src="/gallery/25.jpg" alt="Teacher in front of class.">
         </div>
-        <div class="Curiculum__container">
-          <div class="Curiculum__content" v-html="curiculum"/>
-          <div class="Curiculum__content-link">
-            <nuxt-link :to="'/teach'">Time is your most valuable resource. <br> Find out about donating your <span class="underline">time and expertise</span> here.</nuxt-link>
+        <div class="curiculum__container">
+          <div class="curiculum__content" v-html="curiculum"/>
+          <div class="curiculum__content-link">
+            <nuxt-link :to="'/teach'">
+              Time is your most valuable resource.
+              <br>Find out about donating your
+              <span class="underline">time and expertise</span>here.
+            </nuxt-link>
           </div>
         </div>
       </section>
-
-      <section class="Teaser">
-        <div class="Teaser__container">
-          <h1>Women Coding Teaser</h1>
-          <div class="Teaser__content" v-html="teaser"/>
-          <nuxt-link :to="'/teaser'"><span class="underline">Apply</span></nuxt-link>
+      <section class="teaser">
+        <div class="teaser__container">
+          <h1>Women Coding teaser</h1>
+          <div class="teaser__content" v-html="teaser"/>
+          <nuxt-link :to="'/teaser'">
+            <span class="underline">Apply</span>
+          </nuxt-link>
         </div>
-        <div class="Teaser__image">
-          <img src="/gallery/22.jpg" alt="Close up, two women asking a question in the coding teaser.">
+        <div class="teaser__image">
+          <img
+            src="/gallery/22.jpg"
+            alt="Close up, two women asking a question in the coding teaser."
+          >
         </div>
       </section>
-
-      <section class="Hire">
-        <div class="Hire__image">
+      <section class="hire">
+        <div class="hire__image">
           <img src="/gallery/20.jpg" alt="Student receiving diploma after graduation.">
         </div>
-        <div class="Hire__container">
+        <div class="hire__container">
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
           <div>
-            <nuxt-link :to="'/support'">Get in touch to talk about <span class="underline">hiring our graduates.</span></nuxt-link>
+            <nuxt-link :to="'/support'">
+              Get in touch to talk about
+              <span class="underline">hiring our graduates.</span>
+            </nuxt-link>
           </div>
           <div v-html="laptops"/>
           <div>
-            <nuxt-link :to="'/contact'">Contact us about <span class="underline">donating laptops. </span></nuxt-link>
+            <nuxt-link :to="'/contact'">
+              Contact us about
+              <span class="underline">donating laptops.</span>
+            </nuxt-link>
           </div>
         </div>
-        
-        
       </section>
-    </Main>
-
-    <section class="Chapters"/>
-
-    <section class="Makers">
-      <Graduates/>
+    </main>
+    <section class="chapters"/>
+    <section class="makers">
+      <graduates/>
     </section>
-
-    <Signup :color="'grey'"/>
-
-    <Partners/>
-
+    <partners/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Colors from "~/constants/colors";
+import colors from "~/constants/colors";
 
-import Landscape from "~/components/index/Landscape";
-import Signup from "~/components/signup/Signup";
-import Graduates from "~/components/graduates/Graduates";
-import Partners from "~/components/partners/Partners";
-import YoutubePlayer from "~/components/video/YoutubePlayer";
-import Footer from "~/components/footer/Footer";
+import landscape from "~/components/index/landscape";
+import graduates from "~/components/graduates/graduates";
+import partners from "~/components/partners/partners";
+import youtubePlayer from "~/components/video/youtubePlayer";
 
 export default {
     async asyncData() {
@@ -131,22 +140,20 @@ export default {
             what,
             apply,
             curiculum,
-            Colors
+            colors
         };
     },
     components: {
-        Landscape,
-        Signup,
-        Graduates,
-        Partners,
-        YoutubePlayer,
-        Footer
+        landscape,
+        graduates,
+        partners,
+        youtubePlayer
     }
 };
 </script>
 
 <style lang="scss">
-.About {
+.about {
     .content {
         width: 80%;
         margin: 0 auto;
@@ -203,10 +210,10 @@ export default {
     }
 }
 
-.Apply {
+.apply {
     margin: $base-vertical-rithm * 30 0;
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 20 0;
+        margin: $base-vertical-rithm * 10 0;
     }
     &__image {
         display: inline-block;
@@ -223,7 +230,7 @@ export default {
         display: inline-block;
         vertical-align: middle;
         @include breakpoint("mobile_landscape") {
-            margin-top: $base-vertical-rithm * 10;
+            margin: $base-vertical-rithm * 10 $base-vertical-rithm * 6;
             width: 100%;
         }
         h1 {
@@ -249,10 +256,10 @@ export default {
     }
 }
 
-.Curiculum {
+.curiculum {
     margin: $base-vertical-rithm * 30 0;
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 5 0;
+        margin: 0;
     }
     &__header {
         margin: 0 $base-vertical-rithm * 10;
@@ -337,10 +344,10 @@ export default {
     }
 }
 
-.Teaser {
+.teaser {
     margin: $base-vertical-rithm * 30 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
-        margin: 0;
+        margin: $base-vertical-rithm * 15 0;
     }
 
     &__container {
@@ -390,7 +397,7 @@ export default {
     }
 }
 
-.Hire {
+.hire {
     margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
         margin: $base-vertical-rithm * 5 0;

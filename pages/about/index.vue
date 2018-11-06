@@ -1,41 +1,44 @@
 <template>
   <div>
-    <Main class="About container">
-      <div class="About__header">
-
-        <div class="About__header-content">
+    <main class="about container">
+      <div class="about__header">
+        <div class="about__header-content">
           <div v-html="why_exist"/>
         </div>
-
-        <div class="About__header-image">
+        <div class="about__header-image">
           <img src="/gallery/15.jpg" alt="HackYourFuture students during their class on Sunday.">
         </div>
-        
       </div>
-      
-      <div class="About__container results">
+      <div class="about__container results">
         <div v-html="results_today"/>
         <div class="links">
-          <nuxt-link :to="'/teach'">You want<br> to <span class="underline">help?</span></nuxt-link>
-          <nuxt-link :to="'/chapters'">You want <br>to <span class="underline">donate</span></nuxt-link>
+          <nuxt-link :to="'/teach'">
+            You want
+            <br>to
+            <span class="underline">help?</span>
+          </nuxt-link>
+          <nuxt-link :to="'/chapters'">
+            You want
+            <br>to
+            <span class="underline">donate</span>
+          </nuxt-link>
         </div>
       </div>
-
-      <div class="About__container how">
-        <div class="About__container-image">
-          <img src="/gallery/07.jpg" alt="Overview, the opening and gathering of everyone in HackYourFuture before the classes start.">
+      <div class="about__container how">
+        <div class="about__container-image">
+          <img
+            src="/gallery/07.jpg"
+            alt="Overview, the opening and gathering of everyone in HackYourFuture before the classes start."
+          >
         </div>
         <div v-html="how_school_works"/>
       </div>
-
-    </Main>
-    <Signup :color="'grey'"/>
+    </main>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Signup from "~/components/signup/Signup";
 
 export default {
     async asyncData() {
@@ -64,15 +67,12 @@ export default {
             results_today: results_today ? results_today : null,
             how_school_works: how_school_works ? how_school_works : null
         };
-    },
-    components: {
-        Signup
     }
 };
 </script>
 
 <style lang="scss">
-.About {
+.about {
     h1 {
         margin-bottom: $base-vertical-rithm * 2;
         color: $color-purple;
@@ -134,7 +134,7 @@ export default {
             @include breakpoint("mobile_landscape") {
                 margin-left: 0;
             }
-            .About__container-image {
+            .about__container-image {
                 margin-left: 0;
                 @include breakpoint("mobile_landscape") {
                     padding: 0;
@@ -144,7 +144,7 @@ export default {
 
         &.who {
             margin-right: -100px;
-            .About__container-image {
+            .about__container-image {
                 margin-right: 0;
             }
         }
@@ -166,7 +166,7 @@ export default {
         }
 
         &.footer {
-            .About__container-image {
+            .about__container-image {
                 margin-left: 25%;
                 width: 50%;
             }

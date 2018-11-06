@@ -1,23 +1,23 @@
 <template>
   <div>
-    <Header/>
-    <HeaderNavMobile/>
+    <pageHeader/>
+    <headerNavMobile/>
     <div class="app-main">
       <nuxt/>
-      <Footer/>
+      <pageFooter/>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "~/components/header/Header";
-import Footer from "~/components/footer/Footer";
-import HeaderNavMobile from "~/components/header/HeaderNavMobile";
+import pageHeader from "~/components/header/pageheader";
+import pageFooter from "~/components/footer/pagefooter";
+import headerNavMobile from "~/components/header/headerNavMobile";
 export default {
     components: {
-        Header,
-        HeaderNavMobile,
-        Footer
+        pageHeader,
+        headerNavMobile,
+        pageFooter
     }
 };
 </script>

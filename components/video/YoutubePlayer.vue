@@ -1,5 +1,5 @@
 <template>
-  <div class="VideoPlayer">
+  <div class="videoPlayer">
     <div ref="video" class="video"/>
   </div>
 </template>
@@ -89,7 +89,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.VideoPlayer {
+.videoPlayer {
     iframe {
         width: 100%;
     }

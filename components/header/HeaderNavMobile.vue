@@ -1,9 +1,5 @@
 <template>
-
-  <nav 
-    :class="{ toggled: toggled }" 
-    class="MobileNav"
-    @click="onClick">
+  <nav :class="{ toggled: toggled }" class="mobileNav" @click="onClick">
     <ul>
       <li>
         <nuxt-link :to="'/'">Home</nuxt-link>
@@ -27,11 +23,10 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
+        <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
       </li>
     </ul>
   </nav>
-
 </template>
 <script>
 import eventBus from "~/utils/event-bus";
@@ -51,13 +46,10 @@ export default {
         eventBus.$on("toggle-mobile-nav", this.toggleNav);
     },
     methods: {
-        toggleSearch() {
-            // this.$store.commit('TOGGLE_SEARCH_VIEW', true);
-        },
+        toggleSearch() {},
         onClick(e) {
             if (e.target.nodeName === "A") {
                 if (e.target.classList.contains("nuxt-link-active")) return;
-                // eventBus.$emit('toggle-mobile-nav', false)
             }
         },
         toggleNav(toggle) {
@@ -68,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
-.MobileNav {
+.mobileNav {
     position: fixed;
     top: 60px;
     bottom: 0;

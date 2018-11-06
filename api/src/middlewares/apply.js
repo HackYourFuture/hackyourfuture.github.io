@@ -8,43 +8,52 @@ const fromEmail = "info@hackyourfuture.net";
 const ERROR_USER_FOUND = "User already exists";
 
 const validate = req => {
-    req.check("firstName", "first name is too short")
+    req.check("firstName")
+        .isString()
         .isLength({
-            min: 2
-        })
-        .isString();
-    req.check("lastName", "last name is too short")
+            min: 2,
+            max: 100
+        });
+    req.check("lastName")
+        .isString()
         .isLength({
-            min: 2
-        })
-        .isString();
-    req.check("city", "City name is too short")
+            min: 2,
+            max: 100
+        });
+    req.check("city")
+        .isString()
         .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("email", "Invalid Email Address").isEmail();
-    req.check("phone", "Invalid phone number")
+            min: 2,
+            max: 100
+        });
+    req.check("country").isLength({
+        min: 1
+    });
+    req.check("email").isEmail();
+    req.check("phone")
         .isNumeric()
         .isLength({
             min: 9
         });
-    req.check("education", "The string must be between 2-15 letters")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("how_hear", "Either not a String or the String is too long")
+    req.check("computer").isBoolean();
+    req.check("education")
         .isString()
         .isLength({
-            max: 20
+            min: 2,
+            max: 100
         });
-    req.check("message", "Either not a String or the String is too long")
+    req.check("how_hear")
         .isString()
         .isLength({
-            max: 120
+            min: 2,
+            max: 200
         });
-    req.check("computer", "Invalid boolean").isBoolean();
+    req.check("note")
+        .isString()
+        .isLength({
+            min: 0,
+            max: 200
+        });
 
     return req.validationErrors();
 };

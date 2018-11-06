@@ -1,41 +1,43 @@
 <template>
-  <footer class="Footer">
-    <div class="Footer__Main">
-
-      <div class="Footer__Links container">
+  <footer class="footer">
+    <div class="footer__Main">
+      <div class="footer__Links container">
         <nuxt-link :to="'/'">Home</nuxt-link>
         <nuxt-link :to="'/apply/'">Apply</nuxt-link>
         <nuxt-link :to="'/teach/'">Teach</nuxt-link>
         <nuxt-link :to="'/support/'">Hire</nuxt-link>
       </div>
-
-      <div class="Footer__Links container">
+      <div class="footer__Links container">
         <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
         <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
         <nuxt-link :to="'/about/'">About</nuxt-link>
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
-
-      <div class="Footer__Adress container">
+      <div class="footer__Adress container">
         <p>Stichting Hack Your Future</p>
-        <p> Herengracht 504</p>
+        <p>Herengracht 504</p>
         <p>1017 CB Amsterdam</p>
         <a href="mailto:info@hackyourfuture.net">info@hackyourfuture.net</a>
       </div>
-
-      <div class="Footer__Info container">
+      <div class="footer__Info container">
         <p>KvK: 64992160</p>
         <p>Copyright © HackYourFuture {{ date }}</p>
         <!--  <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link> -->
       </div>
-
-      <div class="Footer__Social container">
-        <a href="https://twitter.com/hackyourfutures"><img src="/icons/tw.svg" alt="Twitter."></a>
-        <a href="https://www.facebook.com/hackyourfuturenow/"><img src="/icons/fb.svg" alt="Facebook."></a>
-        <a href="https://www.linkedin.com/company/hackyourfuture/"><img src="/icons/in.svg" alt="LinkedIn."></a>
-        <a href="https://github.com/HackYourFuture"><img src="/icons/git.svg" alt="Github."></a>
+      <div class="footer__Social container">
+        <a href="https://twitter.com/hackyourfutures">
+          <img src="/icons/tw.svg" alt="Twitter.">
+        </a>
+        <a href="https://www.facebook.com/hackyourfuturenow/">
+          <img src="/icons/fb.svg" alt="Facebook.">
+        </a>
+        <a href="https://www.linkedin.com/company/hackyourfuture/">
+          <img src="/icons/in.svg" alt="LinkedIn.">
+        </a>
+        <a href="https://github.com/HackYourFuture">
+          <img src="/icons/git.svg" alt="Github.">
+        </a>
       </div>
-
     </div>
   </footer>
 </template>
@@ -52,7 +54,7 @@ export default {
 
 
 <style lang="scss">
-.Footer {
+.footer {
     background: $color-purple;
     margin: 0px #{-$base-margin} #{-$base-margin};
     color: $color-white;
@@ -73,6 +75,7 @@ export default {
         .container {
             padding: 20px;
             margin: 0px;
+
             p {
                 margin: 0px;
             }
@@ -110,13 +113,22 @@ export default {
     }
     &__Links {
         width: 10%;
+        @media (max-width: 800px) {
+            width: 45%;
+        }
     }
 
     &__Adress {
         width: 20%;
+        @media (max-width: 800px) {
+            width: 100%;
+        }
     }
     &__Info {
         width: 20%;
+        @media (max-width: 800px) {
+            width: 100%;
+        }
     }
 }
 </style>

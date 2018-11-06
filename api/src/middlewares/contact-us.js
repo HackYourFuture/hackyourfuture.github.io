@@ -3,28 +3,33 @@ const email = require("../utils/email");
 const toEmail = "info@hackyourfuture.net";
 
 const validate = req => {
-    req.check("firstName", "first name is too short")
+    req.check("firstName")
+        .isString()
         .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("lastName", "last name is too short")
+            min: 2,
+            max: 100
+        });
+    req.check("lastName")
+        .isString()
         .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("phone", "Invalid phone number")
+            min: 2,
+            max: 100
+        });
+    req.check("country").isLength({
+        min: 1
+    });
+    req.check("phone")
         .isNumeric()
         .isLength({
             min: 9
         });
-    req.check("email", "Invalid Email Address").isEmail();
-
-    req.check("message", "This message is too short")
+    req.check("email").isEmail();
+    req.check("note")
+        .isString()
         .isLength({
-            min: 3
-        })
-        .isString();
+            min: 2,
+            max: 200
+        });
 
     return req.validationErrors();
 };

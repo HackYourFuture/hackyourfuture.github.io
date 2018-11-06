@@ -1,88 +1,19 @@
 <template>
   <div>
-    <Main class="Apply container">
-      <div class="Apply__header">
-        <h1>Join <br> Us!</h1>
-        <div class="Apply__header-image">
+    <Main class="apply container">
+      <div class="apply__header">
+        <h1>Join
+          <br>Us!
+        </h1>
+        <div class="apply__header-image">
           <img src="/gallery/11.jpg" alt="Group of students working in class.">
         </div>
-        <div class="Apply__header-dates" v-html="dates"/>
+        <div class="apply__header-dates" v-html="dates"/>
       </div>
-
-      <div class="Apply__content" v-html="content"/>
-
-      <div ref="Apply__form" class="Apply__form form">
-        <h2>Apply for our next class:</h2>
-        <form method="POST" @submit.prevent="formUrlApply">
-          <fieldset>
-            <div class="half-width inputContainer">
-              <label for="firstName">First Name *</label>
-              <input id="firstName" ref="firstName" type="text" class="input" name="firstName" @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="lastName">Last Name *</label>
-              <input id="lastName" ref="lastName" type="text" class="input" name="lastName" @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="city">City *</label>
-              <input id="city" ref="city" type="text" class="input" name="city" @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label class="active label" for="country">Country *</label>
-              <select id="country" name="country" class="input">
-                <option value="nl">The Netherlands</option>
-                <option value="dk">Denmark</option>
-                <option value="se">Sweden</option>
-              </select>
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="email">E-mail *</label>
-              <input id="email" ref="email" type="email" class="input" name="email" @focus="setActive">
-            </div>
-
-            <div class="half-width inputContainer">
-              <label for="phone">Phone *</label>
-              <input id="phone" ref="phone" type="number" class="input" name="phone" @focus="setActive">
-            </div>
-
-            <div class="full-width inputContainer">
-              <label for="eductation">Educational Background *</label>
-              <input id="education" ref="education" type="eductation" class="input" name="education" @focus="setActive">
-            </div>
-
-            <div class="full-width inputContainer">
-              <label for="how-hear">How did you hear about us? *</label>
-              <input id="how-hear" ref="how_hear" type="how-hear" class="input" name="how_hear" @focus="setActive">
-            </div>
-
-            <div class="full-width computer inputContainer">
-              <label for="computer">I have a computer *</label>
-              <select id="computer" ref="computer" name="computer" class="input" @focus="setActive">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-
-            <div class="full-width inputContainer">
-              <label for="message">Is there something else you would like to notify us about?</label>
-              <input id="message" ref="message" type="text" class="input" name="message" @focus="setActive">
-            </div>
-
-            <div class="apply-btn">
-              <input type="submit" value="Apply">
-            </div>
-          </fieldset>
-        </form>
-      </div>
-      <div>
-        <p ref="successMessage" class="Apply__successMessage"/>
-      </div>
-      <div ref="errMsg"> 
-        <p ref="errorMessage" class="Apply__errorMessage"/>
+      <div class="apply__content" v-html="content"/>
+      <div ref="apply__form" class="apply__form form">
+        <h2>apply for our next class:</h2>
+        <formComponent :action="`${lambdaUrl}apply`" :inputs="inputs"/>
       </div>
     </Main>
   </div>
@@ -90,7 +21,154 @@
 
 <script>
 import axios from "~/plugins/axios";
+import formComponent from "~/components/form/form";
+import fieldError from "~/components/form/helpers/fieldError";
+
+const inputs = [
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "First Name *",
+            name: "firstName",
+            validate: value =>
+                new fieldError(value)
+                    .isLength({ min: 2, max: 100 })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "Last Name *",
+            name: "lastName",
+            validate: value =>
+                new fieldError(value)
+                    .isLength({ min: 2, max: 100 })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "City *",
+            name: "city",
+            validate: value =>
+                new fieldError(value)
+                    .isLength({ min: 2, max: 100 })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-drop",
+        className: "half-width",
+        props: {
+            label: "Country *",
+            name: "country",
+            options: [
+                { id: 1, value: "nl", label: "The Netherlands" },
+                { id: 2, value: "dk", label: "Denmark" },
+                { id: 3, value: "se", label: "Sweden" }
+            ],
+            validate: value => {
+                console.log(value);
+                return new fieldError(value).isRequired().errors;
+            }
+        }
+    },
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "E-mail *",
+            name: "email",
+            validate: value =>
+                new fieldError(value).isEmail().isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "Phone *",
+            name: "phone",
+            validate: value =>
+                new fieldError(value).isMobilePhone().isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "full-width",
+        props: {
+            label: "Educational Background *",
+            name: "education",
+            validate: value =>
+                new fieldError(value)
+                    .isLength({ min: 2, max: 100 })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-radio",
+        className: "full-width",
+        props: {
+            label: "Do you have a computer? *",
+            name: "computer",
+            options: [
+                { label: "yes", value: "yes" },
+                { label: "no", value: "no" }
+            ],
+            validate: value => new fieldError(value).isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "full-width",
+        props: {
+            label: "How did you hear about us? *",
+            name: "how_hear",
+            validate: value =>
+                new fieldError(value)
+                    .isLength({ min: 2, max: 200 })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-text",
+        className: "full-width",
+        props: {
+            label: "Something else you would like to notify us about?",
+            name: "note",
+            validate: value =>
+                new fieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
+                    .errors
+        }
+    },
+    {
+        type: "input-button",
+        props: {
+            buttonLabel: "Apply"
+        }
+    }
+];
+
 export default {
+    components: {
+        formComponent
+    },
+    data: () => {
+        return {
+            lambdaUrl: process.env.lambdaUrl,
+            inputs
+        };
+    },
     async asyncData() {
         let dates;
         let content;
@@ -108,59 +186,12 @@ export default {
             dates: dates ? dates : null,
             content: content ? content : null
         };
-    },
-    mounted: function() {
-        this.$el.querySelectorAll(".input").forEach(i => {
-            if (i.value.length == 0) {
-                i.parentNode.classList.remove("active");
-            } else {
-                i.parentNode.classList.add("active");
-            }
-        });
-    },
-    methods: {
-        async formUrlApply(e) {
-            let obj = {};
-            const fields = {};
-            Object.values(e.target.elements).forEach(
-                input => (fields[input.name] = input.value)
-      ); // eslint-disable-line
-            try {
-                let req = await axios.post(// eslint-disable-line
-                    process.env.lambdaUrl + "apply",
-                    fields
-                ); // eslint-disable-line
-            } catch (error) {
-                if (error.response) {
-                    obj = error.response.data;
-                    for (let key in obj) {
-                        console.log(key);
-                        for (let i = 0; i < 7; i++) {
-                            this.$refs.errorMessage.innerHTML +=
-                                `<br/>` +
-                                obj.requestErrors[i].param +
-                                " : " +
-                                obj.requestErrors[i].msg;
-                        }
-                    }
-                }
-            }
-        },
-
-        setActive(e) {
-            this.$el.querySelectorAll(".input").forEach(i => {
-                if (i.value.length == 0) {
-                    i.parentNode.classList.remove("active");
-                }
-            });
-            e.target.parentNode.classList.add("active");
-        }
     }
 };
 </script>
 
 <style lang="scss">
-.Apply {
+.apply {
     &__header {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
@@ -183,7 +214,7 @@ export default {
             }
         }
         &-image {
-            width: 60%;
+            width: 65%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
@@ -246,7 +277,7 @@ export default {
     }
     &__form {
         width: 75%;
-        margin-left: 2.5%;
+        margin: 0 auto;
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
             width: 100%;
@@ -281,20 +312,6 @@ export default {
             font-weight: bold;
             font-size: 24px;
         }
-    }
-    &__successMessage {
-        margin-top: $base-vertical-rithm * 10;
-        font-weight: bold;
-        font-size: 24px;
-        color: $color-purple;
-        text-align: center;
-    }
-    &__errorMessage {
-        margin-top: $base-vertical-rithm * 10;
-        font-weight: bold;
-        font-size: 18px;
-        color: $color-purple;
-        text-align: center;
     }
 }
 </style>

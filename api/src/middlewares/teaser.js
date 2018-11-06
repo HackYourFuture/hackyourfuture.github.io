@@ -4,26 +4,36 @@ const sendEmail = require("../utils/send-emails");
 const fromEmail = "info@hackyourfuture.net";
 
 const validate = req => {
-    req.check("firstName", "firstName is too short")
-        .isLength({
-            min: 2
-        })
-        .isString();
-    req.check("lastName", "lastName is too short")
-        .isLength({
-            min: 2
-        })
-        .isString();
-    req.check("email", "Invalid Email Address").isEmail();
-    req.check("message", "The message is too short")
-        .isLength({
-            min: 3
-        })
-        .isString();
-    req.check("message", "Either not a String or the String is too long")
+    req.check("firstName")
         .isString()
         .isLength({
-            max: 120
+            min: 2,
+            max: 100
+        });
+    req.check("lastName")
+        .isString()
+        .isLength({
+            min: 2,
+            max: 100
+        });
+    req.check("email").isEmail();
+    req.check("phone")
+        .isNumeric()
+        .isLength({
+            min: 9
+        });
+    req.check("computer").isBoolean();
+    req.check("education")
+        .isString()
+        .isLength({
+            min: 2,
+            max: 100
+        });
+    req.check("note")
+        .isString()
+        .isLength({
+            min: 0,
+            max: 200
         });
 
     return req.validationErrors();
