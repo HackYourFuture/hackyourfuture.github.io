@@ -1,32 +1,35 @@
 <template>
   <div>
-    <Main class="Support container">
-      <div class="Support__header">
-        <div class="Support__header-image">
+    <Main class="support container">
+      <div class="support__header">
+        <div class="support__header-image">
           <img src="/gallery/19.jpg" alt="Student presenting his final project.">
         </div>
-        <div class="Support__header-content">
-          <nuxt-link :to="'/'">Hire<br> <span class="underline">Alumni</span></nuxt-link>
+        <div class="support__header-content">
+          <nuxt-link :to="'/'">Hire
+            <br>
+            <span class="underline">Alumni</span>
+          </nuxt-link>
           <div v-html="hire_alumni"/>
         </div>
       </div>
     </Main>
-    <div class="Support__companies">
+    <div class="support__companies">
       <h3>Where our students work</h3>
-      <div class="Support__companies-items">
+      <div class="support__companies-items">
         <img src="/partners/bijenkorf.svg" alt="Bijenkorf.">
         <img src="/partners/booking.svg" alt="Booking.com.">
         <img src="/partners/klm.svg" alt="KLM.">
         <img src="/partners/nuon.svg" alt="Nuon.">
       </div>
     </div>
-    <Partners/>
+    <partners/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Partners from "~/components/partners/Partners";
+import partners from "~/components/partners/partners";
 export default {
     async asyncData() {
         let hire_alumni;
@@ -44,13 +47,13 @@ export default {
         };
     },
     components: {
-        Partners
+        partners
     }
 };
 </script>
 
 <style lang="scss">
-.Support {
+.support {
     &__header {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
@@ -131,10 +134,6 @@ export default {
                 width: calc(15% -5px);
                 height: 150px;
                 margin: 15px;
-            }
-            .hoi {
-                height: 10%;
-                width: auto;
             }
         }
     }

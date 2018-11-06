@@ -1,15 +1,15 @@
 <template>
-  <div class ="main">
+  <div class="main">
     <h1>Thank you for donating!</h1>
-    <Donate class="donate-component"/>
+    <donate class="donate-component"/>
   </div>
 </template>
 <script>
-import Donate from "~/components/Donate";
+import donate from "~/components/donate";
 
 export default {
     components: {
-        Donate
+        donate
     }
 };
 </script>

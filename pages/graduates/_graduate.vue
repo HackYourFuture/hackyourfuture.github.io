@@ -1,17 +1,20 @@
 <template>
   <div>
-    <main class="Graduates container">
-      <div class="Graduates__active">
-        <img :src="'/graduates/' + $route.params.graduate + '.jpg'" alt="Graduate of HackYourFuture">
-        <div class="Graduates__active-content" v-html="content"/>
+    <main class="graduates container">
+      <div class="graduates__active">
+        <img
+          :src="'/graduates/' + $route.params.graduate + '.jpg'"
+          alt="Graduate of HackYourFuture"
+        >
+        <div class="graduates__active-content" v-html="content"/>
       </div>
-      <Graduates/>
+      <graduates/>
     </main>
   </div>
 </template>
 
 <script>
-import Graduates from "~/components/graduates/Graduates";
+import graduates from "~/components/graduates/graduates";
 import axios from "~/plugins/axios";
 export default {
     async asyncData({ params }) {
@@ -30,13 +33,13 @@ export default {
         };
     },
     components: {
-        Graduates
+        graduates
     }
 };
 </script>
 
 <style lang="scss">
-.Graduates {
+.graduates {
     position: relative;
     &__active {
         padding: $base-vertical-rithm * 20 $base-vertical-rithm * 8;

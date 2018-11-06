@@ -1,32 +1,29 @@
 <template>
   <div>
-    <main class="Chapter ">
-      <div class="Chapter__header container">
-        <div class="Chapter__header-welcome" v-html="welcome"/>
-        <div class="Chapter__header-image">
+    <main class="chapter">
+      <div class="chapter__header container">
+        <div class="chapter__header-welcome" v-html="welcome"/>
+        <div class="chapter__header-image">
           <img src="/gallery/01.jpg">
         </div>
-        <div class="Chapter__header-description" v-html="description"/>
+        <div class="chapter__header-description" v-html="description"/>
       </div>
-      <section class="Chapter__visit">
-        <div class="Chapter__visit-image">
+      <section class="chapter__visit">
+        <div class="chapter__visit-image">
           <img :src="'/chapters/' + city + '.jpg'">
         </div>
-        <div class="Chapter__visit-description" v-html="visit"/>
+        <div class="chapter__visit-description" v-html="visit"/>
       </section>
-      <section class="Chapter__team">
+      <section class="chapter__team">
         <h1>Meet the {{ city }} team</h1>
-        <div class="Chapter__team-members" v-html="members"/>
+        <div class="chapter__team-members" v-html="members"/>
       </section>
-    
     </main>
-    <Signup :color="'grey'"/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Signup from "~/components/signup/Signup";
 export default {
     async asyncData({ params }) {
         let city = params.city;
@@ -65,15 +62,12 @@ export default {
             visit: visit ? visit : null,
             members: members ? members : null
         };
-    },
-    components: {
-        Signup
     }
 };
 </script>
 
 <style lang="scss">
-.Chapter {
+.chapter {
     &__header {
         margin: 5%;
         padding: $base-vertical-rithm * 10;

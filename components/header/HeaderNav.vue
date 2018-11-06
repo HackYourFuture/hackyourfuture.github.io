@@ -1,5 +1,5 @@
 <template>
-  <nav class="HeaderNav">
+  <nav class="headerNav">
     <nuxt-link :to="'/'">Home</nuxt-link>
     <nuxt-link :to="'/apply/'">Apply</nuxt-link>
     <nuxt-link :to="'/teach/'">Teach</nuxt-link>
@@ -8,17 +8,10 @@
     <nuxt-link :to="'/about/'">About</nuxt-link>
     <nuxt-link :to="'/contact/'">Contact</nuxt-link>
     <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
- 
-    
   </nav>
 </template>
-
-<script>
-export default {};
-</script>
-
 <style lang="scss">
-.HeaderNav {
+.headerNav {
     a {
         position: relative;
         margin-right: $base-vertical-rithm * 8;

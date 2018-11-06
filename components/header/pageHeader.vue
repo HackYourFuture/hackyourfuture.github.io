@@ -1,11 +1,11 @@
 <template>
-  <header class="Header">
+  <header class="header">
     <div class="container max-width">
       <div :class="{pressed: menuOpen}" class="icon menu-button" @click="toggleMenu">
         <span class="icon-menu"/>
         <span class="icon-cross"/>
       </div>
-      <HeaderNav/>
+      <headerNav/>
       <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
     </div>
   </header>
@@ -13,12 +13,12 @@
 
 <script>
 import eventBus from "~/utils/event-bus";
-import HeaderNav from "./HeaderNav";
-import HeaderNavMobile from "./HeaderNavMobile";
+import headerNav from "./headerNav";
+import headerNavMobile from "./headerNavMobile";
 export default {
     components: {
-        HeaderNav,
-        HeaderNavMobile
+        headerNav,
+        headerNavMobile
     },
     data() {
         return {
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-.Header {
+.header {
     position: fixed;
     width: 100%;
     background: white;
@@ -50,7 +50,7 @@ export default {
         height: 60px;
     }
 
-    .HeaderNav {
+    .headerNav {
         margin: $base-vertical-rithm * 2;
         text-align: center;
         @include breakpoint("mobile_landscape") {

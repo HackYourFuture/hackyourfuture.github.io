@@ -1,31 +1,27 @@
 <template>
   <div>
-    <div class="Chapters__map">
-
-      <div class="Chapters__map-map">
-        <img src="/map/map.svg" alt="Map indicating the HackYourFuture Chapters.">
+    <div class="chapters__map">
+      <div class="chapters__map-map">
+        <img src="/map/map.svg" alt="Map indicating the HackYourFuture chapters.">
       </div>
-
-      <div class="Chapters__map-list">
+      <div class="chapters__map-list">
         <p v-for="chapter in chapterPoints" :key="chapter.name">{{ chapter.name }}</p>
       </div>
     </div>
-    <Main class="Chapters container">
-      <div class="Chapters__information">
+    <Main class="chapters container">
+      <div class="chapters__information">
         <h1>Start your own chapter</h1>
         <div v-html="chapters_info"/>
-        <div class="Chapters__information-image">
+        <div class="chapters__information-image">
           <img src="/gallery/01.jpg" alt="Group picture of team and students.">
         </div>
       </div>
     </Main>
-    <Signup :color="'grey'"/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import Signup from "~/components/signup/Signup";
 export default {
     async asyncData() {
         let chapters_info;
@@ -40,9 +36,6 @@ export default {
         return {
             chapters_info: chapters_info ? chapters_info : null
         };
-    },
-    components: {
-        Signup
     },
     data() {
         return {
@@ -82,7 +75,7 @@ export default {
 </script>
 
 <style lang="scss">
-.Chapters {
+.chapters {
     &.container {
         margin-bottom: 200px;
     }
