@@ -37,7 +37,7 @@ const components = {
 };
 export default {
     components,
-    props: { inputs: String, action: String },
+    props: { inputs: Array, action: String },
     mounted() {
         Object.keys(components).forEach(componentName => {
             const component = components[componentName];
