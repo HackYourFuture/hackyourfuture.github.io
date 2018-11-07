@@ -40,7 +40,7 @@
     "axios": "^0.16.2",
     "nuxt": "^2.1.0",
     "validator": "^10.8.0",
-    "vuelayers": "^0.10.13"
+    "vuelayers": "^0.10.20"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
