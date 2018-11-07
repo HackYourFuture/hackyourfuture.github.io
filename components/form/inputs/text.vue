@@ -11,7 +11,7 @@ export default {
     props: {
         label: String,
         name: String,
-        validate: String
+        validate: Function
     },
 
     data() {
