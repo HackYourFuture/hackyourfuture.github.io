@@ -15,7 +15,8 @@ export default {
         label: String,
         name: String,
         cols: String,
-        rows: String
+        rows: String,
+        errorMessage: String
     }
 };
 </script>
