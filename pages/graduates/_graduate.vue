@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import graduates from "~/components/graduates/graduates";
+import graduates from "~/components/graduates/Graduates";
 import axios from "~/plugins/axios";
 export default {
     async asyncData({ params }) {
