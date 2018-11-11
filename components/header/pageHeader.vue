@@ -13,8 +13,8 @@
 
 <script>
 import eventBus from "~/utils/event-bus";
-import headerNav from "./headerNav";
-import headerNavMobile from "./headerNavMobile";
+import headerNav from "./HeaderNav";
+import headerNavMobile from "./HeaderNavMobile";
 export default {
     components: {
         headerNav,
