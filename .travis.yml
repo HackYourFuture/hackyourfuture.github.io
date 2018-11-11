@@ -6,6 +6,8 @@ node_js:
 services:
   - docker
 
+sudo: required
+
 env:
   global:
     - VERBOSE=true
