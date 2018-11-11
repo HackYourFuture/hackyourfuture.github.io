@@ -24,6 +24,7 @@ module.exports = {
     },
 
     build: {
+        quiet: !isGenerating,
         postcss: {
             "postcss-cssnext": {
                 browsers: ["last 2 versions", "ie >= 9"]
