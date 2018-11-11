@@ -24,7 +24,7 @@
     "dev:start:server-content": "kib",
     "generate": "export ENVIRONMENT=prod&& npm-run-all --parallel --race generate:*",
     "generate:server": "kib generate -g ./dist",
-    "generate:nuxt": "node --max-old-space-size=3072 ./node_modules/.bin/nuxt generate",
+    "generate:nuxt": "nuxt generate",
     "lambda": "npm-run-all lambda:prepare lambda:zip",
     "lambda:prepare": "webpack --config api-lambda/webpack.config.js",
     "lambda:zip": "cd api-lambda/dist && zip -r ./../../lambda.zip *",

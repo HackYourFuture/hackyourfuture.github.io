@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import pageHeader from "~/components/header/pageheader";
-import pageFooter from "~/components/footer/pagefooter";
-import headerNavMobile from "~/components/header/headerNavMobile";
+import pageHeader from "~/components/header/pageHeader";
+import pageFooter from "~/components/footer/pageFooter";
+import headerNavMobile from "~/components/header/HeaderNavMobile";
 export default {
     components: {
         pageHeader,

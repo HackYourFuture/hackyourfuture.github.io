@@ -98,10 +98,10 @@
 import axios from "~/plugins/axios";
 import colors from "~/constants/colors";
 
-import landscape from "~/components/index/landscape";
-import graduates from "~/components/graduates/graduates";
-import partners from "~/components/partners/partners";
-import youtubePlayer from "~/components/video/youtubePlayer";
+import landscape from "~/components/index/Landscape";
+import graduates from "~/components/graduates/Graduates";
+import partners from "~/components/partners/Partners";
+import youtubePlayer from "~/components/video/YoutubePlayer";
 
 export default {
     async asyncData() {
