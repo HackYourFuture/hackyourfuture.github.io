@@ -14,10 +14,12 @@
 <script>
 import eventBus from "~/utils/event-bus";
 import HeaderNav from "./headerNav";
+import HeaderNavMobile from "./headerNavMobile";
 
 export default {
     components: {
-        HeaderNav
+        HeaderNav,
+        HeaderNavMobile
     },
     data() {
         return {
