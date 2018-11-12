@@ -8,7 +8,7 @@
         <p v-for="chapter in chapterPoints" :key="chapter.name">{{ chapter.name }}</p>
       </div>
     </div>
-    <Main class="chapters container">
+    <main class="chapters container">
       <div class="chapters__information">
         <h1>Start your own chapter</h1>
         <div v-html="chapters_info"/>
@@ -16,7 +16,7 @@
           <img src="/gallery/01.jpg" alt="Group picture of team and students.">
         </div>
       </div>
-    </Main>
+    </main>
   </div>
 </template>
 

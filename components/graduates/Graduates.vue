@@ -1,11 +1,11 @@
 <template>
-  <div class="Graduates">
+  <div class="graduates">
     <h1>Meet our graduates</h1>
-    <div class="Graduates__items">
-      <div class="Graduates__items-inner">
-        <div v-for="(graduate, key) in graduates" :key="key" class="Graduates__item">
+    <div class="graduates__items">
+      <div class="graduates__items-inner">
+        <div v-for="(graduate, key) in graduates" :key="key" class="graduates__item">
           <nuxt-link :to="'/graduates/' + graduate.route">
-            <div class="Graduates__item-image">
+            <div class="graduates__item-image">
               <img :src="'/graduates/' + graduate.route + '.jpg'">
             </div>
             <h3>{{ graduate.name }}</h3>
@@ -39,7 +39,7 @@ export default {
 </script> 
 
 <style lang="scss">
-.Graduates {
+.graduates {
     margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
     @include breakpoint("mobile_landscape") {
         margin: $base-vertical-rithm * 5 $base-vertical-rithm * 2;

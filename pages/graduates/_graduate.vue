@@ -8,13 +8,13 @@
         >
         <div class="graduates__active-content" v-html="content"/>
       </div>
-      <graduates/>
+      <Graduates/>
     </main>
   </div>
 </template>
 
 <script>
-import graduates from "~/components/graduates/Graduates";
+import Graduates from "~/components/graduates/graduates";
 import axios from "~/plugins/axios";
 export default {
     async asyncData({ params }) {
@@ -33,7 +33,7 @@ export default {
         };
     },
     components: {
-        graduates
+        Graduates
     }
 };
 </script>

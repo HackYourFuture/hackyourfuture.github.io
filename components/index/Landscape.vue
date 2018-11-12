@@ -1,11 +1,12 @@
 <template>
-  <section class="Landscape">
-    <div class="Landscape__logo">
+  <section class="landscape">
+    <div class="landscape__logo">
       <img src="/logos/logo-1.svg">
     </div>
-
-    <div class="Landscape__text">
-      <h1>Use your potential.<br> Build a career in tech.</h1>
+    <div class="landscape__text">
+      <h1>Use your potential.
+        <br>Build a career in tech.
+      </h1>
     </div>
   </section>
 </template>
@@ -15,7 +16,7 @@ export default {};
 </script>
 
 <style lang="scss">
-.Landscape {
+.landscape {
     height: 100vh;
     background-image: url("/gallery/08.jpg");
     background-size: cover;

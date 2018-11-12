@@ -34,7 +34,7 @@
       </div>
       <div class="teach__form form">
         <h1>Join our teacher team</h1>
-        <formComponent :action="`${lambdaUrl}teach`" :inputs="inputs"/>
+        <FormComponent :action="`${lambdaUrl}teach`" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -42,8 +42,8 @@
 
 <script>
 import axios from "~/plugins/axios";
-import formComponent from "~/components/form/form";
-import fieldError from "~/components/form/helpers/fieldError";
+import FormComponent from "~/components/form/form";
+import FieldError from "~/components/form/helpers/fieldError";
 
 const inputs = [
     {
@@ -53,7 +53,7 @@ const inputs = [
             label: "First Name *",
             name: "firstName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -66,7 +66,7 @@ const inputs = [
             label: "Last Name *",
             name: "lastName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -85,7 +85,7 @@ const inputs = [
             ],
             validate: value => {
                 console.log(value);
-                return new fieldError(value).isRequired().errors;
+                return new FieldError(value).isRequired().errors;
             }
         }
     },
@@ -96,7 +96,7 @@ const inputs = [
             label: "E-mail *",
             name: "email",
             validate: value =>
-                new fieldError(value).isEmail().isRequired().errors
+                new FieldError(value).isEmail().isRequired().errors
         }
     },
     {
@@ -106,7 +106,7 @@ const inputs = [
             label: "Please tell us something about yourself *",
             name: "note",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 200 })
                     .isAlpha()
                     .isRequired().errors
@@ -122,7 +122,7 @@ const inputs = [
 
 export default {
     components: {
-        formComponent
+        FormComponent
     },
     data: () => {
         return {

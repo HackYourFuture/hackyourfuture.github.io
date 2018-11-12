@@ -5,7 +5,7 @@
         <span class="icon-menu"/>
         <span class="icon-cross"/>
       </div>
-      <headerNav/>
+      <HeaderNav/>
       <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
     </div>
   </header>
@@ -13,12 +13,11 @@
 
 <script>
 import eventBus from "~/utils/event-bus";
-import headerNav from "./HeaderNav";
-import headerNavMobile from "./HeaderNavMobile";
+import HeaderNav from "./headerNav";
+
 export default {
     components: {
-        headerNav,
-        headerNavMobile
+        HeaderNav
     },
     data() {
         return {
