@@ -29,7 +29,7 @@
 
 <script>
 import axios from "~/plugins/axios";
-import Partners from "~/components/partners/Partners";
+import Partners from "~/components/partners/partners";
 export default {
     async asyncData() {
         let hire_alumni;
