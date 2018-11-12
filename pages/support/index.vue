@@ -23,13 +23,13 @@
         <img src="/partners/nuon.svg" alt="Nuon.">
       </div>
     </div>
-    <partners/>
+    <Partners/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import partners from "~/components/partners/Partners";
+import Partners from "~/components/partners/Partners";
 export default {
     async asyncData() {
         let hire_alumni;
@@ -47,7 +47,7 @@ export default {
         };
     },
     components: {
-        partners
+        Partners
     }
 };
 </script>

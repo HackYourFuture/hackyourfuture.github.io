@@ -4,7 +4,7 @@
       <div class="upload__header">
         <div class="upload__header-content" v-html="cv_assignment"/>
         <div ref="upload__form" class="upload__form form">
-          <formComponent :inputs="inputs"/>
+          <FormComponent :inputs="inputs"/>
         </div>
       </div>
     </main>
@@ -13,7 +13,7 @@
 
 <script>
 import axios from "~/plugins/axios";
-import formComponent from "~/components/form/form";
+import FormComponent from "~/components/form/form";
 
 const inputs = [
     {
@@ -63,7 +63,7 @@ const inputs = [
 
 export default {
     components: {
-        formComponent
+        FormComponent
     },
     data: () => {
         return {

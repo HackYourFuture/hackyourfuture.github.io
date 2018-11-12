@@ -13,7 +13,7 @@
       <div class="contact__form form">
         <h1>Reach us for any other questions</h1>
         <p>General Inquiries</p>
-        <formComponent :action="`${lambdaUrl}contact`" :inputs="inputs"/>
+        <FormComponent :action="`${lambdaUrl}contact`" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -21,8 +21,8 @@
 
 <script>
 import axios from "~/plugins/axios";
-import formComponent from "~/components/form/form";
-import fieldError from "~/components/form/helpers/fieldError";
+import FormComponent from "~/components/form/form";
+import FieldError from "~/components/form/helpers/fieldError";
 const inputs = [
     {
         type: "input-text",
@@ -31,7 +31,7 @@ const inputs = [
             label: "First Name *",
             name: "firstName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({
                         min: 2,
                         max: 100
@@ -48,7 +48,7 @@ const inputs = [
             label: "Last Name *",
             name: "lastName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({
                         min: 2,
                         max: 100
@@ -82,7 +82,7 @@ const inputs = [
                 }
             ],
             validate: value => {
-                return new fieldError(value).isRequired().errors;
+                return new FieldError(value).isRequired().errors;
             }
         }
     },
@@ -93,7 +93,7 @@ const inputs = [
         props: {
             label: "Phone",
             name: "phone",
-            validate: value => new fieldError(value).isMobilePhone().errors
+            validate: value => new FieldError(value).isMobilePhone().errors
         }
     },
 
@@ -104,7 +104,7 @@ const inputs = [
             label: "E-mail *",
             name: "email",
             validate: value =>
-                new fieldError(value).isEmail().isRequired().errors
+                new FieldError(value).isEmail().isRequired().errors
         }
     },
 
@@ -115,7 +115,7 @@ const inputs = [
             label: "What would you like to contact us about? *",
             name: "about",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({
                         min: 2,
                         max: 200
@@ -133,7 +133,7 @@ const inputs = [
 ];
 export default {
     components: {
-        formComponent
+        FormComponent
     },
     data: () => {
         return {

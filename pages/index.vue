@@ -1,6 +1,6 @@
 <template>
   <div>
-    <landscape/>
+    <Landscape/>
     <main class="main container">
       <section class="about">
         <div class="content" v-html="what"/>
@@ -10,7 +10,7 @@
             <br>about
             <span class="underline">us</span>
           </nuxt-link>
-          <youtubePlayer class="about__video-player"/>
+          <YoutubePlayer class="about__video-player"/>
         </div>
       </section>
       <section class="apply">
@@ -88,20 +88,20 @@
     </main>
     <section class="chapters"/>
     <section class="makers">
-      <graduates/>
+      <Graduates/>
     </section>
-    <partners/>
+    <Partners/>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import colors from "~/constants/colors";
+import Colors from "~/constants/colors";
 
-import landscape from "~/components/index/Landscape";
-import graduates from "~/components/graduates/Graduates";
-import partners from "~/components/partners/Partners";
-import youtubePlayer from "~/components/video/YoutubePlayer";
+import Landscape from "~/components/index/landscape";
+import Graduates from "~/components/graduates/graduates";
+import Partners from "~/components/partners/partners";
+import YoutubePlayer from "~/components/video/youtubePlayer";
 
 export default {
     async asyncData() {
@@ -140,14 +140,14 @@ export default {
             what,
             apply,
             curiculum,
-            colors
+            Colors
         };
     },
     components: {
-        landscape,
-        graduates,
-        partners,
-        youtubePlayer
+        Landscape,
+        Graduates,
+        Partners,
+        YoutubePlayer
     }
 };
 </script>

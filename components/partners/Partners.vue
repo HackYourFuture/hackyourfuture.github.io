@@ -1,7 +1,7 @@
 <template>
-  <div class="Partners">
+  <div class="partners">
     <h3>Official partners & supporters</h3>
-    <div class="Partners__items">
+    <div class="partners__items">
       <img src="/partners/ing.svg" alt="ING.">
       <img src="/partners/doen.svg" alt="Stichting doen.">
       <img src="/partners/atlasian.svg" alt="Atlassian.">
@@ -10,11 +10,8 @@
   </div>
 </template>
 
-<script>
-</script> 
-
 <style lang="scss">
-.Partners {
+.partners {
     margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
     margin-bottom: $base-vertical-rithm * 5;
     h3 {

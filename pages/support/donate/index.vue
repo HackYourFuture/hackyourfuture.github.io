@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Donate from "~/components/Donate";
+import Donate from "~/components/donate";
 
 export default {
     components: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Main class="apply container">
+    <main class="apply container">
       <div class="apply__header">
         <h1>Join
           <br>Us!
@@ -13,16 +13,16 @@
       <div class="apply__content" v-html="content"/>
       <div ref="apply__form" class="apply__form form">
         <h2>apply for our next class:</h2>
-        <formComponent :action="`${lambdaUrl}apply`" :inputs="inputs"/>
+        <FormComponent :action="`${lambdaUrl}apply`" :inputs="inputs"/>
       </div>
-    </Main>
+    </main>
   </div>
 </template>
 
 <script>
 import axios from "~/plugins/axios";
-import formComponent from "~/components/form/form";
-import fieldError from "~/components/form/helpers/fieldError";
+import FormComponent from "~/components/form/form";
+import FieldError from "~/components/form/helpers/fieldError";
 
 const inputs = [
     {
@@ -32,7 +32,7 @@ const inputs = [
             label: "First Name *",
             name: "firstName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -45,7 +45,7 @@ const inputs = [
             label: "Last Name *",
             name: "lastName",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -58,7 +58,7 @@ const inputs = [
             label: "City *",
             name: "city",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -77,7 +77,7 @@ const inputs = [
             ],
             validate: value => {
                 console.log(value);
-                return new fieldError(value).isRequired().errors;
+                return new FieldError(value).isRequired().errors;
             }
         }
     },
@@ -88,7 +88,7 @@ const inputs = [
             label: "E-mail *",
             name: "email",
             validate: value =>
-                new fieldError(value).isEmail().isRequired().errors
+                new FieldError(value).isEmail().isRequired().errors
         }
     },
     {
@@ -98,7 +98,7 @@ const inputs = [
             label: "Phone *",
             name: "phone",
             validate: value =>
-                new fieldError(value).isMobilePhone().isRequired().errors
+                new FieldError(value).isMobilePhone().isRequired().errors
         }
     },
     {
@@ -108,7 +108,7 @@ const inputs = [
             label: "Educational Background *",
             name: "education",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 100 })
                     .isAlpha()
                     .isRequired().errors
@@ -124,7 +124,7 @@ const inputs = [
                 { label: "yes", value: "yes" },
                 { label: "no", value: "no" }
             ],
-            validate: value => new fieldError(value).isRequired().errors
+            validate: value => new FieldError(value).isRequired().errors
         }
     },
     {
@@ -134,7 +134,7 @@ const inputs = [
             label: "How did you hear about us? *",
             name: "how_hear",
             validate: value =>
-                new fieldError(value)
+                new FieldError(value)
                     .isLength({ min: 2, max: 200 })
                     .isAlpha()
                     .isRequired().errors
@@ -147,7 +147,7 @@ const inputs = [
             label: "Something else you would like to notify us about?",
             name: "note",
             validate: value =>
-                new fieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
+                new FieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
                     .errors
         }
     },
@@ -161,7 +161,7 @@ const inputs = [
 
 export default {
     components: {
-        formComponent
+        FormComponent
     },
     data: () => {
         return {

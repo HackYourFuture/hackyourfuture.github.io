@@ -4,7 +4,7 @@
       <div class="technical__header">
         <div class="technical__header-content" v-html="technical_assignment"/>
         <div ref="technical__form" class="technical__form form">
-          <formComponent :action="`${lambdaUrl}technical`" :inputs="inputs"/>
+          <FormComponent :action="`${lambdaUrl}technical`" :inputs="inputs"/>
         </div>
       </div>
     </main>
@@ -13,8 +13,8 @@
 
 <script>
 import axios from "~/plugins/axios";
-import formComponent from "~/components/form/form";
-import fieldError from "~/components/form/helpers/fieldError";
+import FormComponent from "~/components/form/form";
+import FieldError from "~/components/form/helpers/fieldError";
 
 const inputs = [
     {
@@ -23,7 +23,7 @@ const inputs = [
         props: {
             label: "url codepen *",
             name: "url",
-            validate: value => new fieldError(value).isURL().errors
+            validate: value => new FieldError(value).isURL().errors
         }
     },
     {
@@ -44,7 +44,7 @@ const inputs = [
 
 export default {
     components: {
-        formComponent
+        FormComponent
     },
     data: () => {
         return {
