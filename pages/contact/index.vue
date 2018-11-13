@@ -24,227 +24,230 @@ import axios from "~/plugins/axios";
 import FormComponent from "~/components/form/form";
 import FieldError from "~/components/form/helpers/fieldError";
 const inputs = [
-  {
-    type: "input-text",
-    className: "half-width",
-    props: {
-      label: "First Name *",
-      name: "firstName",
-      validate: value =>
-        new FieldError(value)
-          .isLength({
-            min: 2,
-            max: 100
-          })
-          .isAlpha()
-          .isRequired().errors
-    }
-  },
-
-  {
-    type: "input-text",
-    className: "half-width",
-    props: {
-      label: "Last Name *",
-      name: "lastName",
-      validate: value =>
-        new FieldError(value)
-          .isLength({
-            min: 2,
-            max: 100
-          })
-          .isAlpha()
-          .isRequired().errors
-    }
-  },
-
-  {
-    type: "input-drop",
-    className: "half-width",
-    props: {
-      label: "Country *",
-      name: "country",
-      options: [
-        {
-          id: 1,
-          value: "nl",
-          label: "The Netherlands"
-        },
-        {
-          id: 2,
-          value: "dk",
-          label: "Denmark"
-        },
-        {
-          id: 3,
-          value: "se",
-          label: "Sweden"
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "First Name *",
+            name: "firstName",
+            validate: value =>
+                new FieldError(value)
+                    .isLength({
+                        min: 2,
+                        max: 100
+                    })
+                    .isAlpha()
+                    .isRequired().errors
         }
-      ],
-      validate: value => {
-        return new FieldError(value).isRequired().errors;
-      }
-    }
-  },
+    },
 
-  {
-    type: "input-text",
-    className: "half-width",
-    props: {
-      label: "Phone",
-      name: "phone",
-      validate: value => new FieldError(value).isMobilePhone().errors
-    }
-  },
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "Last Name *",
+            name: "lastName",
+            validate: value =>
+                new FieldError(value)
+                    .isLength({
+                        min: 2,
+                        max: 100
+                    })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
 
-  {
-    type: "input-text",
-    className: "half-width",
-    props: {
-      label: "E-mail *",
-      name: "email",
-      validate: value => new FieldError(value).isEmail().isRequired().errors
-    }
-  },
+    {
+        type: "input-drop",
+        className: "half-width",
+        props: {
+            label: "Country *",
+            name: "country",
+            options: [
+                {
+                    id: 1,
+                    value: "nl",
+                    label: "The Netherlands"
+                },
+                {
+                    id: 2,
+                    value: "dk",
+                    label: "Denmark"
+                },
+                {
+                    id: 3,
+                    value: "se",
+                    label: "Sweden"
+                }
+            ],
+            validate: value => {
+                return new FieldError(value).isRequired().errors;
+            }
+        }
+    },
 
-  {
-    type: "input-text",
-    className: "full-width",
-    props: {
-      label: "What would you like to contact us about? *",
-      name: "about",
-      validate: value =>
-        new FieldError(value)
-          .isLength({
-            min: 2,
-            max: 200
-          })
-          .isAlpha()
-          .isRequired().errors
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "Phone",
+            name: "phone",
+            validate: value => new FieldError(value).isMobilePhone().errors
+        }
+    },
+
+    {
+        type: "input-text",
+        className: "half-width",
+        props: {
+            label: "E-mail *",
+            name: "email",
+            validate: value =>
+                new FieldError(value).isEmail().isRequired().errors
+        }
+    },
+
+    {
+        type: "input-text",
+        className: "full-width",
+        props: {
+            label: "What would you like to contact us about? *",
+            name: "about",
+            validate: value =>
+                new FieldError(value)
+                    .isLength({
+                        min: 2,
+                        max: 200
+                    })
+                    .isAlpha()
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-button",
+        props: {
+            buttonLabel: "Contact"
+        }
     }
-  },
-  {
-    type: "input-button",
-    props: {
-      buttonLabel: "Contact"
-    }
-  }
 ];
 export default {
-  components: {
-    FormComponent
-  },
-  data: () => {
-    return {
-      lambdaUrl: process.env.lambdaUrl,
-      inputs
-    };
-  },
-  async asyncData() {
-    let content;
-    try {
-      let req = await axios.get("/content/en/contact/contact-questions.json");
-      content = req.data.body;
-    } catch (e) {
-      console.log(e);
-      content = false;
+    components: {
+        FormComponent
+    },
+    data: () => {
+        return {
+            lambdaUrl: process.env.lambdaUrl,
+            inputs
+        };
+    },
+    async asyncData() {
+        let content;
+        try {
+            let req = await axios.get(
+                "/content/en/contact/contact-questions.json"
+            );
+            content = req.data.body;
+        } catch (e) {
+            console.log(e);
+            content = false;
+        }
+        return {
+            content: content ? content : null
+        };
     }
-    return {
-      content: content ? content : null
-    };
-  }
 };
 </script><style lang="scss">
 .contact {
-  position: relative;
-  &__header {
-    padding: $base-vertical-rithm * 10;
-    @include breakpoint("ipad_portrait") {
-      padding: $base-vertical-rithm * 8;
-    }
-    h1 {
-      margin: $base-vertical-rithm * 10;
-      margin-bottom: $base-vertical-rithm * 2;
-      width: 30%;
-      color: $color-purple;
-      font-weight: bold;
-      font-size: 60px;
-      line-height: 1.25em;
-      display: inline-block;
-      @include breakpoint("ipad_portrait") {
-        margin-left: 0;
-        font-size: 32px;
-        line-height: 40px;
-      }
-    }
-    &-image {
-      width: 55%;
-      display: inline-block;
-    }
-  }
-  &__quicklink {
-    position: absolute;
-    margin: $base-vertical-rithm * 10;
-    font-weight: bold;
-    font-size: 18px;
-    color: black;
-    span:after {
-      bottom: -5px;
-    }
-    @include breakpoint("ipad_portrait") {
-      position: relative;
-      margin: 0;
-    }
-  }
-  &__content {
-    width: 50%;
-    margin-left: 40%;
-    @include breakpoint("ipad_portrait") {
-      width: 80%;
-      margin: $base-vertical-rithm * 10 auto;
-    }
-    h4 {
-      font-weight: bold;
-      color: $color-purple;
-    }
-  }
-  &__form {
-    margin-top: $base-vertical-rithm * 10;
-    width: 70%;
-    margin-left: 15%;
     position: relative;
-    @include breakpoint("ipad_portrait") {
-      width: 80%;
-      margin: $base-vertical-rithm * 10 auto;
+    &__header {
+        padding: $base-vertical-rithm * 10;
+        @include breakpoint("ipad_portrait") {
+            padding: $base-vertical-rithm * 8;
+        }
+        h1 {
+            margin: $base-vertical-rithm * 10;
+            margin-bottom: $base-vertical-rithm * 2;
+            width: 30%;
+            color: $color-purple;
+            font-weight: bold;
+            font-size: 60px;
+            line-height: 1.25em;
+            display: inline-block;
+            @include breakpoint("ipad_portrait") {
+                margin-left: 0;
+                font-size: 32px;
+                line-height: 40px;
+            }
+        }
+        &-image {
+            width: 55%;
+            display: inline-block;
+        }
     }
+    &__quicklink {
+        position: absolute;
+        margin: $base-vertical-rithm * 10;
+        font-weight: bold;
+        font-size: 18px;
+        color: black;
+        span:after {
+            bottom: -5px;
+        }
+        @include breakpoint("ipad_portrait") {
+            position: relative;
+            margin: 0;
+        }
+    }
+    &__content {
+        width: 50%;
+        margin-left: 40%;
+        @include breakpoint("ipad_portrait") {
+            width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+        }
+        h4 {
+            font-weight: bold;
+            color: $color-purple;
+        }
+    }
+    &__form {
+        margin-top: $base-vertical-rithm * 10;
+        width: 70%;
+        margin-left: 15%;
+        position: relative;
+        @include breakpoint("ipad_portrait") {
+            width: 80%;
+            margin: $base-vertical-rithm * 10 auto;
+        }
 
-    p,
-    h1 {
-      margin-left: 50px;
-      color: $color-purple;
-      @include breakpoint("ipad_portrait") {
-        margin: 0;
-      }
+        p,
+        h1 {
+            margin-left: 50px;
+            color: $color-purple;
+            @include breakpoint("ipad_portrait") {
+                margin: 0;
+            }
+        }
+        h1 {
+            font-weight: bold;
+            font-size: 36px;
+            width: 40%;
+            line-height: 36px;
+            @include breakpoint("ipad_portrait") {
+                width: 100%;
+                font-size: 32px;
+                line-height: 40px;
+            }
+        }
+        p {
+            margin-top: $base-vertical-rithm * 10;
+            font-weight: bold;
+            font-size: 24px;
+        }
     }
-    h1 {
-      font-weight: bold;
-      font-size: 36px;
-      width: 40%;
-      line-height: 36px;
-      @include breakpoint("ipad_portrait") {
-        width: 100%;
-        font-size: 32px;
-        line-height: 40px;
-      }
+    .contact__form {
+        position: relative;
     }
-    p {
-      margin-top: $base-vertical-rithm * 10;
-      font-weight: bold;
-      font-size: 24px;
-    }
-  }
-  .contact__form {
-    position: relative;
-  }
 }
 </style>
