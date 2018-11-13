@@ -44,91 +44,91 @@
 
 <script>
 export default {
-    computed: {
-        date() {
-            return "2018";
-        }
+  computed: {
+    date() {
+      return "2018";
     }
+  }
 };
 </script>
 
 
 <style lang="scss">
 .footer {
-    background: $color-purple;
-    margin: 0px #{-$base-margin} #{-$base-margin};
+  background: $color-purple;
+  margin: 0px #{-$base-margin} #{-$base-margin};
+  color: $color-white;
+  font-family: $fontWorkSans;
+  letter-spacing: 0.5px;
+  a {
     color: $color-white;
-    font-family: $fontWorkSans;
-    letter-spacing: 0.5px;
-    a {
-        color: $color-white;
+  }
+  &__Main {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-left: 10 * $base-vertical-rithm;
+    padding-right: 10 * $base-vertical-rithm;
+    @media (max-width: 800px) {
+      display: block;
     }
-    &__Main {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        padding-left: 10 * $base-vertical-rithm;
-        padding-right: 10 * $base-vertical-rithm;
-        @media (max-width: 800px) {
-            display: block;
-        }
-        .container {
-            padding: 20px;
-            margin: 0px;
+    .container {
+      padding: 20px;
+      margin: 0px;
 
-            p {
-                margin: 0px;
-            }
-            a {
-                display: block;
-            }
-            a img {
-                height: 20px;
-                width: 20px;
-                @media (max-width: 800px) {
-                    height: 30px;
-                    width: 30px;
-                    margin: 2%;
-                }
-            }
-            @media (max-width: 800px) {
-                width: calc(50% -10px);
-                padding: 20px 0px;
-                display: inline-block;
-                margin: 5px;
-                vertical-align: top;
-            }
-            &:first-child {
-                padding-left: 0px;
-            }
-            &:last-child {
-                padding-right: 0px;
-                @media (max-width: 800px) {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                }
-            }
-        }
-    }
-    &__Links {
-        width: 10%;
+      p {
+        margin: 0px;
+      }
+      a {
+        display: block;
+      }
+      a img {
+        height: 20px;
+        width: 20px;
         @media (max-width: 800px) {
-            width: 45%;
+          height: 30px;
+          width: 30px;
+          margin: 2%;
         }
+      }
+      @media (max-width: 800px) {
+        width: calc(50% -10px);
+        padding: 20px 0px;
+        display: inline-block;
+        margin: 5px;
+        vertical-align: top;
+      }
+      &:first-child {
+        padding-left: 0px;
+      }
+      &:last-child {
+        padding-right: 0px;
+        @media (max-width: 800px) {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
     }
+  }
+  &__Links {
+    width: 10%;
+    @media (max-width: 800px) {
+      width: 45%;
+    }
+  }
 
-    &__Adress {
-        width: 20%;
-        @media (max-width: 800px) {
-            width: 100%;
-        }
+  &__Adress {
+    width: 20%;
+    @media (max-width: 800px) {
+      width: 100%;
     }
-    &__Info {
-        width: 20%;
-        @media (max-width: 800px) {
-            width: 100%;
-        }
+  }
+  &__Info {
+    width: 20%;
+    @media (max-width: 800px) {
+      width: 100%;
     }
+  }
 }
 </style>
