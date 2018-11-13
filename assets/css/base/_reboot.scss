@@ -60,6 +60,7 @@ section {
 body {
   padding: 0; // 1
   margin: 0px;
+  overflow-x: hidden;
   font-family: $font-family-base;
   font-size: $font-size-base;
   font-weight: $font-weight-base;

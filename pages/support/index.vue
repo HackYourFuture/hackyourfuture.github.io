@@ -117,6 +117,9 @@ export default {
     &__companies {
         margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
         margin-bottom: $base-vertical-rithm * 5;
+        @include breakpoint("mobile_portrait") {
+            margin-bottom: $base-vertical-rithm * 1;
+        }
         h3 {
             font-size: 24px;
             color: $color-purple;
@@ -126,7 +129,10 @@ export default {
             margin-top: $base-vertical-rithm * 5;
             display: flex;
             justify-content: space-between;
-            position: relative;
+            @include breakpoint("mobile_portrait") {
+                flex-wrap: wrap;
+                margin-top: 0;
+            }
             img {
                 display: flex;
                 font-weight: bold;
@@ -134,6 +140,10 @@ export default {
                 width: calc(15% -5px);
                 height: 150px;
                 margin: 15px;
+                @include breakpoint("mobile_portrait") {
+                    width: calc(45% - 5px);
+                    margin: 5px;
+                }
             }
         }
     }
