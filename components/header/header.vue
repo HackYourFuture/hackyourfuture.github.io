@@ -46,7 +46,6 @@ export default {
     width: 100vw;
     background: white;
     z-index: 10;
-    background: yellow;
     top: 0;
     left: 0;
     @include breakpoint("mobile_landscape") {
