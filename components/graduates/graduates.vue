@@ -41,30 +41,34 @@ export default {
 <style lang="scss">
 .graduates {
     margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
-    @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 5 $base-vertical-rithm * 2;
+    @include breakpoint("mobile_portrait") {
+        margin: 0;
     }
     h1 {
         font-size: 42px;
         font-weight: bold;
         color: $color-purple;
-        @include breakpoint("mobile_landscape") {
+        @include breakpoint("mobile_portrait") {
             font-size: 24px;
             line-height: 24px;
+            text-align: center;
         }
     }
     &__items {
         margin: 25px -25px;
         overflow-x: scroll;
-        @include breakpoint("mobile_landscape") {
+        @include breakpoint("mobile_portrait") {
+            width: 95%;
+            margin: 0 auto;
             overflow-x: none;
         }
         &-inner {
             width: max-content;
             height: 460px;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
+            @include breakpoint("mobile_portrait") {
                 height: auto;
+                width: 85%;
+                margin: 0 auto;
             }
         }
     }
@@ -75,6 +79,10 @@ export default {
         width: 350px;
         margin: 25px;
         display: inline-block;
+        @include breakpoint("mobile_landscape") {
+            margin: 5px;
+            width: 275px;
+        }
 
         h3,
         p {
