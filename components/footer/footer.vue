@@ -14,7 +14,7 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
       <div class="footer__Adress container">
-        <p>Stichting Hack Your Future</p>
+        <p>Stichting HackYourFuture</p>
         <p>Herengracht 504</p>
         <p>1017 CB Amsterdam</p>
         <a href="mailto:info@hackyourfuture.net">info@hackyourfuture.net</a>
@@ -44,109 +44,99 @@
 
 <script>
 export default {
-    computed: {
-        date() {
-            return "2018";
-        }
+  computed: {
+    date() {
+      return "2018";
     }
+  }
 };
 </script>
 
 <style lang="scss">
 .footer {
-    background: $color-purple;
-    margin: 0px;
+  background: $color-purple;
+  margin: 0px;
+  color: $color-white;
+  font-family: $fontWorkSans;
+  letter-spacing: 0.5px;
+  a {
     color: $color-white;
-    font-family: $fontWorkSans;
-    letter-spacing: 0.5px;
-    a {
-        color: $color-white;
+  }
+  &__Main {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding-left: 1 * $base-vertical-rithm;
+    padding-right: 1 * $base-vertical-rithm;
+    width: 90%;
+    margin: 0 auto;
+    @include breakpoint("ipad_portrait") {
+      flex-wrap: wrap;
+      padding-left: 1 * $base-vertical-rithm;
+      padding-right: 1 * $base-vertical-rithm;
     }
-    &__Main {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        padding-left: 1 * $base-vertical-rithm;
-        padding-right: 1 * $base-vertical-rithm;
-        width: 90%;
-        margin: 0 auto;
-        @include breakpoint("ipad_portrait") {
-            flex-wrap: wrap;
-            padding-left: 1 * $base-vertical-rithm;
-            padding-right: 1 * $base-vertical-rithm;
-        }
-        @include breakpoint("mobile_portrait") {
-            padding-left: 5 * $base-vertical-rithm;
-            padding-right: 5 * $base-vertical-rithm;
-        }
-        .container {
-            padding: 20px;
-            margin: 0px;
-            p {
-                margin: 0px;
-            }
-            a {
-                display: block;
-            }
-            a img {
-                height: 20px;
-                width: 20px;
-                @media (max-width: "mobile-portrait") {
-                    height: 30px;
-                    width: 30px;
-                    margin: 2%;
-                }
-            }
-            @media (max-width: "mobile-portrait") {
-                width: calc(50% -10px);
-                padding: 20px 0px;
-                display: inline-block;
-                margin: 5px;
-                vertical-align: top;
-            }
-        }
+    @include breakpoint("mobile_portrait") {
+      padding-left: 5 * $base-vertical-rithm;
+      padding-right: 5 * $base-vertical-rithm;
     }
-    &__Links {
-        width: auto;
-        @include breakpoint("ipad_portrait") {
-            width: 25%;
-        }
-        @include breakpoint("mobile_portrait") {
-            width: 50%;
-        }
+    .container {
+      padding: 20px;
+      margin: 0px;
+      p {
+        margin: 0px;
+      }
+      a {
+        display: block;
+        height: 35px;
+        width: 35px;
+      }
+      @media (max-width: "mobile-portrait") {
+        width: calc(50% -10px);
+        padding: 20px 0px;
+        display: inline-block;
+        margin: 5px;
+        vertical-align: top;
+      }
     }
-    &__Adress {
-        width: auto;
-        @include breakpoint("ipad_portrait") {
-            width: 50%;
-        }
-        @include breakpoint("mobile_portrait") {
-            width: 100%;
-        }
+  }
+  &__Links {
+    width: auto;
+    @include breakpoint("ipad_portrait") {
+      width: 25%;
     }
-    &__Info {
-        width: 20%;
-        @include breakpoint("ipad_portrait") {
-            width: 70%;
-        }
-        @include breakpoint("mobile_portrait") {
-            width: 100%;
-        }
+    @include breakpoint("mobile_portrait") {
+      width: 50%;
     }
-    &__Social {
-        width: auto;
-        @include breakpoint("ipad_portrait") {
-            width: 30%;
-            justify-content: space-evenly;
-            justify-items: baseline;
-            display: flex;
-        }
-        @include breakpoint("mobile_portrait") {
-            width: 100%;
-            justify-content: space-evenly;
-            justify-items: baseline;
-            display: flex;
-        }
+  }
+  &__Adress {
+    width: auto;
+    @include breakpoint("ipad_portrait") {
+      width: 50%;
     }
+    @include breakpoint("mobile_portrait") {
+      width: 100%;
+    }
+  }
+  &__Info {
+    width: 20%;
+    @include breakpoint("ipad_portrait") {
+      width: 65%;
+    }
+    @include breakpoint("mobile_portrait") {
+      width: 100%;
+    }
+  }
+  &__Social {
+    width: auto;
+    @include breakpoint("ipad_portrait") {
+      width: 35%;
+      justify-content: space-evenly;
+      justify-items: baseline;
+      display: flex;
+    }
+    @include breakpoint("mobile_portrait") {
+      width: 100%;
+    }
+  }
 }
 </style>

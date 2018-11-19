@@ -10,7 +10,7 @@ We’re looking for people who:
 - Are able to study for at least 25 hours per week
 - Are able to attend our in-person class every Sunday afternoon, plus occasional masterclasses during the week  
 
-Also:    
+### Also:    
   
 - We accept students living all over the Netherlands and Beligum, and most parts of Denmark and Sweden.
 - We cover the cost of train tickets for travel   
