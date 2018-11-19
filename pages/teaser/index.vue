@@ -22,269 +22,265 @@ import FormComponent from "~/components/form/form";
 import FieldError from "~/components/form/helpers/fieldError";
 
 const inputs = [
-    {
-        type: "input-text",
-        className: "half-width",
-        props: {
-            label: "First Name *",
-            name: "firstName",
-            validate: value =>
-                new FieldError(value)
-                    .isLength({ min: 2, max: 100 })
-                    .isAlpha()
-                    .isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "half-width",
-        props: {
-            label: "Last Name *",
-            name: "lastName",
-            validate: value =>
-                new FieldError(value)
-                    .isLength({ min: 2, max: 100 })
-                    .isAlpha()
-                    .isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "half-width",
-        props: {
-            label: "E-mail *",
-            name: "email",
-            validate: value =>
-                new FieldError(value).isEmail().isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "half-width",
-        props: {
-            label: "Phone *",
-            name: "phone",
-            validate: value =>
-                new FieldError(value).isMobilePhone().isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "full-width",
-        props: {
-            label: "Educational Background *",
-            name: "education",
-            validate: value =>
-                new FieldError(value)
-                    .isLength({ min: 2, max: 100 })
-                    .isAlpha()
-                    .isRequired().errors
-        }
-    },
-    {
-        type: "input-radio",
-        className: "full-width",
-        props: {
-            label: "Do you have programming experience? *",
-            name: "experience",
-            options: [
-                { label: "yes", value: "yes" },
-                { label: "no", value: "no" }
-            ],
-            validate: value => new FieldError(value).isRequired().errors
-        }
-    },
-    {
-        type: "input-radio",
-        className: "full-width",
-        props: {
-            label: "Do you have a computer? *",
-            name: "computer",
-            options: [
-                { label: "yes", value: "yes" },
-                { label: "no", value: "no" }
-            ],
-            validate: value => new FieldError(value).isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "full-width",
-        props: {
-            label: "How did you hear about us? *",
-            name: "hear",
-            validate: value =>
-                new FieldError(value)
-                    .isLength({ min: 2, max: 200 })
-                    .isAlpha()
-                    .isRequired().errors
-        }
-    },
-    {
-        type: "input-text",
-        className: "full-width",
-        props: {
-            label: "Something else you would like to notify us about?",
-            name: "note",
-            validate: value =>
-                new FieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
-                    .errors
-        }
-    },
-    {
-        type: "input-button",
-        props: {
-            buttonLabel: "Apply"
-        }
+  {
+    type: "input-text",
+    className: "half-width",
+    props: {
+      label: "First Name *",
+      name: "firstName",
+      validate: value =>
+        new FieldError(value)
+          .isLength({ min: 2, max: 100 })
+          .isAlpha()
+          .isRequired().errors
     }
+  },
+  {
+    type: "input-text",
+    className: "half-width",
+    props: {
+      label: "Last Name *",
+      name: "lastName",
+      validate: value =>
+        new FieldError(value)
+          .isLength({ min: 2, max: 100 })
+          .isAlpha()
+          .isRequired().errors
+    }
+  },
+  {
+    type: "input-text",
+    className: "half-width",
+    props: {
+      label: "E-mail *",
+      name: "email",
+      validate: value => new FieldError(value).isEmail().isRequired().errors
+    }
+  },
+  {
+    type: "input-text",
+    className: "half-width",
+    props: {
+      label: "Phone *",
+      name: "phone",
+      validate: value =>
+        new FieldError(value).isMobilePhone().isRequired().errors
+    }
+  },
+  {
+    type: "input-text",
+    className: "full-width",
+    props: {
+      label: "Educational Background *",
+      name: "education",
+      validate: value =>
+        new FieldError(value)
+          .isLength({ min: 2, max: 100 })
+          .isAlpha()
+          .isRequired().errors
+    }
+  },
+  {
+    type: "input-radio",
+    className: "full-width",
+    props: {
+      label: "Do you have programming experience? *",
+      name: "experience",
+      options: [{ label: "yes", value: "yes" }, { label: "no", value: "no" }],
+      validate: value => new FieldError(value).isRequired().errors
+    }
+  },
+  {
+    type: "input-radio",
+    className: "full-width",
+    props: {
+      label: "Do you have a computer? *",
+      name: "computer",
+      options: [{ label: "yes", value: "yes" }, { label: "no", value: "no" }],
+      validate: value => new FieldError(value).isRequired().errors
+    }
+  },
+  {
+    type: "input-text",
+    className: "full-width",
+    props: {
+      label: "How did you hear about us? *",
+      name: "hear",
+      validate: value =>
+        new FieldError(value)
+          .isLength({ min: 2, max: 200 })
+          .isAlpha()
+          .isRequired().errors
+    }
+  },
+  {
+    type: "input-text",
+    className: "full-width",
+    props: {
+      label: "Something else you would like to notify us about?",
+      name: "note",
+      validate: value =>
+        new FieldError(value).isLength({ min: 0, max: 200 }).isAlpha().errors
+    }
+  },
+  {
+    type: "input-button",
+    props: {
+      buttonLabel: "Apply"
+    }
+  }
 ];
 
 export default {
-    components: {
-        FormComponent
-    },
-    data: () => {
-        return {
-            lambdaUrl: process.env.lambdaUrl,
-            inputs
-        };
-    },
-    async asyncData() {
-        let teaser_dates;
-        let teaser_about;
-        try {
-            let req = await axios.get("/content/en/teaser/teaser-dates.json");
-            let req1 = await axios.get("/content/en/teaser/teaser-about.json");
-            teaser_dates = req.data.body;
-            teaser_about = req1.data.body;
-        } catch (e) {
-            console.log(e);
-            teaser_dates = false;
-            teaser_about = false;
-        }
-        return {
-            teaser_dates: teaser_dates ? teaser_dates : null,
-            teaser_about: teaser_about ? teaser_about : null
-        };
+  components: {
+    FormComponent
+  },
+  data: () => {
+    return {
+      lambdaUrl: process.env.lambdaUrl,
+      inputs
+    };
+  },
+  async asyncData() {
+    let teaser_dates;
+    let teaser_about;
+    try {
+      let req = await axios.get("/content/en/teaser/teaser-dates.json");
+      let req1 = await axios.get("/content/en/teaser/teaser-about.json");
+      teaser_dates = req.data.body;
+      teaser_about = req1.data.body;
+    } catch (e) {
+      console.log(e);
+      teaser_dates = false;
+      teaser_about = false;
     }
+    return {
+      teaser_dates: teaser_dates ? teaser_dates : null,
+      teaser_about: teaser_about ? teaser_about : null
+    };
+  }
 };
 </script>
 
 <style lang="scss">
 .teaserPage {
-    &__container {
-        margin: 0 $base-vertical-rithm * 10;
-        & > div {
-            display: inline-block;
-            width: calc(50% - 100px);
-            vertical-align: top;
-            margin: 50px;
-        }
+  &__container {
+    margin: 0 $base-vertical-rithm * 10;
+    & > div {
+      display: inline-block;
+      width: calc(50% - 100px);
+      vertical-align: top;
+      margin: 50px;
     }
-    &__header {
-        padding: $base-vertical-rithm * 10;
-        @include breakpoint("mobile_landscape") {
-            padding: 0;
-        }
-        h1 {
-            margin: $base-vertical-rithm * 10;
-            margin-bottom: $base-vertical-rithm * 2;
-            width: 20%;
-            color: $color-purple;
-            font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
-            display: inline-block;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
-                font-size: 24px;
-                line-height: 24px;
-                margin: $base-vertical-rithm * 5;
-            }
-        }
-        &-image {
-            width: 65%;
-            display: inline-block;
-            vertical-align: top;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
-            }
-        }
-        &-links a {
-            font-size: 18px;
-        }
-        &-dates {
-            margin: $base-vertical-rithm * 15;
-            width: 90%;
-            display: inline-block;
-            vertical-align: top;
-            @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 5;
-            }
-            div {
-                display: inline-block;
-                width: calc(25% - 20px);
-                vertical-align: top;
-                @include breakpoint("mobile_landscape") {
-                    width: calc(50% - 10px);
-                    margin: $base-vertical-rithm * 5 auto;
-                }
-            }
-            h4 {
-                font-size: 18px;
-                color: $color-purple;
-                font-weight: bold;
-            }
-        }
-        &-about {
-            width: 90%;
-            margin: 0 auto;
-            @include breakpoint("mobile_landscape") {
-                width: 80%;
-                margin: 0 auto;
-            }
-            h2 {
-                color: $color-purple;
-                font-weight: bold;
-                font-size: 28px;
-                line-height: 1;
-                margin-bottom: $base-vertical-rithm * 5;
-            }
-        }
+  }
+  &__header {
+    padding: $base-vertical-rithm * 10;
+    @include breakpoint("mobile_landscape") {
+      padding: 0;
     }
-    &__form {
-        position: relative;
-        width: 75%;
+    h1 {
+      margin: $base-vertical-rithm * 10;
+      margin-bottom: $base-vertical-rithm * 2;
+      width: 20%;
+      color: $color-purple;
+      font-weight: bold;
+      font-size: 52px;
+      line-height: 60px;
+      display: inline-block;
+      @include breakpoint("mobile_landscape") {
+        width: 100%;
+        font-size: 32px;
+        line-height: 40px;
+        margin: $base-vertical-rithm * 5;
+        margin-top: $base-vertical-rithm * 10;
+      }
+    }
+    &-image {
+      width: 65%;
+      display: inline-block;
+      vertical-align: top;
+      @include breakpoint("mobile_landscape") {
+        width: 100%;
+      }
+    }
+    &-links a {
+      font-size: 18px;
+    }
+    &-dates {
+      margin: $base-vertical-rithm * 15;
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      vertical-align: top;
+      align-content: space-between;
+      @include breakpoint("mobile_landscape") {
         margin: 0 auto;
-        padding: $base-vertical-rithm * 15;
+      }
+      div {
+        display: inline-block;
+        width: calc(25% - 20px);
+        vertical-align: top;
         @include breakpoint("mobile_landscape") {
-            width: 100%;
-            padding: $base-vertical-rithm * 5;
-            margin: 0;
+          width: calc(50% - 10px);
+          margin: $base-vertical-rithm * 5 auto 0;
         }
-        p,
-        h1 {
-            margin-left: 50px;
-            color: $color-purple;
-        }
-        h1 {
-            font-weight: bold;
-            font-size: 30px;
-            width: 60%;
-            line-height: 36px;
-        }
-        h2 {
-            font-weight: bold;
-            color: $color-purple;
-            font-size: 36px;
-            width: 60%;
-            line-height: 36px;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
-                font-size: 32px;
-                line-height: 40px;
-            }
-        }
+      }
+      h4 {
+        font-size: 18px;
+        color: $color-purple;
+        font-weight: bold;
+      }
     }
+    &-about {
+      width: 90%;
+      margin: 0 auto;
+      @include breakpoint("mobile_landscape") {
+        width: 80%;
+        margin: 0 auto;
+      }
+      h2 {
+        color: $color-purple;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 1;
+        margin-bottom: $base-vertical-rithm * 5;
+      }
+    }
+  }
+  &__form {
+    position: relative;
+    width: 75%;
+    margin: 0 auto;
+    padding: $base-vertical-rithm * 15;
+    @include breakpoint("mobile_landscape") {
+      width: 100%;
+      padding: $base-vertical-rithm * 2;
+      margin: 0;
+    }
+    p,
+    h1 {
+      margin-left: 50px;
+      color: $color-purple;
+    }
+    h1 {
+      font-weight: bold;
+      font-size: 30px;
+      width: 60%;
+      line-height: 36px;
+    }
+    h2 {
+      font-weight: bold;
+      color: $color-purple;
+      font-size: 36px;
+      width: 60%;
+      line-height: 36px;
+      @include breakpoint("mobile_landscape") {
+        line-height: 40px;
+        width: calc(100% - 60px);
+        margin: 30px;
+        font-size: 32px;
+      }
+    }
+  }
 }
 </style>

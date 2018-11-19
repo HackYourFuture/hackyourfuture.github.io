@@ -1,0 +1,21 @@
+h1 {
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: bold;
+  color: $color-purple;
+  @include breakpoint("mobile_landscape") {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: bold;
+  }
+  @include breakpoint("mobile_portrait") {
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+p {
+  @include breakpoint("mobile_landscape") {
+    width: 100%;
+  }
+}
