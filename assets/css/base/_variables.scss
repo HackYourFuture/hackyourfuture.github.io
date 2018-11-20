@@ -1,37 +1,35 @@
 /* Fonts
 --------------------------------------------------------------*/
-$fontArial: Arial, sans-serif;
-$fontHelvetica: "Helvetica Neue", Helvetica, $fontArial;
-$fontHelveticaBold: "Helvetica Neue Bold", $fontHelvetica;
 
-$fontWorkSans: "Work Sans", sans-serif;
-$fontSpaceMono: "Space Mono", monospace;
-
+$fontArial: Arial,
+sans-serif;
+$fontHelvetica: "Helvetica Neue",
+Helvetica,
+$fontArial;
+$fontHelveticaBold: "Helvetica Neue Bold",
+$fontHelvetica;
+$fontWorkSans: "Work Sans",
+sans-serif;
+$fontSpaceMono: "Space Mono",
+monospace;
 /* Sizings */
 
 $base-vertical-rithm: 5px;
 $base-margin: 2 * $base-vertical-rithm;
-
 $font-family-base: $fontWorkSans;
 $font-size-base: 18px !default;
 $font-weight-base: normal;
 $line-height-base: 5 * $base-vertical-rithm !default;
-
 $body-bg: white !default;
 $body-color: black !default;
-
 $dt-font-weight: bold !default;
-
-$color-grey: rgba(244,244,244,1);
-$color-purple: rgba(41,58,125,1);
-$color-white: rgba(255,255,255,1);
-
+$color-grey: rgba(244, 244, 244, 1);
+$color-purple: rgba(41, 58, 125, 1);
+$color-white: rgba(255, 255, 255, 1);
 $link-color: $color-purple !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 30%) !default;
 $link-hover-decoration: none !default;
-
 $table-cell-padding: .75rem !default;
 $text-muted: #A8A8A8 !default;
-
-$button-size: $line-height-base + 1px;
+$button-size: $line-height-base+1px;
