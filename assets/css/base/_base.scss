@@ -1,8 +1,14 @@
-h1 {
-  font-size: 42px;
-  line-height: 50px;
+h1,
+h2,
+h3 {
   font-weight: bold;
   color: $color-purple;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: normal;
   @include breakpoint("mobile_landscape") {
     font-size: 32px;
     line-height: 40px;
@@ -10,8 +16,33 @@ h1 {
   }
   @include breakpoint("mobile_portrait") {
     font-size: 24px;
-    line-height: 24px;
+    line-height: 24px; //font-weight: normal;
   }
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: .2px;
+  @include breakpoint("mobile_landscape") {
+    margin-top: 20px;
+    font-size: 1.7em;
+    font-weight: normal;
+  }
+}
+
+h3 {
+  font-size: 1.17em;
+  @include breakpoint("mobile_landscape") {
+    margin-top: 20px;
+    font-size: 1.5em;
+  }
+}
+
+h4 {
+  font-family: Space Mono, monospace;
+  line-height: 25px;
 }
 
 p {

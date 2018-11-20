@@ -12,27 +12,27 @@
 </template>
 <style lang="scss">
 .headerNav {
-  a {
-    position: relative;
-    margin-right: $base-vertical-rithm * 8;
-    &:last-child {
-      margin-right: 0;
+    a {
+        position: relative;
+        margin-right: $base-vertical-rithm * 8;
+        &:last-child {
+            margin-right: 0;
+        }
+        text-transform: uppercase;
+        font-family: $fontWorkSans;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        &.nuxt-link-exact-active {
+            &:after {
+                content: "";
+                position: absolute;
+                height: 2px;
+                bottom: -$base-vertical-rithm;
+                left: -$base-vertical-rithm;
+                right: -$base-vertical-rithm;
+                background-color: $link-color;
+            }
+        }
     }
-    text-transform: uppercase;
-    font-family: $fontWorkSans;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    &.nuxt-link-exact-active {
-      &:after {
-        content: "";
-        position: absolute;
-        height: 2px;
-        bottom: -$base-vertical-rithm;
-        left: -$base-vertical-rithm;
-        right: -$base-vertical-rithm;
-        background-color: $link-color;
-      }
-    }
-  }
 }
 </style>

@@ -44,99 +44,99 @@
 
 <script>
 export default {
-  computed: {
-    date() {
-      return "2018";
+    computed: {
+        date() {
+            return "2018";
+        }
     }
-  }
 };
 </script>
 
 <style lang="scss">
 .footer {
-  background: $color-purple;
-  margin: 0px;
-  color: $color-white;
-  font-family: $fontWorkSans;
-  letter-spacing: 0.5px;
-  a {
+    background: $color-purple;
+    margin: 0px;
     color: $color-white;
-  }
-  &__Main {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    padding-left: 1 * $base-vertical-rithm;
-    padding-right: 1 * $base-vertical-rithm;
-    width: 90%;
-    margin: 0 auto;
-    @include breakpoint("ipad_portrait") {
-      flex-wrap: wrap;
-      padding-left: 1 * $base-vertical-rithm;
-      padding-right: 1 * $base-vertical-rithm;
+    font-family: $fontWorkSans;
+    letter-spacing: 0.5px;
+    a {
+        color: $color-white;
     }
-    @include breakpoint("mobile_portrait") {
-      padding-left: 5 * $base-vertical-rithm;
-      padding-right: 5 * $base-vertical-rithm;
+    &__Main {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        padding-left: 1 * $base-vertical-rithm;
+        padding-right: 1 * $base-vertical-rithm;
+        width: 90%;
+        margin: 0 auto;
+        @include breakpoint("ipad_portrait") {
+            flex-wrap: wrap;
+            padding-left: 1 * $base-vertical-rithm;
+            padding-right: 1 * $base-vertical-rithm;
+        }
+        @include breakpoint("mobile_portrait") {
+            padding-left: 5 * $base-vertical-rithm;
+            padding-right: 5 * $base-vertical-rithm;
+        }
+        .container {
+            padding: 20px;
+            margin: 0px;
+            p {
+                margin: 0px;
+            }
+            a {
+                display: block;
+                height: 35px;
+                width: 35px;
+            }
+            @media (max-width: "mobile-portrait") {
+                width: calc(50% -10px);
+                padding: 20px 0px;
+                display: inline-block;
+                margin: 5px;
+                vertical-align: top;
+            }
+        }
     }
-    .container {
-      padding: 20px;
-      margin: 0px;
-      p {
-        margin: 0px;
-      }
-      a {
-        display: block;
-        height: 35px;
-        width: 35px;
-      }
-      @media (max-width: "mobile-portrait") {
-        width: calc(50% -10px);
-        padding: 20px 0px;
-        display: inline-block;
-        margin: 5px;
-        vertical-align: top;
-      }
+    &__Links {
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 25%;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 50%;
+        }
     }
-  }
-  &__Links {
-    width: auto;
-    @include breakpoint("ipad_portrait") {
-      width: 25%;
+    &__Adress {
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 50%;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 100%;
+        }
     }
-    @include breakpoint("mobile_portrait") {
-      width: 50%;
+    &__Info {
+        width: 20%;
+        @include breakpoint("ipad_portrait") {
+            width: 65%;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 100%;
+        }
     }
-  }
-  &__Adress {
-    width: auto;
-    @include breakpoint("ipad_portrait") {
-      width: 50%;
+    &__Social {
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 35%;
+            justify-content: space-evenly;
+            justify-items: baseline;
+            display: flex;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 100%;
+        }
     }
-    @include breakpoint("mobile_portrait") {
-      width: 100%;
-    }
-  }
-  &__Info {
-    width: 20%;
-    @include breakpoint("ipad_portrait") {
-      width: 65%;
-    }
-    @include breakpoint("mobile_portrait") {
-      width: 100%;
-    }
-  }
-  &__Social {
-    width: auto;
-    @include breakpoint("ipad_portrait") {
-      width: 35%;
-      justify-content: space-evenly;
-      justify-items: baseline;
-      display: flex;
-    }
-    @include breakpoint("mobile_portrait") {
-      width: 100%;
-    }
-  }
 }
 </style>
