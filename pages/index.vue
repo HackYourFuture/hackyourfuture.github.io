@@ -20,7 +20,7 @@
         <div class="apply__container">
           <h1>Join our 6 month web development course</h1>
           <nuxt-link :to="'/apply'">
-            <span class="underline">apply</span>
+            <span class="underline">Apply</span>
           </nuxt-link>
         </div>
       </section>
@@ -159,21 +159,24 @@ export default {
         margin: 0 auto;
         padding-top: $base-vertical-rithm * 10;
         h1 {
-            font-size: 36px;
-            color: $color-purple;
-            width: 45%;
-            line-height: 50px;
+            width: 60%;
+            font-weight: normal;
             margin: $base-vertical-rithm * 10 0;
+            @include breakpoint("ipad_landscape") {
+                font-weight: bold;
+                width: 80%;
+                margin: $base-vertical-rithm * 5 0;
+            }
             @include breakpoint("mobile_landscape") {
                 width: 100%;
-                font-size: 24px;
-                line-height: 24px;
-                margin: $base-vertical-rithm * 5 0;
             }
         }
         p {
             width: 70%;
             margin: 0 auto;
+            @include breakpoint("ipad_landscape") {
+                width: 80%;
+            }
             @include breakpoint("mobile_landscape") {
                 width: 100%;
             }
@@ -183,7 +186,7 @@ export default {
         margin: $base-vertical-rithm * 10 0;
         a {
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 5 40px;
+                margin-bottom: 40px;
             }
         }
         &-player {
@@ -212,8 +215,13 @@ export default {
 
 .apply {
     margin: $base-vertical-rithm * 30 0;
+    display: block;
+    @include breakpoint("ipad_landscape") {
+        margin: $base-vertical-rithm * 10 0 0;
+        display: flex;
+    }
     @include breakpoint("mobile_landscape") {
-        margin: $base-vertical-rithm * 10 0;
+        display: block;
     }
     &__image {
         display: inline-block;
@@ -226,20 +234,22 @@ export default {
         }
     }
     &__container {
-        width: 44%;
+        width: 40%;
+        text-align: center;
         display: inline-block;
         vertical-align: middle;
+        @include breakpoint("ipad_landscape") {
+            margin: $base-vertical-rithm * 10 auto;
+            display: block;
+            width: 40%;
+        }
         @include breakpoint("mobile_landscape") {
-            margin: $base-vertical-rithm * 10 $base-vertical-rithm * 6;
-            width: 100%;
+            width: 75%;
         }
         h1 {
-            font-size: 36px;
-            color: $color-purple;
-            line-height: 50px;
+            font-weight: bold;
             @include breakpoint("mobile_landscape") {
-                font-size: 24px;
-                line-height: 24px;
+                width: 100%;
                 margin: $base-vertical-rithm * 5 0;
             }
         }
@@ -258,6 +268,10 @@ export default {
 
 .curiculum {
     margin: $base-vertical-rithm * 30 0;
+    @include breakpoint("ipad_landscape") {
+        margin: 0;
+        margin-top: $base-vertical-rithm * 10;
+    }
     @include breakpoint("mobile_landscape") {
         margin: 0;
     }
@@ -275,11 +289,7 @@ export default {
             margin-bottom: $base-vertical-rithm * 2;
             width: 75%;
             color: white;
-            font-size: 36px;
-            line-height: 50px;
             @include breakpoint("mobile_landscape") {
-                font-size: 24px;
-                line-height: 24px;
                 width: 100%;
                 margin: $base-vertical-rithm * 5;
             }
@@ -346,6 +356,9 @@ export default {
 
 .teaser {
     margin: $base-vertical-rithm * 30 $base-vertical-rithm * 10;
+    @include breakpoint("ipad_landscape") {
+        margin: $base-vertical-rithm * 10 0;
+    }
     @include breakpoint("mobile_landscape") {
         margin: $base-vertical-rithm * 15 0;
     }
@@ -354,20 +367,18 @@ export default {
         width: 45%;
         display: inline-block;
         margin: $base-vertical-rithm * 5;
+        @include breakpoint("ipad_landscape") {
+            margin-top: 0;
+        }
         @include breakpoint("mobile_landscape") {
             width: 80%;
             margin: $base-vertical-rithm * 10 auto;
             display: inherit;
         }
         h1 {
-            font-size: 36px;
-            color: $color-purple;
-            line-height: 50px;
             margin: $base-vertical-rithm * 10 0;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
-                font-size: 24px;
-                line-height: 24px;
+            @include breakpoint("ipad_landscape") {
+                margin-top: 0;
             }
         }
         a {
@@ -416,15 +427,15 @@ export default {
         }
     }
     h1 {
-        font-size: 36px;
-        color: $color-purple;
         width: 45%;
-        line-height: 50px;
         margin: $base-vertical-rithm * 10 0;
+        @include breakpoint("ipad_landscape") {
+            margin-top: 0;
+            width: 80%;
+        }
         @include breakpoint("mobile_landscape") {
             width: 100%;
-            font-size: 24px;
-            line-height: 24px;
+            margin: $base-vertical-rithm * 10 0;
         }
     }
 
@@ -432,6 +443,9 @@ export default {
         width: 50%;
         display: inline-block;
         vertical-align: bottom;
+        @include breakpoint("ipad_landscape") {
+            width: 45%;
+        }
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;

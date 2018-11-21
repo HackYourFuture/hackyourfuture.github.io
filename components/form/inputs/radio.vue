@@ -58,6 +58,9 @@ export default {
         white-space: nowrap;
         display: flex;
         align-items: baseline;
+        @include breakpoint("ipad_portrait") {
+            flex-wrap: wrap;
+        }
     }
 }
 </style>

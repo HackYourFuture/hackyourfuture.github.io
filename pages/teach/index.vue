@@ -18,7 +18,9 @@
             <span class="underline">chapter</span>
           </nuxt-link>
         </div>
-        <div v-html="what_we_teach"/>
+        <div class="teach__container what_teach">
+          <div v-html="what_we_teach"/>
+        </div>
       </div>
       <div class="teach__container who">
         <div v-html="who_are_our_teachers"/>
@@ -170,18 +172,21 @@ export default {
 .teach {
     &__header {
         padding: $base-vertical-rithm * 10;
+        display: flex;
         @include breakpoint("mobile_landscape") {
             padding: 0;
+            flex-wrap: wrap;
         }
         h1 {
             margin: $base-vertical-rithm * 15 $base-vertical-rithm * 10
                 $base-vertical-rithm * 2;
             width: 30%;
-            color: $color-purple;
-            font-weight: bold;
             font-size: 60px;
+            font-weight: bold;
             line-height: 1.25em;
-            display: inline-block;
+            @include breakpoint("ipad_landscape") {
+                margin: $base-vertical-rithm * 6;
+            }
             @include breakpoint("mobile_landscape") {
                 width: 100%;
                 margin: $base-vertical-rithm * 8;
@@ -191,7 +196,6 @@ export default {
         }
         &-image {
             width: 60%;
-            display: inline-block;
             vertical-align: top;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
@@ -206,93 +210,109 @@ export default {
         }
         h1 {
             margin-bottom: $base-vertical-rithm * 2;
-            color: $color-purple;
             font-weight: normal;
-            font-size: 42px;
-            line-height: 50px;
-            @include breakpoint("mobile_landscape") {
-                font-size: 24px;
-                line-height: 24px;
-            }
-        }
-        & > div {
-            display: inline-block;
-            width: calc(50% - 100px);
-            vertical-align: top;
-            margin: 50px;
-            @include breakpoint("mobile_landscape") {
-                width: calc(100% - 80px);
-                margin: 40px;
-            }
-            a {
-                color: $color-purple;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 40px;
-                margin-bottom: 40px;
-                display: block;
-                span:after {
-                    bottom: -5px;
-                }
-            }
-        }
-        &-image {
-            width: 55%;
-            display: inline-block;
-            vertical-align: top;
         }
         &.what {
             margin-left: 0%;
+            margin-bottom: $base-vertical-rithm * 10;
+            display: flex;
             .teach__container-image {
                 margin-left: 0;
+            }
+            @include breakpoint("mobile_landscape") {
+                margin-top: 0;
+                flex-wrap: wrap;
+            }
+        }
+        &.what_teach {
+            width: 60%;
+            margin: $base-vertical-rithm * 10;
+            @include breakpoint("ipad_portrait") {
+                margin-top: 0;
+            }
+            @include breakpoint("mobile_landscape") {
+                margin: $base-vertical-rithm * 10;
+                margin-bottom: $base-vertical-rithm * 5;
             }
         }
         &.who {
             margin-right: -100px;
+            display: flex;
+            & > div {
+                width: calc(50% - 100px);
+                margin: $base-vertical-rithm * 10;
+                @include breakpoint("ipad_portrait") {
+                    width: auto;
+                    margin-top: $base-vertical-rithm * 5;
+                    margin-bottom: $base-vertical-rithm * 5;
+                }
+            }
+            @include breakpoint("ipad_portrait") {
+                margin: 0;
+                flex-wrap: wrap;
+            }
             @include breakpoint("mobile_landscape") {
-                margin-right: 0;
+                margin: $base-vertical-rithm * 10 0;
+                margin-top: 0;
             }
             .teach__container-image {
-                margin-right: 0;
                 @include breakpoint("mobile_landscape") {
-                    width: 100%;
                     margin: 0;
                 }
             }
         }
         &.teach {
             margin-left: -50px;
-            @include breakpoint("mobile_landscape") {
+            display: flex;
+            & > div {
+                margin: $base-vertical-rithm * 10;
+                width: calc(50% - 100px);
+                @include breakpoint("ipad_portrait") {
+                    width: auto;
+                    margin-bottom: $base-vertical-rithm * 5;
+                }
+            }
+            @include breakpoint("ipad_portrait") {
+                flex-wrap: wrap;
                 margin-left: 0;
+                margin-right: 0;
             }
             .teach__container-image {
                 margin-left: 0;
                 @include breakpoint("mobile_landscape") {
                     width: 100%;
+                    margin: 0;
                 }
             }
         }
 
         .links {
-            margin-left: $base-vertical-rithm * 10;
+            margin: $base-vertical-rithm * 10;
             width: 20%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
-                width: 100%;
-                margin-bottom: 0;
-                margin-top: 0;
+                width: 90%;
+                display: flex;
+                margin: 0 auto;
+                justify-content: space-around;
             }
             a {
                 color: black;
+                line-height: 40px;
                 display: block;
-                margin-top: 40px;
                 font-weight: bold;
                 font-size: 18px;
+                margin: 30px;
                 .underline:after {
                     bottom: -5px;
                 }
-                &:nth-child(1) {
+                @include breakpoint("mobile_landscape") {
                     margin-top: 0;
+                    margin-bottom: 0;
+                }
+                @include breakpoint("mobile_portrait") {
+                    width: max-content;
+                    margin: 0 auto;
                 }
             }
         }
@@ -306,6 +326,7 @@ export default {
         @include breakpoint("mobile_landscape") {
             width: 100%;
             margin-left: 0;
+            padding: $base-vertical-rithm * 2;
         }
         h1 {
             margin-left: 50px;
@@ -315,8 +336,8 @@ export default {
             width: 40%;
             line-height: 36px;
             @include breakpoint("mobile_landscape") {
-                width: calc(100% - 80px);
-                margin: 40px;
+                width: calc(100% - 60px);
+                margin: 30px;
                 font-size: 32px;
                 line-height: 40px;
             }

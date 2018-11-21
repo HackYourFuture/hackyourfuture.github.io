@@ -14,7 +14,7 @@
         <nuxt-link :to="'/support/'">Hire</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
+        <nuxt-link :to="'/chapters/'">International</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/about/'">About</nuxt-link>
@@ -24,6 +24,9 @@
       </li>
       <li>
         <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
+      </li>
+      <li>
+        <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
       </li>
     </ul>
   </nav>
@@ -69,9 +72,11 @@ export default {
     z-index: 9999;
     background: white;
     border-right: 1px solid rgba(#111, 0.12);
-
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
+    @include breakpoint("mobile_landscape") {
+        overflow-y: scroll;
+    }
 
     &.toggled {
         transform: translateX(0);

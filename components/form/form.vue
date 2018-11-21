@@ -135,20 +135,21 @@ export default {
         border-bottom: 2px solid $color-purple;
         margin: 25px 50px;
         vertical-align: top;
-        @include breakpoint("ipad_portrait") {
+        @include breakpoint("mobile_portrait") {
             margin: 20px 20px;
         }
     }
     .half-width {
         width: calc(50% - 100px);
-        @include breakpoint("ipad_portrait") {
+        @include breakpoint("mobile_portrait") {
             width: calc(100% - 40px);
         }
     }
     .full-width {
         width: calc(100% - 100px);
-        @include breakpoint("ipad_portrait") {
+        @include breakpoint("mobile_portrait") {
             width: calc(100% - 40px);
+            padding-bottom: 15px;
         }
     }
 }
@@ -243,6 +244,9 @@ label {
     left: 5px;
     top: 10px;
     transition: 0.2s ease all;
+    @include breakpoint("ipad_portrait") {
+        font-size: 18px;
+    }
 }
 
 .input-textarea label {

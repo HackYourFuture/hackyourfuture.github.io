@@ -129,59 +129,5 @@ export default {
             }
         }
     }
-    &__team {
-        padding: $base-vertical-rithm * 20;
-        @include breakpoint("mobile_landscape") {
-            padding: $base-vertical-rithm * 10;
-        }
-        img {
-            width: 100%;
-            border-radius: 50%;
-            display: block;
-        }
-        h1 {
-            color: $color-purple;
-            font-family: $fontWorkSans;
-            font-size: 36px;
-        }
-        &-members {
-            margin-top: $base-vertical-rithm * 20;
-            @include breakpoint("mobile_landscape") {
-                margin-top: $base-vertical-rithm * 10;
-            }
-        }
-        &-member {
-            width: calc(15% - 50px);
-            margin-right: 50px;
-            display: inline-block;
-            text-align: center;
-            margin-bottom: 25px;
-            justify-content: center;
-            vertical-align: middle;
-            @include breakpoint("mobile_landscape") {
-                width: calc(45% - 20px);
-                margin: 10px 10px;
-            }
-            h3,
-            p,
-            a {
-                margin: 0;
-                color: $color-purple;
-                display: inherit;
-            }
-            a img {
-                width: 20px;
-                margin: auto;
-                border-radius: 0%;
-            }
-            h3 {
-                margin-top: $base-vertical-rithm * 4;
-                font-weight: bold;
-            }
-            &:last-child {
-                margin-right: 0px;
-            }
-        }
-    }
 }
 </style>

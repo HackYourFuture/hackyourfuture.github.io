@@ -14,7 +14,7 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
       <div class="footer__Adress container">
-        <p>Stichting Hack Your Future</p>
+        <p>Stichting HackYourFuture</p>
         <p>Herengracht 504</p>
         <p>1017 CB Amsterdam</p>
         <a href="mailto:info@hackyourfuture.net">info@hackyourfuture.net</a>
@@ -52,11 +52,10 @@ export default {
 };
 </script>
 
-
 <style lang="scss">
 .footer {
     background: $color-purple;
-    margin: 0px #{-$base-margin} #{-$base-margin};
+    margin: 0px;
     color: $color-white;
     font-family: $fontWorkSans;
     letter-spacing: 0.5px;
@@ -67,66 +66,75 @@ export default {
         display: flex;
         justify-content: space-between;
         position: relative;
-        padding-left: 10 * $base-vertical-rithm;
-        padding-right: 10 * $base-vertical-rithm;
-        @media (max-width: 800px) {
-            display: block;
+        padding-left: 1 * $base-vertical-rithm;
+        padding-right: 1 * $base-vertical-rithm;
+        width: 90%;
+        margin: 0 auto;
+        @include breakpoint("ipad_portrait") {
+            flex-wrap: wrap;
+            padding-left: 1 * $base-vertical-rithm;
+            padding-right: 1 * $base-vertical-rithm;
+        }
+        @include breakpoint("mobile_portrait") {
+            padding-left: 5 * $base-vertical-rithm;
+            padding-right: 5 * $base-vertical-rithm;
         }
         .container {
             padding: 20px;
             margin: 0px;
-
             p {
                 margin: 0px;
             }
             a {
                 display: block;
+                height: 35px;
+                width: 35px;
             }
-            a img {
-                height: 20px;
-                width: 20px;
-                @media (max-width: 800px) {
-                    height: 30px;
-                    width: 30px;
-                    margin: 2%;
-                }
-            }
-            @media (max-width: 800px) {
+            @media (max-width: "mobile-portrait") {
                 width: calc(50% -10px);
                 padding: 20px 0px;
                 display: inline-block;
                 margin: 5px;
                 vertical-align: top;
             }
-            &:first-child {
-                padding-left: 0px;
-            }
-            &:last-child {
-                padding-right: 0px;
-                @media (max-width: 800px) {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                }
-            }
         }
     }
     &__Links {
-        width: 10%;
-        @media (max-width: 800px) {
-            width: 45%;
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 25%;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 50%;
         }
     }
-
     &__Adress {
-        width: 20%;
-        @media (max-width: 800px) {
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 50%;
+        }
+        @include breakpoint("mobile_portrait") {
             width: 100%;
         }
     }
     &__Info {
         width: 20%;
-        @media (max-width: 800px) {
+        @include breakpoint("ipad_portrait") {
+            width: 65%;
+        }
+        @include breakpoint("mobile_portrait") {
+            width: 100%;
+        }
+    }
+    &__Social {
+        width: auto;
+        @include breakpoint("ipad_portrait") {
+            width: 35%;
+            justify-content: space-evenly;
+            justify-items: baseline;
+            display: flex;
+        }
+        @include breakpoint("mobile_portrait") {
             width: 100%;
         }
     }

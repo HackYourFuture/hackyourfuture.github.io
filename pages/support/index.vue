@@ -1,19 +1,15 @@
 <template>
   <div>
-    <Main class="support container">
+    <main class="support container">
       <div class="support__header">
         <div class="support__header-image">
           <img src="/gallery/19.jpg" alt="Student presenting his final project.">
         </div>
         <div class="support__header-content">
-          <nuxt-link :to="'/'">Hire
-            <br>
-            <span class="underline">Alumni</span>
-          </nuxt-link>
           <div v-html="hire_alumni"/>
         </div>
       </div>
-    </Main>
+    </main>
     <div class="support__companies">
       <h3>Where our students work</h3>
       <div class="support__companies-items">
@@ -56,40 +52,36 @@ export default {
 .support {
     &__header {
         padding: $base-vertical-rithm * 10;
+        display: flex;
         @include breakpoint("mobile_landscape") {
             padding: 0;
-        }
-        a {
-            color: $color-purple;
-            font-weight: bold;
-            font-size: 60px;
-            line-height: 1.25em;
-            span:after {
-                bottom: -5px;
-            }
-        }
-        span a {
-            font-size: 16px;
-            font-weight: normal;
-            line-height: 25px;
+            flex-wrap: wrap;
         }
         &-content {
-            display: inline-block;
-            width: 40%;
-            padding: $base-vertical-rithm * 10;
+            width: 60%;
+            margin: $base-vertical-rithm * 10 auto;
             @include breakpoint("mobile_landscape") {
-                width: 100%;
-                padding: $base-vertical-rithm * 8;
+                width: 80%;
+                margin: $base-vertical-rithm * 5 auto;
             }
-            & > div {
-                margin-top: $base-vertical-rithm * 5;
+            h1 {
+                font-weight: bold;
+                font-size: 60px;
+                line-height: 1.25em;
+                @include breakpoint("mobile_landscape") {
+                    width: 100%;
+                    font-size: 32px;
+                    line-height: 40px;
+                }
             }
         }
         &-image {
-            width: 60%;
-            display: inline-block;
+            width: 95%;
+            margin: 50px;
+            margin-left: -70px;
             vertical-align: top;
             @include breakpoint("mobile_landscape") {
+                margin: 0;
                 width: 100%;
             }
         }
@@ -117,6 +109,13 @@ export default {
     &__companies {
         margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
         margin-bottom: $base-vertical-rithm * 5;
+        @include breakpoint("mobile_landscape") {
+            margin-top: $base-vertical-rithm * 8;
+        }
+        @include breakpoint("mobile_portrait") {
+            margin-bottom: 0;
+            margin-top: $base-vertical-rithm * 10;
+        }
         h3 {
             font-size: 24px;
             color: $color-purple;
@@ -126,14 +125,24 @@ export default {
             margin-top: $base-vertical-rithm * 5;
             display: flex;
             justify-content: space-between;
-            position: relative;
+            @include breakpoint("mobile_portrait") {
+                flex-wrap: wrap;
+                margin-top: 0;
+            }
             img {
-                display: flex;
                 font-weight: bold;
                 color: $color-purple;
                 width: calc(15% -5px);
                 height: 150px;
                 margin: 15px;
+                @include breakpoint("mobile_landscape") {
+                    width: calc(15% - 5px);
+                    height: 100px;
+                }
+                @include breakpoint("mobile_portrait") {
+                    width: calc(45% - 5px);
+                    margin: 5px;
+                }
             }
         }
     }

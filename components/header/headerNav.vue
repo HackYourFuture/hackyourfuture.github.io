@@ -4,10 +4,10 @@
     <nuxt-link :to="'/apply/'">Apply</nuxt-link>
     <nuxt-link :to="'/teach/'">Teach</nuxt-link>
     <nuxt-link :to="'/support/'">Hire</nuxt-link>
-    <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
+    <nuxt-link :to="'/chapters/'">International</nuxt-link>
     <nuxt-link :to="'/about/'">About</nuxt-link>
     <nuxt-link :to="'/contact/'">Contact</nuxt-link>
-    <nuxt-link :to="'/teaser/'">Women Coding Teaser</nuxt-link>
+    <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
   </nav>
 </template>
 <style lang="scss">

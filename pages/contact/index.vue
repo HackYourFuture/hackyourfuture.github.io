@@ -10,7 +10,7 @@
         <span class="underline">contact</span>
       </nuxt-link>
       <div class="contact__content" v-html="content"/>
-      <div class="contact__form form">
+      <div id="contactForm" class="contact__form form">
         <h1>Reach us for any other questions</h1>
         <p>General Inquiries</p>
         <FormComponent :action="`${lambdaUrl}contact`" :inputs="inputs"/>
@@ -178,6 +178,8 @@ export default {
                 margin-left: 0;
                 font-size: 32px;
                 line-height: 40px;
+                width: 100%;
+                margin: 0;
             }
         }
         &-image {
@@ -200,8 +202,8 @@ export default {
         }
     }
     &__content {
-        width: 50%;
-        margin-left: 40%;
+        width: 60%;
+        margin-left: 30%;
         @include breakpoint("ipad_portrait") {
             width: 80%;
             margin: $base-vertical-rithm * 10 auto;

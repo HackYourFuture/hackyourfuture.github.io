@@ -6,8 +6,10 @@
         <div class="teaserPage__header-image">
           <img src="/gallery/21.jpg" alt="Group of women who get their first coding class.">
         </div>
-        <div class="teaserPage__header-dates" v-html="teaser_dates"/>
-        <div class="teaserPage__header-about" v-html="teaser_about"/>
+      </div>
+      <div class="teaserPage__content">
+        <div class="teaserPage__content-dates" v-html="teaser_dates"/>
+        <div class="teaserPage__content-about" v-html="teaser_about"/>
       </div>
       <div ref="teaserPage__form" class="teaserPage__form form">
         <h2>Apply for our next teaser day:</h2>
@@ -189,37 +191,41 @@ export default {
         h1 {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
-            width: 20%;
-            color: $color-purple;
+            width: 25%;
             font-weight: bold;
-            font-size: 52px;
-            line-height: 60px;
+            font-size: 60px;
+            line-height: 1.25em;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
-                font-size: 24px;
-                line-height: 24px;
+                font-size: 32px;
+                line-height: 40px;
                 margin: $base-vertical-rithm * 5;
+                margin-top: $base-vertical-rithm * 10;
             }
         }
         &-image {
-            width: 65%;
+            width: 60%;
             display: inline-block;
             vertical-align: top;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
             }
         }
+    }
+    &__content {
         &-links a {
             font-size: 18px;
         }
         &-dates {
             margin: $base-vertical-rithm * 15;
             width: 90%;
-            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
             vertical-align: top;
+            align-content: space-between;
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 5;
+                margin: 0 auto;
             }
             div {
                 display: inline-block;
@@ -227,7 +233,7 @@ export default {
                 vertical-align: top;
                 @include breakpoint("mobile_landscape") {
                     width: calc(50% - 10px);
-                    margin: $base-vertical-rithm * 5 auto;
+                    margin: $base-vertical-rithm * 5 auto 0;
                 }
             }
             h4 {
@@ -244,10 +250,6 @@ export default {
                 margin: 0 auto;
             }
             h2 {
-                color: $color-purple;
-                font-weight: bold;
-                font-size: 28px;
-                line-height: 1;
                 margin-bottom: $base-vertical-rithm * 5;
             }
         }
@@ -259,31 +261,11 @@ export default {
         padding: $base-vertical-rithm * 15;
         @include breakpoint("mobile_landscape") {
             width: 100%;
-            padding: $base-vertical-rithm * 5;
+            padding: $base-vertical-rithm * 2;
             margin: 0;
-        }
-        p,
-        h1 {
-            margin-left: 50px;
-            color: $color-purple;
-        }
-        h1 {
-            font-weight: bold;
-            font-size: 30px;
-            width: 60%;
-            line-height: 36px;
         }
         h2 {
             font-weight: bold;
-            color: $color-purple;
-            font-size: 36px;
-            width: 60%;
-            line-height: 36px;
-            @include breakpoint("mobile_landscape") {
-                width: 100%;
-                font-size: 32px;
-                line-height: 40px;
-            }
         }
     }
 }

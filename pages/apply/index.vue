@@ -1,18 +1,18 @@
 <template>
   <div>
-    <main class="apply container">
-      <div class="apply__header">
+    <main class="apply_page container">
+      <div class="apply_page__header">
         <h1>Join
           <br>Us!
         </h1>
-        <div class="apply__header-image">
+        <div class="apply_page__header-image">
           <img src="/gallery/11.jpg" alt="Group of students working in class.">
         </div>
-        <div class="apply__header-dates" v-html="dates"/>
+        <div class="apply_page__header-dates" v-html="dates"/>
       </div>
-      <div class="apply__content" v-html="content"/>
-      <div ref="apply__form" class="apply__form form">
-        <h2>apply for our next class:</h2>
+      <div class="apply_page__content" v-html="content"/>
+      <div ref="apply_page__form" class="apply_page__form form">
+        <h3>Apply for our next class:</h3>
         <FormComponent :action="`${lambdaUrl}apply`" :inputs="inputs"/>
       </div>
     </main>
@@ -191,7 +191,7 @@ export default {
 </script>
 
 <style lang="scss">
-.apply {
+.apply_page {
     &__header {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
@@ -201,12 +201,10 @@ export default {
             margin: $base-vertical-rithm * 10;
             margin-bottom: $base-vertical-rithm * 2;
             width: 20%;
-            color: $color-purple;
-            font-weight: bold;
             font-size: 60px;
             line-height: 1.25em;
+            font-weight: bold;
             display: inline-block;
-
             @include breakpoint("mobile_landscape") {
                 margin: $base-vertical-rithm * 5;
                 font-size: 32px;
@@ -214,26 +212,30 @@ export default {
             }
         }
         &-image {
-            width: 65%;
+            width: 60%;
             display: inline-block;
             @include breakpoint("mobile_landscape") {
                 width: 100%;
             }
         }
         &-dates {
-            margin-left: $base-vertical-rithm * 15;
-            margin-top: $base-vertical-rithm * 15;
-            width: 100%;
-            display: inline-block;
+            width: 90%;
+            margin: $base-vertical-rithm * 15 auto $base-vertical-rithm * 2;
+            justify-content: space-evenly;
+            display: flex;
             vertical-align: top;
+            flex-wrap: wrap;
             @include breakpoint("mobile_landscape") {
-                margin: $base-vertical-rithm * 5;
+                width: 100%;
+                margin: 10px 0;
             }
             div {
                 display: inline-block;
                 width: calc(25% - 20px);
+                margin: 10px;
+
                 @include breakpoint("mobile_landscape") {
-                    width: calc(50% - 10px);
+                    width: calc(45% - 20px);
                     margin: $base-vertical-rithm * 5 auto;
                 }
             }
@@ -254,18 +256,11 @@ export default {
             width: 80%;
             margin: 0 auto;
         }
-        h1 {
-            color: $color-purple;
-            line-height: 1;
-            margin: 0 $base-vertical-rithm * 10 $base-vertical-rithm * 10;
-            @media (max-width: 800px) {
-                margin: 0 0 5 * $base-vertical-rithm;
-            }
-        }
         h2 {
-            color: $color-purple;
-            font-size: 2em;
-            font-weight: bold;
+            margin: 0 $base-vertical-rithm * 10 $base-vertical-rithm * 10;
+            @include breakpoint("mobile_landscape") {
+                margin: 0 auto;
+            }
         }
         ul li {
             list-style: disc;
@@ -274,6 +269,20 @@ export default {
         ul + p {
             margin-top: 1rem;
         }
+        h3 {
+            font-weight: bold;
+            color: $color-purple;
+            font-size: 36px;
+            width: 40%;
+            line-height: 36px;
+            @include breakpoint("mobile_landscape") {
+                font-size: 32px;
+                line-height: 40px;
+                width: calc(100% - 60px);
+                margin: 30px;
+                margin-left: 0;
+            }
+        }
     }
     &__form {
         width: 75%;
@@ -281,7 +290,7 @@ export default {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {
             width: 100%;
-            padding: $base-vertical-rithm * 5;
+            padding: $base-vertical-rithm * 2;
             margin: 0;
         }
         p,
@@ -290,21 +299,18 @@ export default {
             color: $color-purple;
         }
         h1 {
-            font-weight: bold;
-            font-size: 36px;
             width: 60%;
-            line-height: 36px;
         }
-        h2 {
+        h3 {
             font-weight: bold;
-            color: $color-purple;
             font-size: 36px;
             width: 40%;
             line-height: 36px;
             @include breakpoint("mobile_landscape") {
-                width: 100%;
                 font-size: 32px;
                 line-height: 40px;
+                width: calc(100% - 60px);
+                margin: 30px;
             }
         }
         p {

@@ -6,7 +6,9 @@
         <span class="icon-cross"/>
       </div>
       <HeaderNav/>
-      <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
+      <div class="mobile-logo">
+        <img src="/logos/logo-2.svg" alt="">
+      </div>
     </div>
   </header>
 </template>
@@ -47,8 +49,24 @@ export default {
     background: white;
     z-index: 10;
     top: 0;
+    left: 0;
     @include breakpoint("mobile_landscape") {
         height: 60px;
+    }
+    .mobile-logo {
+        display: none;
+        position: absolute;
+        width: 60px;
+        height: 60px;
+
+        top: 20px;
+        @include breakpoint("mobile_landscape") {
+            right: 60px;
+            display: block;
+        }
+        @include breakpoint("mobile_portrait") {
+            right: 40px;
+        }
     }
 
     .headerNav {
@@ -58,24 +76,7 @@ export default {
             display: none;
         }
     }
-    .donate-btn {
-        border: 2px solid $color-purple;
-        padding: 0px 10px;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: $color-purple;
-        position: absolute;
-        top: 2px;
-        right: 0;
-        margin: $base-vertical-rithm * 1 $base-vertical-rithm * 5;
-        @include breakpoint("mobile_landscape") {
-            display: none;
-        }
-        &:hover {
-            color: white;
-            background: $color-purple;
-        }
-    }
+
     .menu-button {
         top: 20px;
         position: absolute;
