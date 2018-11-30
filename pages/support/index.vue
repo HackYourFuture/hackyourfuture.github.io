@@ -17,6 +17,11 @@
         <img src="/partners/booking.svg" alt="Booking.com.">
         <img src="/partners/klm.svg" alt="KLM.">
         <img src="/partners/nuon.svg" alt="Nuon.">
+        <img src="/partners/accenture.svg" alt="Accenture.">
+        <img src="/partners/energie.svg" alt="Energie.">
+        <img src="/partners/vruchtvlees.svg" alt="Vruchtvlees.">
+        <img src="/partners/ilumy.svg" alt="Ilumy.">
+        <img src="/partners/kpmg.svg" alt="Ilumy.">
       </div>
     </div>
     <Partners/>
@@ -26,24 +31,33 @@
 <script>
 import axios from "~/plugins/axios";
 import Partners from "~/components/partners/partners";
+import Graduates from "~/components/graduates/graduates";
 export default {
-    async asyncData() {
+    async asyncData({ params }) {
         let hire_alumni;
+        let content;
         try {
             let req = await axios.get(
                 "/content/en/support/support-hire_alumni.json"
             );
+            let req1 = await axios.get(
+                "/content/en/graduates/" + params.graduate + ".json"
+            );
             hire_alumni = req.data.body;
+            content = req1.data.body;
         } catch (e) {
             console.log(e);
+            content = false;
             hire_alumni = false;
         }
         return {
-            hire_alumni: hire_alumni ? hire_alumni : null
+            hire_alumni: hire_alumni ? hire_alumni : null,
+            content: content ? content : null
         };
     },
     components: {
-        Partners
+        Partners,
+        Graduates
     }
 };
 </script>
@@ -107,41 +121,37 @@ export default {
         }
     }
     &__companies {
-        margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
-        margin-bottom: $base-vertical-rithm * 5;
+        margin: $base-vertical-rithm * 15 $base-vertical-rithm * 10
+            $base-vertical-rithm * 5;
         @include breakpoint("mobile_landscape") {
-            margin-top: $base-vertical-rithm * 8;
+            margin-top: $base-vertical-rithm * 5;
         }
         @include breakpoint("mobile_portrait") {
-            margin-bottom: 0;
             margin-top: $base-vertical-rithm * 10;
         }
         h3 {
             font-size: 24px;
-            color: $color-purple;
-            font-weight: bold;
         }
         &-items {
             margin-top: $base-vertical-rithm * 5;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             @include breakpoint("mobile_portrait") {
                 flex-wrap: wrap;
-                margin-top: 0;
             }
             img {
                 font-weight: bold;
                 color: $color-purple;
-                width: calc(15% -5px);
-                height: 150px;
+                width: calc(15% - 5px);
                 margin: 15px;
+                padding: 0 15px;
                 @include breakpoint("mobile_landscape") {
-                    width: calc(15% - 5px);
-                    height: 100px;
+                    padding: 0;
                 }
                 @include breakpoint("mobile_portrait") {
-                    width: calc(45% - 5px);
-                    margin: 5px;
+                    width: calc(45% - 20px);
+                    padding: 0 10px;
                 }
             }
         }
