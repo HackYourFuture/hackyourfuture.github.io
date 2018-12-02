@@ -1,5 +1,5 @@
 <template>
-  <form ref="form" @submit="e => onSubmit(e)">
+  <form ref="form" :action="action" @submit="e => onSubmit(e)">
     <div
       v-for="(input, key) in inputs"
       ref="input"
@@ -43,12 +43,7 @@ export default {
             const component = components[componentName];
             if (!component.methods || component.methods.check === undefined) {
                 console.warn(
-                    `$ {
-                    ` +
-                        componentName +
-                        `
-                }
-                doesn't implement check method, do you need validation?`
+                    `${componentName} doesn't implement check method, do you need validation?`
                 );
             }
         });
@@ -63,6 +58,7 @@ export default {
                 validateFields.filter(checked => checked !== true).length === 0
             );
         },
+
         serialize() {
             return {};
         },
@@ -78,43 +74,37 @@ export default {
 
             return classList;
         },
+
         formData() {
-            const formElements = Array.from(
-                this.$refs.form.querySelectorAll(allInputTypes)
-            );
-            return formElements.reduce((formArray, element) => {
-                const obj = {};
-                const tag = element.tagName.toLowerCase();
-                const type = element.getAttribute("type");
-                const name = element.getAttribute("name");
-                const isCheckable = type === "checkbox" || type === "radio";
-                const isCheckedInput =
-                    tag === "input" && isCheckable && element.checked;
-                switch (true) {
-                    case isCheckedInput:
-                        obj[name] = element.value;
-                        break;
-                    case tag === "textarea":
-                        obj[name] = element.innerText;
-                        break;
-                    default:
-                        if (!isCheckable) {
-                            obj[name] = element.value;
-                        }
-                }
-                if (Object.keys(obj).length > 0) {
-                    formArray.push(obj);
-                }
-                return formArray;
-            }, []);
+            return new FormData(this.$refs.form);
         },
+
+        isMultipart() {
+            return (
+                this.inputs.filter(el => el.type === "input-file").length > 0
+            );
+        },
+
         async onSubmit(e) {
             e.preventDefault();
             if (this.isValid() === false) {
                 return;
             }
-            const { data } = await axios.post(this.action, this.formData());
+
+            const config = {
+                method: "post",
+                url: this.action,
+                data: this.formData(),
+                headers: {
+                    "Content-Type": !this.isMultipart()
+                        ? "application/x-www-form-urlencoded"
+                        : "multipart/form-data"
+                }
+            };
+
+            const { data } = await axios(config);
         },
+
         setActive(e) {
             let { parentNode } = e.target;
             while (!parentNode.classList.contains("form-row")) {

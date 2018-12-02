@@ -64,6 +64,8 @@ module.exports = async (req, res) => {
 
     const requestErrors = validate(req);
 
+    console.log(req.body, req.params);
+
     if (requestErrors) {
         console.error("Validation errors: ", requestErrors);
         res.status(400).json({

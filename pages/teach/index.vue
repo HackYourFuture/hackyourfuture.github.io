@@ -36,7 +36,7 @@
       </div>
       <div class="teach__form form">
         <h1>Join our teacher team</h1>
-        <FormComponent :action="`${lambdaUrl}teach`" :inputs="inputs"/>
+        <formComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -128,7 +128,7 @@ export default {
     },
     data: () => {
         return {
-            lambdaUrl: process.env.lambdaUrl,
+            action: `${process.env.lambdaUrl}teach`,
             inputs
         };
     },

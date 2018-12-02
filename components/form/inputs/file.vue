@@ -2,7 +2,7 @@
   <div>
     <div v-if="errorMessage" class="error" v-html="errorMessage"/>
     <label ref="label" style="top:-30px;">{{ label }}</label>
-    <input id="files" ref="files" type="file" multiple @change="handleFilesUpload()">
+    <input ref="files" :name="name" type="file" multiple @change="handleFilesUpload()">
     <div>
       <span class="addFiles" @click="addFiles()">+ Select Files</span>
     </div>

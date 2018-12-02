@@ -13,7 +13,7 @@
       <div id="contactForm" class="contact__form form">
         <h1>Reach us for any other questions</h1>
         <p>General Inquiries</p>
-        <FormComponent :action="`${lambdaUrl}contact`" :inputs="inputs"/>
+        <formComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -137,7 +137,7 @@ export default {
     },
     data: () => {
         return {
-            lambdaUrl: process.env.lambdaUrl,
+            action: `${process.env.lambdaUrl}contact`,
             inputs
         };
     },
