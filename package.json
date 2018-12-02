@@ -40,7 +40,7 @@
     "axios": "^0.16.2",
     "nuxt": "^2.1.0",
     "validator": "^10.8.0",
-    "vuelayers": "^0.10.20"
+    "vuelayers": "^0.11.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -51,11 +51,11 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-vue": "^4.7.1",
     "husky": "^1.0.0-rc.13",
-    "npm-run-all": "^4.1.3",
     "kibbeling": "^1.0.4",
     "node-sass": "^4.9.2",
-    "sass-loader": "^7.1.0",
+    "npm-run-all": "^4.1.5",
     "nuxt-sass-resources-loader": "^2.0.3",
-    "prettier": "^1.14.0"
+    "prettier": "^1.14.0",
+    "sass-loader": "^7.1.0"
   }
 }
