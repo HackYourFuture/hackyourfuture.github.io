@@ -29,12 +29,14 @@ api-zip:  api-$(VERSION).zip
 
 .PHONY: publish-lambda
 upload-lambda: api-$(VERSION).zip
-	@$(RUN_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip
+	@$(RUN_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip && \
+	sleep 5
 
 .PHONY: publish-api
 publish-api: clean-zip upload-lambda
 	@$(RUN_AWS_CLI) lambda update-function-code \
-		--file-zip=fileb://./api-$(VERSION).zip \
+		--s3-bucket=hyf-api-deploy \
+		--s3-key=api-$(VERSION).zip \
 		--publish \
 		--function-name=gateway_proxy &> /dev/null && \
 		echo "Function updated"
