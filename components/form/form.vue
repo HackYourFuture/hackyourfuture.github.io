@@ -76,7 +76,9 @@ export default {
         },
 
         formData() {
-            return new FormData(this.$refs.form);
+            const data = new FormData(this.$refs.form);
+            if (!this.isMultipart()) return new URLSearchParams(data);
+            return data;
         },
 
         isMultipart() {
