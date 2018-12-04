@@ -1,18 +1,28 @@
 <template>
   <div>
-    <main class="support container">
-      <div class="support__header">
-        <div class="support__header-image">
+    <main class="hire container">
+      <div class="hire__header">
+        <div class="hire__header-image">
           <img src="/gallery/19.jpg" alt="Student presenting his final project.">
         </div>
-        <div class="support__header-content">
+        <div class="hire__header-content">
           <div v-html="hire_alumni"/>
         </div>
       </div>
     </main>
-    <div class="support__companies">
+    <div id="graduates" class="graduates container">
+      <div class="graduates__active">
+        <img
+          :src="'/graduates/' + $route.params.graduate + '.jpg'"
+          alt="Graduate of HackYourFuture"
+        >
+        <div class="graduates__active-content" v-html="content"/>
+      </div>
+      <Graduates/>
+    </div>
+    <div class="hire__companies">
       <h3>Where our students work</h3>
-      <div class="support__companies-items">
+      <div class="hire__companies-items">
         <img src="/partners/bijenkorf.svg" alt="Bijenkorf.">
         <img src="/partners/booking.svg" alt="Booking.com.">
         <img src="/partners/klm.svg" alt="KLM.">
@@ -37,9 +47,7 @@ export default {
         let hire_alumni;
         let content;
         try {
-            let req = await axios.get(
-                "/content/en/support/support-hire_alumni.json"
-            );
+            let req = await axios.get("/content/en/hire/hire-alumni.json");
             let req1 = await axios.get(
                 "/content/en/graduates/" + params.graduate + ".json"
             );
@@ -52,7 +60,8 @@ export default {
         }
         return {
             hire_alumni: hire_alumni ? hire_alumni : null,
-            content: content ? content : null
+            content: content ? content : null,
+            currentStudent: null
         };
     },
     components: {
@@ -63,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss">
-.support {
+.hire {
     &__header {
         padding: $base-vertical-rithm * 10;
         display: flex;

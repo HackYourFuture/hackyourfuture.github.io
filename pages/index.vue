@@ -71,7 +71,7 @@
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
           <div>
-            <nuxt-link :to="'/support'">
+            <nuxt-link :to="'/hire'">
               Get in touch to talk about
               <span class="underline">hiring our graduates.</span>
             </nuxt-link>
@@ -86,7 +86,6 @@
         </div>
       </section>
     </main>
-    <section class="chapters"/>
     <section class="makers">
       <Graduates/>
     </section>

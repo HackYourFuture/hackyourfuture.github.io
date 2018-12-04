@@ -11,10 +11,10 @@
         <nuxt-link :to="'/teach/'">Teach</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/support/'">Hire</nuxt-link>
+        <nuxt-link :to="'/hire/'">Hire</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/chapters/'">International</nuxt-link>
+        <nuxt-link :to="'/international/'">International</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/about/'">About</nuxt-link>
@@ -26,7 +26,7 @@
         <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/support/donate/'" class="donate-btn">Donate</nuxt-link>
+        <nuxt-link :to="'/hire/donate/'" class="donate-btn">Donate</nuxt-link>
       </li>
     </ul>
   </nav>

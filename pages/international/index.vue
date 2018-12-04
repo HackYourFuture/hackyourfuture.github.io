@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="chapters__map">
-      <div class="chapters__map-map">
-        <img src="/map/map.svg" alt="Map indicating the HackYourFuture chapters.">
+    <div class="international__map">
+      <div class="international__map-map">
+        <img src="/map/map.svg" alt="Map indicating the HackYourFuture international.">
       </div>
-      <div class="chapters__map-list">
+      <div class="international__map-list">
         <h2>HackYourFuture
           <br>is active in:
         </h2>
@@ -13,11 +13,11 @@
         </a>
       </div>
     </div>
-    <main class="chapters container">
-      <div class="chapters__information">
+    <main class="international container">
+      <div class="international__information">
         <h1>Start your own chapter</h1>
-        <div v-html="chapters_info"/>
-        <div class="chapters__information-image">
+        <div v-html="international_info"/>
+        <div class="international__information-image">
           <img src="/gallery/01.jpg" alt="Group picture of team and students.">
         </div>
       </div>
@@ -29,17 +29,17 @@
 import axios from "~/plugins/axios";
 export default {
     async asyncData() {
-        let chapters_info;
+        let international_info;
         try {
             let req = await axios.get(
-                "/content/en/chapters/chapters_info.json"
+                "/content/en/international/international_info.json"
             );
-            chapters_info = req.data.body;
+            international_info = req.data.body;
         } catch (e) {
-            chapters_info = false;
+            international_info = false;
         }
         return {
-            chapters_info: chapters_info ? chapters_info : null
+            international_info: international_info ? international_info : null
         };
     },
     data() {
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss">
-.chapters {
+.international {
     &.container {
         margin-bottom: 200px;
         position: relative;

@@ -2,13 +2,15 @@
   <div>
     <main class="contact container">
       <div class="contact__header">
-        <h1>Frequently Asked Questions</h1>
+        <h1>Contact</h1>
       </div>
-      <nuxt-link :to="'/'" class="contact__quicklink">
-        Take me
-        <br>to
-        <span class="underline">contact</span>
-      </nuxt-link>
+      <a href="#contactForm" class="contact__quicklink">Contact
+        <br>
+        <span class="underline">Form</span>
+        <br>
+        <img src="/icons/arrow-down.svg">
+      </a>
+      <h2>Frequently Asked Questions</h2>
       <div class="contact__content" v-html="content"/>
       <div id="contactForm" class="contact__form form">
         <h1>Reach us for any other questions</h1>
@@ -162,6 +164,9 @@ export default {
     position: relative;
     &__header {
         padding: $base-vertical-rithm * 10;
+        @include breakpoint("ipad_landscape") {
+            //display: inline-block;
+        }
         @include breakpoint("ipad_portrait") {
             padding: $base-vertical-rithm * 8;
         }
@@ -191,30 +196,70 @@ export default {
         position: absolute;
         margin: $base-vertical-rithm * 10;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 24px;
+        display: inline-block;
+        line-height: 1.2em;
         color: black;
         span:after {
             bottom: -5px;
         }
         @include breakpoint("ipad_portrait") {
+            left: -60px;
+            top: 60px;
+        }
+        @include breakpoint("mobile_landscape") {
+            font-size: 18px;
+            right: -40px;
+            top: 25px;
+            left: auto;
+        }
+        img {
+            width: 20px;
+            height: 20px;
             position: relative;
-            margin: 0;
+            margin: $base-vertical-rithm * 3;
+            animation: bounce 1.5s infinite ease;
+        }
+        @keyframes bounce {
+            0% {
+                transform: scale(1, 1) translateY(0px);
+            }
+            10% {
+                transform: scale(1.1, 0.9);
+            }
+            40% {
+                transform: scale(0.9, 1.1) translateY(15px);
+            }
+            60% {
+                transform: scale(1, 1) translateY(0px);
+            }
+            100% {
+                transform: scale(1, 1) translateY(0px);
+            }
         }
     }
-    &__content {
+
+    &__content,
+    h2 {
+        margin: $base-vertical-rithm * 5 auto;
         width: 60%;
         margin-left: 30%;
         @include breakpoint("ipad_portrait") {
             width: 80%;
-            margin: $base-vertical-rithm * 10 auto;
+            margin: 0 auto;
         }
         h4 {
             font-weight: bold;
             color: $color-purple;
         }
     }
+    h2 {
+        @include breakpoint("ipad_portrait") {
+            margin: $base-vertical-rithm * 5 auto;
+        }
+    }
     &__form {
-        margin-top: $base-vertical-rithm * 10;
+        padding-top: $base-vertical-rithm * 10;
         width: 70%;
         margin-left: 15%;
         position: relative;

@@ -1,30 +1,30 @@
 <template>
   <footer class="footer">
-    <div class="footer__Main">
-      <div class="footer__Links container">
+    <div class="footer__main">
+      <div class="footer__links container">
         <nuxt-link :to="'/'">Home</nuxt-link>
         <nuxt-link :to="'/apply/'">Apply</nuxt-link>
         <nuxt-link :to="'/teach/'">Teach</nuxt-link>
-        <nuxt-link :to="'/support/'">Hire</nuxt-link>
+        <nuxt-link :to="'/hire/'">Hire</nuxt-link>
       </div>
-      <div class="footer__Links container">
-        <nuxt-link :to="'/chapters/'">Chapters</nuxt-link>
+      <div class="footer__links container">
+        <nuxt-link :to="'/international/'">Chapters</nuxt-link>
         <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
         <nuxt-link :to="'/about/'">About</nuxt-link>
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
-      <div class="footer__Adress container">
+      <div class="footer__adress container">
         <p>Stichting HackYourFuture</p>
         <p>Herengracht 504</p>
         <p>1017 CB Amsterdam</p>
         <a href="mailto:info@hackyourfuture.net">info@hackyourfuture.net</a>
       </div>
-      <div class="footer__Info container">
+      <div class="footer__info container">
         <p>KvK: 64992160</p>
         <p>Copyright © HackYourFuture {{ date }}</p>
         <!--  <nuxt-link :to="'/disclaimer/'">Disclaimer</nuxt-link> -->
       </div>
-      <div class="footer__Social container">
+      <div class="footer__social container">
         <a href="https://twitter.com/hackyourfutures">
           <img src="/icons/tw.svg" alt="Twitter.">
         </a>
@@ -62,7 +62,7 @@ export default {
     a {
         color: $color-white;
     }
-    &__Main {
+    &__main {
         display: flex;
         justify-content: space-between;
         position: relative;
@@ -99,7 +99,7 @@ export default {
             }
         }
     }
-    &__Links {
+    &__links {
         width: auto;
         @include breakpoint("ipad_portrait") {
             width: 25%;
@@ -108,7 +108,7 @@ export default {
             width: 50%;
         }
     }
-    &__Adress {
+    &__adress {
         width: auto;
         @include breakpoint("ipad_portrait") {
             width: 50%;
@@ -117,7 +117,7 @@ export default {
             width: 100%;
         }
     }
-    &__Info {
+    &__info {
         width: 20%;
         @include breakpoint("ipad_portrait") {
             width: 65%;
@@ -126,8 +126,11 @@ export default {
             width: 100%;
         }
     }
-    &__Social {
+    &__social {
         width: auto;
+        img {
+            padding: 3px;
+        }
         @include breakpoint("ipad_portrait") {
             width: 35%;
             justify-content: space-evenly;
