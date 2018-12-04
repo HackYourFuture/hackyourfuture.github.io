@@ -13,7 +13,7 @@
       </div>
       <div ref="teaserPage__form" class="teaserPage__form form">
         <h2>Apply for our next teaser day:</h2>
-        <FormComponent :action="`${lambdaUrl}teaser`" :inputs="inputs"/>
+        <formComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -147,7 +147,7 @@ export default {
     },
     data: () => {
         return {
-            lambdaUrl: process.env.lambdaUrl,
+            action: `${process.env.lambdaUrl}apply/teaser`,
             inputs
         };
     },

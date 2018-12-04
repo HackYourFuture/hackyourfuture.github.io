@@ -35,7 +35,7 @@ const validate = req => {
         .isLength({
             min: 9
         });
-    req.check("computer").isBoolean();
+    req.check("computer");
     req.check("education")
         .isString()
         .isLength({
@@ -63,6 +63,8 @@ module.exports = async (req, res) => {
     let totalRows;
 
     const requestErrors = validate(req);
+
+    console.log(req.body, req.params);
 
     if (requestErrors) {
         console.error("Validation errors: ", requestErrors);

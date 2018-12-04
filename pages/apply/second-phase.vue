@@ -4,7 +4,7 @@
       <div class="technical__header">
         <div class="technical__header-content" v-html="technical_assignment"/>
         <div ref="technical__form" class="technical__form form">
-          <FormComponent :action="`${lambdaUrl}technical`" :inputs="inputs"/>
+          <formComponent :action="action" :inputs="inputs"/>
         </div>
       </div>
     </main>
@@ -48,7 +48,7 @@ export default {
     },
     data: () => {
         return {
-            lambdaUrl: process.env.lambdaUrl,
+            action: `${process.env.lambdaUrl}apply/assignment`,
             inputs
         };
     },

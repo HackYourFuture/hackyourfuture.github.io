@@ -31,9 +31,12 @@ export default {
                 const checkedOption = this.$refs.options.filter(
                     el => !!el.checked
                 );
+
                 const value =
-                    checkedOption.length > 0 ? checkedOption.value : "";
+                    checkedOption.length > 0 ? checkedOption[0].value : "";
+
                 const errors = this.validate(value);
+
                 this.errorMessage = errors.join("<br/>");
                 this.valid = errors.length === 0;
             }

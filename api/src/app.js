@@ -16,6 +16,7 @@ const {
     Teach,
     DonationStatus
 } = require("./middlewares");
+
 const Teaser = require("./middlewares/teaser");
 const { donate } = require("./donation/donate");
 
@@ -128,12 +129,13 @@ app.use(expressValidator());
 app.post("/apply", Apply);
 app.post("/contact-us", ContactUs);
 app.post("/apply", Apply);
-app.post("/apply/upload", FileUpload, UploadCVML);
-app.post("/apply/upload1", FileUpload, UploadAssignment);
+app.post("/apply/profile", FileUpload, UploadCVML);
+app.post("/apply/assignment", FileUpload, UploadAssignment);
 app.post("/teach", Teach);
-app.post("/teaser", Teaser);
-app.get("/get-applicant", GetApplicantFromToken);
+app.post("/apply/teaser", Teaser);
 app.post("/donate", (req, res) => donate(req.body, res));
+
+app.get("/applicant", GetApplicantFromToken);
 app.get("/donation/status", DonationStatus);
 
 module.exports = app;

@@ -13,7 +13,7 @@
       <div class="apply_page__content" v-html="content"/>
       <div ref="apply_page__form" class="apply_page__form form">
         <h3>Apply for our next class:</h3>
-        <FormComponent :action="`${lambdaUrl}apply`" :inputs="inputs"/>
+        <FormComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
   </div>
@@ -76,7 +76,6 @@ const inputs = [
                 { id: 3, value: "se", label: "Sweden" }
             ],
             validate: value => {
-                console.log(value);
                 return new FieldError(value).isRequired().errors;
             }
         }
@@ -136,7 +135,6 @@ const inputs = [
             validate: value =>
                 new FieldError(value)
                     .isLength({ min: 2, max: 200 })
-                    .isAlpha()
                     .isRequired().errors
         }
     },
@@ -147,8 +145,7 @@ const inputs = [
             label: "Something else you would like to notify us about?",
             name: "note",
             validate: value =>
-                new FieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
-                    .errors
+                new FieldError(value).isLength({ min: 0, max: 200 }).errors
         }
     },
     {
@@ -165,7 +162,7 @@ export default {
     },
     data: () => {
         return {
-            lambdaUrl: process.env.lambdaUrl,
+            action: `${process.env.lambdaUrl}apply`,
             inputs
         };
     },

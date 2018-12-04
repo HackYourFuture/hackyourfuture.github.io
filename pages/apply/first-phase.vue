@@ -4,7 +4,7 @@
       <div class="upload__header">
         <div class="upload__header-content" v-html="cv_assignment"/>
         <div ref="upload__form" class="upload__form form">
-          <FormComponent :inputs="inputs"/>
+          <formComponent :action="action" :inputs="inputs" />
         </div>
       </div>
     </main>
@@ -52,7 +52,6 @@ const inputs = [
             rows: "1"
         }
     },
-
     {
         type: "input-button",
         props: {
@@ -67,6 +66,7 @@ export default {
     },
     data: () => {
         return {
+            action: `${process.env.lambdaUrl}apply/profile`,
             inputs
         };
     },
