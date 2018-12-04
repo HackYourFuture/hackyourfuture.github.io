@@ -32,14 +32,8 @@ npm run dev
                         HOME ------ DONATE
                          |
         -------------------------------------------------------------
-        |         |         |         |         |         |         |
-      APPLY     TEACH    SUPPORT   CHAPTERS   ABOUT    CONTACT  WOMEN CODING TEASER
-                                      |
-                                       Map chapters
-                                      |
-                                      Chapter pages
-                                      - Amsterdam
-                                      - Brussels
-                                      - Copenhagen
-                                      - Malmö
-```
+        |         |       |           |            |         |      |
+      APPLY     TEACH    HIRE    INTERNATIONAL   ABOUT   CONTACT    WCT
+                                  
+                                      
+                                     
