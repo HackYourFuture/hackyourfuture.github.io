@@ -12,7 +12,7 @@
 
 <style lang="scss">
 .partners {
-    margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
+    margin: $base-vertical-rithm * 15 $base-vertical-rithm * 10;
     margin-bottom: $base-vertical-rithm * 5;
     @include breakpoint("mobile_landscape") {
         margin-top: $base-vertical-rithm * 5;
@@ -20,11 +20,8 @@
     @include breakpoint("mobile_portrait") {
         margin-top: $base-vertical-rithm * 10;
     }
-
     h3 {
         font-size: 24px;
-        color: $color-purple;
-        font-weight: bold;
     }
     &__items {
         margin-top: $base-vertical-rithm * 5;
@@ -34,13 +31,16 @@
             flex-wrap: wrap;
         }
         img {
-            display: flex;
             font-weight: bold;
             color: $color-purple;
             width: calc(15% - 5px);
-            height: 100px;
+            padding: 0 15px;
+            @include breakpoint("mobile_landscape") {
+                padding: 0;
+            }
             @include breakpoint("mobile_portrait") {
-                width: calc(45% - 5px);
+                width: calc(45% - 20px);
+                padding: 0 10px;
             }
         }
     }

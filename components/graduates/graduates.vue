@@ -4,7 +4,7 @@
     <div class="graduates__items">
       <div class="graduates__items-inner">
         <div v-for="(graduate, key) in graduates" :key="key" class="graduates__item">
-          <nuxt-link :to="'/graduates/' + graduate.route">
+          <nuxt-link :to="'/hire'">
             <div class="graduates__item-image">
               <img :src="'/graduates/' + graduate.route + '.jpg'">
             </div>
@@ -38,7 +38,7 @@ export default {
 };
 </script> 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .graduates {
     margin: $base-vertical-rithm * 20 $base-vertical-rithm * 8;
     @include breakpoint("mobile_portrait") {
