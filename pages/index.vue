@@ -63,11 +63,11 @@
           >
         </div>
       </section>
-      <section class="hire">
-        <div class="hire__image">
+      <section class="alumni">
+        <div class="alumni__image">
           <img src="/gallery/20.jpg" alt="Student receiving diploma after graduation.">
         </div>
-        <div class="hire__container">
+        <div class="alumni__container">
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
           <div>
@@ -407,7 +407,7 @@ export default {
     }
 }
 
-.hire {
+.alumni {
     margin: $base-vertical-rithm * 10 $base-vertical-rithm * 10;
     @include breakpoint("mobile_landscape") {
         margin: $base-vertical-rithm * 5 0;

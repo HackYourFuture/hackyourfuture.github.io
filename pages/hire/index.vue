@@ -9,17 +9,23 @@
           <div v-html="hire_alumni"/>
         </div>
       </div>
-    </main>
-    <div id="graduates" class="graduates container">
-      <div class="graduates__active">
-        <img
-          :src="'/graduates/' + $route.params.graduate + '.jpg'"
-          alt="Graduate of HackYourFuture"
-        >
-        <div class="graduates__active-content" v-html="content"/>
+      <div id="graduates" class="graduates container">
+        <h1>Meet our Graduates</h1>
+        <div class="graduates__item">
+          <div class="graduates__item-content" v-html="rabih"/>
+          <div class="graduates__item-image">
+            <img :src="'/graduates/rabih.jpg'" alt="Graduate of HackYourFuture">
+          </div>
+        </div>
+        <div class="graduates__item">
+          <div class="graduates__item-image">
+            <img :src="'/graduates/sarea.jpg'" alt="Graduate of HackYourFuture">
+          </div>
+          <div class="graduates__item-content" v-html="sarea"/>
+        </div>
       </div>
-      <Graduates/>
-    </div>
+    </main>
+
     <div class="hire__companies">
       <h3>Where our students work</h3>
       <div class="hire__companies-items">
@@ -31,7 +37,7 @@
         <img src="/partners/energie.svg" alt="Energie.">
         <img src="/partners/vruchtvlees.svg" alt="Vruchtvlees.">
         <img src="/partners/ilumy.svg" alt="Ilumy.">
-        <img src="/partners/kpmg.svg" alt="Ilumy.">
+        <img src="/partners/kpmg.svg" alt="Kpmg.">
       </div>
     </div>
     <Partners/>
@@ -41,37 +47,77 @@
 <script>
 import axios from "~/plugins/axios";
 import Partners from "~/components/partners/partners";
-import Graduates from "~/components/graduates/graduates";
 export default {
     async asyncData({ params }) {
         let hire_alumni;
-        let content;
+        let sarea;
+        let rabih;
         try {
             let req = await axios.get("/content/en/hire/hire-alumni.json");
-            let req1 = await axios.get(
-                "/content/en/graduates/" + params.graduate + ".json"
-            );
+            let req1 = await axios.get("/content/en/graduates/sarea.json");
+            let req2 = await axios.get("/content/en/graduates/rabih.json");
             hire_alumni = req.data.body;
-            content = req1.data.body;
+            sarea = req1.data.body;
+            rabih = req2.data.body;
         } catch (e) {
             console.log(e);
-            content = false;
+            sarea = false;
+            rabih = false;
             hire_alumni = false;
         }
         return {
             hire_alumni: hire_alumni ? hire_alumni : null,
-            content: content ? content : null,
-            currentStudent: null
+            sarea: sarea ? sarea : null,
+            rabih: rabih ? rabih : null
         };
     },
     components: {
-        Partners,
-        Graduates
+        Partners
     }
 };
 </script>
 
 <style lang="scss">
+.graduates {
+    position: relative;
+    padding: 0 $base-vertical-rithm * 5;
+    h1 {
+        text-align: center;
+    }
+    &__item {
+        display: flex;
+        margin: $base-vertical-rithm * 20 $base-vertical-rithm * 5;
+        &:last-child {
+            margin-bottom: $base-vertical-rithm * 10;
+        }
+        h2 {
+            font-weight: bold;
+            margin-bottom: $base-vertical-rithm * 5;
+        }
+        a {
+            color: black;
+        }
+        &-image {
+            width: calc(50% - 10px);
+            padding: 0 20px;
+            margin: 0 $base-vertical-rithm * 5;
+
+            img {
+                width: 100%;
+            }
+        }
+        &-content {
+            margin: 0 $base-vertical-rithm * 5;
+            width: 60%;
+            vertical-align: top;
+            @include breakpoint("mobile_landscape") {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    }
+}
 .hire {
     &__header {
         padding: $base-vertical-rithm * 10;
