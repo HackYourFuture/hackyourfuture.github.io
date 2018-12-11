@@ -32,7 +32,7 @@ We use `express` together with `aws-serverless-express` proxy.
 
 ## Development
 
-If you want to start development you can run `npm dev`.
+If you want to start development you can run `npm run dev`.
 This would:
 
 - Start a fake `ses` provider
@@ -45,7 +45,7 @@ This would:
 
 ## Cloud Services and deploys
 
-We currently use `terraform.io` to access to `aws` resorces, we wanna mantain
+We currently use `terraform.io` to access to `aws` resources, we wanna maintain
 our cloud environment under control and we choose to host the
 [infrastructure](https://github.com/HackYourFuture/infrastucture) in code.
 
