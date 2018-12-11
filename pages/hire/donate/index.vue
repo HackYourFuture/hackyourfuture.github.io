@@ -18,48 +18,48 @@
 import Donate from "~/components/donate";
 
 export default {
-  components: {
-    Donate
-  }
+    components: {
+        Donate
+    }
 };
 </script>
 <style lang="scss" scoped>
 .main {
-  display: flex;
-  justify-content: space-around;
-  width: 70%;
-  margin: 7.75em auto;
-  padding: 3em;
-  h1 {
-    margin-bottom: 1em;
-    line-height: 1.3;
-    align-self: flex-start;
-  }
-
-  .donate-text {
-    width: 400px;
-    h4 {
-      font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    margin: 7.75em auto;
+    padding: 3em;
+    h1 {
+        margin-bottom: 1em;
+        line-height: 1.3;
+        align-self: flex-start;
     }
 
-    li {
-      list-style-type: square;
-      margin-left: 1em;
+    .donate-text {
+        width: 400px;
+        h4 {
+            font-weight: bold;
+        }
+
+        li {
+            list-style-type: square;
+            margin-left: 1em;
+        }
     }
-  }
-  .donate-component {
-    margin-top: 50px;
-  }
+    .donate-component {
+        margin-top: 50px;
+    }
 }
 
 @media screen and (max-width: 767px) {
-  .main {
-    padding: 1em;
-    width: initial;
-    flex-direction: column;
-    .donate-text {
-      width: 100%;
+    .main {
+        padding: 1em;
+        width: initial;
+        flex-direction: column;
+        .donate-text {
+            width: 100%;
+        }
     }
-  }
 }
 </style>
