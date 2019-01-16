@@ -5,7 +5,7 @@
         <div class="teach__header-image">
           <img src="/gallery/26.jpg" alt="teacher in front on class of students.">
         </div>
-        <h1>What we teach</h1>
+        <h1>Our teaching approach</h1>
       </div>
       <div class="teach__container what">
         <div class="links">

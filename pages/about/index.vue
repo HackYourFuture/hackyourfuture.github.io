@@ -45,8 +45,8 @@ const team = [
     {
         src: "/team/6.jpeg",
         name: "Wouter Kleijn",
-        function: "Partnership Manager",
-        href: "https://www.linkedin.com/in/gijs-corstens-3b998414/",
+        function: "Managing Director",
+        href: "https://www.linkedin.com/in/wouter-kleijn-26820b12/",
         mail: "mailto:wouter@hackyourfuture.net"
     },
 
@@ -54,16 +54,8 @@ const team = [
         src: "/mentors/35.jpeg",
         name: "Noer Paanakker",
         function: "Education Director",
-        href: "https://www.linkedin.com/in/gijs-corstens-3b998414/",
+        href: "https://www.linkedin.com/in/noer-paanakker-731284a1",
         mail: "mailto:noer@hackyourfuture.net"
-    },
-
-    {
-        src: "/team/4.jpeg",
-        name: "Gijs Corstens",
-        function: "Managing Director",
-        href: "https://www.linkedin.com/in/wouter-kleijn-26820b12/",
-        mail: "mailto:gijs@hackyourfuture.net"
     }
 ];
 const teachers = [

@@ -61,8 +61,8 @@
 
 <script>
 import "~/assets/css/css/paymentfont.min.css";
-// const lambdaUrl = process.env.lambdaUrl || "http://localhost:3005/";
-const lambdaUrl = "http://localhost:3005/";
+const lambdaUrl = process.env.lambdaUrl || "http://localhost:3005/";
+// const lambdaUrl = "http://localhost:3005/";
 const URL_DONATION_SUBMIT = `${lambdaUrl}donate`;
 const URL_DONATION_STATUS = `${lambdaUrl}donation/status`;
 
@@ -91,13 +91,9 @@ export default {
                     description: this.description || "No message"
                 })
             })
-                .then(res => {
-                    console.log("res", res.json());
-                    return res.json();
-                })
+                .then(res => res.clone().json())
                 .then(json => {
-                    console.log("json", json.paymentURL);
-                    //   window.location = json.paymentURL;
+                    window.location = json.paymentURL;
                 })
                 .catch(error => console.log(`Error: ${error}`));
         },
@@ -106,11 +102,13 @@ export default {
             const orderId = this.$route.query.orderid;
             if (orderId !== undefined) {
                 const url = URL_DONATION_STATUS.concat("/?orderid=", orderId);
+
                 fetch(url)
                     .then(response => response.json())
                     .then(json => {
                         if (json.message === "Donation went ok") {
                             this.donated = true;
+                            console.log("hello!");
                             return;
                         }
                     })
@@ -223,10 +221,12 @@ export default {
     .blur-screen {
         position: absolute;
         left: 0;
+        right: 0;
+        bottom: 0;
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.2);
+        // background: rgba(0, 0, 0, 0.2);
     }
     .donated-ok {
         display: flex;
