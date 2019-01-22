@@ -35,11 +35,12 @@ const validate = req => {
 };
 
 module.exports = (req, res) => {
+    const { body } = req;
     const isValid = !validate(req);
 
     if (!isValid) {
         const errors = validate(req);
-        console.error("Validation errors: ", errors);
+
         res.status(400).json({
             errors
         });
@@ -48,9 +49,9 @@ module.exports = (req, res) => {
 
     sendEmail(
         [toEmail],
-        email("contact_us.tpl", { params: req.body }),
+        email("contact_us.tpl", { params: body }),
         "New contact request",
-        req.body.email
+        body.email
     )
         .then(() => {
             console.log("=== ALL EMAILS ARE SENT!!!");

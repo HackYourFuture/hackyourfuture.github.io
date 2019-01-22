@@ -32,7 +32,7 @@ if (process.env.DEVELOPMENT) {
         }
     });
 } else {
-    console.log("Should not neeed credentials");
+    console.log("Should not need credentials");
     s3 = new aws.S3();
 }
 
@@ -127,7 +127,7 @@ app.use(
 app.use(expressValidator());
 
 app.post("/apply", Apply);
-app.post("/contact-us", ContactUs);
+app.post("/contact", ContactUs);
 app.post("/apply", Apply);
 app.post("/apply/profile", FileUpload, UploadCVML);
 app.post("/apply/assignment", FileUpload, UploadAssignment);
