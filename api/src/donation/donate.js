@@ -25,7 +25,7 @@ function donate({ method, amount, description }, res) {
 
     const encryptedOrderId = encryptData(orderId.toString());
     const redirectUrl = baseURL.concat(
-        "support/donate?orderid=",
+        "hire/donate?orderid=",
         encryptedOrderId
     );
 

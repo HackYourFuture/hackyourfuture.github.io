@@ -43,7 +43,7 @@
             <nuxt-link :to="'/teach'">
               Time is your most valuable resource.
               <br>Find out about donating your
-              <span class="underline">time and expertise</span>here.
+              <span class="underline">time and expertise</span> here.
             </nuxt-link>
           </div>
         </div>

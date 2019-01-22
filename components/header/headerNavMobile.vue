@@ -97,6 +97,10 @@ export default {
                 padding: 1rem 1rem;
                 color: $color-purple;
             }
+            .donate-btn {
+                background-color: #293a7d;
+                color: white;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ npm install
 4- Run the project
 
 ```
-npm run dev
+npm run dev (on localhost:3000)
 ```
 
 5- Follow the command line instructions to create and link your spreadsheet
@@ -34,6 +34,7 @@ npm run dev
         -------------------------------------------------------------
         |         |       |           |            |         |      |
       APPLY     TEACH    HIRE    INTERNATIONAL   ABOUT   CONTACT    WCT
-                                  
-                                      
-                                     
+
+
+
+```

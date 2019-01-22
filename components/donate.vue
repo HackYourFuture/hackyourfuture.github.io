@@ -20,10 +20,11 @@
             <i class="pf pf-credit-card"/>
             <span class="method-text-span">Creditcard</span>
           </label>
-          <input id="bitcoin" v-model="method" class="method-radio" type="radio" value="bitcoin">
-          <label class="method-label last-method-label" for="bitcoin">
-            <i class="pf pf-bitcoin-sign"/>
-            <span class="method-text-span">Bitcoin</span>
+          
+          <input id="paypal" v-model="method" class="method-radio" type="radio" value="paypal">
+          <label class="method-label" for="paypal">
+            <i class="pf pf-paypal-alt"/>
+            <span class="method-text-span">PayPal</span>
           </label>
         </div>
         <div class="input-container">
@@ -51,7 +52,7 @@
     </div>
     <div v-if="donated" class="blur-screen">
       <div v-if="donated" class="donated-ok">
-        <p>Thanks For your donation</p>
+        <p>Thanks for your donation!</p>
         <button @click="donated = false">Close</button>
       </div>
     </div>
@@ -60,7 +61,8 @@
 
 <script>
 import "~/assets/css/css/paymentfont.min.css";
-const { lambdaUrl } = process.env;
+const lambdaUrl = process.env.lambdaUrl || "http://localhost:3005/";
+// const lambdaUrl = "http://localhost:3005/";
 const URL_DONATION_SUBMIT = `${lambdaUrl}donate`;
 const URL_DONATION_STATUS = `${lambdaUrl}donation/status`;
 
@@ -89,21 +91,24 @@ export default {
                     description: this.description || "No message"
                 })
             })
-                .then(res => res.json())
+                .then(res => res.clone().json())
                 .then(json => {
                     window.location = json.paymentURL;
-                });
+                })
+                .catch(error => console.log(`Error: ${error}`));
         },
 
         paymentStatus() {
             const orderId = this.$route.query.orderid;
             if (orderId !== undefined) {
                 const url = URL_DONATION_STATUS.concat("/?orderid=", orderId);
+
                 fetch(url)
                     .then(response => response.json())
                     .then(json => {
                         if (json.message === "Donation went ok") {
                             this.donated = true;
+                            console.log("hello!");
                             return;
                         }
                     })
@@ -118,7 +123,6 @@ export default {
 <style lang="scss" scoped>
 * {
     box-sizing: border-box;
-    overflow: hidden;
 }
 .form-container {
     width: 310px;
@@ -139,14 +143,15 @@ export default {
     .form-check {
         display: flex;
         flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: center;
         position: relative;
         padding: 10px;
         .method-radio {
             position: relative;
             width: auto;
+            top: 0.72em;
             zoom: 2;
-            margin-top: 5px;
             padding-right: 0;
             margin-right: 0;
             padding: 0;
@@ -155,14 +160,12 @@ export default {
         .method-label {
             display: flex;
             font-size: 25px;
+            overflow: visible;
             position: relative;
             font-style: normal;
             cursor: pointer;
-            margin-right: 40px;
+            margin-left: 25px;
             padding: 0;
-        }
-        .last-method-label {
-            margin: 0;
         }
 
         .last-method-label i {
@@ -170,7 +173,7 @@ export default {
         }
 
         .method-text-span {
-            display: none;
+            //   display: none;
         }
     }
     .input-container {
@@ -212,17 +215,18 @@ export default {
         .submit-button {
             margin-top: 15px;
             border-radius: 6px;
-            zoom: 2;
             background-color: white;
         }
     }
     .blur-screen {
         position: absolute;
         left: 0;
+        right: 0;
+        bottom: 0;
         top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.2);
+        // background: rgba(0, 0, 0, 0.2);
     }
     .donated-ok {
         display: flex;
@@ -266,14 +270,14 @@ export default {
 /* desktop */
 @media screen and (min-width: 340px) {
     .form-container {
-        width: 350px;
+        width: 100%;
     }
 }
 
 /* desktop */
 @media screen and (min-width: 767px) {
     .form-container {
-        width: 600px;
+        width: 50%;
         .form-check {
             .method-text-span {
                 display: inline-block;

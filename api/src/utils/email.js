@@ -7,7 +7,7 @@ const EMAILS_DIRECTORIES = path.join(__dirname, "../../emails_template");
 module.exports = (emailFile, data) => {
     const PATH_EMAIL = path.join(EMAILS_DIRECTORIES, emailFile);
 
-    if (!!process.env.DEVELOPMENT && !fs.existsSync(PATH_EMAIL)) {
+    if (!process.env.DEVELOPMENT && !fs.existsSync(PATH_EMAIL)) {
         throw new Error(`Not email found ${PATH_EMAIL}`);
     }
 

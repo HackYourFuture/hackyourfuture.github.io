@@ -1,6 +1,6 @@
-Hey <%- params.name %> contacted us
+Hey <%- params.email %> contacted us!
 
-Here are his details:
+Here are their details:
 <% for(let k in params) {%>
 <%- k %>:
 --

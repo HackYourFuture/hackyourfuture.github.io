@@ -9,8 +9,22 @@
           <div v-html="hire_alumni"/>
         </div>
       </div>
+      <div class="hire__companies">
+        <h3>Where our students work</h3>
+        <div class="hire__companies-items">
+          <img src="/partners/bijenkorf.svg" alt="Bijenkorf.">
+          <img src="/partners/booking.svg" alt="Booking.com.">
+          <img src="/partners/klm.svg" alt="KLM.">
+          <img src="/partners/nuon.svg" alt="Nuon.">
+          <img src="/partners/accenture.svg" alt="Accenture.">
+          <img src="/partners/energie.svg" alt="Energie.">
+          <img src="/partners/vruchtvlees.svg" alt="Vruchtvlees.">
+          <img src="/partners/ilumy.svg" alt="Ilumy.">
+          <img src="/partners/kpmg.svg" alt="Kpmg.">
+        </div>
+      </div>
       <div id="graduates" class="graduates container">
-        <h1>Meet our Graduates</h1>
+        <h1>Success Stories</h1>
         <div class="graduates__item">
           <div class="graduates__item-content" v-html="rabih"/>
           <div class="graduates__item-image">
@@ -25,22 +39,6 @@
         </div>
       </div>
     </main>
-
-    <div class="hire__companies">
-      <h3>Where our students work</h3>
-      <div class="hire__companies-items">
-        <img src="/partners/bijenkorf.svg" alt="Bijenkorf.">
-        <img src="/partners/booking.svg" alt="Booking.com.">
-        <img src="/partners/klm.svg" alt="KLM.">
-        <img src="/partners/nuon.svg" alt="Nuon.">
-        <img src="/partners/accenture.svg" alt="Accenture.">
-        <img src="/partners/energie.svg" alt="Energie.">
-        <img src="/partners/vruchtvlees.svg" alt="Vruchtvlees.">
-        <img src="/partners/ilumy.svg" alt="Ilumy.">
-        <img src="/partners/kpmg.svg" alt="Kpmg.">
-      </div>
-    </div>
-    <Partners/>
   </div>
 </template>
 
