@@ -1,4 +1,4 @@
-Hey <b><%- params.name %></b> wants to become a student!
+Hey <b><%- params.firstName %> <%- params.lastName -%></b> wants to become a student!
 
 Here are his details:
 
