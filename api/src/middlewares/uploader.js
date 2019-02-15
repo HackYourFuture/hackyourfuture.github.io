@@ -80,15 +80,15 @@ function fileType(file, cb) {
 
 const Uploader = upload.fields([
     {
-        name: "input_file_cv",
+        name: "cv",
         maxCount: 1
     },
     {
-        name: "input_file_motivation_letter",
+        name: "motivation",
         maxCount: 1
     },
     {
-        name: "input_file_assignment",
+        name: "screenshot",
         maxCount: 1
     }
 ]);
