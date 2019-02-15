@@ -5,7 +5,7 @@ RUN_AWS_CLI := docker run -it --rm \
 		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
 		-e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"\
 		-e "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}"\
-		mesosphere/aws-cli
+		infrastructureascode/aws-cli aws
 
 VERSION = $(shell git rev-parse --short=7 HEAD)
 
@@ -30,7 +30,7 @@ api-zip:  api-$(VERSION).zip
 .PHONY: publish-lambda
 upload-lambda: api-$(VERSION).zip
 	@$(RUN_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip && \
-	sleep 5
+	sleep 1
 
 .PHONY: publish-api
 publish-api: clean-zip upload-lambda
