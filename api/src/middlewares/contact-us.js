@@ -24,11 +24,10 @@ const validate = req => {
             min: 9
         });
     req.check("email").isEmail();
-    req.check("about")
+    req.check("note")
         .isString()
         .isLength({
-            min: 2,
-            max: 200
+            min: 2
         });
 
     return req.validationErrors();

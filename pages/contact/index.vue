@@ -122,7 +122,6 @@ const inputs = [
                         min: 2,
                         max: 200
                     })
-                    .isAlpha()
                     .isRequired().errors
         }
     },

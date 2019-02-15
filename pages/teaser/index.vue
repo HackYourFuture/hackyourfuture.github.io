@@ -128,8 +128,7 @@ const inputs = [
             label: "Something else you would like to notify us about?",
             name: "note",
             validate: value =>
-                new FieldError(value).isLength({ min: 0, max: 200 }).isAlpha()
-                    .errors
+                new FieldError(value).isLength({ min: 0, max: 200 }).errors
         }
     },
     {
