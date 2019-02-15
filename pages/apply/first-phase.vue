@@ -4,7 +4,7 @@
       <div class="upload__header">
         <div class="upload__header-content" v-html="cv_assignment"/>
         <div ref="upload__form" class="upload__form form">
-          <formComponent :action="action" :inputs="inputs" />
+          <FormComponent :action="action" :inputs="inputs" />
         </div>
       </div>
     </main>
@@ -50,6 +50,13 @@ const inputs = [
             name: "motivation",
             cols: "50",
             rows: "1"
+        }
+    },
+    {
+        type: "input-hidden",
+        props: {
+            name: "token",
+            value: window.location.href.match("token=(.*)")
         }
     },
     {

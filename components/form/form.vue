@@ -26,6 +26,7 @@ import InputDrop from "~/components/form/inputs/drop";
 import InputRadio from "~/components/form/inputs/radio";
 import InputButton from "~/components/form/inputs/button";
 import InputFile from "~/components/form/inputs/file";
+import InputHidden from "~/components/form/inputs/hidden";
 const allInputTypes = [
     "select",
     "input[type='search']",
@@ -41,7 +42,8 @@ const components = {
     "input-drop": InputDrop,
     "input-radio": InputRadio,
     "input-button": InputButton,
-    "input-file": InputFile
+    "input-file": InputFile,
+    "input-hidden": InputHidden
 };
 export default {
     components,

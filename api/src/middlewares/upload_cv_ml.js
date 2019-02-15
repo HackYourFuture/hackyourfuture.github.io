@@ -43,18 +43,20 @@ module.exports = (req, res) => {
                             message: "you got an email :-)"
                         });
                     })
-                    .catch(() => {
+                    .catch(err => {
                         sendEmail(
                             [fromEmail],
                             "** Confirmation email **",
                             `Uploading CV file is failed:${[email]}`
                         );
+                        console.log(err);
                         res.status(500).send({
                             message: "Something went wrong"
                         });
                     })
             )
-            .catch(() => {
+            .catch(err => {
+                console.log(err);
                 res.status(404).send("Your name does not exist");
             });
     } else {
