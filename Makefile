@@ -1,5 +1,5 @@
 RUN_AWS_CLI := docker run -it --rm \
-		-v /Users/m/work/hyf-web:/workspace \
+		-v $(shell pwd):/workspace \
 		-v ~/.aws:/root/.aws \
 		-e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
 		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
