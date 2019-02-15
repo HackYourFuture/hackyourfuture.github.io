@@ -57,7 +57,6 @@ const inputs = [
             validate: value =>
                 new FieldError(value)
                     .isLength({ min: 2, max: 100 })
-                    .isAlpha()
                     .isRequired().errors
         }
     },
@@ -70,7 +69,6 @@ const inputs = [
             validate: value =>
                 new FieldError(value)
                     .isLength({ min: 2, max: 100 })
-                    .isAlpha()
                     .isRequired().errors
         }
     },
@@ -110,7 +108,6 @@ const inputs = [
             validate: value =>
                 new FieldError(value)
                     .isLength({ min: 2, max: 200 })
-                    .isAlpha()
                     .isRequired().errors
         }
     },

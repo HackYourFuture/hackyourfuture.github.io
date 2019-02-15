@@ -1,13 +1,21 @@
 <template>
   <form ref="form" :action="action" @submit="e => onSubmit(e)">
-    <div
-      v-for="(input, key) in inputs"
-      ref="input"
-      :key="key"
-      :is="input.type"
-      v-bind="input.props || {}"
-      :class="formRowClasses(input)"
-    />
+    <div v-if="error" ref="error" style="margin: 40px 0;">
+      <p>{{ error }}</p>
+    </div>
+    <div :class="{ fadeOutForm: success }">
+      <div
+        v-for="(input, key) in inputs"
+        ref="input"
+        :key="key"
+        :is="input.type"
+        v-bind="input.props || {}"
+        :class="formRowClasses(input)"
+      />
+    </div>
+    <div :class="{ fadeInMSG: success }" style="opacity: 0">
+      <p>{{ message }}</p>
+    </div>
   </form>
 </template>
 <script>
@@ -38,6 +46,13 @@ const components = {
 export default {
     components,
     props: { inputs: Array, action: String },
+    data() {
+        return {
+            error: "",
+            success: false,
+            message: ""
+        };
+    },
     mounted() {
         Object.keys(components).forEach(componentName => {
             const component = components[componentName];
@@ -104,7 +119,30 @@ export default {
                 }
             };
 
-            const { data } = await axios(config);
+            try {
+                const { data } = await axios(config);
+                this.showSuccessMessage(data);
+            } catch (error) {
+                const { data } = error.response;
+                this.error = data.error;
+                this.scrollToError();
+            }
+        },
+
+        scrollToError() {
+            const { form } = this.$refs;
+            const top = form.getBoundingClientRect().top + window.scrollY - 100;
+            window.scroll({
+                top,
+                behavior: "smooth"
+            });
+        },
+
+        showSuccessMessage(data) {
+            const { message } = data;
+            this.success = true;
+            this.error = "";
+            this.message = `${message}!`;
         },
 
         setActive(e) {
@@ -119,6 +157,19 @@ export default {
 </script>
 
 <style lang="scss">
+.fadeOutForm {
+    opacity: 0;
+    display: none;
+    -webkit-transition: all 1000ms linear;
+    transition: all 1000ms linear;
+}
+
+.fadeInMSG {
+    opacity: 1 !important;
+    -webkit-transition: opacity 2000ms linear;
+    transition: opacity 2000ms linear;
+}
+
 .form {
     .half-width,
     .full-width {
