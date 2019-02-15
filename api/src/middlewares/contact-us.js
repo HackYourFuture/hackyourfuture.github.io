@@ -24,7 +24,7 @@ const validate = req => {
             min: 9
         });
     req.check("email").isEmail();
-    req.check("note")
+    req.check("about")
         .isString()
         .isLength({
             min: 2

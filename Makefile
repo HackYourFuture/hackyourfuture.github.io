@@ -1,11 +1,11 @@
 RUN_AWS_CLI := docker run -it --rm \
-		-v $(shell pwd):/workspace \
+		-v /Users/m/work/hyf-web:/workspace \
 		-v ~/.aws:/root/.aws \
 		-e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
 		-e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
 		-e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}"\
 		-e "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}"\
-		infrastructureascode/aws-cli aws
+		mesosphere/aws-cli
 
 VERSION = $(shell git rev-parse --short=7 HEAD)
 
@@ -34,12 +34,19 @@ upload-lambda: api-$(VERSION).zip
 
 .PHONY: publish-api
 publish-api: clean-zip upload-lambda
-	@$(RUN_AWS_CLI) lambda update-function-code \
+	@$(eval LAMBDA_VERSION = $(shell $(RUN_AWS_CLI) lambda update-function-code \
 		--s3-bucket=hyf-api-deploy \
 		--s3-key=api-$(VERSION).zip \
 		--publish \
-		--function-name=gateway_proxy &> /dev/null && \
-		echo "Function updated"
+		--function-name=gateway_proxy --query Version))
+	$(RUN_AWS_CLI) lambda publish-version \
+		--function-name=gateway_proxy \
+		--description=$(VERSION) --query Version
+	$(RUN_AWS_CLI) lambda update-alias \
+		--name=website-api-prod \
+		--function-name=gateway_proxy \
+		--function-version=$(LAMBDA_VERSION)
+
 
 dist: node_modules
 	@npm run generate
