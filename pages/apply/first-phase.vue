@@ -59,6 +59,7 @@ const inputs = [
             value: () => {
                 if (!window) return "";
                 const { href } = window.location;
+                console.log(href);
                 href.match(/token=(.*)$/g)[0].replace(/token=/, "");
             }
         }
