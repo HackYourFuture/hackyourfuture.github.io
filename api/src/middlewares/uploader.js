@@ -57,7 +57,7 @@ const allowedMimeTypes = [
     "image/png",
     "text/plain"
 ];
-const fieldsName = ["cv", "motivation_letter", "input_file_assignment"];
+const fieldsName = ["cv", "motivation", "screenshot"];
 
 function fileType(file, cb) {
     const fileTypeAccepted = allowedMimeTypes.includes(file.mimetype);

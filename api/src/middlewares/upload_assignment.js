@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     const { email } = req.body;
     const assignmentUrl = req.body.url;
     const assignmentMessage = req.body.message;
-    const assignmentFileUrl = req.files.input_file_assignment[0].location;
+    const assignmentFileUrl = req.files.screenshot[0].location;
     const updatedUrlAssignment = {
         assignmentFileUrl,
         assignmentUrl,
