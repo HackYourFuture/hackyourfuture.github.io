@@ -56,7 +56,11 @@ const inputs = [
         type: "input-hidden",
         props: {
             name: "token",
-            value: window.location.href.match("token=(.*)")
+            value: () => {
+                if (!window) return "";
+                const { href } = window.location;
+                href.match(/token=(.*)$/g)[0].replace(/token=/, "");
+            }
         }
     },
     {
