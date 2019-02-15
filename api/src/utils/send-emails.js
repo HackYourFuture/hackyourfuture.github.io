@@ -16,7 +16,9 @@ const sendEmail = (ToAddresses, Data, Subject, ReplyToAddresses = []) => {
         ses.sendEmail(
             {
                 Destination: {
-                    ToAddresses
+                    ToAddresses: Array.isArray(ToAddresses)
+                        ? ToAddresses
+                        : [ToAddresses]
                 },
                 Message: {
                     Body: {
