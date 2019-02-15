@@ -22,7 +22,7 @@ const validate = req => {
         .isLength({
             min: 9
         });
-    req.check("computer").isBoolean();
+    req.check("computer").is();
     req.check("education")
         .isString()
         .isLength({

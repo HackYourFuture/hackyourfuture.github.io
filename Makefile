@@ -39,10 +39,10 @@ publish-api: clean-zip upload-lambda
 		--s3-key=api-$(VERSION).zip \
 		--publish \
 		--function-name=gateway_proxy --query Version))
-	$(RUN_AWS_CLI) lambda publish-version \
+	@$(RUN_AWS_CLI) lambda publish-version \
 		--function-name=gateway_proxy \
 		--description=$(VERSION) --query Version
-	$(RUN_AWS_CLI) lambda update-alias \
+	@$(RUN_AWS_CLI) lambda update-alias \
 		--name=website-api-prod \
 		--function-name=gateway_proxy \
 		--function-version=$(LAMBDA_VERSION)
