@@ -53,7 +53,8 @@ module.exports = (req, res) => {
                 message: "Thanks for applying"
             });
         })
-        .catch(() => {
+        .catch(err => {
+            console.log(err);
             res.status(500).send({
                 message: "Something went wrong"
             });
