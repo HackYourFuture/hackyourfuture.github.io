@@ -30,7 +30,7 @@ api-zip:  api-$(VERSION).zip
 .PHONY: publish-lambda
 upload-lambda: api-$(VERSION).zip
 	@$(RUN_AWS_CLI) s3 cp /workspace/api-$(VERSION).zip s3://hyf-api-deploy/api-$(VERSION).zip && \
-	sleep 5
+	sleep 1
 
 .PHONY: publish-api
 publish-api: clean-zip upload-lambda
