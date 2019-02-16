@@ -26,7 +26,7 @@ const upload = multer({
                 null,
                 file.fieldname +
                     "-" +
-                    encodeURIComponent(req.body.token) +
+                    req.body.token +
                     "-" +
                     Date.now() +
                     path.extname(file.originalname)
