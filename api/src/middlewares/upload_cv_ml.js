@@ -11,7 +11,7 @@ const deadline = new Date(); // to be filled later with the deadline
 const now = new Date();
 
 module.exports = (req, res) => {
-    const { token } = req.query;
+    const { token } = req.body;
 
     const email = decryptEmail(token);
     const textArea_message_cv = req.body.textArea_message;
