@@ -10,6 +10,7 @@ const {
     Uploader,
     UploadCVML,
     UploadAssignment,
+    GetPresignedS3Url,
     Teach,
     Teaser,
     DonationStatus
@@ -33,6 +34,7 @@ app.post("/apply/profile", Uploader, UploadCVML);
 app.post("/apply/assignment", Uploader, UploadAssignment);
 app.post("/teach", Teach);
 app.post("/apply/teaser", Teaser);
+app.post("/request-upload", GetPresignedS3Url);
 app.post("/donate", (req, res) => donate(req.body, res));
 app.get("/applicant", GetApplicantFromToken);
 app.get("/donation/status", DonationStatus);
