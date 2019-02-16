@@ -17,18 +17,17 @@ module.exports = function(req, res) {
     const { type, fileExtension, fileName } = req.body;
 
     if (!type || !fileExtension) {
+        console.log(req.body, req.params);
         res.status(400).json({
             error: "request file upload requires type and fileName"
         });
         return;
     }
 
-    const hash = encryptData();
-
     const presignedGETURL = s3.createPresignedPost(
         {
             Bucket: "hyf-website-uploads",
-            Key: `${type}-${hash}-${Date.now()}.${fileExtension}`, //filename
+            Key: `${type}-${Date.now()}.${fileExtension}`, //filename
             Expires: 100 //time to expire in seconds
         },
         (err, data) => {
