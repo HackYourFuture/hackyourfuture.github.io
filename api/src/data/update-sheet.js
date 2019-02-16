@@ -171,6 +171,7 @@ function getApplicant(email) {
                         name => columnPosition[name] === iterIndex
                     )[0];
                     state[cellName] = iterValue;
+                    return state;
                 };
                 const row = foundedAt
                     ? rows[foundedAt - 1].reduce(objectRow, {})
