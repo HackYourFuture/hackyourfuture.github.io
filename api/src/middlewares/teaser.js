@@ -40,10 +40,9 @@ const validate = req => {
 };
 
 module.exports = (req, res) => {
-    const isValid = !validate(req);
+    const errors = validate(req);
 
-    if (!isValid) {
-        const errors = validate(req);
+    if (!errors.length) {
         console.error("Validation errors: ", errors);
         res.status(400).json({
             errors
