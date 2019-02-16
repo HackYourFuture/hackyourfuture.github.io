@@ -14,7 +14,8 @@ module.exports = (req, res) => {
     const { token } = req.body;
 
     const email = decryptEmail(token);
-    const textArea_message_cv = req.body.textArea_message;
+    const textArea_message_cv = req.body.cv_txt;
+    const textArea_message_motivation = req.body.motivation_txt;
     const cvUrl = req.files.cv[0].location;
     const mlUrl = req.files.motivation[0].location;
     const updatedFilesUrl = {

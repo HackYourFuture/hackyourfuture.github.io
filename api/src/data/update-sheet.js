@@ -166,7 +166,15 @@ function getApplicant(email) {
                     return state;
                 }, false);
 
-                resolve({ foundedAt, totalRows });
+                const objectRow = (state, iterValue, iterIndex) => {
+                    const cellName = Object.keys(columnPosition).filter(
+                        name => columnPosition[name] === iterIndex
+                    )[0];
+                    state[cellName] = iterValue;
+                };
+                const row = foundedAt ? rows[foundedAt].reduce(objectRow) : {};
+
+                resolve({ foundedAt, totalRows, row });
             }
         );
     });

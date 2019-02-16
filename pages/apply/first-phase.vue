@@ -29,7 +29,7 @@ const inputs = [
         className: "full-width",
         props: {
             label: "I would like to write something about myself *",
-            name: "cv",
+            name: "cv_txt",
             cols: "50",
             rows: "1"
         }
@@ -47,7 +47,7 @@ const inputs = [
         className: "full-width",
         props: {
             label: "I would like to write my motivation letter",
-            name: "motivation",
+            name: "motivation_txt",
             cols: "50",
             rows: "1"
         }

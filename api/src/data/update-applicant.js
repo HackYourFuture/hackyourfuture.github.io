@@ -16,7 +16,8 @@ async function updateApplicant(email, updates) {
             throw new Error(APPLICANT_DOESNT_EXIST);
         }
 
-        await saveApplicant(result.foundedAt, updates);
+        const { row } = result;
+        await saveApplicant(result.foundedAt, Object.assign({}, row, updates));
         return "Applicant updated successfully";
     } catch (error) {
         if (error === APPLICANT_DOESNT_EXIST) {
