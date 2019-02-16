@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
         return;
     }
 
-    const website = "http://hyf-website.s3-website.eu-central-1.amazonaws.com";
+    const website = "https://www.hackyourfuture.net";
     const encryptedEmail = encryptEmail(req.body.email);
     const verififactioURL = `${website}/apply/first-phase/?token=${encryptedEmail}`;
     console.log(verififactioURL);
