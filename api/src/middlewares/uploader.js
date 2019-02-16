@@ -52,7 +52,6 @@ const fileTypes = [
     ".docx"
 ];
 const allowedMimeTypes = [
-    "text/plain",
     "application/msword",
     "application/x-pdf",
     "application/pdf",
