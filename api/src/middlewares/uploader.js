@@ -20,7 +20,6 @@ const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: "hyf-website-uploads",
-        acl: "public-read",
         contentDisposition: "inline",
         contentType: (req, file, cb) => {
             cb(null, file.mimetype);
