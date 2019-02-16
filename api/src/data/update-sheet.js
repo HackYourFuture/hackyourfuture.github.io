@@ -172,7 +172,9 @@ function getApplicant(email) {
                     )[0];
                     state[cellName] = iterValue;
                 };
-                const row = foundedAt ? rows[foundedAt].reduce(objectRow) : {};
+                const row = foundedAt
+                    ? rows[foundedAt - 1].reduce(objectRow)
+                    : {};
 
                 resolve({ foundedAt, totalRows, row });
             }
