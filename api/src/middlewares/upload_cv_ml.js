@@ -21,7 +21,8 @@ module.exports = (req, res) => {
     const updatedFilesUrl = {
         cvUrl,
         mlUrl,
-        textArea_message_cv
+        textArea_message_cv,
+        textArea_message_motivation
     };
     if (now <= deadline) {
         getApplicant(email)
