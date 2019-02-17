@@ -1,4 +1,5 @@
 const aws = require("aws-sdk");
+const uuid = require("uuid/v4");
 const { encryptData } = require("../utils/email-crypto");
 let s3;
 
@@ -24,11 +25,22 @@ module.exports = function(req, res) {
         return;
     }
 
+    const filename = `${uuid()}.${fileExtension}`;
+
     const presignedGETURL = s3.createPresignedPost(
         {
             Bucket: "hyf-website-uploads",
-            Key: `${type}-${Date.now()}.${fileExtension}`, //filename
-            Expires: 100 //time to expire in seconds
+            Key: filename, //filename
+            Expires: 100, //time to expire in seconds
+            Conditions: [
+                { bucket: "hyf-website-uploads" },
+                { key: filename },
+                { acl: "public-read" },
+                { success_action_status: "201" },
+                // Optionally control content type and file size
+                // {'Content-Type': 'application/pdf'},
+                ["content-length-range", 0, 1000000]
+            ]
         },
         (err, data) => {
             if (err) {
