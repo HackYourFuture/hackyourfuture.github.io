@@ -31,14 +31,13 @@ module.exports = function(req, res) {
         {
             Bucket: "hyf-website-uploads",
             Key: filename, //filename
-            Expires: 100, //time to expire in seconds
+            Expires: 500, //time to expire in seconds
             Conditions: [
                 { bucket: "hyf-website-uploads" },
                 { key: filename },
-                { acl: "public-read" },
+                { acl: "public-read" }
                 // Optionally control content type and file size
                 // {'Content-Type': 'application/pdf'},
-                ["content-length-range", 0, 1000000]
             ]
         },
         (err, data) => {
