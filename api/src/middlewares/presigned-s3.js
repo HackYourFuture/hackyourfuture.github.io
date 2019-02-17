@@ -36,7 +36,6 @@ module.exports = function(req, res) {
                 { bucket: "hyf-website-uploads" },
                 { key: filename },
                 { acl: "public-read" },
-                { success_action_status: "201" },
                 // Optionally control content type and file size
                 // {'Content-Type': 'application/pdf'},
                 ["content-length-range", 0, 1000000]
