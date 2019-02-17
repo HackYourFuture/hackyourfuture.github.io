@@ -2,10 +2,9 @@
   <div>
     <div v-if="errorMessage" class="error" v-html="errorMessage"/>
     <div class="check">
-      <input :name="name" type="checkbox">
       <span ref="label">{{ label }}</span>
     </div>
-    <textarea :cols="cols" :rows="rows"/>
+    <textarea :name="name" :cols="cols" :rows="rows"/>
   </div>
 </template>
 

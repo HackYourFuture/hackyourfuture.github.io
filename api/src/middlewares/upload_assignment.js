@@ -15,9 +15,11 @@ module.exports = (req, res) => {
         "https://hyf-website-uploads.s3.eu-central-1.amazonaws.com";
     const assignmentUrl = req.body.url;
     const assignmentMessage = req.body.message;
-    const assignmentFileUrl = Array.isArray(req.body.screenshot)
-        ? req.body.cv.map(i => `${bucketUrl}/${i}`).join("\n")
-        : `${bucketUrl}/${req.body.screenshot}`;
+    const assignmentFileUrl = req.body.screenshot
+        ? Array.isArray(req.body.screenshot)
+            ? req.body.cv.map(i => `${bucketUrl}/${i}`).join("\n")
+            : `${bucketUrl}/${req.body.screenshot}`
+        : "";
     const updatedUrlAssignment = {
         assignmentFileUrl,
         assignmentUrl,

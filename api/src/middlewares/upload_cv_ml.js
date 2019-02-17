@@ -18,12 +18,16 @@ module.exports = (req, res) => {
     const textArea_message_motivation = req.body.motivation_txt;
     const bucketUrl =
         "https://hyf-website-uploads.s3.eu-central-1.amazonaws.com";
-    const cvUrl = Array.isArray(req.body.cv)
-        ? req.body.cv.map(i => `${bucketUrl}/${i}`).join("\n")
-        : `${bucketUrl}/${req.body.cv}`;
-    const mlUrl = Array.isArray(req.body.motivation)
-        ? req.body.motivation.map(i => `${bucketUrl}/${i}`).join("\n")
-        : `${bucketUrl}/${req.body.motivation}`;
+    const cvUrl = req.body.cv
+        ? Array.isArray(req.body.cv)
+            ? req.body.cv.map(i => `${bucketUrl}/${i}`).join("\n")
+            : `${bucketUrl}/${req.body.cv}`
+        : "";
+    const mlUrl = req.body.motivation
+        ? Array.isArray(req.body.motivation)
+            ? req.body.motivation.map(i => `${bucketUrl}/${i}`).join("\n")
+            : `${bucketUrl}/${req.body.motivation}`
+        : "";
 
     const updatedFilesUrl = {
         cvUrl,
