@@ -94,14 +94,7 @@ export default {
 
         formData() {
             const data = new FormData(this.$refs.form);
-            if (!this.isMultipart()) return new URLSearchParams(data);
-            return data;
-        },
-
-        isMultipart() {
-            return (
-                this.inputs.filter(el => el.type === "input-file").length > 0
-            );
+            return new URLSearchParams(data);
         },
 
         async onSubmit(e) {
@@ -115,9 +108,7 @@ export default {
                 url: this.action,
                 data: this.formData(),
                 headers: {
-                    "Content-Type": !this.isMultipart()
-                        ? "application/x-www-form-urlencoded"
-                        : "multipart/form-data"
+                    "Content-Type": "application/x-www-form-urlencoded"
                 }
             };
 

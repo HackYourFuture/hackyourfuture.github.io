@@ -16,14 +16,22 @@ module.exports = (req, res) => {
     const email = decryptEmail(token);
     const textArea_message_cv = req.body.cv_txt;
     const textArea_message_motivation = req.body.motivation_txt;
-    const cvUrl = req.files.cv[0].location;
-    const mlUrl = req.files.motivation[0].location;
+    const bucketUrl =
+        "https://hyf-website-uploads.s3.eu-central-1.amazonaws.com";
+    const cvUrl = Array.isArray(req.body.cv)
+        ? req.body.cv.map(i => `${bucketUrl}/${i}`).join("\n")
+        : `${bucketUrl}/${req.body.cv}`;
+    const mlUrl = Array.isArray(req.body.motivation)
+        ? req.body.motivation.map(i => `${bucketUrl}/${i}`).join("\n")
+        : `${bucketUrl}/${req.body.motivation}`;
+
     const updatedFilesUrl = {
         cvUrl,
         mlUrl,
         textArea_message_cv,
         textArea_message_motivation
     };
+
     if (now <= deadline) {
         getApplicant(email)
             .then(() =>
