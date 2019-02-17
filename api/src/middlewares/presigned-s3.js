@@ -48,6 +48,8 @@ module.exports = function(req, res) {
                 return;
             }
 
+            data.fields.key = `${filename}`;
+
             res.status(200).json(data);
         }
     );
