@@ -7,7 +7,6 @@ const {
     Apply,
     GetApplicantFromToken,
     ContactUs,
-    Uploader,
     UploadCVML,
     UploadAssignment,
     GetPresignedS3Url,
@@ -30,8 +29,8 @@ app.use(expressValidator());
 app.post("/apply", Apply);
 app.post("/contact", ContactUs);
 app.post("/apply", Apply);
-app.post("/apply/profile", Uploader, UploadCVML);
-app.post("/apply/assignment", Uploader, UploadAssignment);
+app.post("/apply/profile", UploadCVML);
+app.post("/apply/assignment", UploadAssignment);
 app.post("/teach", Teach);
 app.post("/apply/teaser", Teaser);
 app.post("/request-upload", GetPresignedS3Url);

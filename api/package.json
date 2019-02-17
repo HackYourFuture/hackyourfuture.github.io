@@ -38,8 +38,6 @@
     "google-auth-library": "^1.6.1",
     "googleapis": "^32.0.0",
     "lodash.template": "^4.4.0",
-    "multer": "^1.3.1",
-    "multer-s3": "^2.7.0",
     "uuid": "^3.3.2"
   }
 }
