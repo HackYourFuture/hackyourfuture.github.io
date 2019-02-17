@@ -53,7 +53,7 @@ dist: node_modules
 
 .PHONY: upload-web
 upload-web: dist
-	@$(RUN_AWS_CLI) s3 cp /workspace/dist s3://hyf-website --recursive
+	@$(RUN_AWS_CLI) s3 cp /workspace/dist s3://hyf-website --recursive --cache-control max-age=300
 
 .PHONY: publish
 publish: publish-api upload-web
