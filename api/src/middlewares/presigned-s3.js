@@ -15,17 +15,17 @@ if (process.env.DEVELOPMENT) {
 }
 
 module.exports = function(req, res) {
-    const { type, fileExtension, fileName } = req.body;
+    const { type, fileName } = req.body;
 
-    if (!type || !fileExtension) {
-        console.log(req.body, req.params);
+    if (!type || !fileName) {
         res.status(400).json({
             error: "request file upload requires type and fileName"
         });
         return;
     }
 
-    const filename = `${uuid()}.${fileExtension}`;
+    const extension = fileName.split(".").pop();
+    const filename = `${uuid()}.${extension}`;
 
     const presignedGETURL = s3.createPresignedPost(
         {
