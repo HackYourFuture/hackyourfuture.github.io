@@ -4,7 +4,7 @@
     <div class="check">
       <span ref="label">{{ label }}</span>
     </div>
-    <textarea :name="name" :cols="cols" :rows="rows"/>
+    <textarea ref="textarea" :name="name" :cols="cols" @keyup="resize" />
   </div>
 </template>
 
@@ -16,6 +16,13 @@ export default {
         cols: String,
         rows: String,
         errorMessage: String
+    },
+    methods: {
+        resize() {
+            const { textarea } = this.$refs;
+            textarea.style.height = "1px";
+            textarea.style.height = 25 + textarea.scrollHeight + "px";
+        }
     }
 };
 </script>
@@ -29,5 +36,9 @@ input[type="checkbox"] {
     width: 14px;
     height: 14px;
     margin-right: 5px;
+}
+textarea {
+    display: inline-block;
+    min-height: 14px;
 }
 </style>

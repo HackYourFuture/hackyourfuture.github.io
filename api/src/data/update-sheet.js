@@ -27,9 +27,10 @@ const columnPosition = {
     cvUrl: 9,
     mlUrl: 10,
     textArea_message_cv: 11,
-    assignmentUrl: 12,
-    assignmentFileUrl: 13,
-    assignmentMessage: 14
+    textArea_message_motivation: 12,
+    assignmentUrl: 13,
+    assignmentFileUrl: 14,
+    assignmentMessage: 15
 };
 
 function handleApiError(error) {
@@ -63,6 +64,7 @@ function saveApplicant(
         cvUrl,
         mlUrl,
         textArea_message_cv,
+        textArea_message_motivation,
         acceptedFirstRound,
         emailSent,
         assignmentFileUrl,
@@ -92,6 +94,7 @@ function saveApplicant(
                 cvUrl,
                 mlUrl,
                 textArea_message_cv,
+                textArea_message_motivation,
                 acceptedFirstRound,
                 emailSent,
                 assignmentFileUrl,
