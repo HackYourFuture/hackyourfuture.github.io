@@ -23,7 +23,7 @@
           
           <input id="paypal" v-model="method" class="method-radio" type="radio" value="paypal">
           <label class="method-label" for="paypal">
-            <img class="paypal-icon" src="/icons/paypal.svg">
+            <img class="paypal-icon" src="/icons/paypal.svg" alt="paypal icon">
             <span class="method-text-span">PayPal</span>
           </label>
         </div>
