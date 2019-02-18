@@ -23,7 +23,7 @@
           
           <input id="paypal" v-model="method" class="method-radio" type="radio" value="paypal">
           <label class="method-label" for="paypal">
-            <i class="pf pf-paypal-alt"/>
+            <img class="paypal-icon" src="/icons/paypal.svg" alt="paypal icon">
             <span class="method-text-span">PayPal</span>
           </label>
         </div>
@@ -35,6 +35,7 @@
             class="amount-input"
             type="number"
             name="amount"
+            min="1"
             placeholder="Amount"
             required
           >
@@ -46,6 +47,7 @@
           type="text"
           name="description"
           placeholder="Message"
+          autocomplete="off"
         >
         <button class="submit-button" type="submit" name="submit">Donate</button>
       </form>
@@ -62,7 +64,6 @@
 <script>
 import "~/assets/css/css/paymentfont.min.css";
 const lambdaUrl = process.env.lambdaUrl || "http://localhost:3005/";
-// const lambdaUrl = "http://localhost:3005/";
 const URL_DONATION_SUBMIT = `${lambdaUrl}donate`;
 const URL_DONATION_STATUS = `${lambdaUrl}donation/status`;
 
@@ -137,7 +138,7 @@ export default {
         position: relative;
         width: calc(90% - 5px);
         font-weight: bold;
-        font-size: 26px;
+        font-size: 30px;
     }
 
     .form-check {
@@ -152,10 +153,11 @@ export default {
             width: auto;
             top: 0.72em;
             zoom: 2;
-            padding-right: 0;
+            padding-right: 5px;
             margin-right: 0;
             padding: 0;
             vertical-align: middle;
+            cursor: pointer;
         }
         .method-label {
             display: flex;
@@ -166,56 +168,70 @@ export default {
             cursor: pointer;
             margin-left: 25px;
             padding: 0;
-        }
+            width: 50px;
+            color: $color-purple;
 
-        .last-method-label i {
-            padding: 1px 0 0 0;
-        }
-
-        .method-text-span {
-            //   display: none;
+            .paypal-icon {
+                width: 100%;
+                height: 30px;
+            }
         }
     }
     .input-container {
         margin-top: 20px;
-        position: relative;
         height: 50px;
         border-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         background-color: rgb(219, 213, 213);
         .amount-label {
-            float: left;
-            width: 10%;
-            height: 49px;
+            display: block;
+            flex: 0 1 40px;
+            text-align: center;
+            height: 100%;
             position: relative;
+            left: 0;
+            top: 0;
+            line-height: 45px;
             border: 1px solid rgb(219, 213, 213);
             background-color: rgb(219, 213, 213);
             border-radius: 5px;
-            padding-top: 10px;
-            margin-top: -10px;
+            color: $color-purple;
+
+            font-size: 25px;
+            padding: 0 5px;
+            margin: 0;
         }
         .amount-input {
-            float: left;
-            width: 88%;
-            margin-left: 5px;
-            position: relative;
+            flex: 1 1 auto;
+            height: 100%;
+            margin-left: 3px;
             border: 2px solid rgb(219, 213, 213);
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
+            font-size: 25px;
+            padding: 5px;
         }
     }
 
     .form-group {
         text-align: center;
         .description-input {
+            width: 100%;
             margin-top: 10px;
             border: 2px solid rgb(219, 213, 213);
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
+            font-size: 20px;
+            padding: 5px 5px;
         }
         .submit-button {
             margin-top: 15px;
             border-radius: 6px;
             background-color: white;
+            color: $color-purple;
+            cursor: pointer;
         }
     }
     .blur-screen {
