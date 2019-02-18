@@ -1,6 +1,6 @@
-Hey <b><%- params.firstName %> <%- params.lastName %></b> wants to teach!
+Hey <b><%- params.firstName %> <%- params.lastName %></b> has applied!
 
-Here are his details:
+Here are their details:
 
 <% for(let k in params) { %>
 <%- k %>: <%- params[k] %>

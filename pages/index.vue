@@ -39,12 +39,13 @@
         </div>
         <div class="curiculum__container">
           <div class="curiculum__content" v-html="curiculum"/>
-          <div class="curiculum__content-link">
+          <div class="curiculum__content-link">Time is your most valuable resource.
+            <br>Find out about donating your
             <nuxt-link :to="'/teach'">
-              Time is your most valuable resource.
-              <br>Find out about donating your
-              <span class="underline">time and expertise</span> here.
+              <span class="underline">time and expertise</span>
             </nuxt-link>
+
+            here.
           </div>
         </div>
       </section>
@@ -70,19 +71,12 @@
         <div class="alumni__container">
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
-          <div>
+          <div>Get in touch to talk about
             <nuxt-link :to="'/hire'">
-              Get in touch to talk about
               <span class="underline">hiring our graduates.</span>
             </nuxt-link>
           </div>
-          <div v-html="laptops"/>
-          <div>
-            <nuxt-link :to="'/contact'">
-              Contact us about
-              <span class="underline">donating laptops.</span>
-            </nuxt-link>
-          </div>
+          <br>
         </div>
       </section>
     </main>

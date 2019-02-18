@@ -1,6 +1,6 @@
 # What we teach
 
-Our students learn to build full-stack applications. We teach HTML, CSS, Command Line, Git, JavaScript, Node.js, React.js, MySQL and MongoDB.
+Our students learn how to build full-stack applications. We teach HTML, CSS, Command Line, Git, JavaScript, Node.js, React.js and MySQL.
 
 Aside from technology, our students learn how to think like a programmer by solving problems and work in teams. These fundamental skills prepare our students for their first jobs as web developers.
 

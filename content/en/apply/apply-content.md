@@ -12,7 +12,7 @@ We’re looking for people who:
 
 ### Also:
 
-- We accept students living all over the Netherlands and Beligum, and most parts of Denmark and Sweden.
+- We accept students living all over the Netherlands and Belgium, and most parts of Denmark and Sweden.
 - We cover the cost of train tickets for travel
 
 Not sure if coding is for you? Check out [freeCodeCamp](https://www.freecodecamp.org/) and try the basic JavaScript exercises to get an idea of what is ahead.

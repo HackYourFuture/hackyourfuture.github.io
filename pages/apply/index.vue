@@ -188,6 +188,13 @@ export default {
 
 <style lang="scss">
 .apply_page {
+    .applyBtn {
+        text-align: center;
+        background-color: #293a7d;
+        padding: 1em;
+        color: white !important;
+    }
+
     &__header {
         padding: $base-vertical-rithm * 10;
         @include breakpoint("mobile_landscape") {

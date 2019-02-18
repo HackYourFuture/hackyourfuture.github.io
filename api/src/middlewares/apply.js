@@ -1,9 +1,8 @@
 const email = require("../utils/email");
+const countryEmail = require("../utils/countryEmail");
 const { getApplicant, saveApplicant } = require("../data/update-sheet");
 const sendEmail = require("../utils/send-emails");
 const { encryptEmail } = require("../utils/email-crypto");
-
-const fromEmail = "info@hackyourfuture.net";
 
 const ERROR_USER_FOUND = "User already exists";
 
@@ -103,7 +102,7 @@ module.exports = async (req, res) => {
     // Send an email to the organization
     try {
         await sendEmail(
-            [fromEmail],
+            [countryEmail(req.body.country)],
             email("apply_to_org.tpl", { params: req.body }),
             "A new student applied"
         );

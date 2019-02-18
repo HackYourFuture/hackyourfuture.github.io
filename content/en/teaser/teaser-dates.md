@@ -1,7 +1,6 @@
 <div>
 <h4>Dates:</h4>
-<p>30th of September </p>
-<p>2nd of December</p>
+<p>To Be Announced!</p>
 </div>
 
 <div>
@@ -11,7 +10,7 @@
 
 <div>
 <h4>Place:</h4>
-<p>Center of Amsterdam</p>
+<p>To Be Announced!</p>
 </div>
 
 <div>
