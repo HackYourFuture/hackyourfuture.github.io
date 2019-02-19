@@ -1,4 +1,5 @@
 const AWS = require("aws-sdk");
+const countryEmail = require("./countryEmail");
 
 const AWS_CONFIG = {
     region: "eu-west-1"
@@ -7,12 +8,9 @@ const AWS_CONFIG = {
 const ses = new AWS.SES(AWS_CONFIG);
 
 const sendEmail = (ToAddresses, Data, Subject, ReplyToAddresses = []) => {
-    const sourceEmail =
-        ToAddresses[0] === "application@hackyourfuture.net"
-            ? "application@hackyourfuture.net"
-            : "info@hackyourfuture.net";
+    const sourceEmail = countryEmail(ToAddresses[0]);
 
-    console.log("toAddressess 1", sourceEmail);
+    console.log("sourceEmail", sourceEmail);
 
     return new Promise((resolve, reject) => {
         if (process.env.DEVELOPMENT) {

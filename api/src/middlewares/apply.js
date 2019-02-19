@@ -102,7 +102,7 @@ module.exports = async (req, res) => {
     // Send an email to the organization
     try {
         await sendEmail(
-            [countryEmail(req.body.country)],
+            [req.body.country],
             email("apply_to_org.tpl", { params: req.body }),
             "A new student applied"
         );

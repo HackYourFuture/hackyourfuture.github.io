@@ -11,7 +11,7 @@ module.exports = function countryEmail(country) {
             fromEmail = "malmoe@hackyourfuture.net";
             break;
         default:
-            fromEmail = "application@hackyourfuture.net";
+            fromEmail = "info@hackyourfuture.net";
     }
     return fromEmail;
 };
