@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk");
 const countryEmail = require("./countryEmail");
+const checkAddressForInfo = require("./checkAddressForInfo");
 
 const AWS_CONFIG = {
     region: "eu-west-1"
@@ -8,7 +9,8 @@ const AWS_CONFIG = {
 const ses = new AWS.SES(AWS_CONFIG);
 
 const sendEmail = (ToAddresses, Data, Subject, ReplyToAddresses = []) => {
-    const sourceEmail = countryEmail(ToAddresses[0]);
+    console.log("toAddresses", ToAddresses);
+    const sourceEmail = checkAddressForInfo(ToAddresses[0]);
 
     console.log("sourceEmail", sourceEmail);
 
