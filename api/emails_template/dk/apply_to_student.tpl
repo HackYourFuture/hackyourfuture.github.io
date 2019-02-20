@@ -2,18 +2,21 @@ Dear applicant,
 
 Thank you for applying to our program! We're glad to see that you are interested in educating yourself in web-development and building a career in Denmark's IT industry! Please note that _your application is not complete yet_ and read the following instructions carefully.
 
- 
 Next Steps
 
 Send an email to cph@hackyourfuture.net containing the following informations:
 
-1) A SHORT MOTIVATIONAL LETTER. (max. 300 words) in English in which you describe:Why do you want to learn programming and particularly web-development?What would you like to build if you were a really good programmer?
+1) A SHORT MOTIVATIONAL LETTER. (max. 300 words) in English in which you describe:
+
+Why do you want to learn programming and particularly web-development?
+
+What would you like to build if you were a really good programmer?
 
 2) YOUR CV.If you don't have a CV ready, then you can simply fill out this form: https://goo.gl/forms/ByGmeyc0cSOAGPAY2
 
-The deadline for sending this mail is SEPTEMBER 24TH at 23:59 latest.
+The deadline for sending this mail is FEBRUARY 27TH at 23:59 latest.
 
-Once you have sent your CV and motivational letter we will register your application. Then we will send you a test assignment around SEPTEMBER 26TH (Don't worry, it requires no previous knowledge of programming).
+Once you have sent your CV and motivational letter we will register your application. Then we will send you a test assignment around MARCH 1st (Don't worry, it requires no previous knowledge of programming).
 
 Requirements
 
@@ -32,7 +35,8 @@ Don't know where to find them? Ask us about useful resources in your email and w
 
 ------------------------------------------------------------
 
-For more news about the program makes sure to check our website www.hackyourfuture.netand follow our updates on Facebook https://www.facebook.com/hackyourfuturecopenhagen/
+For more news about the program makes sure to check our website www.hackyourfuture.net and follow our updates on Facebook https://www.facebook.com/hackyourfuturecopenhagen/
 
 Kind regards, 
+
 The HackYourFuture Team

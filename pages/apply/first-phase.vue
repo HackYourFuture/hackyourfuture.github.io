@@ -4,7 +4,7 @@
       <div class="upload__header">
         <div class="upload__header-content" v-html="cv_assignment"/>
         <div ref="upload__form" class="upload__form form">
-          <FormComponent :action="action" :inputs="inputs" />
+          <FormComponent :action="action" :inputs="inputs"/>
         </div>
       </div>
     </main>
@@ -20,38 +20,38 @@ const inputs = [
         type: "input-file",
         className: "full-width",
         props: {
-            label: "CV *",
+            label: "CV",
             name: "cv"
         }
     },
+    // {
+    //     type: "input-textarea",
+    //     className: "full-width",
+    //     props: {
+    //         label: "I would like to write something about myself *",
+    //         name: "cv_txt",
+    //         cols: "50",
+    //         rows: "1"
+    //     }
+    // },
     {
         type: "input-textarea",
-        className: "full-width",
-        props: {
-            label: "I would like to write something about myself *",
-            name: "cv_txt",
-            cols: "50",
-            rows: "1"
-        }
-    },
-    {
-        type: "input-file",
         className: "full-width",
         props: {
             label: "Motivation *",
             name: "motivation"
         }
     },
-    {
-        type: "input-textarea",
-        className: "full-width",
-        props: {
-            label: "I would like to write my motivation letter",
-            name: "motivation_txt",
-            cols: "50",
-            rows: "1"
-        }
-    },
+    // {
+    //     type: "input-textarea",
+    //     className: "full-width",
+    //     props: {
+    //         label: "I would like to write my motivation letter",
+    //         name: "motivation_txt",
+    //         cols: "50",
+    //         rows: "1"
+    //     }
+    // },
     {
         type: "input-hidden",
         props: {

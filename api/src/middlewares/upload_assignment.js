@@ -1,5 +1,7 @@
 const { updateApplicant } = require("../data");
 
+const email = require("../utils/email");
+
 const { getApplicant } = require("../data/update-sheet");
 
 const sendEmail = require("../utils/send-emails");
@@ -31,7 +33,7 @@ module.exports = (req, res) => {
                     .then(() => {
                         sendEmail(
                             [email],
-                            "** Confirmation email **",
+                            email("confirmationCV.tpl"),
                             "We've received your files"
                         );
                         sendEmail(
