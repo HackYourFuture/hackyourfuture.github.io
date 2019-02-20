@@ -7,7 +7,7 @@
       </div>
       <HeaderNav/>
       <div class="mobile-logo">
-        <img src="/logos/logo-2.svg" alt="">
+        <img src="/logos/logo-2.svg" alt>
       </div>
     </div>
   </header>
@@ -85,6 +85,7 @@ export default {
         height: 22px;
         overflow: hidden;
         display: none;
+        cursor: pointer;
         @include breakpoint("mobile_landscape") {
             display: block;
         }

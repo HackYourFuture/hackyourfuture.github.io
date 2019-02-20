@@ -16,13 +16,12 @@
     a {
         position: relative;
         margin-right: $base-vertical-rithm * 8;
-        &:last-child {
-            // margin-right: 0;
-        }
         text-transform: uppercase;
         font-family: $fontWorkSans;
         font-weight: bold;
         letter-spacing: 0.5px;
+        display: inline-block;
+        margin-bottom: 10px;
         &.nuxt-link-exact-active {
             &:after {
                 content: "";
@@ -38,7 +37,7 @@
     .donate-btn {
         background-color: #293a7d;
         color: white;
-        padding: 0.5em;
+        padding: 5px 10px;
     }
 }
 </style>

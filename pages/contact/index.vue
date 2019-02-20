@@ -193,7 +193,7 @@ export default {
     }
     &__quicklink {
         position: absolute;
-        margin: $base-vertical-rithm * 10;
+        left: 60px;
         font-weight: bold;
         font-size: 24px;
         display: inline-block;
@@ -203,13 +203,14 @@ export default {
             bottom: -5px;
         }
         @include breakpoint("ipad_portrait") {
-            left: -60px;
-            top: 60px;
+            left: auto;
+            right: 5px;
+            top: 100px;
         }
         @include breakpoint("mobile_landscape") {
             font-size: 18px;
-            right: -40px;
-            top: 25px;
+            right: 30px;
+            top: 50px;
             left: auto;
         }
         img {

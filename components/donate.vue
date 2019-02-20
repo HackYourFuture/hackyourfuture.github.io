@@ -170,6 +170,7 @@ export default {
             padding: 0;
             width: 50px;
             color: $color-purple;
+            top: 0;
 
             .paypal-icon {
                 width: 100%;
