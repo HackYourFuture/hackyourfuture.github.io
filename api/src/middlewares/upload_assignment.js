@@ -38,19 +38,19 @@ module.exports = (req, res) => {
                         );
                         sendEmail(
                             [applicationMail],
-                            "** Confirmation email **",
+                            email("confirmationCV.tpl"),
                             `Applicant uploaded Assignment successfully:${email}`
                         );
                     })
                     .then(() => {
                         res.send({
-                            message: "you got an email :-)"
+                            message: "You got an email :-)"
                         });
                     })
                     .catch(() => {
                         sendEmail(
                             [applicationMail],
-                            "** Confirmation email **",
+                            email("confirmationCV.tpl"),
                             `Uploading Assignment file is failed:${email}`
                         );
                         res.status(500).send({
@@ -62,6 +62,6 @@ module.exports = (req, res) => {
                 res.status(404).send("Your name does not exist");
             });
     } else {
-        res.status(400).send("the deadline has passed");
+        res.status(400).send("The deadline has passed");
     }
 };

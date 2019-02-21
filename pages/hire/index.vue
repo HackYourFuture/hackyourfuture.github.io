@@ -141,6 +141,12 @@ export default {
                     line-height: 40px;
                 }
             }
+            .hireList {
+                margin-bottom: 1em;
+                li {
+                    list-style-type: initial;
+                }
+            }
         }
         &-image {
             width: 95%;
