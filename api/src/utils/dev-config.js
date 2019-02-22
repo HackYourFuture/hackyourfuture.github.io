@@ -54,7 +54,15 @@ function getConfig() {
     if (!process.env.DEVELOPMENT)
         return {
             // This needs to be converted to an environment variable
-            spreadSheetId: "1CRF9TbwSayVq9yhrUCCv038DG0jPGBN7ehOyZa4mvE0"
+            nl: {
+                spreadSheetId: "1CRF9TbwSayVq9yhrUCCv038DG0jPGBN7ehOyZa4mvE0"
+            },
+            dk: {
+                spreadSheetId: "1CRF9TbwSayVq9yhrUCCv038DG0jPGBN7ehOyZa4mvE0"
+            },
+            se: {
+                spreadSheetId: "1CRF9TbwSayVq9yhrUCCv038DG0jPGBN7ehOyZa4mvE0"
+            }
         };
 
     return JSON.parse(fs.readFileSync(PATH_CONFIG));

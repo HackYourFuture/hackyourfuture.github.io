@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
     console.log(verififactioURL);
 
     try {
-        const res = await getApplicant(req.body.email);
+        const res = await getApplicant(req.body);
         totalRows = res.totalRows;
         foundedAt = res.foundedAt;
         if (foundedAt) {

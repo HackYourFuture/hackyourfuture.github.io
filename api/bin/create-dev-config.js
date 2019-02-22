@@ -44,14 +44,37 @@ question("Insert the ClientID:")
     .then(clientSecret => {
         config.clientSecret = clientSecret;
 
-        console.log(`2) Visit Google Spreadsheet and create a new document:`);
+        console.log(
+            `2) Visit Google Spreadsheet and create a new document for Netherlands:`
+        );
         console.log("https://docs.google.com/spreadsheets");
         console.log("Get the id from the url");
 
         return question("Insert Spreadsheet ID: ");
     })
     .then(spreadSheetId => {
-        config.spreadSheetId = spreadSheetId;
+        config.nl = {};
+        config.nl.spreadSheetId = spreadSheetId;
+
+        console.log(`3) Create another document for Denmark:`);
+        console.log("https://docs.google.com/spreadsheets");
+        console.log("Get the id from the url");
+
+        return question("Insert Spreadsheet ID: ");
+    })
+    .then(spreadSheetId => {
+        config.dk = {};
+        config.dk.spreadSheetId = spreadSheetId;
+
+        console.log(`4) And create another document for Sweden:`);
+        console.log("https://docs.google.com/spreadsheets");
+        console.log("Get the id from the url");
+
+        return question("Insert Spreadsheet ID: ");
+    })
+    .then(spreadSheetId => {
+        config.se = {};
+        config.se.spreadSheetId = spreadSheetId;
 
         client = createClient(config.clientID, config.clientSecret);
 

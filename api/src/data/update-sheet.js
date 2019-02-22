@@ -10,8 +10,6 @@ const {
 
 const config = getConfig();
 
-const SHEET_ID = config.spreadSheetId;
-
 const auth = getClient();
 
 const columnPosition = {
@@ -69,7 +67,8 @@ function saveApplicant(
         emailSent,
         assignmentFileUrl,
         assignmentUrl,
-        assignmentMessage
+        assignmentMessage,
+        country
     }
 ) {
     return new Promise((resolve, reject) => {
@@ -105,6 +104,7 @@ function saveApplicant(
 
         console.log("row is", row);
 
+        //Sheet name needs to be changed dynamically
         const resource = {
             valueInputOption: "RAW",
             data: [
@@ -118,7 +118,7 @@ function saveApplicant(
         sheets.spreadsheets.values.batchUpdate(
             {
                 auth,
-                spreadsheetId: SHEET_ID,
+                spreadsheetId: config[country].spreadSheetId,
                 valueInputOption: "USER_ENTERED",
                 resource
             },
@@ -136,13 +136,13 @@ function saveApplicant(
     });
 }
 
-function getApplicant(email) {
+function getApplicant({ email, country }) {
     return new Promise((resolve, reject) => {
         const sheets = google.sheets("v4");
         sheets.spreadsheets.values.get(
             {
                 auth,
-                spreadsheetId: SHEET_ID,
+                spreadsheetId: config[country].spreadSheetId,
                 range: "Sheet1"
             },
             (err, response) => {
