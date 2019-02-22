@@ -69,7 +69,7 @@ module.exports = {
             {
                 rel: "icon",
                 type: "image/png",
-                href: "hyf-icon.png"
+                href: "hyf-icon.ico"
             }
         ]
     }
