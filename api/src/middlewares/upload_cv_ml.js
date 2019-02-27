@@ -1,5 +1,6 @@
 const { updateApplicant } = require("../data");
 const { decryptEmail } = require("./../utils/email-crypto");
+const email = require("../utils/email");
 
 const { getApplicant } = require("../data/update-sheet");
 
@@ -43,18 +44,19 @@ module.exports = (req, res) => {
                     .then(() => {
                         sendEmail(
                             [email],
-                            "** Confirmation email **",
+                            email("confirmationCV.tpl"),
                             "We've received your files"
                         );
                         sendEmail(
                             [applicationMail],
-                            "** Confirmation email **",
+                            email("confirmationCV.tpl"),
                             `Applicant uploaded Cv successfully:${[email]}`
                         );
                     })
                     .then(() => {
                         res.send({
-                            message: "you got an email :-)"
+                            message:
+                                "You received an email from us! (Check your spam folder in case you didn't)"
                         });
                     })
                     .catch(err => {

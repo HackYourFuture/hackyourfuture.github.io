@@ -54,7 +54,10 @@ module.exports = (req, res) => {
     )
         .then(() => {
             console.log("=== ALL EMAILS ARE SENT!!!");
-            res.json({ message: "You got an email :-)" });
+            res.json({
+                message:
+                    "You received an email from us! (Check your spam folder in case you didn't)"
+            });
         })
         .catch(err => {
             console.log("===EMAIL NOT SENT===");

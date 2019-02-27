@@ -44,7 +44,8 @@ module.exports = (req, res) => {
                     })
                     .then(() => {
                         res.send({
-                            message: "You got an email :-)"
+                            message:
+                                "You received an email from us! (Check your spam folder in case you didn't)"
                         });
                     })
                     .catch(() => {
