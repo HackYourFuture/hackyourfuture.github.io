@@ -1,6 +1,6 @@
 <div>
 <h4>Dates:</h4>
-<p>To Be Announced!</p>
+<p>31st of March</p>
 </div>
 
 <div>
@@ -10,7 +10,7 @@
 
 <div>
 <h4>Place:</h4>
-<p>To Be Announced!</p>
+<p>Sarphatistraat 370</p>
 </div>
 
 <div>

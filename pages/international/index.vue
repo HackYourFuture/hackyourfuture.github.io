@@ -62,7 +62,7 @@ export default {
                 {
                     name: "Copenhagen",
                     cords: [12.569647, 55.677584],
-                    link: "https://hackyourfuture.dk/"
+                    link: "https://www.hackyourfuture.dk/"
                 },
                 {
                     name: "Malmö",

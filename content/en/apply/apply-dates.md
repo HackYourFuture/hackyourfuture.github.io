@@ -4,6 +4,7 @@
 <p>3rd of April</p>
 <h4>Starts</h4>
 <p>End of April</p>
+<a href="#apply_form_ams"><p class="applyBtn">Apply below</p></a>
 </div>
 
 <div>

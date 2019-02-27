@@ -11,7 +11,7 @@
         <div class="apply_page__header-dates" v-html="dates"/>
       </div>
       <div class="apply_page__content" v-html="content"/>
-      <div ref="apply_page__form" class="apply_page__form form">
+      <div id="apply_form_ams" ref="apply_page__form" class="apply_page__form form">
         <h3>Apply for our next class:</h3>
         <FormComponent :action="action" :inputs="inputs"/>
       </div>
@@ -187,6 +187,9 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+    scroll-behavior: smooth;
+}
 .apply_page {
     .applyBtn {
         text-align: center;
