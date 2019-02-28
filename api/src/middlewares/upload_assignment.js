@@ -51,8 +51,8 @@ module.exports = (req, res) => {
                     .catch(() => {
                         sendEmail(
                             [applicationMail],
-                            email("confirmationCV.tpl"),
-                            `Uploading Assignment file is failed:${email}`
+                            email("failedUploadCV.tpl"),
+                            `Uploading Assignment file has failed:${email}`
                         );
                         res.status(500).send({
                             message: "Something went wrong"

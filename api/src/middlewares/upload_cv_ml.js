@@ -62,8 +62,8 @@ module.exports = (req, res) => {
                     .catch(err => {
                         sendEmail(
                             [fromEmail],
-                            "** Confirmation email **",
-                            `Uploading CV file is failed:${[email]}`
+                            email("failedUploadCV.tpl"),
+                            `Uploading CV file has failed:${[email]}`
                         );
                         console.log(err);
                         res.status(500).send({

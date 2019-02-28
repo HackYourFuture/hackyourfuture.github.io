@@ -24,7 +24,9 @@ module.exports = (emailFile, data) => {
         "se/apply_to_student.tpl": require("../../emails_template/se/apply_to_student.tpl"),
         "contact_us.tpl": require("../../emails_template/contact_us.tpl"),
         "send_to_admin.txt": require("../../emails_template/send_to_admin.txt"),
-        "apply_to_teach_to_org.tpl": require("../../emails_template/apply_to_teach_to_org.tpl")
+        "apply_to_teach_to_org.tpl": require("../../emails_template/apply_to_teach_to_org.tpl"),
+        "failedUploadCV.tpl": require("../../emails_template/failedUploadCV.tpl"),
+        "confirmationCV.tpl": require("../../emails_template/confirmationCV.tpl")
     };
 
     return template(emails[emailFile])(data);
