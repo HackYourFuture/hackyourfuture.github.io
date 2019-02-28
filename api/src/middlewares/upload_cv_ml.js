@@ -1,6 +1,6 @@
 const { updateApplicant } = require("../data");
 const { decryptEmail } = require("./../utils/email-crypto");
-const email = require("../utils/email");
+const emailTemplate = require("../utils/email");
 
 const { getApplicant } = require("../data/update-sheet");
 
@@ -44,12 +44,12 @@ module.exports = (req, res) => {
                     .then(() => {
                         sendEmail(
                             [email],
-                            email("confirmationCV.tpl"),
+                            emailTemplate("confirmationCV.tpl"),
                             "We've received your files"
                         );
                         sendEmail(
                             [applicationMail],
-                            email("confirmationCV.tpl"),
+                            emailTemplate("confirmationCV.tpl"),
                             `Applicant uploaded Cv successfully:${[email]}`
                         );
                     })
@@ -62,7 +62,7 @@ module.exports = (req, res) => {
                     .catch(err => {
                         sendEmail(
                             [fromEmail],
-                            email("failedUploadCV.tpl"),
+                            emailTemplate("failedUploadCV.tpl"),
                             `Uploading CV file has failed:${[email]}`
                         );
                         console.log(err);
@@ -72,7 +72,7 @@ module.exports = (req, res) => {
                     })
             )
             .catch(err => {
-                console.log(err);
+                console.log("this is the error for upload cv", err);
                 res.status(404).send("Your name does not exist");
             });
     } else {

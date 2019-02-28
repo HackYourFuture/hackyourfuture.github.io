@@ -1,6 +1,6 @@
 const { updateApplicant } = require("../data");
 
-const email = require("../utils/email");
+const emailTemplate = require("../utils/email");
 
 const { getApplicant } = require("../data/update-sheet");
 
@@ -33,12 +33,12 @@ module.exports = (req, res) => {
                     .then(() => {
                         sendEmail(
                             [email],
-                            email("confirmationCV.tpl"),
+                            emailTemplate("confirmationCV.tpl"),
                             "We've received your files"
                         );
                         sendEmail(
                             [applicationMail],
-                            email("confirmationCV.tpl"),
+                            emailTemplate("confirmationCV.tpl"),
                             `Applicant uploaded Assignment successfully:${email}`
                         );
                     })
@@ -51,7 +51,7 @@ module.exports = (req, res) => {
                     .catch(() => {
                         sendEmail(
                             [applicationMail],
-                            email("failedUploadCV.tpl"),
+                            emailTemplate("failedUploadCV.tpl"),
                             `Uploading Assignment file has failed:${email}`
                         );
                         res.status(500).send({
@@ -59,7 +59,8 @@ module.exports = (req, res) => {
                         });
                     })
             )
-            .catch(() => {
+            .catch(err => {
+                console.log("this is the error for upload assignment", err);
                 res.status(404).send("Your name does not exist");
             });
     } else {
