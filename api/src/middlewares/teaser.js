@@ -1,7 +1,7 @@
 const email = require("../utils/email");
 const sendEmail = require("../utils/send-emails");
 
-const fromEmail = "info@hackyourfuture.net";
+const fromEmail = "wct@hackyourfuture.net";
 
 const validate = req => {
     req.check("firstName")

@@ -10,11 +10,17 @@
       <div class="teaserPage__content">
         <div class="teaserPage__content-dates" v-html="teaser_dates"/>
         <div class="teaserPage__content-about" v-html="teaser_about"/>
+        <div class="teaserPage__content-about teaserPage__teaser">
+          Apply for our next teaser day:
+          <a
+            href="https://goo.gl/forms/XC3HFSKRoMt5sjTi1"
+            target="_blank"
+          >Apply here!</a>
+        </div>
       </div>
-      <div ref="teaserPage__form" class="teaserPage__form form">
-        <h2>Apply for our next teaser day:</h2>
-        <formComponent :action="action" :inputs="inputs"/>
-      </div>
+      <!-- <div ref="teaserPage__form" class="teaserPage__form form"> -->
+      <!-- <formComponent :action="action" :inputs="inputs"/> -->
+      <!-- </div> -->
     </main>
   </div>
 </template>
@@ -264,6 +270,14 @@ export default {
         }
         h2 {
             font-weight: bold;
+        }
+    }
+    &__teaser {
+        margin-top: 2em;
+        a {
+            background-color: #293a7d;
+            padding: 1em;
+            color: white !important;
         }
     }
 }
