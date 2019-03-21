@@ -111,7 +111,7 @@ const inputs = [
     },
 
     {
-        type: "input-text",
+        type: "input-textarea",
         className: "full-width",
         props: {
             label: "What would you like to contact us about? *",

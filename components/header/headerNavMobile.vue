@@ -23,7 +23,7 @@
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
+        <nuxt-link :to="'/teaser/'">Women</nuxt-link>
       </li>
       <li>
         <nuxt-link :to="'/hire/donate/'" class="donate-btn">Donate</nuxt-link>

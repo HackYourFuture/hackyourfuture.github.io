@@ -3,7 +3,7 @@
     <h1>Meet our graduates</h1>
     <div class="graduates__items">
       <div class="graduates__items-inner">
-        <div v-for="(graduate, key) in graduates" :key="key" class="graduates__item">
+        <div v-for="(graduate, key) in graduates" id="g" :key="key" class="graduates__item">
           <nuxt-link :to="'/hire'">
             <div class="graduates__item-image">
               <img :src="'/graduates/' + graduate.route + '.jpg'">

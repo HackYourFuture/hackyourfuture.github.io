@@ -65,7 +65,7 @@ export default {
                 Object.assign(
                     {
                         events: {
-                            onReady: e => this.onPlayerReady(e),
+                            //   onReady: e => this.onPlayerReady(e),
                             onStateChange: e => this.onPlayerStateChange(e)
                         }
                     },
@@ -78,13 +78,13 @@ export default {
             if (e.data === window.YT.PlayerState.ENDED) {
                 e.target.playVideo();
             }
-        },
-
-        onPlayerReady(e) {
-            e.target.setVolume(0);
-            e.target.playVideo();
-            setTimeout(() => e.target.pauseVideo(), 1000);
         }
+
+        // onPlayerReady(e) {
+        //   e.target.setVolume(0);
+        //   e.target.playVideo();
+        //   setTimeout(() => e.target.pauseVideo(), 1000);
+        // }
     }
 };
 </script>

@@ -100,7 +100,7 @@ const inputs = [
         }
     },
     {
-        type: "input-text",
+        type: "input-textarea",
         className: "full-width",
         props: {
             label: "Please tell us something about yourself *",

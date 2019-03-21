@@ -20,7 +20,7 @@ The motivation letter (max. 300 words) should be written in correct English. The
 
 2. What is your single biggest strength and single biggest weakness? 
 
-The deadline for handing in your CV and motivation letter is the 3rd of April, at 23.59.
+The deadline for handing in your CV and motivation letter is the 10th of April, at 23.59.
 
 Use the following link to send us your motivation letter and CV:
 

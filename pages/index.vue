@@ -29,7 +29,7 @@
           <h1>Expert teachers,
             <br>up-to-date skills
           </h1>
-          <a href="https://github.com/HackYourFuture/curriculum">
+          <a href="https://github.com/HackYourFuture/curriculum" target="_blank">
             Check out our
             <span class="underline">curriculum</span>
           </a>
@@ -43,9 +43,7 @@
             <br>Find out about donating your
             <nuxt-link :to="'/teach'">
               <span class="underline">time and expertise</span>
-            </nuxt-link>
-
-            here.
+            </nuxt-link>here.
           </div>
         </div>
       </section>

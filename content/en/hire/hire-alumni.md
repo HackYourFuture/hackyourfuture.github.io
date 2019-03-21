@@ -13,4 +13,4 @@ Our students are:
 
 Check out <a href="https://www.yumpu.com/en/document/read/62414886/an-introduction-to-hackyourfuture" target="_blank">our brochure</a> for more details.
 
-Interested? Contact our Partnership Manager <span class="underline"><a href="mailto:wouter@hackyourfuture.net">Wouter</a></span>.
+Interested? Contact our Partnership Manager <span class="underline"><a href="mailto:federico@hackyourfuture.net">Federico</a></span>.

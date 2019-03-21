@@ -7,7 +7,7 @@
     <nuxt-link :to="'/international/'">International</nuxt-link>
     <nuxt-link :to="'/about/'">About</nuxt-link>
     <nuxt-link :to="'/contact/'">Contact</nuxt-link>
-    <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
+    <nuxt-link :to="'/teaser/'">Women</nuxt-link>
     <nuxt-link :to="'/hire/donate/'" class="donate-btn">Donate</nuxt-link>
   </nav>
 </template>

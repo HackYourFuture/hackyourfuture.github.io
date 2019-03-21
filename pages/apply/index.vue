@@ -12,7 +12,7 @@
       </div>
       <div class="apply_page__content" v-html="content"/>
       <div id="apply_form_ams" ref="apply_page__form" class="apply_page__form form">
-        <h3>Apply for our next class:</h3>
+        <h3>Apply for our next Amsterdam class:</h3>
         <FormComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
@@ -55,7 +55,7 @@ const inputs = [
         type: "input-text",
         className: "half-width",
         props: {
-            label: "City *",
+            label: "City of residence *",
             name: "city",
             validate: value =>
                 new FieldError(value)
@@ -138,7 +138,7 @@ const inputs = [
         }
     },
     {
-        type: "input-text",
+        type: "input-textarea",
         className: "full-width",
         props: {
             label: "Something else you would like to notify us about?",

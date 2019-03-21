@@ -9,7 +9,7 @@
       </div>
       <div class="footer__links container">
         <nuxt-link :to="'/international/'">Chapters</nuxt-link>
-        <nuxt-link :to="'/teaser/'">WCT</nuxt-link>
+        <nuxt-link :to="'/teaser/'">Women</nuxt-link>
         <nuxt-link :to="'/about/'">About</nuxt-link>
         <nuxt-link :to="'/contact/'">Contact</nuxt-link>
       </div>
