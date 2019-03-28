@@ -2,7 +2,8 @@
   <div>
     <main class="apply_page container">
       <div class="apply_page__header">
-        <h1>Join
+        <h1>
+          Join
           <br>Us!
         </h1>
         <div class="apply_page__header-image">
@@ -144,7 +145,7 @@ const inputs = [
             label: "Something else you would like to notify us about?",
             name: "note",
             validate: value =>
-                new FieldError(value).isLength({ min: 0, max: 200 }).errors
+                new FieldError(value).isLength({ min: 0, max: 1000 }).errors
         }
     },
     {
@@ -323,6 +324,18 @@ html {
             margin-top: $base-vertical-rithm * 10;
             font-weight: bold;
             font-size: 24px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .apply_page {
+        &__form {
+            p {
+                font-size: 20px;
+                width: initial;
+                margin-right: 50px;
+            }
         }
     }
 }

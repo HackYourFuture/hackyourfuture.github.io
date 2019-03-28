@@ -24,7 +24,7 @@ const validate = req => {
         .isString()
         .isLength({
             min: 0,
-            max: 200
+            max: 1000
         });
 
     return req.validationErrors();

@@ -4,7 +4,7 @@
     <div class="check">
       <span ref="label">{{ label }}</span>
     </div>
-    <textarea ref="textarea" :name="name" :cols="cols" @keyup="resize" />
+    <textarea ref="textarea" :name="name" :cols="cols" maxlength="1000" @keyup="resize"/>
   </div>
 </template>
 

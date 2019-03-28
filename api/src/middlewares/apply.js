@@ -51,7 +51,7 @@ const validate = req => {
         .isString()
         .isLength({
             min: 0,
-            max: 200
+            max: 1000
         });
 
     return req.validationErrors();
@@ -119,12 +119,15 @@ module.exports = async (req, res) => {
             email(`${country}apply_to_student.tpl`, {
                 params: { url: verififactioURL }
             }),
-            "Thank you for applying"
+            "Thank you for applying!"
         );
         console.log("Email to organization send");
     } catch (error) {
         console.log("Send email to user FAILED", error, req.body);
     }
 
-    res.status(200).json({ message: "Application received" });
+    res.status(200).json({
+        message:
+            "Application received! Please check your inbox (or spam folder) for further instructions"
+    });
 };
