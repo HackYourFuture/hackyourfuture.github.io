@@ -1,5 +1,6 @@
 const email = require("../utils/email");
 const sendEmail = require("../utils/send-emails");
+const countryEmail = require("../utils/countryEmail");
 
 const fromEmail = "info@hackyourfuture.net";
 
@@ -41,6 +42,8 @@ module.exports = (req, res) => {
         });
         return;
     }
+    console.log("country", req.body.country);
+    console.log("coutrymail", countryEmail);
 
     sendEmail(
         fromEmail,
@@ -50,11 +53,12 @@ module.exports = (req, res) => {
     )
         .then(() => {
             res.send({
-                message: "Thanks for applying"
+                message:
+                    "Thanks for your interest in our school. We will get in contact with you as soon as possible"
             });
         })
         .catch(err => {
-            console.log(err);
+            console.log("what is the rror here!", err);
             res.status(500).send({
                 message: "Something went wrong"
             });

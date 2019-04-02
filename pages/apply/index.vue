@@ -192,6 +192,16 @@ html {
     scroll-behavior: smooth;
 }
 .apply_page {
+    .apply-below-ams {
+        display: block;
+        margin-top: 30px;
+        margin-left: -20px;
+        height: 20px;
+        position: relative;
+        text-align: center;
+        animation: bounce 1.5s infinite ease;
+    }
+
     .applyBtn {
         text-align: center;
         background-color: #293a7d;
@@ -325,6 +335,23 @@ html {
             font-weight: bold;
             font-size: 24px;
         }
+    }
+}
+@keyframes bounce {
+    0% {
+        transform: scale(1, 1) translateY(0px);
+    }
+    10% {
+        transform: scale(1.1, 0.9);
+    }
+    40% {
+        transform: scale(0.9, 1.1) translateY(15px);
+    }
+    60% {
+        transform: scale(1, 1) translateY(0px);
+    }
+    100% {
+        transform: scale(1, 1) translateY(0px);
     }
 }
 

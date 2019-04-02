@@ -25,12 +25,14 @@
       </div>
       <div id="graduates" class="graduates container">
         <h1>Success Stories</h1>
+        <div id="rabih">Rabih</div>
         <div class="graduates__item">
           <div class="graduates__item-content" v-html="rabih"/>
           <div class="graduates__item-image">
             <img :src="'/graduates/rabih.jpg'" alt="Graduate of HackYourFuture">
           </div>
         </div>
+        <div id="sarea">Sarea</div>
         <div class="graduates__item">
           <div class="graduates__item-image">
             <img :src="'/graduates/sarea.jpg'" alt="Graduate of HackYourFuture">
@@ -79,6 +81,11 @@ export default {
 .graduates {
     position: relative;
     padding: 0 $base-vertical-rithm * 5;
+
+    #rabih,
+    #sarea {
+        visibility: hidden;
+    }
     h1 {
         text-align: center;
     }

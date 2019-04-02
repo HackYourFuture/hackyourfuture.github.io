@@ -1,6 +1,6 @@
-Hey there a new Teacher <%- params.firstName %> <%- params.lastName %>  applied!
+A new teacher <%- params.firstName %> <%- params.lastName %>  applied!
 
-Here his details:
+Here are their details:
 <% for(let k in params) {%>
 <%- k %>:
 --

@@ -119,7 +119,7 @@ module.exports = async (req, res) => {
             email(`${country}apply_to_student.tpl`, {
                 params: { url: verififactioURL }
             }),
-            "Thank you for applying!"
+            "Important! Next steps for your HackYourFuture application"
         );
         console.log("Email to organization send");
     } catch (error) {

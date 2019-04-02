@@ -4,7 +4,8 @@
       <div class="contact__header">
         <h1>Contact</h1>
       </div>
-      <a href="#contactForm" class="contact__quicklink">Contact
+      <a href="#contactForm" class="contact__quicklink">
+        Contact
         <br>
         <span class="underline">Form</span>
         <br>
@@ -14,7 +15,6 @@
       <div class="contact__content" v-html="content"/>
       <div id="contactForm" class="contact__form form">
         <h1>Reach us for any other questions</h1>
-        <p>General Inquiries</p>
         <formComponent :action="action" :inputs="inputs"/>
       </div>
     </main>
@@ -267,7 +267,6 @@ export default {
             margin: $base-vertical-rithm * 10 auto;
         }
 
-        p,
         h1 {
             margin-left: 50px;
             color: $color-purple;
@@ -286,10 +285,14 @@ export default {
                 line-height: 40px;
             }
         }
-        p {
-            margin-top: $base-vertical-rithm * 10;
-            font-weight: bold;
-            font-size: 24px;
+        .fadeInMSG {
+            p {
+                margin-top: 25px !important;
+
+                @include breakpoint("ipad_portrait") {
+                    margin: 0;
+                }
+            }
         }
     }
     .contact__form {

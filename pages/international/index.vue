@@ -5,7 +5,8 @@
         <img src="/map/map.svg" alt="Map indicating the HackYourFuture international.">
       </div>
       <div class="international__map-list">
-        <h2>HackYourFuture
+        <h2>
+          HackYourFuture
           <br>is active in:
         </h2>
         <a v-for="chapter in chapterPoints" :key="chapter.name" :href="chapter.link">
@@ -13,7 +14,7 @@
         </a>
       </div>
     </div>
-    <main class="international container">
+    <main id="setup-chapter" class="international container">
       <div class="international__information">
         <h1>Start your own chapter</h1>
         <div v-html="international_info"/>
@@ -63,6 +64,12 @@ export default {
                     name: "Copenhagen",
                     cords: [12.569647, 55.677584],
                     link: "https://www.hackyourfuture.dk/"
+                },
+                {
+                    name: "Toronto",
+                    cords: [12, 55],
+                    link:
+                        "https://helpingnewcomerswork.ca/program/hack-your-future/"
                 },
                 {
                     name: "Malmö",
@@ -141,6 +148,7 @@ export default {
             }
             a {
                 display: block;
+                width: 125px;
                 font-weight: 700;
                 font-family: Space Mono, monospace;
                 letter-spacing: 0.2px;

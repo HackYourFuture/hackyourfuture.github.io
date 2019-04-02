@@ -4,7 +4,7 @@
     <div class="graduates__items">
       <div class="graduates__items-inner">
         <div v-for="(graduate, key) in graduates" id="g" :key="key" class="graduates__item">
-          <nuxt-link :to="'/hire'">
+          <nuxt-link :to="`/hire/#${graduate.route}`">
             <div class="graduates__item-image">
               <img :src="'/graduates/' + graduate.route + '.jpg'">
             </div>

@@ -17,6 +17,16 @@
           </div>
         </div>
       </div>
+      <h2>The Board</h2>
+      <div class="team__boardmembers">
+        <div v-for="(member, key) in boardmembers" :key="key" class="team__teacher-team-member">
+          <img :src="member.src">
+          <h3>{{ member.name }}</h3>
+          <a :href="member.href">
+            <div :class="['icon', member.class]"/>
+          </a>
+        </div>
+      </div>
       <h2>Mentors</h2>
       <div class="team__teacher-team">
         <div v-for="(teacher, key) in teachers" :key="key" class="team__teacher-team-member">
@@ -32,7 +42,7 @@
 </template>
 <script>
 export default {
-    props: { teachers: Array, team: Array }
+    props: { teachers: Array, team: Array, boardmembers: Array }
 };
 </script>
 
@@ -60,7 +70,8 @@ export default {
         }
     }
     &__core-team,
-    &__teacher-team {
+    &__teacher-team,
+    &__boardmembers {
         display: flex;
         align-items: baseline;
         justify-content: space-evenly;

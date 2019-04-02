@@ -14,7 +14,7 @@
       />
     </div>
     <div :class="{ fadeInMSG: success }" style="opacity: 0">
-      <p>{{ message }}</p>
+      <p class="fadeInMSG">{{ message }}</p>
     </div>
   </form>
 </template>
@@ -161,6 +161,11 @@ export default {
     opacity: 1 !important;
     -webkit-transition: opacity 2000ms linear;
     transition: opacity 2000ms linear;
+    width: 60vw;
+    p {
+        margin-top: 25px;
+        margin-left: 50px;
+    }
 }
 
 .form {

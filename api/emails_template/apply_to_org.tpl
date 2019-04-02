@@ -1,4 +1,4 @@
-Hey <b><%- params.firstName %> <%- params.lastName %></b> has applied!
+Hey <b><%- params.firstName %> <%- params.lastName %></b> has applied to become a teacher!
 
 Here are their details:
 

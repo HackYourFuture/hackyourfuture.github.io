@@ -33,7 +33,7 @@
         </div>
         <div v-html="how_school_works"/>
       </div>
-      <TeamComponent :teachers="teachers" :team="team"/>
+      <TeamComponent :teachers="teachers" :team="team" :boardmembers="boardmembers"/>
     </main>
   </div>
 </template>
@@ -56,8 +56,50 @@ const team = [
         function: "Education Director",
         href: "https://www.linkedin.com/in/noer-paanakker-731284a1",
         mail: "mailto:noer@hackyourfuture.net"
+    },
+    {
+        src: "/team/7.jpg",
+        name: "Federico Fusco",
+        function: "Partnership Manager",
+        href: "https://www.linkedin.com/in/fedefusco",
+        mail: "mailto:federico@hackyourfuture.net"
     }
 ];
+
+const boardmembers = [
+    {
+        src: "/mentors/68.jpg",
+        name: "Zazie Wolters",
+        href: "https://www.linkedin.com/in/zazie-wolters-7832b05/"
+    },
+
+    {
+        src: "/mentors/82.jpg",
+        name: "Jork Lousberg",
+        href: "https://www.linkedin.com/in/jork-lousberg-b589309b/"
+    },
+    {
+        src: "/mentors/11.jpeg",
+        name: "Omnia Nour",
+        href: "https://www.linkedin.com/in/omnianour/"
+    },
+    {
+        src: "/mentors/85.jpg",
+        name: "Iman Haghighirad",
+        href: "https://www.linkedin.com/in/imanhaghighirad/"
+    },
+    {
+        src: "/team/4.jpeg",
+        name: "Gijs Corstens",
+        href: "https://www.linkedin.com/"
+    },
+    {
+        src: "/mentors/92.jpg",
+        name: "Arshad Shamsi",
+        href: "https://www.linkedin.com/in/arshadshamsi/"
+    }
+];
+
 const teachers = [
     {
         src: "/mentors/6.jpg",
@@ -123,6 +165,30 @@ const teachers = [
         src: "/mentors/14.jpeg",
         name: "George Sapkin",
         href: "https://www.linkedin.com/in/georgesapkin/"
+    },
+
+    {
+        src: "/mentors/88.jpg",
+        name: "Denys Izhetskyi",
+        href: "https://www.linkedin.com/in/denys-izhetskyi/"
+    },
+
+    {
+        src: "/mentors/83.jpg",
+        name: "Jawhar Birakdar",
+        href: "https://www.linkedin.com/in/jawhar-b-785693152/"
+    },
+
+    {
+        src: "/mentors/84.jpg",
+        name: "Jalal Alnadeem",
+        href: "https://www.linkedin.com/in/jalal-alnadeem-2302577b/"
+    },
+
+    {
+        src: "/mentors/86.jpg",
+        name: "Hasan Shahoud",
+        href: "https://www.linkedin.com/in/hasan-sh-367428125/"
     },
 
     {
@@ -219,12 +285,6 @@ const teachers = [
         src: "/mentors/33.jpeg",
         name: "Isaac Hinman",
         href: "https://www.linkedin.com/in/isaachinman/"
-    },
-
-    {
-        src: "/mentors/11.jpeg",
-        name: "Omnia Nour",
-        href: "https://www.linkedin.com/in/omnianour/"
     },
 
     {
@@ -375,6 +435,91 @@ const teachers = [
         src: "/mentors/55.jpg",
         name: "Piotr Bakker",
         href: "https://www.linkedin.com/in/piotrbakker/"
+    },
+
+    {
+        src: "/mentors/69.jpg",
+        name: "Yash Kapila",
+        href: "https://www.linkedin.com/in/piotrbakker/"
+    },
+
+    {
+        src: "/mentors/70.jpg",
+        name: "Sarea Alkebaly",
+        href: "https://www.linkedin.com/in/sarea-alkebaly"
+    },
+
+    {
+        src: "/mentors/71.jpg",
+        name: "Sarbast Mohammed Mustafa",
+        href: "https://www.linkedin.com/in/sarbast"
+    },
+
+    {
+        src: "/mentors/72.jpg",
+        name: "Sander Hidding",
+        href: "https://www.linkedin.com/in/sanderhidding"
+    },
+    {
+        src: "/mentors/73.jpg",
+        name: "Samir Aleido",
+        href: "https://www.linkedin.com/in/eidosam"
+    },
+    {
+        src: "/mentors/74.jpg",
+        name: "Rohan Nicholls",
+        href: "https://www.linkedin.com/in/rohan-nicholls-592b121"
+    },
+    {
+        src: "/mentors/75.jpg",
+        name: "Rogier Mars",
+        href: "https://www.linkedin.com/"
+    },
+    {
+        src: "/mentors/76.jpg",
+        name: "Rob van Kruijsdijk",
+        href: "https://www.linkedin.com/in/robvk/"
+    },
+    {
+        src: "/mentors/78.jpg",
+        name: "Paul Bremer",
+        href: "https://www.linkedin.com/in/pbremer/"
+    },
+    {
+        src: "/mentors/79.jpg",
+        name: "Neo Nchabeleng",
+        href: "https://www.linkedin.com/in/neo-nchabeleng-b5253186/"
+    },
+    {
+        src: "/mentors/80.jpg",
+        name: "Marciano Viereck",
+        href: "https://www.linkedin.com/in/marciano-viereck-7a290326/"
+    },
+    {
+        src: "/mentors/81.jpg",
+        name: "Knarik Poghosyan",
+        href: "https://www.linkedin.com/in/knarik-poghosyan-49235b181/"
+    },
+
+    {
+        src: "/mentors/89.jpg",
+        name: "Daniela Olaru",
+        href: "https://www.linkedin.com/in/danielaolaru/"
+    },
+    {
+        src: "/mentors/90.jpg",
+        name: "Daniel Lau",
+        href: "https://www.linkedin.com/in/danlaudk/"
+    },
+    {
+        src: "/mentors/91.jpg",
+        name: "Claudio Semeraro",
+        href: "https://www.linkedin.com/in/claudiosemeraro/"
+    },
+    {
+        src: "/mentors/94.jpg",
+        name: "Alejandro Cadavid",
+        href: "https://www.linkedin.com/in/acadavid/"
     }
 ];
 export default {
@@ -384,7 +529,8 @@ export default {
     data: () => {
         return {
             teachers,
-            team
+            team,
+            boardmembers
         };
     },
     async asyncData() {

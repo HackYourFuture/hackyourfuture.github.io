@@ -26,7 +26,8 @@
       </section>
       <section class="curiculum">
         <div class="curiculum__header">
-          <h1>Expert teachers,
+          <h1>
+            Expert teachers,
             <br>up-to-date skills
           </h1>
           <a href="https://github.com/HackYourFuture/curriculum" target="_blank">
@@ -39,11 +40,12 @@
         </div>
         <div class="curiculum__container">
           <div class="curiculum__content" v-html="curiculum"/>
-          <div class="curiculum__content-link">Time is your most valuable resource.
+          <div class="curiculum__content-link">
+            Time is your most valuable resource.
             <br>Find out about donating your
             <nuxt-link :to="'/teach'">
               <span class="underline">time and expertise</span>
-            </nuxt-link>here.
+            </nuxt-link>&nbsp;here.
           </div>
         </div>
       </section>
@@ -64,12 +66,13 @@
       </section>
       <section class="alumni">
         <div class="alumni__image">
-          <img src="/gallery/20.jpg" alt="Student receiving diploma after graduation.">
+          <img src="/gallery/20.jpeg" alt="Student receiving diploma after graduation.">
         </div>
         <div class="alumni__container">
           <h1>Hire our graduates</h1>
           <div v-html="hire"/>
-          <div>Get in touch to talk about
+          <div>
+            Get in touch to talk about
             <nuxt-link :to="'/hire'">
               <span class="underline">hiring our graduates.</span>
             </nuxt-link>

@@ -4,7 +4,9 @@
 <p>10th of April</p>
 <h4>Starts</h4>
 <p>End of April</p>
-<a href="#apply_form_ams"><p class="applyBtn">Apply below</p></a>
+<a href="#apply_form_ams">
+<img class="apply-below-ams" src="/icons/arrow-down.svg" />
+</a>
 </div>
 
 <div>

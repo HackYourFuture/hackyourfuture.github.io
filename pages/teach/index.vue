@@ -9,11 +9,13 @@
       </div>
       <div class="teach__container what">
         <div class="links">
-          <nuxt-link :to="'/'">Check-out our
+          <a target="_blank" href="https://github.com/HackYourFuture/curriculum">
+            Check-out our
             <br>
             <span class="underline">curriculum</span>
-          </nuxt-link>
-          <nuxt-link :to="'/chapters'">Setup your
+          </a>
+          <nuxt-link :to="'/international#setup-chapter'">
+            Setup your
             <br>
             <span class="underline">chapter</span>
           </nuxt-link>
@@ -24,6 +26,7 @@
       </div>
       <div class="teach__container who">
         <div v-html="who_are_our_teachers"/>
+
         <div class="teach__container-image">
           <img src="/gallery/13.jpg" alt="Student and teacher solving a problem behind computer.">
         </div>
@@ -330,7 +333,7 @@ export default {
             color: $color-purple;
             font-weight: bold;
             font-size: 36px;
-            width: 40%;
+            width: 60%;
             line-height: 36px;
             @include breakpoint("mobile_landscape") {
                 width: calc(100% - 60px);

@@ -7,7 +7,7 @@
       </div>
       <HeaderNav/>
       <div class="mobile-logo">
-        <img src="/logos/logo-2.svg" alt="">
+        <img src="/logos/logo-2.svg" alt>
       </div>
     </div>
   </header>

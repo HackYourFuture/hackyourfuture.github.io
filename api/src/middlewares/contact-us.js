@@ -1,6 +1,6 @@
 const sendEmail = require("../utils/send-emails");
 const email = require("../utils/email");
-const toEmail = "info@hackyourfuture.net";
+const countryEmail = require("../utils/countryEmail");
 
 const validate = req => {
     req.check("firstName")
@@ -47,7 +47,7 @@ module.exports = (req, res) => {
     }
 
     sendEmail(
-        [toEmail],
+        [countryEmail(req.body.country)],
         email("contact_us.tpl", { params: body }),
         "New contact request",
         [body.email]
@@ -56,7 +56,7 @@ module.exports = (req, res) => {
             console.log("=== ALL EMAILS ARE SENT!!!");
             res.json({
                 message:
-                    "You received an email from us! (Check your spam folder in case you didn't)"
+                    "Thanks for reaching out. We will get back to you as soon as possible"
             });
         })
         .catch(err => {
