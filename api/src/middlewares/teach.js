@@ -42,8 +42,6 @@ module.exports = (req, res) => {
         });
         return;
     }
-    console.log("country", req.body.country);
-    console.log("coutrymail", countryEmail);
 
     sendEmail(
         fromEmail,
@@ -58,7 +56,6 @@ module.exports = (req, res) => {
             });
         })
         .catch(err => {
-            console.log("what is the rror here!", err);
             res.status(500).send({
                 message: "Something went wrong"
             });

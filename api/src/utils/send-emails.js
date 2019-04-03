@@ -9,10 +9,7 @@ const AWS_CONFIG = {
 const ses = new AWS.SES(AWS_CONFIG);
 
 const sendEmail = (ToAddresses, Data, Subject, ReplyToAddresses = []) => {
-    console.log("toAddresses", ToAddresses);
     const sourceEmail = checkAddressForInfo(ToAddresses[0]);
-
-    console.log("sourceEmail", sourceEmail);
 
     return new Promise((resolve, reject) => {
         if (process.env.DEVELOPMENT) {

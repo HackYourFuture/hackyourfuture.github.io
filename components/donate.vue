@@ -20,7 +20,7 @@
             <i class="pf pf-credit-card"/>
             <span class="method-text-span">Creditcard</span>
           </label>
-          
+
           <input id="paypal" v-model="method" class="method-radio" type="radio" value="paypal">
           <label class="method-label" for="paypal">
             <img class="paypal-icon" src="/icons/paypal.svg" alt="paypal icon">
@@ -109,7 +109,7 @@ export default {
                     .then(json => {
                         if (json.message === "Donation went ok") {
                             this.donated = true;
-                            console.log("hello!");
+
                             return;
                         }
                     })
