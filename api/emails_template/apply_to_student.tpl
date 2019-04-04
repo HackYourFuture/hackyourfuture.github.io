@@ -10,7 +10,9 @@ What are the minimum requirements to participate in the program?
 - You have the time and the motivation to learn. We require our students to study at least 30 hours per week, which is demanding.
 - You are not afraid to fail. During the program you will feel frustrated. It’s important to keep going after every setback.
 
-The deadline for applying is the 10th of April, at 23.59.
+If you think you pass the requirements we'd like to ask you to do a technical assignment. You will get details on what to do after the application deadline has passed.
+
+The deadline for application is April 10th, 29.59. Expect an email from us shortly after that date!
 
 Kind regards,
 
