@@ -12,7 +12,7 @@ What are the minimum requirements to participate in the program?
 
 If you think you pass the requirements we'd like to ask you to do a technical assignment. You will get details on what to do after the application deadline has passed.
 
-The deadline for application is April 10th, 29.59. Expect an email from us shortly after that date!
+The deadline for application is April 10th, 23.59. Expect an email from us shortly after that date!
 
 Kind regards,
 
