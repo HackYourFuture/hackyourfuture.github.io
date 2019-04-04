@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fileContainer">
     <div v-if="errorMessage" class="error" v-html="errorMessage"/>
     <label ref="label" style="top:-30px;">{{ label }}</label>
     <div>
@@ -100,6 +100,10 @@ export default {
 };
 </script>
 <style lang="scss">
+.fileContainer {
+    margin-top: 50px !important;
+}
+
 input[type="file"] {
     display: none;
 }
