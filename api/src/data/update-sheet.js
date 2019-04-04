@@ -82,6 +82,8 @@ function saveApplicant(
 
         const sheets = google.sheets("v4");
 
+        const cvUrl = `https://hyf-website-uploads.s3.eu-central-1.amazonaws.com/${cv}`;
+
         const values = [
             [
                 firstName,
@@ -93,7 +95,7 @@ function saveApplicant(
                 how_hear,
                 computer,
                 note,
-                cv,
+                cvUrl,
                 motivation,
                 textArea_message_cv,
                 textArea_message_motivation,
