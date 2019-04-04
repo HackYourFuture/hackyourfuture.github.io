@@ -4,7 +4,7 @@
     <div class="check">
       <span ref="label">{{ label }}</span>
     </div>
-    <textarea ref="textarea" :name="name" :cols="cols" maxlength="1000" @keyup="resize"/>
+    <textarea ref="textarea" :name="name" :cols="cols" maxlength="1000" @keyup="resizeAndCheck"/>
   </div>
 </template>
 
@@ -15,13 +15,32 @@ export default {
         name: String,
         cols: String,
         rows: String,
-        errorMessage: String
+        validate: Function
     },
+
+    data() {
+        return {
+            errorMessage: "",
+            valid: true
+        };
+    },
+
     methods: {
-        resize() {
+        check() {
+            if (this.validate) {
+                const errors = this.validate(this.$refs.textarea.value);
+                this.errorMessage = errors.join("<br/>");
+                this.valid = errors.length === 0;
+            }
+
+            return this.valid;
+        },
+        resizeAndCheck() {
             const { textarea } = this.$refs;
             textarea.style.height = "1px";
             textarea.style.height = 25 + textarea.scrollHeight + "px";
+
+            this.check();
         }
     }
 };

@@ -4,7 +4,7 @@ const { getApplicant, saveApplicant } = require("../data/update-sheet");
 const sendEmail = require("../utils/send-emails");
 const { encryptEmail } = require("../utils/email-crypto");
 
-const ERROR_USER_FOUND = "User already exists";
+const ERROR_USER_FOUND = "You have already applied with this email address!";
 
 const validate = req => {
     req.check("firstName")
@@ -47,6 +47,12 @@ const validate = req => {
             min: 2,
             max: 200
         });
+    req.check("motivation")
+        .isString()
+        .isLength({
+            min: 2,
+            max: 1000
+        });
     req.check("note")
         .isString()
         .isLength({
@@ -76,7 +82,10 @@ module.exports = async (req, res) => {
     const website = "https://www.hackyourfuture.net";
     const encryptedEmail = encryptEmail(req.body.email);
     const verififactioURL = `${website}/apply/first-phase/?token=${encryptedEmail}`;
-    console.log(verififactioURL);
+    console.log(
+        "the url to upload your cv and motivation is:",
+        verififactioURL
+    );
 
     try {
         const res = await getApplicant(req.body.email);

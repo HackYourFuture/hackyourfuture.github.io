@@ -76,6 +76,7 @@ export default {
         align-items: baseline;
         justify-content: space-evenly;
         flex-wrap: wrap;
+
         &-member {
             width: calc(18% - 50px);
             text-align: center;
@@ -134,6 +135,11 @@ export default {
                     margin: 3px;
                 }
             }
+        }
+    }
+    @media (min-width: 1070px) {
+        &__boardmembers {
+            flex-wrap: nowrap;
         }
     }
 }

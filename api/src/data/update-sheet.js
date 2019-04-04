@@ -24,8 +24,8 @@ const columnPosition = {
     how_hear: 6,
     computer: 7,
     note: 8,
-    cvUrl: 9,
-    mlUrl: 10,
+    cv: 9,
+    motivation: 10,
     textArea_message_cv: 11,
     textArea_message_motivation: 12,
     assignmentUrl: 13,
@@ -61,8 +61,8 @@ function saveApplicant(
         how_hear,
         computer,
         note,
-        cvUrl,
-        mlUrl,
+        cv,
+        motivation,
         textArea_message_cv,
         textArea_message_motivation,
         acceptedFirstRound,
@@ -72,6 +72,8 @@ function saveApplicant(
         assignmentMessage
     }
 ) {
+    console.log("what my cv", cv);
+
     return new Promise((resolve, reject) => {
         if (!row) {
             reject(new Error("We couldnt save the record"));
@@ -91,8 +93,8 @@ function saveApplicant(
                 how_hear,
                 computer,
                 note,
-                cvUrl,
-                mlUrl,
+                cv,
+                motivation,
                 textArea_message_cv,
                 textArea_message_motivation,
                 acceptedFirstRound,

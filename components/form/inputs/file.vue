@@ -9,7 +9,11 @@
     <div class="fileList">
       <div v-for="(file, key) in files" :key="key">
         {{ file.name }}
-        <input :name="files.length === 1 ? name : `${name}[]`" :value="file.url" type="hidden">
+        <input
+          :name="files.length === 1 ? name : `${name}[]`"
+          :value="file.url"
+          type="hidden"
+        >
         <button class="remove-btn" @click="removeFile( key )">Remove</button>
       </div>
     </div>
@@ -85,7 +89,7 @@ export default {
                     url: formDetails.fields.key
                 });
             } catch (e) {
-                console.log(e);
+                console.log("what is the file input error?", e);
             }
         },
 

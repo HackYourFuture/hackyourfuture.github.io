@@ -142,6 +142,26 @@ const inputs = [
         type: "input-textarea",
         className: "full-width",
         props: {
+            label: "Why do you want to become a programmer?",
+            name: "motivation",
+            validate: value =>
+                new FieldError(value)
+                    .isLength({ min: 0, max: 1000 })
+                    .isRequired().errors
+        }
+    },
+    {
+        type: "input-file",
+        className: "full-width",
+        props: {
+            label: "Upload your CV",
+            name: "cv"
+        }
+    },
+    {
+        type: "input-textarea",
+        className: "full-width",
+        props: {
             label: "Something else you would like to notify us about?",
             name: "note",
             validate: value =>
