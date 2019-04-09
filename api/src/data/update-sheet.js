@@ -72,8 +72,6 @@ function saveApplicant(
         assignmentMessage
     }
 ) {
-    console.log("what my cv", cv);
-
     return new Promise((resolve, reject) => {
         if (!row) {
             reject(new Error("We couldnt save the record"));
@@ -83,6 +81,7 @@ function saveApplicant(
         const sheets = google.sheets("v4");
 
         const cvUrl = `https://hyf-website-uploads.s3.eu-central-1.amazonaws.com/${cv}`;
+        const motivationUrl = `https://hyf-website-uploads.s3.eu-central-1.amazonaws.com/${motivation}`;
 
         const values = [
             [
@@ -96,7 +95,7 @@ function saveApplicant(
                 computer,
                 note,
                 cvUrl,
-                motivation,
+                motivationUrl,
                 textArea_message_cv,
                 textArea_message_motivation,
                 acceptedFirstRound,

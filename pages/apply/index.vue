@@ -139,23 +139,22 @@ const inputs = [
         }
     },
     {
-        type: "input-textarea",
+        type: "input-file",
         className: "full-width",
         props: {
-            label: "Why do you want to become a programmer?",
+            label: "Upload your motivation letter *",
+            desc: "Let us know who you are in at least 300 words",
             name: "motivation",
-            validate: value =>
-                new FieldError(value)
-                    .isLength({ min: 0, max: 1000 })
-                    .isRequired().errors
+            validate: value => new FieldError(value).isRequired().errors
         }
     },
     {
         type: "input-file",
         className: "full-width",
         props: {
-            label: "Upload your CV",
-            name: "cv"
+            label: "Upload your CV *",
+            name: "cv",
+            validate: value => new FieldError(value).isRequired().errors
         }
     },
     {

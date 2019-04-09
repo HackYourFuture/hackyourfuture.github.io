@@ -13,7 +13,7 @@ We’re looking for people who:
 
 ### Also:
 
-- We accept students living all over the Netherlands and Belgium, and most parts of Denmark and Sweden.
+- We accept students living all over the Netherlands
 - We cover the cost of train tickets for travel
 - We provide lunch during the break on the Sundays
 

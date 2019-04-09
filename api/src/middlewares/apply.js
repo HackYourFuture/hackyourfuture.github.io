@@ -47,12 +47,7 @@ const validate = req => {
             min: 2,
             max: 200
         });
-    req.check("motivation")
-        .isString()
-        .isLength({
-            min: 2,
-            max: 1000
-        });
+
     req.check("note")
         .isString()
         .isLength({
@@ -69,7 +64,7 @@ module.exports = async (req, res) => {
 
     const requestErrors = validate(req);
 
-    console.log(req.body, req.params);
+    console.log("apply form data: ", req.body);
 
     if (requestErrors) {
         console.error("Validation errors: ", requestErrors);

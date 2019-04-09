@@ -2,8 +2,9 @@
   <div class="fileContainer">
     <div v-if="errorMessage" class="error" v-html="errorMessage"/>
     <label ref="label" style="top:-30px;">{{ label }}</label>
+    <h5>{{ desc }}</h5>
     <div>
-      <input ref="files" type="file" multiple @change="handleFilesUpload()">
+      <input ref="files" type="file" multiple @change="handleFilesUpload()" @keyup="onKeyUp">
       <span class="addFiles" @click="addFiles()">+ Select Files</span>
     </div>
     <div class="fileList">
@@ -23,7 +24,7 @@
 import axios from "~/plugins/axios";
 
 export default {
-    props: { label: String, name: String },
+    props: { label: String, desc: String, name: String, validate: Function },
     data() {
         return {
             errorMessage: "",
@@ -32,6 +33,20 @@ export default {
         };
     },
     methods: {
+        check() {
+            if (this.validate) {
+                const errors = this.validate(this.$refs.files.value);
+                this.errorMessage = errors.join("<br/>");
+                this.valid = errors.length === 0;
+            }
+
+            return this.valid;
+        },
+
+        onKeyUp() {
+            this.check();
+        },
+
         addFiles() {
             this.$refs.files.click();
         },
@@ -115,5 +130,9 @@ input[type="file"] {
     padding: 0px 10px;
     text-transform: uppercase;
     font-weight: 300;
+}
+
+h5 {
+    margin-left: 5px;
 }
 </style>
