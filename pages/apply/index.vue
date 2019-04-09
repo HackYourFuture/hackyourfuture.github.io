@@ -143,7 +143,8 @@ const inputs = [
         className: "full-width",
         props: {
             label: "Upload your motivation letter *",
-            desc: "Let us know who you are in at least 300 words",
+            desc:
+                "Tell us why you want to become a programmer in at least 300 words",
             name: "motivation",
             validate: value => new FieldError(value).isRequired().errors
         }
