@@ -1,6 +1,6 @@
 <div>
 <h3>Amsterdam</h3>
-<h4>Deadline class 22</h4>
+<h4>Deadline class 23</h4>
 <p>9th of June</p>
 <h4>Starts</h4>
 <p>30th of June</p>
