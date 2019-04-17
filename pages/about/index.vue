@@ -460,11 +460,7 @@ const teachers = [
         name: "Sander Hidding",
         href: "https://www.linkedin.com/in/sanderhidding"
     },
-    {
-        src: "/mentors/73.jpg",
-        name: "Samir Aleido",
-        href: "https://www.linkedin.com/in/eidosam"
-    },
+
     {
         src: "/mentors/74.jpg",
         name: "Rohan Nicholls",
@@ -520,6 +516,11 @@ const teachers = [
         src: "/mentors/94.jpg",
         name: "Alejandro Cadavid",
         href: "https://www.linkedin.com/in/acadavid/"
+    },
+    {
+        src: "/mentors/96.jpeg",
+        name: "Wilgert Velinga",
+        href: "https://www.linkedin.com/in/wilgert/"
     }
 ];
 export default {
