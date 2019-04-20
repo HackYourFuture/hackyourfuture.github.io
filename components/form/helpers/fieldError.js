@@ -21,9 +21,12 @@ export default class FieldError {
         return this;
     }
 
-    isLength(options) {
-        if (!validator.isLength(this.value, options)) {
+    isLength({ min, max }) {
+        if (!validator.isLength(this.value, { min })) {
             this.errors.push("Is too short");
+        }
+        if (!validator.isLength(this.value, { max })) {
+            this.errors.push("Is too long");
         }
 
         return this;
