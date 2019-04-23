@@ -521,6 +521,21 @@ const teachers = [
         src: "/mentors/96.jpeg",
         name: "Wilgert Velinga",
         href: "https://www.linkedin.com/in/wilgert/"
+    },
+    {
+        src: "/mentors/97.jpg",
+        name: "Abdul Rahman",
+        href: "https://www.linkedin.com/in/ar-mhimid-dbis/"
+    },
+    {
+        src: "/mentors/98.jpg",
+        name: "Josja Heerema",
+        href: "https://www.linkedin.com/in/josja-heerema/"
+    },
+    {
+        src: "/mentors/99.jpg",
+        name: "Igor Budasov",
+        href: "https://www.linkedin.com/in/igorbudasov/"
     }
 ];
 export default {
