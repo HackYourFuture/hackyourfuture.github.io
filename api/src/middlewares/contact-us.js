@@ -1,6 +1,7 @@
 const sendEmail = require("../utils/send-emails");
 const email = require("../utils/email");
 const countryEmail = require("../utils/countryEmail");
+const toEmail = "info@hackyourfuture.net";
 
 const validate = req => {
     req.check("firstName")
@@ -47,7 +48,7 @@ module.exports = (req, res) => {
     }
 
     sendEmail(
-        [countryEmail(req.body.country)],
+        [toEmail],
         email("contact_us.tpl", { params: body }),
         "New contact request",
         [body.email]
