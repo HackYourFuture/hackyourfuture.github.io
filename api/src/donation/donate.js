@@ -20,8 +20,12 @@ const { encryptData, decryptData } = require("../utils/email-crypto");
 
 function donate({ method, amount, description }, res) {
     const orderId = new Date().getTime(); //
-    let baseURL = `http://localhost:3000/`;
-    if (process.env.ENVIRONMENT === "prod") baseURL = process.env.PROD_BASE_URL;
+    let baseURL;
+    if (process.env.ENVIRONMENT === "prod") {
+        baseURL = process.env.PROD_BASE_URL;
+    } else {
+        baseURL = `http://localhost:3000/`;
+    }
 
     const encryptedOrderId = encryptData(orderId.toString());
     const redirectUrl = baseURL.concat(
