@@ -15,8 +15,8 @@
       </div>
       <div class="footer__adress container">
         <p>Stichting HackYourFuture</p>
-        <p>Herengracht 504</p>
-        <p>1017 CB Amsterdam</p>
+        <p>OFFICE: Herengracht 504</p>
+        <p>SCHOOL: Sarphatistraat 370</p>
         <a href="mailto:info@hackyourfuture.net">info@hackyourfuture.net</a>
       </div>
       <div class="footer__info container">

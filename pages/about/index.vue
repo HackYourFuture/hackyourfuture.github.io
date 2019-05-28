@@ -58,6 +58,13 @@ const team = [
         mail: "mailto:noer@hackyourfuture.net"
     },
     {
+        src: "/team/8.jpg",
+        name: "Tjebbe Schalij",
+        function: "Education Support",
+        href: "https://www.linkedin.com/in/tjebbe-schalij-68b5b9160",
+        mail: "mailto:tjebbe@hackyourfuture.net"
+    },
+    {
         src: "/team/7.jpg",
         name: "Federico Fusco",
         function: "Partnership Manager",
