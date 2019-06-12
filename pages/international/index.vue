@@ -70,11 +70,6 @@ export default {
                     cords: [12, 55],
                     link:
                         "https://helpingnewcomerswork.ca/program/hack-your-future/"
-                },
-                {
-                    name: "Malmö",
-                    cords: [13.00925, 55.606281],
-                    link: "http://foocafe.org/malmoe/hack-your-future"
                 }
             ]
         };

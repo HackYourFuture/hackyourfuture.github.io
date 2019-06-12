@@ -1,6 +1,6 @@
 <div>
 <h4>Dates:</h4>
-<p>31st of March</p>
+<p>TBA</p>
 </div>
 
 <div>
