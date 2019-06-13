@@ -1,4 +1,4 @@
-## We teach motivated refugees who want to start a career in web development. No technical background required. Our six-month program begins every two months.
+## We teach motivated refugees who want to start a career in web development. No technical background required. Our seven-month program begins every two months.
 
 ### Requirements
 
