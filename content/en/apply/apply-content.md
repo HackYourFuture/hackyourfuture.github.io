@@ -8,6 +8,7 @@ We’re looking for people who:
 - Speak and understand English at an intermediate level
 - Are able to study for at least 30 hours per week
 - Are able to attend our in-person class every Sunday, from 12.00 to 16.00
+- You are committed to study with HYF for 7 months. We expect you to finish the course. We will help you find a job as a programmer afterwards. Dropping out during the course because of a job or internship opportunity is not allowed.
 
 <br/>
 
