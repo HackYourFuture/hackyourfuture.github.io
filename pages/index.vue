@@ -18,7 +18,7 @@
           <img src="/gallery/12.jpg" alt="Group of students working in class.">
         </div>
         <div class="apply__container">
-          <h1>Join our 6 month web development course</h1>
+          <h1>Join our 7 month web development course</h1>
           <nuxt-link :to="'/apply'">
             <span class="underline">Apply</span>
           </nuxt-link>
