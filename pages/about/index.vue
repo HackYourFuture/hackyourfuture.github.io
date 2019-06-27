@@ -6,7 +6,7 @@
           <div v-html="why_exist"/>
         </div>
         <div class="about__header-image">
-          <img src="/gallery/15.jpg" alt="HackYourFuture students during their class on Sunday.">
+          <img src="/gallery/08.jpg" alt="HackYourFuture students during their class on Sunday.">
         </div>
       </div>
       <div class="about__container results">

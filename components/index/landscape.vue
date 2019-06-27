@@ -4,7 +4,8 @@
       <img src="/logos/logo-1.svg">
     </div>
     <div class="landscape__text">
-      <h1>Use your potential.
+      <h1>
+        Use your potential.
         <br>Build a career in tech.
       </h1>
     </div>
@@ -18,7 +19,7 @@ export default {};
 <style lang="scss">
 .landscape {
     height: 100vh;
-    background-image: url("/gallery/08.jpg");
+    background-image: url("/gallery/15.jpg");
     background-size: cover;
     position: relative;
     text-align: center;
