@@ -20,9 +20,9 @@
 
 <div>
 <h3>Copenhagen</h3>
-<h4>Deadline class 11</h4>
-<p>29th of May</p>
+<h4>Deadline class 12</h4>
+<p>25th of August</p>
 <h4>Starts</h4>
-<p>August</p>
+<p>September</p>
 <a target="_blank" href="http://www.hackyourfuture.dk/apply"><p class="applyBtn">Apply here</p></a>
 </div>
