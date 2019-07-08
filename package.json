@@ -37,7 +37,7 @@
   "license": "ISC",
   "dependencies": {
     "@nuxtjs/proxy": "^1.2.4",
-    "axios": "^0.16.2",
+    "axios": "^0.18.1",
     "nuxt": "^2.1.0",
     "validator": "^10.8.0",
     "vuelayers": "^0.11.1"
