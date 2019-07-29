@@ -13,7 +13,7 @@ What are the minimum requirements to participate in the program?
 
 You will get details on what to do after the application deadline has passed. We will grade your CV and Motivation letter. If we grade them well, you will receive instructions to make a technical assignment.
 
-The deadline for application is July 21st, 23.59. Expect an email from us shortly after that date!
+The deadline for application is October 6th, 23.59. Expect an email from us shortly after that date!
 
 Kind regards,
 
