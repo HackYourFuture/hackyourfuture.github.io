@@ -1,9 +1,9 @@
 <div>
 <h3>Amsterdam</h3>
 <h4>Deadline class 26</h4>
-<p>16th of October</p>
+<p>23rd of October</p>
 <h4>Starts</h4>
-<p>Mid November</p>
+<p>Early December</p>
 <a href="#apply_form_ams">
 <img class="apply-below-ams" src="/icons/arrow-down.svg" />
 </a>
